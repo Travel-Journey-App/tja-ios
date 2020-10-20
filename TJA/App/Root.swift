@@ -13,9 +13,9 @@ struct Root: View {
     
     var body: some View {
         if let _ = userData.currenUser {
-            Home()
+            Home().environmentObject(userData)
         } else {
-            SignIn()
+            SignIn().environmentObject(userData)
         }
     }
 }

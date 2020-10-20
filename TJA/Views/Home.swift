@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct Home: View {
+    
+    @EnvironmentObject var userData: UserData
+    
     var body: some View {
-        Text("Home")
+        if let user = userData.currenUser {
+            Text("Welcome home, \(user.name)")
+        } else {
+            Text("No user")
+        }
     }
 }
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
+        Home().environmentObject(UserData())
     }
 }
