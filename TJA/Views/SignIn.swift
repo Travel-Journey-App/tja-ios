@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SignIn: View {
     
+    @ObservedObject private var keyboard = KeyboardResponder()
+    
     @EnvironmentObject var userData: UserData
     @State var showingSignUp = false
     @State var email: String = ""
@@ -18,13 +20,18 @@ struct SignIn: View {
         GeometryReader { geometry in
             VStack(spacing: 10) {
                 // Logo image
-                HStack {
-                    LogoTitle()
-                        .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height / 4)
-                    Spacer()
+                if keyboard.currentHeight == 0 {
+                    HStack {
+                        LogoTitle()
+                            .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height / 4)
+                        Spacer()
+                    }
+                    .padding(.bottom, 12)
+                    .padding(.horizontal, -10)
+                } else {
+                    Spacer().frame(height: 30)
                 }
-                .padding(.bottom, 12)
-                .padding(.horizontal, -10)
+                
                 
                 // Title
                 if !showingSignUp {
@@ -58,7 +65,7 @@ struct SignIn: View {
                                 .font(.system(size: 15))
                                 .fontWeight(.medium)
                                 .underline()
-                                .foregroundColor(.black)
+                                .foregroundColor(Color(UIColor.label))
                         }.padding(.bottom, 10)
                     }
                     
@@ -71,6 +78,7 @@ struct SignIn: View {
                     if showingSignUp {
                         Button(action: {
                             print("DEBUG: Return pressed")
+                            self.resetTextFields()
                             self.showingSignUp = false
                             
                         }){
@@ -92,6 +100,7 @@ struct SignIn: View {
                         if self.showingSignUp {
                             print("DEBUG: Signin User Up")
                         } else {
+                            self.resetTextFields()
                             self.showingSignUp = true
                         }
                         
@@ -113,7 +122,18 @@ struct SignIn: View {
                     print("DEBUG: Google SignUp pressed")
                     self.userData.currenUser = User(name: "Google", email: "fake@gmail.com")
                 }){
-                    Text("Sign Up with Google".uppercased())
+                    HStack(spacing: 20) {
+                        Image("google")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                        Text( showingSignUp ?
+                            "Sign Up with Google".uppercased() :
+                                "Sign In with Google".uppercased()
+                        )
+                        Spacer() // for leading alignment
+                    }
+                    .padding(.horizontal, 10)
+                    .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(FilledButtonStyle(filled: false))
             }
@@ -123,7 +143,16 @@ struct SignIn: View {
                 height: geometry.size.height,
                 alignment: .topLeading
             )
+            .gesture(DragGesture().onChanged { _ in
+                print("DEBUG: -- Drag Gesture -- Hide keyboard")
+                self.hideKeyboard()
+            })
         }
+    }
+    
+    func resetTextFields() {
+        self.email = ""
+        self.password = ""
     }
 }
 

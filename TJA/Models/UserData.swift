@@ -5,8 +5,8 @@
 //  Created by Miron Rogovets on 19.10.2020.
 //
 
+import Foundation
 import Combine
-import SwiftUI
 
 
 struct User: Codable {
