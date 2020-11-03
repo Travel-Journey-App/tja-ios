@@ -11,7 +11,8 @@ struct SignIn: View {
     
     @ObservedObject private var keyboard = KeyboardResponder()
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var authState: AuthState
+    
     @State var showingSignUp = false
     @State var email: String = ""
     @State var password: String = ""
@@ -50,6 +51,8 @@ struct SignIn: View {
                 // Text fields
                 VStack(spacing: 20) {
                     TextField("Username", text: $email)
+                        .autocapitalization(.none)
+                        .keyboardType(.emailAddress)
                         .textFieldStyle(BorderedTextField())
                         
                     SecureField("Password", text: $password)
@@ -88,7 +91,7 @@ struct SignIn: View {
                     } else {
                         Button(action: {
                             print("DEBUG: LogIn pressed")
-                            
+                            self.authState.login(with: .emailAndPassword(email: email, password: password))
                         }){
                             Text("Login".uppercased())
                         }
@@ -99,6 +102,8 @@ struct SignIn: View {
                         print("DEBUG: SignUp pressed")
                         if self.showingSignUp {
                             print("DEBUG: Signin User Up")
+                            //TODO: Call sign up later
+                            self.authState.login(with: .emailAndPassword(email: email, password: password))
                         } else {
                             self.resetTextFields()
                             self.showingSignUp = true
@@ -120,7 +125,7 @@ struct SignIn: View {
                 // Google
                 Button(action: {
                     print("DEBUG: Google SignUp pressed")
-                    self.userData.currenUser = User(name: "Google", email: "fake@gmail.com")
+                    self.authState.login(with: .google)
                 }){
                     HStack(spacing: 20) {
                         Image("google")
@@ -158,6 +163,6 @@ struct SignIn: View {
 
 struct SignIn_Previews: PreviewProvider {
     static var previews: some View {
-        SignIn().environmentObject(UserData())
+        SignIn().environmentObject(AuthState.shared)
     }
 }

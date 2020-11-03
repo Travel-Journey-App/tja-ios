@@ -16,10 +16,20 @@
 		9E263667253DDDD700928B38 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E263666253DDDD600928B38 /* SignIn.swift */; };
 		9E26366B253DDDE900928B38 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26366A253DDDE900928B38 /* Root.swift */; };
 		9E263672253DDFD200928B38 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E263671253DDFD200928B38 /* Home.swift */; };
+		9E2D7786255176BF0040872F /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2D7785255176BF0040872F /* AuthProvider.swift */; };
+		9E2D778925517A080040872F /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2D778825517A080040872F /* AuthState.swift */; };
+		9E2D779225518C3C0040872F /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2D779125518C3C0040872F /* ApiKeys.swift */; };
 		9E589E5A253DFA28003CC8EE /* LogoTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E589E59253DFA28003CC8EE /* LogoTitle.swift */; };
 		9E589E5F253E4C20003CC8EE /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E589E5E253E4C20003CC8EE /* ButtonStyles.swift */; };
 		9E589E68253E6D5E003CC8EE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E589E67253E6D5E003CC8EE /* Colors.xcassets */; };
 		9E589E6B253E7CC4003CC8EE /* TextFieldStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E589E6A253E7CC4003CC8EE /* TextFieldStyles.swift */; };
+		9E971AF3254ECDB9008FC02F /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E971AF0254ECDB7008FC02F /* GoogleSignInDependencies.framework */; };
+		9E971AF4254ECDB9008FC02F /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9E971AF1254ECDB8008FC02F /* GoogleSignIn.bundle */; };
+		9E971AF5254ECDB9008FC02F /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E971AF2254ECDB9008FC02F /* GoogleSignIn.framework */; };
+		9E971AFB254ECE91008FC02F /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E971AFA254ECE91008FC02F /* LocalAuthentication.framework */; };
+		9E971AFD254ECE9A008FC02F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E971AFC254ECE9A008FC02F /* SafariServices.framework */; };
+		9E971AFF254ECEA2008FC02F /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E971AFE254ECEA2008FC02F /* AuthenticationServices.framework */; };
+		9E971B01254ECEAE008FC02F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E971B00254ECEAE008FC02F /* SystemConfiguration.framework */; };
 		9ED5072F254B1EEB00401E2A /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */; };
 		9ED5073C254B6F5000401E2A /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5073B254B6F5000401E2A /* Keyboard.swift */; };
 /* End PBXBuildFile section */
@@ -36,10 +46,20 @@
 		9E263666253DDDD600928B38 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		9E26366A253DDDE900928B38 /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
 		9E263671253DDFD200928B38 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		9E2D7785255176BF0040872F /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
+		9E2D778825517A080040872F /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
+		9E2D779125518C3C0040872F /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		9E589E59253DFA28003CC8EE /* LogoTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoTitle.swift; sourceTree = "<group>"; };
 		9E589E5E253E4C20003CC8EE /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		9E589E67253E6D5E003CC8EE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		9E589E6A253E7CC4003CC8EE /* TextFieldStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyles.swift; sourceTree = "<group>"; };
+		9E971AF0254ECDB7008FC02F /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
+		9E971AF1254ECDB8008FC02F /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
+		9E971AF2254ECDB9008FC02F /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
+		9E971AFA254ECE91008FC02F /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		9E971AFC254ECE9A008FC02F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		9E971AFE254ECEA2008FC02F /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
+		9E971B00254ECEAE008FC02F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		9ED5073B254B6F5000401E2A /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,6 +69,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E971B01254ECEAE008FC02F /* SystemConfiguration.framework in Frameworks */,
+				9E971AFF254ECEA2008FC02F /* AuthenticationServices.framework in Frameworks */,
+				9E971AFD254ECE9A008FC02F /* SafariServices.framework in Frameworks */,
+				9E971AFB254ECE91008FC02F /* LocalAuthentication.framework in Frameworks */,
+				9E971AF3254ECDB9008FC02F /* GoogleSignInDependencies.framework in Frameworks */,
+				9E971AF5254ECDB9008FC02F /* GoogleSignIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +86,7 @@
 			children = (
 				9E26363C253DA28900928B38 /* TJA */,
 				9E26363B253DA28900928B38 /* Products */,
+				9E971AF9254ECE91008FC02F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +101,8 @@
 		9E26363C253DA28900928B38 /* TJA */ = {
 			isa = PBXGroup;
 			children = (
+				9E2D779025518BD80040872F /* Private */,
+				9E971AF7254ECDC4008FC02F /* GoogleSignin */,
 				9ED5073A254B6F3900401E2A /* Core */,
 				9ED5072D254B1ECD00401E2A /* Services */,
 				9E263661253DDD8400928B38 /* Views */,
@@ -100,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				9E26365C253DDBF500928B38 /* UserData.swift */,
+				9E2D7785255176BF0040872F /* AuthProvider.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -124,6 +154,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		9E2D779025518BD80040872F /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				9E2D779125518C3C0040872F /* ApiKeys.swift */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 		9E589E58253DF9AD003CC8EE /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,10 +172,32 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		9E971AF7254ECDC4008FC02F /* GoogleSignin */ = {
+			isa = PBXGroup;
+			children = (
+				9E971AF1254ECDB8008FC02F /* GoogleSignIn.bundle */,
+				9E971AF2254ECDB9008FC02F /* GoogleSignIn.framework */,
+				9E971AF0254ECDB7008FC02F /* GoogleSignInDependencies.framework */,
+			);
+			path = GoogleSignin;
+			sourceTree = "<group>";
+		};
+		9E971AF9254ECE91008FC02F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9E971B00254ECEAE008FC02F /* SystemConfiguration.framework */,
+				9E971AFE254ECEA2008FC02F /* AuthenticationServices.framework */,
+				9E971AFC254ECE9A008FC02F /* SafariServices.framework */,
+				9E971AFA254ECE91008FC02F /* LocalAuthentication.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9ED5072D254B1ECD00401E2A /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */,
+				9E2D778825517A080040872F /* AuthState.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -208,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E263650253DA62800928B38 /* LaunchScreen.storyboard in Resources */,
+				9E971AF4254ECDB9008FC02F /* GoogleSignIn.bundle in Resources */,
 				9E589E68253E6D5E003CC8EE /* Colors.xcassets in Resources */,
 				9E263645253DA29000928B38 /* Preview Assets.xcassets in Resources */,
 				9E263642253DA29000928B38 /* Assets.xcassets in Resources */,
@@ -221,10 +282,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E2D779225518C3C0040872F /* ApiKeys.swift in Sources */,
 				9E263655253DACED00928B38 /* AppDelegate.swift in Sources */,
 				9E263667253DDDD700928B38 /* SignIn.swift in Sources */,
 				9E263659253DB15200928B38 /* SceneDelegate.swift in Sources */,
 				9ED5073C254B6F5000401E2A /* Keyboard.swift in Sources */,
+				9E2D7786255176BF0040872F /* AuthProvider.swift in Sources */,
 				9E26365D253DDBF500928B38 /* UserData.swift in Sources */,
 				9E589E5A253DFA28003CC8EE /* LogoTitle.swift in Sources */,
 				9E589E5F253E4C20003CC8EE /* ButtonStyles.swift in Sources */,
@@ -232,6 +295,7 @@
 				9ED5072F254B1EEB00401E2A /* NetworkMonitor.swift in Sources */,
 				9E589E6B253E7CC4003CC8EE /* TextFieldStyles.swift in Sources */,
 				9E26366B253DDDE900928B38 /* Root.swift in Sources */,
+				9E2D778925517A080040872F /* AuthState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +339,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -336,6 +401,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -364,11 +430,19 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TJA/Preview Content\"";
 				DEVELOPMENT_TEAM = P82W9Y36U3;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TJA",
+				);
 				INFOPLIST_FILE = TJA/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mist3r.tja;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -388,11 +462,19 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TJA/Preview Content\"";
 				DEVELOPMENT_TEAM = P82W9Y36U3;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TJA",
+				);
 				INFOPLIST_FILE = TJA/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mist3r.tja;
 				PRODUCT_NAME = "$(TARGET_NAME)";

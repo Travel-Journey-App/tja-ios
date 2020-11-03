@@ -9,19 +9,21 @@ import SwiftUI
 
 struct Root: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var authState: AuthState
     
     var body: some View {
-        if let _ = userData.currenUser {
-            Home().environmentObject(userData)
-        } else {
-            SignIn().environmentObject(userData)
-        }
+        Group {
+            if let _ = authState.currentUser {
+                Home()
+            } else {
+                SignIn()
+            }
+        }.onAppear(perform: authState.restoreSession)
     }
 }
 
 struct Root_Previews: PreviewProvider {
     static var previews: some View {
-        Root().environmentObject(UserData())
+        Root().environmentObject(AuthState.shared)
     }
 }

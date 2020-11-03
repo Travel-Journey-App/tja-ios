@@ -9,10 +9,10 @@ import SwiftUI
 
 struct Home: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var authState: AuthState
     
     var body: some View {
-        if let user = userData.currenUser {
+        if let user = authState.currentUser {
             Text("Welcome home, \(user.name)")
         } else {
             Text("No user")
@@ -22,6 +22,6 @@ struct Home: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home().environmentObject(UserData())
+        Home().environmentObject(AuthState.shared)
     }
 }
