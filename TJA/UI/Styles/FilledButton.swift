@@ -1,5 +1,5 @@
 //
-//  ButtonStyles.swift
+//  FilledButton.swift
 //  TJA
 //
 //  Created by Miron Rogovets on 20.10.2020.
@@ -33,7 +33,7 @@ struct FilledButtonStyle: ButtonStyle {
     }
 }
 
-struct ButtonStyles_Previews: PreviewProvider {
+struct FilledButton_Previews: PreviewProvider {
     static var previews: some View {
         Button(action: {}) {
             Text("Test")

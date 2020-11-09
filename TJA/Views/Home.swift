@@ -11,11 +11,36 @@ struct Home: View {
     
     @EnvironmentObject var authState: AuthState
     
+    @State var selectedTab = Tab.trips
+    
+    enum Tab: Int {
+        case trips, account
+    }
+    
+    
     var body: some View {
+        TabView(selection: $selectedTab) {
+            Text("Welcome home\(welcomeText)")
+                .onTapGesture {
+                    authState.logout()
+                }
+                .tabItem {
+                    Image(systemName: "map")
+                    Text("My trips")
+                }
+            Text("Account")
+                .tabItem {
+                    Image(systemName: "person.crop.circle")
+                    Text("Account")
+                }
+        }
+    }
+    
+    private var welcomeText: String {
         if let user = authState.currentUser {
-            Text("Welcome home, \(user.name)")
+            return ", \(user.name)"
         } else {
-            Text("No user")
+            return ""
         }
     }
 }

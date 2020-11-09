@@ -35,7 +35,7 @@ struct SignIn: View {
                 
                 
                 // Title
-                if !showingSignUp {
+                if showingSignUp {
                     Text("Register".uppercased())
                         .font(.system(size: 35))
                         .fontWeight(.light)

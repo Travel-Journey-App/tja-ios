@@ -1,5 +1,5 @@
 //
-//  TextFieldStyles.swift
+//  BorderedTextField.swift
 //  TJA
 //
 //  Created by Miron Rogovets on 20.10.2020.
@@ -24,7 +24,7 @@ struct BorderedTextField: TextFieldStyle {
     }
 }
 
-struct TextFieldStyles_Previews: PreviewProvider {
+struct BorderedTextField_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             TextField("Username", text: .constant(""))
