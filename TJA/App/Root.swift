@@ -11,6 +11,10 @@ struct Root: View {
     
     @EnvironmentObject var authState: AuthState
     
+    init() {
+        setupApperance()
+    }
+    
     var body: some View {
         Group {
             if let _ = authState.currentUser {
@@ -19,6 +23,21 @@ struct Root: View {
                 SignIn()
             }
         }.onAppear(perform: authState.restoreSession)
+    }
+    
+    private func setupApperance() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor(named: "MainRed")!
+        ]
+        
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor(named: "MainRed")!
+        ]
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes(
+            [NSAttributedString.Key.foregroundColor: UIColor(named: "MainRed")!],
+            for: .normal
+        )
     }
 }
 

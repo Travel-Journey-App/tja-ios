@@ -27,10 +27,23 @@ class AuthState: NSObject, ObservableObject {
     func logout() {
         GIDSignIn.sharedInstance()?.signOut()
         self.currentUser = nil
+        // reset provider to prevent auto login
+        // clear auth token & current user
+        UserDefaultsConfig.googleProviderWasUsed = false
     }
     
     func restoreSession() {
-        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+        if UserDefaultsConfig.googleProviderWasUsed {
+            GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+        } else {
+            // try to restore regular session
+        }
+    }
+    
+    func updateUserProfile(name: String, phone: String) {
+        guard let user = currentUser else { return }
+        guard !name.isEmpty else { return }
+        currentUser = User(name: name, email: user.email, phone: phone.isEmpty ? nil : phone)
     }
     
     func configureGoogleSignIn(controller: UIViewController?) {
@@ -46,11 +59,13 @@ class AuthState: NSObject, ObservableObject {
     private func handleSignInWith(email: String, password: String) {
         // TODO: Update with API call
         self.currentUser = User(name: email, email: email)
+        UserDefaultsConfig.googleProviderWasUsed = false
     }
     
     private func handleSignUpWith(email: String, password: String) {
         // TODO: Update with API call
         self.currentUser = User(name: email, email: email)
+        UserDefaultsConfig.googleProviderWasUsed = false
     }
 }
 
@@ -71,6 +86,7 @@ extension AuthState: GIDSignInDelegate {
         if let name = user.profile.name, let email = user.profile.email {
             print("DEBUG: -- Google Sign In -- Email: \(email), Username: \(name)")
             self.currentUser = User(name: name, email: email)
+            UserDefaultsConfig.googleProviderWasUsed = true
         } else {
             print("DEBUG: -- Google Sign In -- Error in getting email & username")
         }

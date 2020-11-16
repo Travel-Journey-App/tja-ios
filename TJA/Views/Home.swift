@@ -17,30 +17,22 @@ struct Home: View {
         case trips, account
     }
     
-    
-    var body: some View {
-        TabView(selection: $selectedTab) {
-            Text("Welcome home\(welcomeText)")
-                .onTapGesture {
-                    authState.logout()
-                }
-                .tabItem {
-                    Image(systemName: "map")
-                    Text("My trips")
-                }
-            Text("Account")
-                .tabItem {
-                    Image(systemName: "person.crop.circle")
-                    Text("Account")
-                }
+    func tabbarItem(text: String, image: String) -> some View {
+        VStack {
+            Image(systemName: image)
+                .imageScale(.large)
+            Text(text)
         }
     }
     
-    private var welcomeText: String {
-        if let user = authState.currentUser {
-            return ", \(user.name)"
-        } else {
-            return ""
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            MyTrips().tabItem {
+                self.tabbarItem(text: "My trips", image: "map")
+            }.tag(Tab.trips)
+            Account().tabItem {
+                self.tabbarItem(text: "Account", image: "person.crop.circle")
+            }.tag(Tab.account)
         }
     }
 }

@@ -23,6 +23,7 @@
 		9E589E5F253E4C20003CC8EE /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E589E5E253E4C20003CC8EE /* FilledButton.swift */; };
 		9E589E68253E6D5E003CC8EE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E589E67253E6D5E003CC8EE /* Colors.xcassets */; };
 		9E589E6B253E7CC4003CC8EE /* BorderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E589E6A253E7CC4003CC8EE /* BorderedTextField.swift */; };
+		9E83FEB8255C44FC0008F8DC /* MyTrips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E83FEB7255C44FC0008F8DC /* MyTrips.swift */; };
 		9E971AF3254ECDB9008FC02F /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E971AF0254ECDB7008FC02F /* GoogleSignInDependencies.framework */; };
 		9E971AF4254ECDB9008FC02F /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9E971AF1254ECDB8008FC02F /* GoogleSignIn.bundle */; };
 		9E971AF5254ECDB9008FC02F /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E971AF2254ECDB9008FC02F /* GoogleSignIn.framework */; };
@@ -33,6 +34,10 @@
 		9E98CB332559E7C900AF29EA /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E98CB322559E7C900AF29EA /* APIConstants.swift */; };
 		9E98CB362559EE4E00AF29EA /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E98CB352559EE4E00AF29EA /* UserDefault.swift */; };
 		9E98CB3A2559F12A00AF29EA /* UserDefaultsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E98CB392559F12A00AF29EA /* UserDefaultsConfig.swift */; };
+		9EBB625A255ABED1005F41C0 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBB6259255ABED1005F41C0 /* Account.swift */; };
+		9EBB625D255AC013005F41C0 /* TripsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBB625C255AC012005F41C0 /* TripsList.swift */; };
+		9EC9207E2561B2E3001A40CC /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC9207D2561B2E2001A40CC /* UnderlinedTextField.swift */; };
+		9EC920812561DFC4001A40CC /* Binding+didSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC920802561DFC2001A40CC /* Binding+didSet.swift */; };
 		9ED5072F254B1EEB00401E2A /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */; };
 		9ED5073C254B6F5000401E2A /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5073B254B6F5000401E2A /* Keyboard.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +61,7 @@
 		9E589E5E253E4C20003CC8EE /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
 		9E589E67253E6D5E003CC8EE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		9E589E6A253E7CC4003CC8EE /* BorderedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedTextField.swift; sourceTree = "<group>"; };
+		9E83FEB7255C44FC0008F8DC /* MyTrips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTrips.swift; sourceTree = "<group>"; };
 		9E971AF0254ECDB7008FC02F /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
 		9E971AF1254ECDB8008FC02F /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
 		9E971AF2254ECDB9008FC02F /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
@@ -66,6 +72,10 @@
 		9E98CB322559E7C900AF29EA /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		9E98CB352559EE4E00AF29EA /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		9E98CB392559F12A00AF29EA /* UserDefaultsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConfig.swift; sourceTree = "<group>"; };
+		9EBB6259255ABED1005F41C0 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		9EBB625C255AC012005F41C0 /* TripsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsList.swift; sourceTree = "<group>"; };
+		9EC9207D2561B2E2001A40CC /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
+		9EC920802561DFC2001A40CC /* Binding+didSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+didSet.swift"; sourceTree = "<group>"; };
 		9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		9ED5073B254B6F5000401E2A /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,9 +165,11 @@
 		9E263661253DDD8400928B38 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9E589E58253DF9AD003CC8EE /* Components */,
 				9E263666253DDDD600928B38 /* SignIn.swift */,
 				9E263671253DDFD200928B38 /* Home.swift */,
+				9EBB6259255ABED1005F41C0 /* Account.swift */,
+				9EBB625C255AC012005F41C0 /* TripsList.swift */,
+				9E83FEB7255C44FC0008F8DC /* MyTrips.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -174,8 +186,17 @@
 			isa = PBXGroup;
 			children = (
 				9E589E59253DFA28003CC8EE /* LogoTitle.swift */,
+				9EC9207D2561B2E2001A40CC /* UnderlinedTextField.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		9E83FEBA255C4D2E0008F8DC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9EC920802561DFC2001A40CC /* Binding+didSet.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9E971AF7254ECDC4008FC02F /* GoogleSignin */ = {
@@ -202,6 +223,7 @@
 		9E98CB2B2559E05800AF29EA /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				9E589E58253DF9AD003CC8EE /* Components */,
 				9E98CB2E2559E50E00AF29EA /* Styles */,
 			);
 			path = UI;
@@ -245,6 +267,7 @@
 		9ED5073A254B6F3900401E2A /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				9E83FEBA255C4D2E0008F8DC /* Extensions */,
 				9E98CB382559F0B700AF29EA /* Persistence */,
 				9ED5073B254B6F5000401E2A /* Keyboard.swift */,
 			);
@@ -323,13 +346,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E83FEB8255C44FC0008F8DC /* MyTrips.swift in Sources */,
 				9E98CB362559EE4E00AF29EA /* UserDefault.swift in Sources */,
 				9E2D779225518C3C0040872F /* ApiKeys.swift in Sources */,
 				9E263655253DACED00928B38 /* AppDelegate.swift in Sources */,
 				9E263667253DDDD700928B38 /* SignIn.swift in Sources */,
 				9E263659253DB15200928B38 /* SceneDelegate.swift in Sources */,
+				9EBB625A255ABED1005F41C0 /* Account.swift in Sources */,
 				9ED5073C254B6F5000401E2A /* Keyboard.swift in Sources */,
+				9EC920812561DFC4001A40CC /* Binding+didSet.swift in Sources */,
+				9EBB625D255AC013005F41C0 /* TripsList.swift in Sources */,
 				9E2D7786255176BF0040872F /* AuthProvider.swift in Sources */,
+				9EC9207E2561B2E3001A40CC /* UnderlinedTextField.swift in Sources */,
 				9E26365D253DDBF500928B38 /* UserData.swift in Sources */,
 				9E589E5A253DFA28003CC8EE /* LogoTitle.swift in Sources */,
 				9E98CB3A2559F12A00AF29EA /* UserDefaultsConfig.swift in Sources */,

@@ -10,10 +10,11 @@ import SwiftUI
 
 struct BorderedTextField: TextFieldStyle {
     var color: Color = Color("MainRed")
+    var fontSize: CGFloat = 15
     
     public func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .font(.system(size: 15))
+            .font(.system(size: fontSize))
             .foregroundColor(color)
             .padding(15)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 32, maxHeight: 50)

@@ -12,6 +12,9 @@ import Combine
 struct User: Codable {
     let name: String
     let email: String
+    
+    var phone: String? = nil
+    var birth: String? = nil
 }
 
 
