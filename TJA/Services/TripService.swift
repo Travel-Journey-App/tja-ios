@@ -19,6 +19,12 @@ class TripService: NSObject, ObservableObject {
         self.trips = trips
     }
     
+    func saveTrip(name: String, startDate: Date, endDate: Date) {
+        let imgUrl = URL(string: "https://images.unsplash.com/photo-1543988884-c01cfa7b41c2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1482&q=80")
+        let trip = Trip(id: trips.count, image: imgUrl, name: name, startDate: startDate, endDate: endDate)
+        self.trips.append(trip)
+    }
+    
     var hasUpcoming: Bool {
         return upcoming.count > 0
     }

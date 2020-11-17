@@ -14,6 +14,9 @@ struct CreateTrip: View {
     @State var startDate: Date? = nil
     @State var endDate: Date? = nil
     
+    @Environment(\.presentationMode) var presentation
+    @EnvironmentObject var tripService: TripService
+    
     var body: some View {
         ScrollView(.vertical) {
             VStack(spacing: 10) {
@@ -57,6 +60,7 @@ struct CreateTrip: View {
                 // Save button
                 Button(action: {
                     print("DEBUG: -- Save button pressed")
+                    self.saveTrip()
                 }){
                     Text("Save".uppercased())
                 }
@@ -79,6 +83,13 @@ struct CreateTrip: View {
     
     var formFilled: Bool {
         return !(name.isEmpty || destination.isEmpty || startDate == nil || endDate == nil)
+    }
+    
+    func saveTrip() {
+        guard !name.isEmpty && !destination.isEmpty else { return }
+        guard let start = startDate, let end = endDate else { return }
+        self.tripService.saveTrip(name: name, startDate: start, endDate: end)
+        self.presentation.wrappedValue.dismiss()
     }
 }
 
