@@ -38,6 +38,10 @@ struct Root: View {
             [NSAttributedString.Key.foregroundColor: UIColor(named: "MainRed")!],
             for: .normal
         )
+        
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(named: "MainRed")
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(named: "MainRed")!], for: .normal)
     }
 }
 

@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct TripsList: View {
+    
+    var tripname = ""
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack(alignment: .center) {
+            Color.blue
+            Text("Trip item: \(tripname)")
+        }
+        .navigationBarTitle(Text(tripname.uppercased()), displayMode: .inline)
     }
 }
 

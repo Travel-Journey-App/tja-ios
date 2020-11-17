@@ -18,7 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
         let authState = AuthState.shared
-        let root = Root().environmentObject(authState).accentColor(Color("MainRed"))
+        let tripService = TripService.shared
+        let root = Root()
+            .environmentObject(authState)
+            .environmentObject(tripService)
+            .accentColor(Color("MainRed"))
         
         // Use a UIHostingController as window root view controller
         if let windowScene = scene as? UIWindowScene {

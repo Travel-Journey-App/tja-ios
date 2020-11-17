@@ -36,10 +36,10 @@ struct Account: View {
                                 .keyboardType(.phonePad)
                         } else {
                             Text(authState.currentUser?.name ?? "Your Name").font(.system(size: 18))
-                            Text(birth.isEmpty ? "01/01/2000" : birth).font(.system(size: 18))
-                            Text(authState.currentUser?.phone ?? "+00000000000").font(.system(size: 18))
+                            Text(birth.isEmpty ? "Birth date:" : birth).font(.system(size: 18))
+                            Text(authState.currentUser?.phone ?? "Phone:").font(.system(size: 18))
                         }
-                        Text(authState.currentUser?.email ?? "email@example.com").font(.system(size: 18))
+                        Text(authState.currentUser?.email ?? "Email:").font(.system(size: 18))
                     }.padding(.vertical, 10)
                     
                     // Separator
