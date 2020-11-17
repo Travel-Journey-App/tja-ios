@@ -33,16 +33,14 @@ struct UnderlinedTextField: View {
     
     var body: some View {
         VStack {
-            if hasIcon {
-                HStack {
-                    textField
-                    Image(systemName: imageName ?? "")
-                        .foregroundColor(color)
-                }
-            } else {
+            HStack {
                 textField
+                Image(systemName: imageName ?? "")
+                    .foregroundColor(color)
             }
-            Divider().background(color)
+            //            Divider().background(color)
+            // Undeline
+            Rectangle().fill(color).frame(height: 1)
             
         }
     }

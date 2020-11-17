@@ -41,6 +41,9 @@
 		9ED5072F254B1EEB00401E2A /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */; };
 		9ED5073C254B6F5000401E2A /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5073B254B6F5000401E2A /* Keyboard.swift */; };
 		9EE669392563F9AE0018B82A /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE669382563F9AD0018B82A /* CircleButton.swift */; };
+		9EE6693C256402DF0018B82A /* CreateTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE6693B256402DF0018B82A /* CreateTrip.swift */; };
+		9EE6693F25640E260018B82A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE6693E25640E250018B82A /* Constants.swift */; };
+		9EE66942256418C50018B82A /* DatePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE66941256418C40018B82A /* DatePickerTextField.swift */; };
 		9EED544B25630B0C00098500 /* TripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED544A25630B0C00098500 /* TripCell.swift */; };
 		9EED544E2563116600098500 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED544D2563116600098500 /* Trip.swift */; };
 		9EED5455256316F800098500 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED5454256316F800098500 /* Formatters.swift */; };
@@ -85,6 +88,9 @@
 		9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		9ED5073B254B6F5000401E2A /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		9EE669382563F9AD0018B82A /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
+		9EE6693B256402DF0018B82A /* CreateTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTrip.swift; sourceTree = "<group>"; };
+		9EE6693E25640E250018B82A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9EE66941256418C40018B82A /* DatePickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTextField.swift; sourceTree = "<group>"; };
 		9EED544A25630B0C00098500 /* TripCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCell.swift; sourceTree = "<group>"; };
 		9EED544D2563116600098500 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		9EED5454256316F800098500 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
@@ -183,6 +189,7 @@
 				9EBB6259255ABED1005F41C0 /* Account.swift */,
 				9EBB625C255AC012005F41C0 /* TripsList.swift */,
 				9E83FEB7255C44FC0008F8DC /* MyTrips.swift */,
+				9EE6693B256402DF0018B82A /* CreateTrip.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -201,6 +208,7 @@
 				9E589E59253DFA28003CC8EE /* LogoTitle.swift */,
 				9EC9207D2561B2E2001A40CC /* UnderlinedTextField.swift */,
 				9EED544A25630B0C00098500 /* TripCell.swift */,
+				9EE66941256418C40018B82A /* DatePickerTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -287,6 +295,7 @@
 				9E98CB382559F0B700AF29EA /* Persistence */,
 				9ED5073B254B6F5000401E2A /* Keyboard.swift */,
 				9EED5454256316F800098500 /* Formatters.swift */,
+				9EE6693E25640E250018B82A /* Constants.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -374,11 +383,14 @@
 				9E2D779225518C3C0040872F /* ApiKeys.swift in Sources */,
 				9EED5455256316F800098500 /* Formatters.swift in Sources */,
 				9EED544B25630B0C00098500 /* TripCell.swift in Sources */,
+				9EE6693F25640E260018B82A /* Constants.swift in Sources */,
 				9E263655253DACED00928B38 /* AppDelegate.swift in Sources */,
 				9E263667253DDDD700928B38 /* SignIn.swift in Sources */,
 				9E263659253DB15200928B38 /* SceneDelegate.swift in Sources */,
 				9EBB625A255ABED1005F41C0 /* Account.swift in Sources */,
 				9ED5073C254B6F5000401E2A /* Keyboard.swift in Sources */,
+				9EE66942256418C50018B82A /* DatePickerTextField.swift in Sources */,
+				9EE6693C256402DF0018B82A /* CreateTrip.swift in Sources */,
 				9EC920812561DFC4001A40CC /* Binding+didSet.swift in Sources */,
 				9EBB625D255AC013005F41C0 /* TripsList.swift in Sources */,
 				9E2D7786255176BF0040872F /* AuthProvider.swift in Sources */,

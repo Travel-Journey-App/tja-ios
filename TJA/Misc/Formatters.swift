@@ -12,11 +12,25 @@ private let day = 60 * 60 * 24 as TimeInterval
 private let week = day * 7 as TimeInterval
 
 
-final class ExactDateFormatter {
+protocol DateFormatting {
+    func string(from date: Date) -> String
+}
+
+
+final class ExactDateFormatter: DateFormatting {
     func string(from date: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "dd.MM.yyyy"
+        return formatter.string(from: date)
+    }
+}
+
+final class SlashedExactDateFormatter: DateFormatting {
+    func string(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
+        formatter.dateFormat = "dd/MM/yyyy"
         return formatter.string(from: date)
     }
 }
@@ -51,7 +65,7 @@ final class TimeFormatter {
     }
 }
 
-final class TimeAgoFormatter {
+final class TimeAgoFormatter: DateFormatting {
     func string(from date: Date) -> String {
         let now = Date()
         let interval = now.timeIntervalSince(date)
@@ -82,5 +96,6 @@ final class TimeRemainingFormatter {
 }
 
 let dateFormatter = ExactDateFormatter()
+let slashedDateFormatter = SlashedExactDateFormatter()
 let daysAgoFormatter = TimeAgoFormatter()
 let daysRemainFormatter = TimeRemainingFormatter()

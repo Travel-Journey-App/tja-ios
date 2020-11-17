@@ -62,12 +62,11 @@ struct MyTrips: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        Button(action: {
-                            print("DEBUG: -- Create new trip button pressed")
-                        }) {
+                        NavigationLink(destination: CreateTrip()) {
                             Image(systemName: "plus")
                                 .frame(width: 24, height: 24, alignment: .center)
-                        }.buttonStyle(CircleButtonStyle())
+                        }
+                        .buttonStyle(CircleButtonStyle())
                     }
                 }
                 .padding(.trailing, 16)

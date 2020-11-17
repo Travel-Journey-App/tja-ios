@@ -53,5 +53,12 @@ extension View {
             #selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil
         )
     }
+    
+    func resignKeyboardOnDragGesture() -> some View {
+        return gesture(DragGesture().onChanged { _ in
+            print("DEBUG: -- Drag Gesture -- Hide keyboard")
+            self.hideKeyboard()
+        })
+    }
 }
 #endif

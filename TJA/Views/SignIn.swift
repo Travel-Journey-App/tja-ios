@@ -148,10 +148,7 @@ struct SignIn: View {
                 height: geometry.size.height,
                 alignment: .topLeading
             )
-            .gesture(DragGesture().onChanged { _ in
-                print("DEBUG: -- Drag Gesture -- Hide keyboard")
-                self.hideKeyboard()
-            })
+            .resignKeyboardOnDragGesture()
         }
     }
     
