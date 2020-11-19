@@ -3,6 +3,7 @@
 //  TJA
 //
 //  Created by Miron Rogovets on 20.10.2020.
+//  Copyright © 2020 MironRogovets. All rights reserved.
 //
 
 import SwiftUI
