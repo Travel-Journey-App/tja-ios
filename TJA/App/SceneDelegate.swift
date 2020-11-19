@@ -20,9 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let authState = AuthState.shared
         let tripService = TripService.shared
+        let locationService = LocationService()
         let root = Root()
             .environmentObject(authState)
             .environmentObject(tripService)
+            .environmentObject(locationService)
             .accentColor(Color("MainRed"))
         
         // Use a UIHostingController as window root view controller

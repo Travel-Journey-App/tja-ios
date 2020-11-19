@@ -18,8 +18,8 @@ struct MyTrips: View {
         
         var title: String {
             switch self {
-            case .future: return "upcoming"
-            case .past: return "past"
+            case .future: return "upcoming".uppercased()
+            case .past: return "past".uppercased()
             }
         }
     }

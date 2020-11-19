@@ -9,9 +9,14 @@
 import SwiftUI
 
 struct MapContainer: View {
+    
+    @EnvironmentObject var locationService: LocationService
+    
     var body: some View {
         ZStack(alignment: .top) {
-            Map().edgesIgnoringSafeArea(.all)
+            Map(
+                tripLocation: locationService.mockupCoordinate
+            ).edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading) {
                 // Filters
@@ -26,6 +31,7 @@ struct MapContainer: View {
                     Spacer()
                     Button(action: {
                         print("DEBUG: -- Current location tapped")
+                        self.locationService.userTrackingMode = .follow
                     }) {
                         Image(systemName: "location.fill")
                             .frame(width: 24, height: 24, alignment: .center)
@@ -36,6 +42,10 @@ struct MapContainer: View {
             .padding(.horizontal, 15)
             .padding(.bottom, 30)
             .padding(.top, 20)
+        }
+        .onAppear(perform: self.locationService.checkPermissions)
+        .alert(isPresented: $locationService.servicesDisabled) {
+            Alert(title: Text("Please Enable Location Access In Settings"))
         }
     }
 }

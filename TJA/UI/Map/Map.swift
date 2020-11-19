@@ -11,6 +11,7 @@ import MapKit
 
 struct Map: UIViewRepresentable {
     
+    @EnvironmentObject var locationService: LocationService
     var tripLocation: CLLocationCoordinate2D?
     
     func makeCoordinator() -> Map.Coordinator {
@@ -20,6 +21,7 @@ struct Map: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<Map>) -> MKMapView {
         let map = MKMapView(frame: .zero)
         map.showsUserLocation = true
+        map.userTrackingMode = locationService.userTrackingMode
         map.delegate = context.coordinator
         if let region = makeInitialRegion() {
             map.setRegion(region, animated: true)
@@ -28,7 +30,9 @@ struct Map: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: UIViewRepresentableContext<Map>) {
-        
+        if uiView.userTrackingMode != locationService.userTrackingMode {
+            uiView.setUserTrackingMode(locationService.userTrackingMode, animated: true)
+        }
     }
     
     // MARK: - Map Coordinator -
@@ -48,7 +52,11 @@ struct Map: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
-            print("DEBUG: -- Map -- Changed MKUserTrackingMode to=\(mode)")
+            print("DEBUG: -- Map -- Changed MKUserTrackingMode to=\(mode.rawValue)")
+            DispatchQueue.main.async {
+//                self.controller.$userTrackingMode.wrappedValue = mode
+                self.controller.locationService.userTrackingMode = mode
+            }
         }
     }
     
@@ -67,6 +75,9 @@ struct Map: UIViewRepresentable {
 
 struct Map_Previews: PreviewProvider {
     static var previews: some View {
-        Map(tripLocation: CLLocationCoordinate2D(latitude: 40.71, longitude: -74))
+        Map(
+//            userTrackingMode: .constant(.follow),
+            tripLocation: CLLocationCoordinate2D(latitude: 40.71, longitude: -74)
+        ).environmentObject(LocationService())
     }
 }
