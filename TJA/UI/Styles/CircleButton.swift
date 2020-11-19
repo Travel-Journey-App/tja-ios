@@ -11,6 +11,7 @@ import SwiftUI
 struct CircleButtonStyle: ButtonStyle {
     var color: Color = Color("MainRed")
     var secondaryColor: Color? = nil
+    var size: CGFloat = 50
     
     var shouldChangeColor: Bool {
         return secondaryColor != nil
@@ -28,7 +29,7 @@ struct CircleButtonStyle: ButtonStyle {
         
         configuration.label
             .foregroundColor(.white)
-            .frame(width: 50, height: 50, alignment: .center)
+            .frame(width: size, height: size, alignment: .center)
             .background(
                 shouldChangeColor ?
                 configuration.isPressed ? secondaryOrDefaultColor : color

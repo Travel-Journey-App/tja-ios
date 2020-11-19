@@ -35,8 +35,13 @@
 		9E98CB362559EE4E00AF29EA /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E98CB352559EE4E00AF29EA /* UserDefault.swift */; };
 		9E98CB3A2559F12A00AF29EA /* UserDefaultsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E98CB392559F12A00AF29EA /* UserDefaultsConfig.swift */; };
 		9EB47CCD2566874B0065C641 /* Date+compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB47CCC2566874B0065C641 /* Date+compare.swift */; };
+		9EB47CD625669B970065C641 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB47CD525669B970065C641 /* Map.swift */; };
+		9EB47CDE2566C2A70065C641 /* MapContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB47CDD2566C2A70065C641 /* MapContainer.swift */; };
+		9EB47CE22566CEE80065C641 /* DaysContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB47CE12566CEE80065C641 /* DaysContainer.swift */; };
+		9EB47CE72566D1860065C641 /* TripEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB47CE62566D1860065C641 /* TripEvents.swift */; };
+		9EB47CEB2566D5F50065C641 /* View+toAny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB47CEA2566D5F50065C641 /* View+toAny.swift */; };
+		9EB47CF32566E71C0065C641 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB47CF22566E71C0065C641 /* LocationService.swift */; };
 		9EBB625A255ABED1005F41C0 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBB6259255ABED1005F41C0 /* Account.swift */; };
-		9EBB625D255AC013005F41C0 /* TripDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBB625C255AC012005F41C0 /* TripDetails.swift */; };
 		9EC9207E2561B2E3001A40CC /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC9207D2561B2E2001A40CC /* UnderlinedTextField.swift */; };
 		9EC920812561DFC4001A40CC /* Binding+didSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC920802561DFC2001A40CC /* Binding+didSet.swift */; };
 		9ED5072F254B1EEB00401E2A /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */; };
@@ -84,8 +89,13 @@
 		9E98CB352559EE4E00AF29EA /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		9E98CB392559F12A00AF29EA /* UserDefaultsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConfig.swift; sourceTree = "<group>"; };
 		9EB47CCC2566874B0065C641 /* Date+compare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+compare.swift"; sourceTree = "<group>"; };
+		9EB47CD525669B970065C641 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		9EB47CDD2566C2A70065C641 /* MapContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapContainer.swift; sourceTree = "<group>"; };
+		9EB47CE12566CEE80065C641 /* DaysContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysContainer.swift; sourceTree = "<group>"; };
+		9EB47CE62566D1860065C641 /* TripEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEvents.swift; sourceTree = "<group>"; };
+		9EB47CEA2566D5F50065C641 /* View+toAny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+toAny.swift"; sourceTree = "<group>"; };
+		9EB47CF22566E71C0065C641 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		9EBB6259255ABED1005F41C0 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		9EBB625C255AC012005F41C0 /* TripDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetails.swift; sourceTree = "<group>"; };
 		9EC9207D2561B2E2001A40CC /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		9EC920802561DFC2001A40CC /* Binding+didSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+didSet.swift"; sourceTree = "<group>"; };
 		9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
@@ -191,8 +201,6 @@
 				9E5AE2C025653CFD0033EF6F /* Trip */,
 				9E5AE2BF25653CE20033EF6F /* Home */,
 				9E5AE2BE25653CD70033EF6F /* Auth */,
-				9EBB625C255AC012005F41C0 /* TripDetails.swift */,
-				9EE6693B256402DF0018B82A /* CreateTrip.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -208,7 +216,6 @@
 		9E589E58253DF9AD003CC8EE /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				9EE66944256432300018B82A /* Trip */,
 				9E589E59253DFA28003CC8EE /* LogoTitle.swift */,
 				9EC9207D2561B2E2001A40CC /* UnderlinedTextField.swift */,
 				9EE66941256418C40018B82A /* DatePickerTextField.swift */,
@@ -237,6 +244,8 @@
 		9E5AE2C025653CFD0033EF6F /* Trip */ = {
 			isa = PBXGroup;
 			children = (
+				9EE6693B256402DF0018B82A /* CreateTrip.swift */,
+				9EB47CE62566D1860065C641 /* TripEvents.swift */,
 			);
 			path = Trip;
 			sourceTree = "<group>";
@@ -270,6 +279,7 @@
 			children = (
 				9EC920802561DFC2001A40CC /* Binding+didSet.swift */,
 				9EB47CCC2566874B0065C641 /* Date+compare.swift */,
+				9EB47CEA2566D5F50065C641 /* View+toAny.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -298,6 +308,8 @@
 		9E98CB2B2559E05800AF29EA /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				9EE66944256432300018B82A /* Trip */,
+				9EB47CD425669B7F0065C641 /* Map */,
 				9E589E58253DF9AD003CC8EE /* Components */,
 				9E98CB2E2559E50E00AF29EA /* Styles */,
 			);
@@ -331,12 +343,22 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		9EB47CD425669B7F0065C641 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				9EB47CD525669B970065C641 /* Map.swift */,
+				9EB47CDD2566C2A70065C641 /* MapContainer.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		9ED5072D254B1ECD00401E2A /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				9E2D778825517A080040872F /* AuthState.swift */,
 				9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */,
 				9EED545B25632FFF00098500 /* TripService.swift */,
+				9EB47CF22566E71C0065C641 /* LocationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -358,6 +380,7 @@
 			children = (
 				9EED544A25630B0C00098500 /* TripCell.swift */,
 				9EE66945256432790018B82A /* DayCell.swift */,
+				9EB47CE12566CEE80065C641 /* DaysContainer.swift */,
 			);
 			path = Trip;
 			sourceTree = "<group>";
@@ -393,6 +416,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = MironRogovets;
 				TargetAttributes = {
 					9E263639253DA28900928B38 = {
 						CreatedOnToolsVersion = 12.0;
@@ -444,29 +468,34 @@
 				9E98CB362559EE4E00AF29EA /* UserDefault.swift in Sources */,
 				9E2D779225518C3C0040872F /* ApiKeys.swift in Sources */,
 				9EED5455256316F800098500 /* Formatters.swift in Sources */,
+				9EB47CD625669B970065C641 /* Map.swift in Sources */,
 				9EED544B25630B0C00098500 /* TripCell.swift in Sources */,
 				9EE6693F25640E260018B82A /* Constants.swift in Sources */,
 				9E263655253DACED00928B38 /* AppDelegate.swift in Sources */,
+				9EB47CDE2566C2A70065C641 /* MapContainer.swift in Sources */,
 				9E263667253DDDD700928B38 /* SignIn.swift in Sources */,
 				9E263659253DB15200928B38 /* SceneDelegate.swift in Sources */,
 				9EBB625A255ABED1005F41C0 /* Account.swift in Sources */,
 				9ED5073C254B6F5000401E2A /* Keyboard.swift in Sources */,
+				9EB47CF32566E71C0065C641 /* LocationService.swift in Sources */,
 				9EE66942256418C50018B82A /* DatePickerTextField.swift in Sources */,
 				9EE6693C256402DF0018B82A /* CreateTrip.swift in Sources */,
 				9EC920812561DFC4001A40CC /* Binding+didSet.swift in Sources */,
-				9EBB625D255AC013005F41C0 /* TripDetails.swift in Sources */,
+				9EB47CEB2566D5F50065C641 /* View+toAny.swift in Sources */,
 				9E2D7786255176BF0040872F /* AuthProvider.swift in Sources */,
 				9EED544E2563116600098500 /* Trip.swift in Sources */,
 				9EC9207E2561B2E3001A40CC /* UnderlinedTextField.swift in Sources */,
 				9E26365D253DDBF500928B38 /* UserData.swift in Sources */,
 				9EED545C25632FFF00098500 /* TripService.swift in Sources */,
 				9E589E5A253DFA28003CC8EE /* LogoTitle.swift in Sources */,
+				9EB47CE72566D1860065C641 /* TripEvents.swift in Sources */,
 				9E98CB3A2559F12A00AF29EA /* UserDefaultsConfig.swift in Sources */,
 				9E589E5F253E4C20003CC8EE /* FilledButton.swift in Sources */,
 				9E263672253DDFD200928B38 /* Home.swift in Sources */,
 				9EE669392563F9AE0018B82A /* CircleButton.swift in Sources */,
 				9ED5072F254B1EEB00401E2A /* NetworkMonitor.swift in Sources */,
 				9E98CB332559E7C900AF29EA /* APIConstants.swift in Sources */,
+				9EB47CE22566CEE80065C641 /* DaysContainer.swift in Sources */,
 				9EE669462564327A0018B82A /* DayCell.swift in Sources */,
 				9E589E6B253E7CC4003CC8EE /* BorderedTextField.swift in Sources */,
 				9EB47CCD2566874B0065C641 /* Date+compare.swift in Sources */,
