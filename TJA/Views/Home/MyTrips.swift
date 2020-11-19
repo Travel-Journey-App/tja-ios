@@ -41,7 +41,7 @@ struct MyTrips: View {
                         ScrollView(.vertical) {
                             VStack(alignment: .center, spacing: 24) {
                                 ForEach(tripItems) { trip in
-                                    NavigationLink(destination: TripsList(tripname: trip.name)) {
+                                    NavigationLink(destination: TripDetails(tripname: trip.name)) {
                                         TripCell(trip: trip)
                                     }.buttonStyle(PlainButtonStyle())
                                 }

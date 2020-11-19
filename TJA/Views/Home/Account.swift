@@ -20,14 +20,14 @@ struct Account: View {
     
     var birthDate: String {
         if let date = birth {
-            return slashedDateFormatter.string(from: date)
+            return slashedFormatter.string(from: date)
         } else {
             return "Birth date:"
         }
     }
     
     var dateField: some View {
-        return DateField("01/01/2000", date: $birth, formatter: slashedDateFormatter)
+        return DateField("01/01/2000", date: $birth, formatter: slashedFormatter)
             .font(.system(size: 18))
     }
     

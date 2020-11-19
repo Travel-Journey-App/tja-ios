@@ -34,8 +34,9 @@
 		9E98CB332559E7C900AF29EA /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E98CB322559E7C900AF29EA /* APIConstants.swift */; };
 		9E98CB362559EE4E00AF29EA /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E98CB352559EE4E00AF29EA /* UserDefault.swift */; };
 		9E98CB3A2559F12A00AF29EA /* UserDefaultsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E98CB392559F12A00AF29EA /* UserDefaultsConfig.swift */; };
+		9EB47CCD2566874B0065C641 /* Date+compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB47CCC2566874B0065C641 /* Date+compare.swift */; };
 		9EBB625A255ABED1005F41C0 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBB6259255ABED1005F41C0 /* Account.swift */; };
-		9EBB625D255AC013005F41C0 /* TripsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBB625C255AC012005F41C0 /* TripsList.swift */; };
+		9EBB625D255AC013005F41C0 /* TripDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBB625C255AC012005F41C0 /* TripDetails.swift */; };
 		9EC9207E2561B2E3001A40CC /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC9207D2561B2E2001A40CC /* UnderlinedTextField.swift */; };
 		9EC920812561DFC4001A40CC /* Binding+didSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC920802561DFC2001A40CC /* Binding+didSet.swift */; };
 		9ED5072F254B1EEB00401E2A /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */; };
@@ -44,6 +45,7 @@
 		9EE6693C256402DF0018B82A /* CreateTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE6693B256402DF0018B82A /* CreateTrip.swift */; };
 		9EE6693F25640E260018B82A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE6693E25640E250018B82A /* Constants.swift */; };
 		9EE66942256418C50018B82A /* DatePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE66941256418C40018B82A /* DatePickerTextField.swift */; };
+		9EE669462564327A0018B82A /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE66945256432790018B82A /* DayCell.swift */; };
 		9EED544B25630B0C00098500 /* TripCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED544A25630B0C00098500 /* TripCell.swift */; };
 		9EED544E2563116600098500 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED544D2563116600098500 /* Trip.swift */; };
 		9EED5455256316F800098500 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED5454256316F800098500 /* Formatters.swift */; };
@@ -81,8 +83,9 @@
 		9E98CB322559E7C900AF29EA /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		9E98CB352559EE4E00AF29EA /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		9E98CB392559F12A00AF29EA /* UserDefaultsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConfig.swift; sourceTree = "<group>"; };
+		9EB47CCC2566874B0065C641 /* Date+compare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+compare.swift"; sourceTree = "<group>"; };
 		9EBB6259255ABED1005F41C0 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
-		9EBB625C255AC012005F41C0 /* TripsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsList.swift; sourceTree = "<group>"; };
+		9EBB625C255AC012005F41C0 /* TripDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetails.swift; sourceTree = "<group>"; };
 		9EC9207D2561B2E2001A40CC /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		9EC920802561DFC2001A40CC /* Binding+didSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+didSet.swift"; sourceTree = "<group>"; };
 		9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
@@ -91,6 +94,7 @@
 		9EE6693B256402DF0018B82A /* CreateTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTrip.swift; sourceTree = "<group>"; };
 		9EE6693E25640E250018B82A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9EE66941256418C40018B82A /* DatePickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTextField.swift; sourceTree = "<group>"; };
+		9EE66945256432790018B82A /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		9EED544A25630B0C00098500 /* TripCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCell.swift; sourceTree = "<group>"; };
 		9EED544D2563116600098500 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		9EED5454256316F800098500 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
@@ -135,14 +139,14 @@
 		9E26363C253DA28900928B38 /* TJA */ = {
 			isa = PBXGroup;
 			children = (
-				9E98CB2C2559E06900AF29EA /* API */,
-				9E98CB2B2559E05800AF29EA /* UI */,
-				9E2D779025518BD80040872F /* Private */,
-				9ED5073A254B6F3900401E2A /* Misc */,
-				9ED5072D254B1ECD00401E2A /* Services */,
-				9E263661253DDD8400928B38 /* Views */,
-				9E263660253DDD7100928B38 /* App */,
 				9E26365B253DDBBD00928B38 /* Models */,
+				9E98CB2C2559E06900AF29EA /* API */,
+				9ED5072D254B1ECD00401E2A /* Services */,
+				9E98CB2B2559E05800AF29EA /* UI */,
+				9E263661253DDD8400928B38 /* Views */,
+				9ED5073A254B6F3900401E2A /* Misc */,
+				9E2D779025518BD80040872F /* Private */,
+				9E263660253DDD7100928B38 /* App */,
 				9E263641253DA29000928B38 /* Assets.xcassets */,
 				9E263646253DA29000928B38 /* Info.plist */,
 				9E26364F253DA62800928B38 /* LaunchScreen.storyboard */,
@@ -164,9 +168,9 @@
 		9E26365B253DDBBD00928B38 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9E26365C253DDBF500928B38 /* UserData.swift */,
-				9E2D7785255176BF0040872F /* AuthProvider.swift */,
-				9EED544D2563116600098500 /* Trip.swift */,
+				9E5AE2C425653D3D0033EF6F /* Trip */,
+				9E5AE2C325653D380033EF6F /* User */,
+				9E5AE2C225653D310033EF6F /* Auth */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,11 +188,10 @@
 		9E263661253DDD8400928B38 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9E263666253DDDD600928B38 /* SignIn.swift */,
-				9E263671253DDFD200928B38 /* Home.swift */,
-				9EBB6259255ABED1005F41C0 /* Account.swift */,
-				9EBB625C255AC012005F41C0 /* TripsList.swift */,
-				9E83FEB7255C44FC0008F8DC /* MyTrips.swift */,
+				9E5AE2C025653CFD0033EF6F /* Trip */,
+				9E5AE2BF25653CE20033EF6F /* Home */,
+				9E5AE2BE25653CD70033EF6F /* Auth */,
+				9EBB625C255AC012005F41C0 /* TripDetails.swift */,
 				9EE6693B256402DF0018B82A /* CreateTrip.swift */,
 			);
 			path = Views;
@@ -205,18 +208,68 @@
 		9E589E58253DF9AD003CC8EE /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9EE66944256432300018B82A /* Trip */,
 				9E589E59253DFA28003CC8EE /* LogoTitle.swift */,
 				9EC9207D2561B2E2001A40CC /* UnderlinedTextField.swift */,
-				9EED544A25630B0C00098500 /* TripCell.swift */,
 				9EE66941256418C40018B82A /* DatePickerTextField.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		9E5AE2BE25653CD70033EF6F /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				9E263666253DDDD600928B38 /* SignIn.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		9E5AE2BF25653CE20033EF6F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				9EBB6259255ABED1005F41C0 /* Account.swift */,
+				9E263671253DDFD200928B38 /* Home.swift */,
+				9E83FEB7255C44FC0008F8DC /* MyTrips.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		9E5AE2C025653CFD0033EF6F /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Trip;
+			sourceTree = "<group>";
+		};
+		9E5AE2C225653D310033EF6F /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				9E2D7785255176BF0040872F /* AuthProvider.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		9E5AE2C325653D380033EF6F /* User */ = {
+			isa = PBXGroup;
+			children = (
+				9E26365C253DDBF500928B38 /* UserData.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		9E5AE2C425653D3D0033EF6F /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+				9EED544D2563116600098500 /* Trip.swift */,
+			);
+			path = Trip;
 			sourceTree = "<group>";
 		};
 		9E83FEBA255C4D2E0008F8DC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				9EC920802561DFC2001A40CC /* Binding+didSet.swift */,
+				9EB47CCC2566874B0065C641 /* Date+compare.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -298,6 +351,15 @@
 				9EE6693E25640E250018B82A /* Constants.swift */,
 			);
 			path = Misc;
+			sourceTree = "<group>";
+		};
+		9EE66944256432300018B82A /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+				9EED544A25630B0C00098500 /* TripCell.swift */,
+				9EE66945256432790018B82A /* DayCell.swift */,
+			);
+			path = Trip;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,7 +454,7 @@
 				9EE66942256418C50018B82A /* DatePickerTextField.swift in Sources */,
 				9EE6693C256402DF0018B82A /* CreateTrip.swift in Sources */,
 				9EC920812561DFC4001A40CC /* Binding+didSet.swift in Sources */,
-				9EBB625D255AC013005F41C0 /* TripsList.swift in Sources */,
+				9EBB625D255AC013005F41C0 /* TripDetails.swift in Sources */,
 				9E2D7786255176BF0040872F /* AuthProvider.swift in Sources */,
 				9EED544E2563116600098500 /* Trip.swift in Sources */,
 				9EC9207E2561B2E3001A40CC /* UnderlinedTextField.swift in Sources */,
@@ -405,7 +467,9 @@
 				9EE669392563F9AE0018B82A /* CircleButton.swift in Sources */,
 				9ED5072F254B1EEB00401E2A /* NetworkMonitor.swift in Sources */,
 				9E98CB332559E7C900AF29EA /* APIConstants.swift in Sources */,
+				9EE669462564327A0018B82A /* DayCell.swift in Sources */,
 				9E589E6B253E7CC4003CC8EE /* BorderedTextField.swift in Sources */,
+				9EB47CCD2566874B0065C641 /* Date+compare.swift in Sources */,
 				9E26366B253DDDE900928B38 /* Root.swift in Sources */,
 				9E2D778925517A080040872F /* AuthState.swift in Sources */,
 			);

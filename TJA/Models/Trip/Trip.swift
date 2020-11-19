@@ -15,21 +15,20 @@ struct Trip: Hashable, Codable, Identifiable {
     let endDate: Date
     
     var isFinished: Bool {
-        return Date() > endDate
+        return Date().compare(to: endDate) == .orderedDescending
     }
     
     var hasStarted: Bool {
-        return Date() >= startDate
+        return startDate.isToday() || startDate.compare(to: Date()) == .orderedAscending
+    }
+    
+    var inProgress: Bool {
+        return hasStarted && !isFinished
     }
     
     var daysInOrAgo: String {
-        if isFinished {
-            return daysAgoFormatter.string(from: endDate)
-        } else if hasStarted {
-            return "Today"
-        } else {
-            return daysRemainFormatter.string(from: startDate)
-        }
+        remainingOrAgoFormatter.recentString(between: startDate, and: Date())
+            ?? dateFormatter.string(from: startDate)
     }
     
     var interval: String {

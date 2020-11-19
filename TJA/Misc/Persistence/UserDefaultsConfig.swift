@@ -15,4 +15,7 @@ public struct UserDefaultsConfig {
     
     @UserDefault("sync-with-calendar", defaultValue: false)
     public static var syncWithCalendar: Bool
+    
+    @OptionalUserDefault("auth-token", defaultValue: nil)
+    public static var authToken: String?
 }

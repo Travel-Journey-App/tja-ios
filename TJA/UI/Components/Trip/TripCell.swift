@@ -27,11 +27,13 @@ struct TripCell: View {
                         .font(.system(size: 18))
                         .bold()
                     Text(trip.interval).font(.system(size: 13))
-                    HStack(spacing: 5) {
-                        Image(systemName: "clock")
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(.accentColor)
-                        Text(trip.daysInOrAgo).font(.system(size: 15))
+                    if !trip.isFinished {
+                        HStack(spacing: 5) {
+                            Image(systemName: "clock")
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.accentColor)
+                            Text(trip.daysInOrAgo).font(.system(size: 15))
+                        }
                     }
                 }
                 Spacer()
@@ -51,13 +53,24 @@ struct TripCell: View {
 
 struct TripCell_Previews: PreviewProvider {
     static var previews: some View {
-        TripCell(
-            trip: Trip(
-                id: 0,
-                image: URL(string: "https://images.unsplash.com/photo-1605546741978-365c16813d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1575&q=80"),
-                name: "New Year",
-                startDate: Date().addingTimeInterval(60*60*24*2),
-                endDate: Date().addingTimeInterval(60*60*24*6))
-        )
+        VStack {
+            TripCell(
+                trip: Trip(
+                    id: 0,
+                    image: URL(string: "https://images.unsplash.com/photo-1605546741978-365c16813d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1575&q=80"),
+                    name: "New Year",
+                    startDate: Date().addingTimeInterval(60*60*24*2),
+                    endDate: Date().addingTimeInterval(60*60*24*6))
+            )
+            TripCell(
+                trip: Trip(
+                    id: 0,
+                    image: URL(string: "https://images.unsplash.com/photo-1605546741978-365c16813d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1575&q=80"),
+                    name: "New Year",
+                    startDate: Date().addingTimeInterval(-60*60*24*9),
+                    endDate: Date().addingTimeInterval(-60*60*24*6))
+            )
+        }
+        
     }
 }

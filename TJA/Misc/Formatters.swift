@@ -9,93 +9,53 @@ import Foundation
 
 
 private let day = 60 * 60 * 24 as TimeInterval
-private let week = day * 7 as TimeInterval
 
 
 protocol DateFormatting {
+    var dateFormat: String { get }
     func string(from date: Date) -> String
+}
+
+protocol TimeFormatting {
+    func recentString(between date: Date, and now: Date) -> String?
 }
 
 
 final class ExactDateFormatter: DateFormatting {
+    
+    let dateFormat: String
+    
+    init(dateFormat: String = "dd.MM.yyyy") {
+        self.dateFormat = dateFormat
+    }
+    
     func string(from date: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en")
-        formatter.dateFormat = "dd.MM.yyyy"
+        formatter.dateFormat = self.dateFormat
         return formatter.string(from: date)
     }
 }
 
-final class SlashedExactDateFormatter: DateFormatting {
-    func string(from date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en")
-        formatter.dateFormat = "dd/MM/yyyy"
-        return formatter.string(from: date)
-    }
-}
-
-final class TimeFormatter {
-    func fullString(from date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en")
-        formatter.dateFormat = "dd.MM.yyyy"
-        return formatter.string(from: date)
-    }
+final class TimeFormatter: TimeFormatting {
 
     func recentString(between date: Date, and now: Date) -> String? {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .full
-        formatter.maximumUnitCount = 1
-
-        var calendar = Calendar.current
-        calendar.locale = Locale(identifier: "en")
-        formatter.calendar = calendar
-        let components = calendar.dateComponents([.day],
-                                                 from: date,
-                                                 to: date <= now ? now : date)
-
-        guard let timeString = formatter.string(for: components) else {
-            return nil
-        }
-
-        // Bug with maximumUnitCount not working
-        guard let commaIndex = timeString.firstIndex(of: ",") else { return timeString }
-        return String(timeString[..<commaIndex])
-    }
-}
-
-final class TimeAgoFormatter: DateFormatting {
-    func string(from date: Date) -> String {
-        let now = Date()
-        let interval = now.timeIntervalSince(date)
-        if interval < 0 {
-            return formatter.fullString(from: date)
-        } else if interval < day {
+        guard let distance = now.fullDistance(from: date, resultIn: .day) else { return nil }
+        
+        if distance == 0 {
             return "Today"
-        } else if let string = formatter.recentString(between: date, and: now) {
-            return string + " ago"
+        }
+        
+        let postfix = abs(distance) <= 1 ? "" : "s"
+        if distance < 0 {
+            return "\(abs(distance)) day\(postfix) ago"
         } else {
-            return formatter.fullString(from: date)
+            return "in \(distance) day\(postfix)"
         }
     }
-
-    private let formatter = TimeFormatter()
 }
 
-final class TimeRemainingFormatter {
-    func string(from date: Date) -> String {
-        let now = Date()
-        let interval = now.timeIntervalSince(date)
-        if abs(interval) < day { return "Today" }
-        let string = formatter.recentString(between: now, and: date) ?? "a day"
-        return "in " + string
-    }
-
-    private let formatter = TimeFormatter()
-}
 
 let dateFormatter = ExactDateFormatter()
-let slashedDateFormatter = SlashedExactDateFormatter()
-let daysAgoFormatter = TimeAgoFormatter()
-let daysRemainFormatter = TimeRemainingFormatter()
+let slashedFormatter = ExactDateFormatter(dateFormat: "dd/MM/yyyy")
+let remainingOrAgoFormatter = TimeFormatter()
