@@ -18,8 +18,8 @@ struct MyTrips: View {
         
         var title: String {
             switch self {
-            case .future: return "upcoming".uppercased()
-            case .past: return "past".uppercased()
+            case .future: return "upcoming"
+            case .past: return "past"
             }
         }
     }
@@ -31,8 +31,8 @@ struct MyTrips: View {
                 VStack {
                     // Segment control
                     Picker("", selection: $selectedTab) {
-                        Text(Tab.future.title).tag(Tab.future).font(.title)
-                        Text(Tab.past.title).tag(Tab.past).font(.title)
+                        Text(Tab.future.title.uppercased()).tag(Tab.future).font(.title)
+                        Text(Tab.past.title.uppercased()).tag(Tab.past).font(.title)
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .padding(.horizontal, 10)

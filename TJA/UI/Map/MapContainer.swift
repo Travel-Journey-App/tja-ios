@@ -12,6 +12,8 @@ struct MapContainer: View {
     
     @EnvironmentObject var locationService: LocationService
     
+    var numberOfDays = 3
+    
     var body: some View {
         ZStack(alignment: .top) {
             Map(
@@ -20,10 +22,7 @@ struct MapContainer: View {
             
             VStack(alignment: .leading) {
                 // Filters
-                Rectangle()
-                    .fill(Color.blue)
-                    .frame(width: 40, height: 28)
-                
+                MapFilters(daysCount: 3, onFilterChanged: applyFilters)
                 Spacer()
                 
                 // Current location button
@@ -46,6 +45,14 @@ struct MapContainer: View {
         .onAppear(perform: self.locationService.checkPermissions)
         .alert(isPresented: $locationService.servicesDisabled) {
             Alert(title: Text("Please Enable Location Access In Settings"))
+        }
+    }
+    
+    private func applyFilters(_ day: Int?) {
+        if let day = day {
+            print("DEBUG: -- Applying filter for day = \(day)")
+        } else {
+            print("DEBUG: -- Reseting filter to all days")
         }
     }
 }

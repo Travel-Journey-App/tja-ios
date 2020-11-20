@@ -23,6 +23,7 @@
 		9E589E5F253E4C20003CC8EE /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E589E5E253E4C20003CC8EE /* FilledButton.swift */; };
 		9E589E68253E6D5E003CC8EE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E589E67253E6D5E003CC8EE /* Colors.xcassets */; };
 		9E589E6B253E7CC4003CC8EE /* BorderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E589E6A253E7CC4003CC8EE /* BorderedTextField.swift */; };
+		9E824DC125673E2900AE3F77 /* MapFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E824DC025673E2900AE3F77 /* MapFilters.swift */; };
 		9E83FEB8255C44FC0008F8DC /* MyTrips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E83FEB7255C44FC0008F8DC /* MyTrips.swift */; };
 		9E971AF3254ECDB9008FC02F /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E971AF0254ECDB7008FC02F /* GoogleSignInDependencies.framework */; };
 		9E971AF4254ECDB9008FC02F /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9E971AF1254ECDB8008FC02F /* GoogleSignIn.bundle */; };
@@ -41,6 +42,7 @@
 		9EB47CE72566D1860065C641 /* TripEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB47CE62566D1860065C641 /* TripEvents.swift */; };
 		9EB47CEB2566D5F50065C641 /* View+toAny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB47CEA2566D5F50065C641 /* View+toAny.swift */; };
 		9EB47CF32566E71C0065C641 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB47CF22566E71C0065C641 /* LocationService.swift */; };
+		9EB47CF6256722660065C641 /* SharpBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB47CF5256722650065C641 /* SharpBorderButton.swift */; };
 		9EBB625A255ABED1005F41C0 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBB6259255ABED1005F41C0 /* Account.swift */; };
 		9EC9207E2561B2E3001A40CC /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC9207D2561B2E2001A40CC /* UnderlinedTextField.swift */; };
 		9EC920812561DFC4001A40CC /* Binding+didSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC920802561DFC2001A40CC /* Binding+didSet.swift */; };
@@ -77,6 +79,7 @@
 		9E589E5E253E4C20003CC8EE /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
 		9E589E67253E6D5E003CC8EE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		9E589E6A253E7CC4003CC8EE /* BorderedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedTextField.swift; sourceTree = "<group>"; };
+		9E824DC025673E2900AE3F77 /* MapFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilters.swift; sourceTree = "<group>"; };
 		9E83FEB7255C44FC0008F8DC /* MyTrips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTrips.swift; sourceTree = "<group>"; };
 		9E971AF0254ECDB7008FC02F /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
 		9E971AF1254ECDB8008FC02F /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 		9EB47CE62566D1860065C641 /* TripEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEvents.swift; sourceTree = "<group>"; };
 		9EB47CEA2566D5F50065C641 /* View+toAny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+toAny.swift"; sourceTree = "<group>"; };
 		9EB47CF22566E71C0065C641 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		9EB47CF5256722650065C641 /* SharpBorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharpBorderButton.swift; sourceTree = "<group>"; };
 		9EBB6259255ABED1005F41C0 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		9EC9207D2561B2E2001A40CC /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		9EC920802561DFC2001A40CC /* Binding+didSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+didSet.swift"; sourceTree = "<group>"; };
@@ -330,6 +334,7 @@
 				9E589E5E253E4C20003CC8EE /* FilledButton.swift */,
 				9E589E6A253E7CC4003CC8EE /* BorderedTextField.swift */,
 				9EE669382563F9AD0018B82A /* CircleButton.swift */,
+				9EB47CF5256722650065C641 /* SharpBorderButton.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 			children = (
 				9EB47CD525669B970065C641 /* Map.swift */,
 				9EB47CDD2566C2A70065C641 /* MapContainer.swift */,
+				9E824DC025673E2900AE3F77 /* MapFilters.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -477,6 +483,7 @@
 				9E263659253DB15200928B38 /* SceneDelegate.swift in Sources */,
 				9EBB625A255ABED1005F41C0 /* Account.swift in Sources */,
 				9ED5073C254B6F5000401E2A /* Keyboard.swift in Sources */,
+				9E824DC125673E2900AE3F77 /* MapFilters.swift in Sources */,
 				9EB47CF32566E71C0065C641 /* LocationService.swift in Sources */,
 				9EE66942256418C50018B82A /* DatePickerTextField.swift in Sources */,
 				9EE6693C256402DF0018B82A /* CreateTrip.swift in Sources */,
@@ -486,6 +493,7 @@
 				9EED544E2563116600098500 /* Trip.swift in Sources */,
 				9EC9207E2561B2E3001A40CC /* UnderlinedTextField.swift in Sources */,
 				9E26365D253DDBF500928B38 /* UserData.swift in Sources */,
+				9EB47CF6256722660065C641 /* SharpBorderButton.swift in Sources */,
 				9EED545C25632FFF00098500 /* TripService.swift in Sources */,
 				9E589E5A253DFA28003CC8EE /* LogoTitle.swift in Sources */,
 				9EB47CE72566D1860065C641 /* TripEvents.swift in Sources */,
