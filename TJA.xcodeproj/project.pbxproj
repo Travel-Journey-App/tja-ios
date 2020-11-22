@@ -26,6 +26,8 @@
 		9E589E5F253E4C20003CC8EE /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E589E5E253E4C20003CC8EE /* FilledButton.swift */; };
 		9E589E68253E6D5E003CC8EE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E589E67253E6D5E003CC8EE /* Colors.xcassets */; };
 		9E589E6B253E7CC4003CC8EE /* BorderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E589E6A253E7CC4003CC8EE /* BorderedTextField.swift */; };
+		9E5A8ED3256AA63B0037D742 /* EventIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8ED2256AA63B0037D742 /* EventIcons.swift */; };
+		9E5A8ED6256AB17E0037D742 /* EventIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8ED5256AB17E0037D742 /* EventIcon.swift */; };
 		9E824DC125673E2900AE3F77 /* MapFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E824DC025673E2900AE3F77 /* MapFilters.swift */; };
 		9E83FEB8255C44FC0008F8DC /* MyTrips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E83FEB7255C44FC0008F8DC /* MyTrips.swift */; };
 		9E971AF3254ECDB9008FC02F /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E971AF0254ECDB7008FC02F /* GoogleSignInDependencies.framework */; };
@@ -85,6 +87,8 @@
 		9E589E5E253E4C20003CC8EE /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
 		9E589E67253E6D5E003CC8EE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		9E589E6A253E7CC4003CC8EE /* BorderedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedTextField.swift; sourceTree = "<group>"; };
+		9E5A8ED2256AA63B0037D742 /* EventIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventIcons.swift; sourceTree = "<group>"; };
+		9E5A8ED5256AB17E0037D742 /* EventIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventIcon.swift; sourceTree = "<group>"; };
 		9E824DC025673E2900AE3F77 /* MapFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilters.swift; sourceTree = "<group>"; };
 		9E83FEB7255C44FC0008F8DC /* MyTrips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTrips.swift; sourceTree = "<group>"; };
 		9E971AF0254ECDB7008FC02F /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
@@ -282,6 +286,7 @@
 				9EED544D2563116600098500 /* Trip.swift */,
 				9E487F492569EF64007BC9C7 /* Event.swift */,
 				9E487F4F2569FCD2007BC9C7 /* Location.swift */,
+				9E5A8ED2256AA63B0037D742 /* EventIcons.swift */,
 			);
 			path = Trip;
 			sourceTree = "<group>";
@@ -396,6 +401,7 @@
 				9EED544A25630B0C00098500 /* TripCell.swift */,
 				9EE66945256432790018B82A /* DayCell.swift */,
 				9EB47CE12566CEE80065C641 /* DaysContainer.swift */,
+				9E5A8ED5256AB17E0037D742 /* EventIcon.swift */,
 			);
 			path = Trip;
 			sourceTree = "<group>";
@@ -480,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E83FEB8255C44FC0008F8DC /* MyTrips.swift in Sources */,
+				9E5A8ED6256AB17E0037D742 /* EventIcon.swift in Sources */,
 				9E98CB362559EE4E00AF29EA /* UserDefault.swift in Sources */,
 				9E2D779225518C3C0040872F /* ApiKeys.swift in Sources */,
 				9EED5455256316F800098500 /* Formatters.swift in Sources */,
@@ -488,6 +495,7 @@
 				9EE6693F25640E260018B82A /* Constants.swift in Sources */,
 				9E263655253DACED00928B38 /* AppDelegate.swift in Sources */,
 				9EB47CDE2566C2A70065C641 /* MapContainer.swift in Sources */,
+				9E5A8ED3256AA63B0037D742 /* EventIcons.swift in Sources */,
 				9E263667253DDDD700928B38 /* SignIn.swift in Sources */,
 				9E263659253DB15200928B38 /* SceneDelegate.swift in Sources */,
 				9EBB625A255ABED1005F41C0 /* Account.swift in Sources */,

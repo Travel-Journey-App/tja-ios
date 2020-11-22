@@ -54,19 +54,6 @@ enum EventType: Codable {
         case museum
         case sightseeing
         case fun
-        
-        
-        // TODO: Fill in icons
-        var icon: String {
-            switch self {
-            case .food: return ""
-            case .bar: return ""
-            case .gallery: return ""
-            case .museum: return ""
-            case .sightseeing: return ""
-            case .fun: return ""
-            }
-        }
     }
     
     enum Transfer: String, Codable {
@@ -75,18 +62,6 @@ enum EventType: Codable {
         case ship
         case bus
         case car
-        
-        
-        // TODO: Fill in icons
-        var icon: String {
-            switch self {
-            case .plane: return "airplane"
-            case .train: return "tram.fill"
-            case .ship: return ""
-            case .bus: return ""
-            case .car: return "car.fill"
-            }
-        }
     }
     
     
@@ -131,28 +106,6 @@ enum EventType: Codable {
             try container.encode(activity, forKey: .activity)
         case .transfer(let transfer, let arrival):
             try container.encodeValues(transfer, arrival, for: .transfer)
-        }
-    }
-    
-    
-    // TODO: Fill in icons
-    var categoryIcon: String {
-        switch self {
-        case .accomodation: return "bed.double"
-        case .activity(let activity): return activity.icon
-        case .transfer(let transfer, _): return transfer.icon
-        }
-    }
-    
-    // TODO: Fill in icons
-    var eventIcon: String {
-        switch self {
-        case .transfer(let transfer, let arrival):
-            switch transfer {
-            case .plane: return arrival ? "" : ""
-            default: return transfer.icon
-            }
-        default: return categoryIcon
         }
     }
 }
