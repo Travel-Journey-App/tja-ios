@@ -25,8 +25,10 @@ struct EventIcon: View {
     
     var image: some View {
         switch source {
-        case .system: return Image(systemName: name).toAnyView()
-        case .custom: return Image(name)
+        case .system:
+            return Image(systemName: name).resizable().toAnyView()
+        case .custom:
+            return Image(name)
             .renderingMode(.template)
             .resizable()
             .aspectRatio(contentMode: .fit)
@@ -45,10 +47,10 @@ struct EventIcon_Previews: PreviewProvider {
                 EventType.activity(activity: .fun).eventIcon
                 EventType.activity(activity: .sightseeing).eventIcon
                 EventType.activity(activity: .gallery).eventIcon
-                
-            }
-            VStack {
                 EventType.accomodation.eventIcon
+            }
+            EventIcon(name: "calendar")
+            VStack {
                 EventType.transfer(transfer: .plane, arrival: true).eventIcon
                 EventType.transfer(transfer: .plane, arrival: false).eventIcon
                 EventType.transfer(transfer: .bus, arrival: true).eventIcon

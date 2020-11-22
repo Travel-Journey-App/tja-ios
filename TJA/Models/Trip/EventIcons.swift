@@ -59,4 +59,8 @@ extension EventType {
         default: return categoryIcon
         }
     }
+    
+    static func getDefaultIcon() -> EventIcon {
+        return EventIcon(name: "calendar")
+    }
 }
