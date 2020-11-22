@@ -13,11 +13,12 @@ struct MapContainer: View {
     @EnvironmentObject var locationService: LocationService
     
     var numberOfDays = 3
+    var location: Location?
     
     var body: some View {
         ZStack(alignment: .top) {
             Map(
-                tripLocation: locationService.mockupCoordinate
+                tripLocation: location?.coordinate
             ).edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading) {
@@ -59,6 +60,6 @@ struct MapContainer: View {
 
 struct MapContainer_Previews: PreviewProvider {
     static var previews: some View {
-        MapContainer()
+        MapContainer(location: mockTripLocation)
     }
 }

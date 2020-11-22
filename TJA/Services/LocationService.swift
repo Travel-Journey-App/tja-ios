@@ -27,10 +27,6 @@ class LocationService: NSObject, ObservableObject {
         CLLocationManager.locationServicesEnabled()
     }
     
-    var mockupCoordinate: CLLocationCoordinate2D {
-        CLLocationCoordinate2D(latitude: 40.71, longitude: -74)
-    }
-    
     func checkPermissions() {
         let status = CLLocationManager.authorizationStatus()
         

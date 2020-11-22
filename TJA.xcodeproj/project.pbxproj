@@ -19,6 +19,9 @@
 		9E2D7786255176BF0040872F /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2D7785255176BF0040872F /* AuthProvider.swift */; };
 		9E2D778925517A080040872F /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2D778825517A080040872F /* AuthState.swift */; };
 		9E2D779225518C3C0040872F /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2D779125518C3C0040872F /* ApiKeys.swift */; };
+		9E487F4A2569EF64007BC9C7 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E487F492569EF64007BC9C7 /* Event.swift */; };
+		9E487F4D2569F95D007BC9C7 /* KeyedEncodingContainer+values.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E487F4C2569F95D007BC9C7 /* KeyedEncodingContainer+values.swift */; };
+		9E487F502569FCD2007BC9C7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E487F4F2569FCD2007BC9C7 /* Location.swift */; };
 		9E589E5A253DFA28003CC8EE /* LogoTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E589E59253DFA28003CC8EE /* LogoTitle.swift */; };
 		9E589E5F253E4C20003CC8EE /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E589E5E253E4C20003CC8EE /* FilledButton.swift */; };
 		9E589E68253E6D5E003CC8EE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E589E67253E6D5E003CC8EE /* Colors.xcassets */; };
@@ -75,6 +78,9 @@
 		9E2D7785255176BF0040872F /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
 		9E2D778825517A080040872F /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
 		9E2D779125518C3C0040872F /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
+		9E487F492569EF64007BC9C7 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		9E487F4C2569F95D007BC9C7 /* KeyedEncodingContainer+values.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyedEncodingContainer+values.swift"; sourceTree = "<group>"; };
+		9E487F4F2569FCD2007BC9C7 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		9E589E59253DFA28003CC8EE /* LogoTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoTitle.swift; sourceTree = "<group>"; };
 		9E589E5E253E4C20003CC8EE /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
 		9E589E67253E6D5E003CC8EE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -274,6 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				9EED544D2563116600098500 /* Trip.swift */,
+				9E487F492569EF64007BC9C7 /* Event.swift */,
+				9E487F4F2569FCD2007BC9C7 /* Location.swift */,
 			);
 			path = Trip;
 			sourceTree = "<group>";
@@ -284,6 +292,7 @@
 				9EC920802561DFC2001A40CC /* Binding+didSet.swift */,
 				9EB47CCC2566874B0065C641 /* Date+compare.swift */,
 				9EB47CEA2566D5F50065C641 /* View+toAny.swift */,
+				9E487F4C2569F95D007BC9C7 /* KeyedEncodingContainer+values.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -494,14 +503,17 @@
 				9EC9207E2561B2E3001A40CC /* UnderlinedTextField.swift in Sources */,
 				9E26365D253DDBF500928B38 /* UserData.swift in Sources */,
 				9EB47CF6256722660065C641 /* SharpBorderButton.swift in Sources */,
+				9E487F4A2569EF64007BC9C7 /* Event.swift in Sources */,
 				9EED545C25632FFF00098500 /* TripService.swift in Sources */,
 				9E589E5A253DFA28003CC8EE /* LogoTitle.swift in Sources */,
 				9EB47CE72566D1860065C641 /* TripEvents.swift in Sources */,
 				9E98CB3A2559F12A00AF29EA /* UserDefaultsConfig.swift in Sources */,
+				9E487F4D2569F95D007BC9C7 /* KeyedEncodingContainer+values.swift in Sources */,
 				9E589E5F253E4C20003CC8EE /* FilledButton.swift in Sources */,
 				9E263672253DDFD200928B38 /* Home.swift in Sources */,
 				9EE669392563F9AE0018B82A /* CircleButton.swift in Sources */,
 				9ED5072F254B1EEB00401E2A /* NetworkMonitor.swift in Sources */,
+				9E487F502569FCD2007BC9C7 /* Location.swift in Sources */,
 				9E98CB332559E7C900AF29EA /* APIConstants.swift in Sources */,
 				9EB47CE22566CEE80065C641 /* DaysContainer.swift in Sources */,
 				9EE669462564327A0018B82A /* DayCell.swift in Sources */,

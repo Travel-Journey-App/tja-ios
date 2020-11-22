@@ -24,6 +24,7 @@ struct TripEvents: View {
     @State var selectedTab = Tab.events
     
     var tripname = ""
+    var location: Location?
     
     var body: some View {
         VStack {
@@ -49,13 +50,13 @@ struct TripEvents: View {
     var contentSection: some View {
         switch self.selectedTab {
         case .events: return DaysContainer().toAnyView()
-        case .map: return MapContainer().toAnyView()
+        case .map: return MapContainer(location: location).toAnyView()
         }
     }
 }
 
 struct TripEvents_Previews: PreviewProvider {
     static var previews: some View {
-        TripEvents()
+        TripEvents(location: mockTripLocation)
     }
 }

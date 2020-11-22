@@ -61,7 +61,8 @@ struct TripCell_Previews: PreviewProvider {
                     image: URL(string: "https://images.unsplash.com/photo-1605546741978-365c16813d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1575&q=80"),
                     name: "New Year",
                     startDate: Date().addingTimeInterval(60*60*24*2),
-                    endDate: Date().addingTimeInterval(60*60*24*6))
+                    endDate: Date().addingTimeInterval(60*60*24*6),
+                    location: nil)
             )
             TripCell(
                 trip: Trip(
@@ -69,7 +70,8 @@ struct TripCell_Previews: PreviewProvider {
                     image: URL(string: "https://images.unsplash.com/photo-1605546741978-365c16813d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1575&q=80"),
                     name: "New Year",
                     startDate: Date().addingTimeInterval(-60*60*24*9),
-                    endDate: Date().addingTimeInterval(-60*60*24*6))
+                    endDate: Date().addingTimeInterval(-60*60*24*6),
+                    location: nil)
             )
         }
         

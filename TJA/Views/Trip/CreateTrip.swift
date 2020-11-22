@@ -89,7 +89,12 @@ struct CreateTrip: View {
     func saveTrip() {
         guard !name.isEmpty && !destination.isEmpty else { return }
         guard let start = startDate, let end = endDate else { return }
-        self.tripService.saveTrip(name: name, startDate: start, endDate: end)
+        self.tripService.saveTrip(
+            name: name,
+            destination: destination,
+            startDate: start,
+            endDate: end
+        )
         self.presentation.wrappedValue.dismiss()
     }
 }

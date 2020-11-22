@@ -14,6 +14,7 @@ struct Trip: Hashable, Codable, Identifiable {
     let name: String
     let startDate: Date
     let endDate: Date
+    let location: Location?
     
     var isFinished: Bool {
         return Date().compare(to: endDate) == .orderedDescending
@@ -35,4 +36,11 @@ struct Trip: Hashable, Codable, Identifiable {
     var interval: String {
         return "\(dateFormatter.string(from: startDate)) - \(dateFormatter.string(from: endDate))"
     }
+}
+
+
+struct TripDay: Hashable, Codable, Identifiable {
+    let id: Int
+    let number: Int
+    let events: [Event]
 }

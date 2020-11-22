@@ -20,10 +20,22 @@ class TripService: NSObject, ObservableObject {
         self.trips = trips
     }
     
-    func saveTrip(name: String, startDate: Date, endDate: Date) {
+    func saveTrip(name: String, destination: String, startDate: Date, endDate: Date) {
         let imgUrl = URL(string: "https://images.unsplash.com/photo-1543988884-c01cfa7b41c2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1482&q=80")
-        let trip = Trip(id: trips.count, image: imgUrl, name: name, startDate: startDate, endDate: endDate)
+        let trip = Trip(
+            id: trips.count,
+            image: imgUrl,
+            name: name,
+            startDate: startDate,
+            endDate: endDate,
+            location: Location(placeName: destination, lat: 40.71, lon: -74)
+        )
         self.trips.append(trip)
+    }
+    
+    func delete(at offsets: IndexSet) {
+        print("DEBUG: -- Removing trips at \(offsets)")
+        self.trips.remove(atOffsets: offsets)
     }
     
     var hasUpcoming: Bool {
@@ -57,7 +69,8 @@ func generateMockupTrips() -> [Trip] {
             image: URL(string: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"),
             name: "London",
             startDate: now.addingTimeInterval(-day*2),
-            endDate: now.addingTimeInterval(-day)
+            endDate: now.addingTimeInterval(-day),
+            location: mockTripLocation
         )
     )
     trips.append(
@@ -66,7 +79,8 @@ func generateMockupTrips() -> [Trip] {
             image: URL(string: "https://images.unsplash.com/photo-1495542779398-9fec7dc7986c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80"),
             name: "Moscow",
             startDate: now.addingTimeInterval(-week*2),
-            endDate: now.addingTimeInterval(-week)
+            endDate: now.addingTimeInterval(-week),
+            location: mockTripLocation
         )
     )
     trips.append(
@@ -75,7 +89,8 @@ func generateMockupTrips() -> [Trip] {
             image: URL(string: "https://images.unsplash.com/photo-1541503506238-58dbe11ef244?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80"),
             name: "Brussels",
             startDate: now.addingTimeInterval(-day),
-            endDate: now.addingTimeInterval(day*3)
+            endDate: now.addingTimeInterval(day*3),
+            location: mockTripLocation
         )
     )
     trips.append(
@@ -84,7 +99,8 @@ func generateMockupTrips() -> [Trip] {
             image: URL(string: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=762&q=80"),
             name: "Tokyo",
             startDate: now.addingTimeInterval(week*2),
-            endDate: now.addingTimeInterval(week*2 + day*4)
+            endDate: now.addingTimeInterval(week*2 + day*4),
+            location: mockTripLocation
         )
     )
     trips.append(
@@ -93,7 +109,8 @@ func generateMockupTrips() -> [Trip] {
             image: URL(string: "https://images.unsplash.com/photo-1601751664209-be452817a8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"),
             name: "NY",
             startDate: now.addingTimeInterval(week*5),
-            endDate: now.addingTimeInterval(week*6)
+            endDate: now.addingTimeInterval(week*6),
+            location: mockTripLocation
         )
     )
     trips.append(
@@ -102,9 +119,13 @@ func generateMockupTrips() -> [Trip] {
             image: URL(string: "https://images.unsplash.com/photo-1601907449390-a10b97d6368a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80"),
             name: "Okinawa",
             startDate: now.addingTimeInterval(week*6),
-            endDate: now.addingTimeInterval(week*7)
+            endDate: now.addingTimeInterval(week*7),
+            location: mockTripLocation
         )
     )
     
     return trips
 }
+
+
+let mockTripLocation = Location(placeName: "New York", lat: 40.71, lon: -74)

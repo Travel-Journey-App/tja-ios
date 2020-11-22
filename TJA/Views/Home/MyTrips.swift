@@ -42,7 +42,11 @@ struct MyTrips: View {
                         ScrollView(.vertical) {
                             VStack(alignment: .center, spacing: 24) {
                                 ForEach(tripItems) { trip in
-                                    NavigationLink(destination: TripEvents(tripname: trip.name)) {
+                                    NavigationLink(
+                                        destination: TripEvents(
+                                            tripname: trip.name,
+                                            location: trip.location
+                                        )) {
                                         TripCell(trip: trip)
                                     }.buttonStyle(PlainButtonStyle())
                                 }
@@ -77,10 +81,15 @@ struct MyTrips: View {
         }.onAppear(perform: self.tripService.loadTrips)
     }
     
+    
+    private func delete(at offsets: IndexSet) {
+        self.tripService.delete(at: offsets)
+    }
+    
     private var hasTrips: Bool {
         switch self.selectedTab {
         case .future: return self.tripService.hasUpcoming
-        case .past: return false //self.tripService.hasFinished
+        case .past: return self.tripService.hasFinished
         }
     }
     
