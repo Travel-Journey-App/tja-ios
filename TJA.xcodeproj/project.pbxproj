@@ -30,6 +30,7 @@
 		9E5A8ED6256AB17E0037D742 /* EventIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8ED5256AB17E0037D742 /* EventIcon.swift */; };
 		9E5A8EDE256AC49D0037D742 /* BorderTitleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8EDD256AC49D0037D742 /* BorderTitleImage.swift */; };
 		9E5A8EE1256ACA7A0037D742 /* StrokeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8EE0256ACA790037D742 /* StrokeText.swift */; };
+		9E5A8EE4256AD6690037D742 /* ShadowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8EE3256AD6680037D742 /* ShadowImage.swift */; };
 		9E824DC125673E2900AE3F77 /* MapFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E824DC025673E2900AE3F77 /* MapFilters.swift */; };
 		9E83FEB8255C44FC0008F8DC /* MyTrips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E83FEB7255C44FC0008F8DC /* MyTrips.swift */; };
 		9E971AF3254ECDB9008FC02F /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E971AF0254ECDB7008FC02F /* GoogleSignInDependencies.framework */; };
@@ -93,6 +94,7 @@
 		9E5A8ED5256AB17E0037D742 /* EventIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventIcon.swift; sourceTree = "<group>"; };
 		9E5A8EDD256AC49D0037D742 /* BorderTitleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderTitleImage.swift; sourceTree = "<group>"; };
 		9E5A8EE0256ACA790037D742 /* StrokeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeText.swift; sourceTree = "<group>"; };
+		9E5A8EE3256AD6680037D742 /* ShadowImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowImage.swift; sourceTree = "<group>"; };
 		9E824DC025673E2900AE3F77 /* MapFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilters.swift; sourceTree = "<group>"; };
 		9E83FEB7255C44FC0008F8DC /* MyTrips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTrips.swift; sourceTree = "<group>"; };
 		9E971AF0254ECDB7008FC02F /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				9EE66941256418C40018B82A /* DatePickerTextField.swift */,
 				9E5A8EDD256AC49D0037D742 /* BorderTitleImage.swift */,
 				9E5A8EE0256ACA790037D742 /* StrokeText.swift */,
+				9E5A8EE3256AD6680037D742 /* ShadowImage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				9E98CB3A2559F12A00AF29EA /* UserDefaultsConfig.swift in Sources */,
 				9E487F4D2569F95D007BC9C7 /* KeyedEncodingContainer+values.swift in Sources */,
 				9E589E5F253E4C20003CC8EE /* FilledButton.swift in Sources */,
+				9E5A8EE4256AD6690037D742 /* ShadowImage.swift in Sources */,
 				9E263672253DDFD200928B38 /* Home.swift in Sources */,
 				9EE669392563F9AE0018B82A /* CircleButton.swift in Sources */,
 				9E5A8EDE256AC49D0037D742 /* BorderTitleImage.swift in Sources */,
