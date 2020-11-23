@@ -11,20 +11,25 @@ import Foundation
 
 struct Event: Hashable, Codable, Identifiable, Comparable {
     
+    // TODO: Revert to scheduled and unscheduled when proper sort is discussed
+    
     let id: Int
     let eventType: EventType
     let name: String
     let note: String
-    let startTime: Date
-    let endTime: Date
+//    let startTime: Date
+//    let endTime: Date
+    let time: Date
     let location: Location?
     
     var scheduled: Bool {
-        return startTime == endTime
+//        return startTime == endTime
+        true
     }
     
     var exactTime: Date {
-        startTime
+//        startTime
+        time
     }
     
     func hash(into hasher: inout Hasher) {
@@ -36,11 +41,12 @@ struct Event: Hashable, Codable, Identifiable, Comparable {
     }
     
     static func < (lhs: Event, rhs: Event) -> Bool {
-        if !lhs.scheduled && !rhs.scheduled {
-            return lhs.endTime < rhs.endTime
-        } else {
-            return lhs.exactTime < rhs.exactTime
-        }
+        return lhs.exactTime < rhs.exactTime
+//        if !lhs.scheduled && !rhs.scheduled {
+//            return lhs.endTime < rhs.endTime
+//        } else {
+//            return lhs.exactTime < rhs.exactTime
+//        }
     }
 }
 
@@ -62,11 +68,15 @@ enum EventType: Codable {
         case ship
         case bus
         case car
+        
+        enum Direction: String, Codable {
+            case arrival, departure
+        }
     }
     
     
     case accomodation
-    case transfer(transfer: Transfer, arrival: Bool)
+    case transfer(transfer: Transfer, direction: Transfer.Direction)
     case activity(activity: Activity)
     
     enum CodingKeys: CodingKey {
@@ -84,8 +94,8 @@ enum EventType: Codable {
             let activity = try container.decode(Activity.self, forKey: .activity)
             self = .activity(activity: activity)
         case .transfer:
-            let (transfer, arrival): (Transfer, Bool) = try container.decodeValues(for: .transfer)
-            self = .transfer(transfer: transfer, arrival: arrival)
+            let (transfer, direction): (Transfer, Transfer.Direction) = try container.decodeValues(for: .transfer)
+            self = .transfer(transfer: transfer, direction: direction)
         default:
             throw DecodingError.dataCorrupted(
                 DecodingError.Context(
@@ -104,8 +114,8 @@ enum EventType: Codable {
             try container.encode(true, forKey: .accomodation)
         case .activity(let activity):
             try container.encode(activity, forKey: .activity)
-        case .transfer(let transfer, let arrival):
-            try container.encodeValues(transfer, arrival, for: .transfer)
+        case .transfer(let transfer, let direction):
+            try container.encodeValues(transfer, direction, for: .transfer)
         }
     }
 }

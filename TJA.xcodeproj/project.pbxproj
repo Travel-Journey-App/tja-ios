@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E17EF07256B1D85005F2BDE /* MockupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E17EF06256B1D85005F2BDE /* MockupData.swift */; };
+		9E17EF0A256B2984005F2BDE /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E17EF09256B2984005F2BDE /* EventService.swift */; };
 		9E263642253DA29000928B38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E263641253DA29000928B38 /* Assets.xcassets */; };
 		9E263645253DA29000928B38 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E263644253DA29000928B38 /* Preview Assets.xcassets */; };
 		9E263650253DA62800928B38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E26364F253DA62800928B38 /* LaunchScreen.storyboard */; };
@@ -69,6 +71,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E17EF06256B1D85005F2BDE /* MockupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupData.swift; sourceTree = "<group>"; };
+		9E17EF09256B2984005F2BDE /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		9E26363A253DA28900928B38 /* TJA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TJA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E263641253DA29000928B38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E263644253DA29000928B38 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -388,6 +392,7 @@
 				9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */,
 				9EED545B25632FFF00098500 /* TripService.swift */,
 				9EB47CF22566E71C0065C641 /* LocationService.swift */,
+				9E17EF09256B2984005F2BDE /* EventService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -400,6 +405,7 @@
 				9ED5073B254B6F5000401E2A /* Keyboard.swift */,
 				9EED5454256316F800098500 /* Formatters.swift */,
 				9EE6693E25640E250018B82A /* Constants.swift */,
+				9E17EF06256B1D85005F2BDE /* MockupData.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -498,6 +504,7 @@
 				9E83FEB8255C44FC0008F8DC /* MyTrips.swift in Sources */,
 				9E5A8ED6256AB17E0037D742 /* EventIcon.swift in Sources */,
 				9E98CB362559EE4E00AF29EA /* UserDefault.swift in Sources */,
+				9E17EF07256B1D85005F2BDE /* MockupData.swift in Sources */,
 				9E2D779225518C3C0040872F /* ApiKeys.swift in Sources */,
 				9EED5455256316F800098500 /* Formatters.swift in Sources */,
 				9EB47CD625669B970065C641 /* Map.swift in Sources */,
@@ -506,6 +513,7 @@
 				9E263655253DACED00928B38 /* AppDelegate.swift in Sources */,
 				9EB47CDE2566C2A70065C641 /* MapContainer.swift in Sources */,
 				9E5A8ED3256AA63B0037D742 /* EventIcons.swift in Sources */,
+				9E17EF0A256B2984005F2BDE /* EventService.swift in Sources */,
 				9E263667253DDDD700928B38 /* SignIn.swift in Sources */,
 				9E263659253DB15200928B38 /* SceneDelegate.swift in Sources */,
 				9EBB625A255ABED1005F41C0 /* Account.swift in Sources */,

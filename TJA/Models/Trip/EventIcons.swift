@@ -49,11 +49,15 @@ extension EventType {
     
     var eventIcon: EventIcon {
         switch self {
-        case .transfer(let transfer, let arrival):
+        case .transfer(let transfer, let direction):
+            
             switch transfer {
-            case .plane: return arrival ?
-                EventIcon(name: "landing", source: .custom)
-                : EventIcon(name: "takeoff", source: .custom)
+            case .plane:
+                switch direction {
+                case .arrival: return EventIcon(name: "landing", source: .custom)
+                case .departure: return EventIcon(name: "takeoff", source: .custom)
+                }
+                
             default: return transfer.icon
             }
         default: return categoryIcon

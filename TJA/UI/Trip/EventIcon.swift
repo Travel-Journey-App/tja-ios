@@ -51,13 +51,13 @@ struct EventIcon_Previews: PreviewProvider {
             }
             EventIcon(name: "calendar")
             VStack {
-                EventType.transfer(transfer: .plane, arrival: true).eventIcon
-                EventType.transfer(transfer: .plane, arrival: false).eventIcon
-                EventType.transfer(transfer: .bus, arrival: true).eventIcon
-                EventType.transfer(transfer: .car, arrival: true).eventIcon
-                EventType.transfer(transfer: .ship, arrival: true).eventIcon
-                EventType.transfer(transfer: .train, arrival: true).eventIcon
-                EventType.transfer(transfer: .plane, arrival: true).categoryIcon
+                EventType.transfer(transfer: .plane, direction: .arrival).eventIcon
+                EventType.transfer(transfer: .plane, direction: .departure).eventIcon
+                EventType.transfer(transfer: .bus, direction: .arrival).eventIcon
+                EventType.transfer(transfer: .car, direction: .arrival).eventIcon
+                EventType.transfer(transfer: .ship, direction: .arrival).eventIcon
+                EventType.transfer(transfer: .train, direction: .arrival).eventIcon
+                EventType.transfer(transfer: .plane, direction: .arrival).categoryIcon
             }
         }
         

@@ -10,15 +10,15 @@ import SwiftUI
 
 struct DaysContainer: View {
     
-    var daysCount = 2
+    @EnvironmentObject var eventService: EventService
     
     var body: some View {
         ZStack(alignment: .top) {
             // Content
             ScrollView {
                 VStack(spacing: 5) {
-                    ForEach(1..<daysCount+1) { day in
-                        DayCell(dayNumber: day)
+                    ForEach(0..<eventService.daysCount) { day in
+                        DayCell(dayNumber: day + 1)
                     }
                 }
                 .padding(.vertical, 15)

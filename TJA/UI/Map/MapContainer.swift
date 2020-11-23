@@ -11,9 +11,11 @@ import SwiftUI
 struct MapContainer: View {
     
     @EnvironmentObject var locationService: LocationService
+    @EnvironmentObject var eventService: EventService
     
-    var numberOfDays = 3
-    var location: Location?
+    @State var events: [Event] = []
+    
+    var location: Location? = nil
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -23,7 +25,7 @@ struct MapContainer: View {
             
             VStack(alignment: .leading) {
                 // Filters
-                MapFilters(daysCount: 3, onFilterChanged: applyFilters)
+                MapFilters(daysCount: eventService.daysCount, onFilterChanged: applyFilters)
                 Spacer()
                 
                 // Current location button
@@ -46,20 +48,20 @@ struct MapContainer: View {
         .onAppear(perform: self.locationService.checkPermissions)
         .alert(isPresented: $locationService.servicesDisabled) {
             Alert(title: Text("Please Enable Location Access In Settings"))
-        }
+        }.onAppear(perform: loadEvents)
     }
     
     private func applyFilters(_ day: Int?) {
-        if let day = day {
-            print("DEBUG: -- Applying filter for day = \(day)")
-        } else {
-            print("DEBUG: -- Reseting filter to all days")
-        }
+        self.eventService.filterBy(day: day)
+    }
+    
+    private func loadEvents() {
+        self.events = eventService.events
     }
 }
 
 struct MapContainer_Previews: PreviewProvider {
     static var previews: some View {
-        MapContainer(location: mockTripLocation)
+        MapContainer()
     }
 }

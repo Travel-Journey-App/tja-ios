@@ -22,6 +22,7 @@ struct TripEvents: View {
     }
     
     @State var selectedTab = Tab.events
+    @EnvironmentObject var eventService: EventService
     
     var tripname = ""
     var location: Location?
@@ -57,6 +58,7 @@ struct TripEvents: View {
 
 struct TripEvents_Previews: PreviewProvider {
     static var previews: some View {
-        TripEvents(location: mockTripLocation)
+        TripEvents(location: Mockup.Locations.mockTripLocation)
+            .environmentObject(EventService())
     }
 }

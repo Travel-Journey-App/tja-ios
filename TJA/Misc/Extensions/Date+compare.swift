@@ -31,3 +31,14 @@ extension Date {
         return calendar.isDateInTomorrow(self)
     }
 }
+
+extension Date {
+    
+    func startOf(_ dateComponent : Calendar.Component) -> Date {
+        var calendar: Calendar = .current
+        var startOfComponent = self
+        var timeInterval : TimeInterval = 0.0
+        calendar.dateInterval(of: dateComponent, start: &startOfComponent, interval: &timeInterval, for: self)
+        return startOfComponent
+    }
+}

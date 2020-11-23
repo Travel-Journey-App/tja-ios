@@ -46,7 +46,8 @@ struct MyTrips: View {
                                         destination: TripEvents(
                                             tripname: trip.name,
                                             location: trip.location
-                                        )) {
+                                        ).environmentObject(EventService(start: trip.startDate))
+                                    ) {
                                         TripCell(trip: trip)
                                     }.buttonStyle(PlainButtonStyle())
                                 }
