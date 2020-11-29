@@ -22,8 +22,6 @@ struct BorderTitleImage: View {
             .aspectRatio(contentMode: .fill)
             .frame(maxWidth: .infinity)
             .frame(height: 85, alignment: .center)
-            .border(Color("MainRed"), width: 3.0)
-            .clipped()
             .overlay(
                 StrokeText(text: title, width: 1.0, color: .black)
                     .font(.system(size: 24, weight: .bold))
@@ -32,6 +30,9 @@ struct BorderTitleImage: View {
                     .padding(.vertical, 8)
                     .padding(.horizontal, 5),
                 alignment: .bottomTrailing)
+            .clipped()
+            .border(Color("MainRed"), width: 3.0)
+            .contentShape(Rectangle())
     }
     
     var title: String {

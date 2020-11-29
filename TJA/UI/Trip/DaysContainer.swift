@@ -10,7 +10,18 @@ import SwiftUI
 
 struct DaysContainer: View {
     
+    enum ActiveSheet: Identifiable {
+        case magic, wish, manual
+        
+        var id: Int {
+            hashValue
+        }
+    }
+    
     @EnvironmentObject var eventService: EventService
+    @State var isBlurShown: Bool = false
+    @State var activeSheet: ActiveSheet?
+    
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -25,22 +36,33 @@ struct DaysContainer: View {
                 .padding(.horizontal, 10)
             }
             
-            // "+" button
+            if isBlurShown {
+                BlurView().onTapGesture {
+                    self.isBlurShown = false
+                }
+            }
+            
             VStack {
                 Spacer()
                 HStack {
                     Spacer()
-                    Button(action: {
-                        print("DEBUG: -- Add button tapped")
-                    }) {
-                        Image(systemName: "plus")
-                            .frame(width: 24, height: 24, alignment: .center)
-                    }
-                    .buttonStyle(CircleButtonStyle())
+                    AddButtonsStack(
+                        isExpanded: $isBlurShown,
+                        magicFlow: { self.activeSheet = .magic },
+                        ideasFlow: { self.activeSheet = .wish },
+                        manualFlow: { self.activeSheet = .manual }
+                    )
                 }
             }
             .padding(.trailing, 16)
             .padding(.bottom, 48)
+        }
+        .sheet(item: $activeSheet) { item in
+            switch item {
+            case .magic: Text("Magic")
+            case .wish: WishList().accentColor(Color("MainRed"))
+            case .manual: EventCreation().accentColor(Color("MainRed"))
+            }
         }
     }
 }
