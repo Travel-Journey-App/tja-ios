@@ -77,6 +77,9 @@
 		9EED545C25632FFF00098500 /* TripService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED545B25632FFF00098500 /* TripService.swift */; };
 		9EFB6767257423D1005941D1 /* WishItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB6766257423D1005941D1 /* WishItem.swift */; };
 		9EFB676A25742A17005941D1 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB676925742A17005941D1 /* Grid.swift */; };
+		9EFB676D257446FE005941D1 /* SuggestionPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB676C257446FE005941D1 /* SuggestionPlace.swift */; };
+		9EFB67702574483E005941D1 /* Double+rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB676F2574483D005941D1 /* Double+rounded.swift */; };
+		9EFB6774257449B7005941D1 /* SuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB6773257449B7005941D1 /* SuggestionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,6 +154,9 @@
 		9EED545B25632FFF00098500 /* TripService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripService.swift; sourceTree = "<group>"; };
 		9EFB6766257423D1005941D1 /* WishItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishItem.swift; sourceTree = "<group>"; };
 		9EFB676925742A17005941D1 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		9EFB676C257446FE005941D1 /* SuggestionPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionPlace.swift; sourceTree = "<group>"; };
+		9EFB676F2574483D005941D1 /* Double+rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+rounded.swift"; sourceTree = "<group>"; };
+		9EFB6773257449B7005941D1 /* SuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +349,7 @@
 				9E487F4F2569FCD2007BC9C7 /* Location.swift */,
 				9E5A8ED2256AA63B0037D742 /* EventIcons.swift */,
 				9EFB6766257423D1005941D1 /* WishItem.swift */,
+				9EFB676C257446FE005941D1 /* SuggestionPlace.swift */,
 			);
 			path = Trip;
 			sourceTree = "<group>";
@@ -354,6 +361,7 @@
 				9EB47CCC2566874B0065C641 /* Date+compare.swift */,
 				9EB47CEA2566D5F50065C641 /* View+toAny.swift */,
 				9E487F4C2569F95D007BC9C7 /* KeyedEncodingContainer+values.swift */,
+				9EFB676F2574483D005941D1 /* Double+rounded.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -382,6 +390,7 @@
 		9E98CB2B2559E05800AF29EA /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				9EFB6772257449A1005941D1 /* Suggestion */,
 				9EE66944256432300018B82A /* Trip */,
 				9EB47CD425669B7F0065C641 /* Map */,
 				9E589E58253DF9AD003CC8EE /* Components */,
@@ -462,6 +471,14 @@
 				9E5A8ED5256AB17E0037D742 /* EventIcon.swift */,
 			);
 			path = Trip;
+			sourceTree = "<group>";
+		};
+		9EFB6772257449A1005941D1 /* Suggestion */ = {
+			isa = PBXGroup;
+			children = (
+				9EFB6773257449B7005941D1 /* SuggestionCell.swift */,
+			);
+			path = Suggestion;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -577,11 +594,13 @@
 				9EFB676A25742A17005941D1 /* Grid.swift in Sources */,
 				9EED544E2563116600098500 /* Trip.swift in Sources */,
 				9EC9207E2561B2E3001A40CC /* UnderlinedTextField.swift in Sources */,
+				9EFB67702574483E005941D1 /* Double+rounded.swift in Sources */,
 				9E26365D253DDBF500928B38 /* UserData.swift in Sources */,
 				9EB47CF6256722660065C641 /* SharpBorderButton.swift in Sources */,
 				9E487F4A2569EF64007BC9C7 /* Event.swift in Sources */,
 				9E3343122573EEB800AE5568 /* NewAccommodation.swift in Sources */,
 				9EED545C25632FFF00098500 /* TripService.swift in Sources */,
+				9EFB676D257446FE005941D1 /* SuggestionPlace.swift in Sources */,
 				9E589E5A253DFA28003CC8EE /* LogoTitle.swift in Sources */,
 				9EB47CE72566D1860065C641 /* TripEvents.swift in Sources */,
 				9E98CB3A2559F12A00AF29EA /* UserDefaultsConfig.swift in Sources */,
@@ -589,6 +608,7 @@
 				9E589E5F253E4C20003CC8EE /* FilledButton.swift in Sources */,
 				9E5A8EE4256AD6690037D742 /* ShadowImage.swift in Sources */,
 				9E263672253DDFD200928B38 /* Home.swift in Sources */,
+				9EFB6774257449B7005941D1 /* SuggestionCell.swift in Sources */,
 				9EE669392563F9AE0018B82A /* CircleButton.swift in Sources */,
 				9E5A8EDE256AC49D0037D742 /* BorderTitleImage.swift in Sources */,
 				9ED5072F254B1EEB00401E2A /* NetworkMonitor.swift in Sources */,
