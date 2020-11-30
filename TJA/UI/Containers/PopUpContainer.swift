@@ -1,5 +1,5 @@
 //
-//  PopUpHolder.swift
+//  PopUpContainer.swift
 //  TJA
 //
 //  Created by Miron Rogovets on 30.11.2020.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PopUpHolder<Content: View>: View {
+struct PopUpContainer<Content: View>: View {
     
     @Binding var isBlurShown: Bool
     
@@ -31,7 +31,7 @@ struct PopUpHolder<Content: View>: View {
 
 struct PopUpHolder_Previews: PreviewProvider {
     static var previews: some View {
-        PopUpHolder(isShown: .constant(true)) {
+        PopUpContainer(isShown: .constant(true)) {
 //            Text("A")
             SuggestionCard(
                 suggestion:

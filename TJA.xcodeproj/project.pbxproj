@@ -39,7 +39,7 @@
 		9E5A8EE1256ACA7A0037D742 /* StrokeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8EE0256ACA790037D742 /* StrokeText.swift */; };
 		9E5A8EE4256AD6690037D742 /* ShadowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8EE3256AD6680037D742 /* ShadowImage.swift */; };
 		9E6889252575277C0065D165 /* SuggestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6889242575277C0065D165 /* SuggestionCard.swift */; };
-		9E688928257536FA0065D165 /* PopUpHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E688927257536FA0065D165 /* PopUpHolder.swift */; };
+		9E688928257536FA0065D165 /* PopUpContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E688927257536FA0065D165 /* PopUpContainer.swift */; };
 		9E68892C257576FB0065D165 /* MagicMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E68892B257576FA0065D165 /* MagicMode.swift */; };
 		9E76D1872572EA850063C4BE /* AddButtonsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E76D1862572EA850063C4BE /* AddButtonsStack.swift */; };
 		9E824DC125673E2900AE3F77 /* MapFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E824DC025673E2900AE3F77 /* MapFilters.swift */; };
@@ -120,7 +120,7 @@
 		9E5A8EE0256ACA790037D742 /* StrokeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeText.swift; sourceTree = "<group>"; };
 		9E5A8EE3256AD6680037D742 /* ShadowImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowImage.swift; sourceTree = "<group>"; };
 		9E6889242575277C0065D165 /* SuggestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCard.swift; sourceTree = "<group>"; };
-		9E688927257536FA0065D165 /* PopUpHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpHolder.swift; sourceTree = "<group>"; };
+		9E688927257536FA0065D165 /* PopUpContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpContainer.swift; sourceTree = "<group>"; };
 		9E68892B257576FA0065D165 /* MagicMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicMode.swift; sourceTree = "<group>"; };
 		9E76D1862572EA850063C4BE /* AddButtonsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonsStack.swift; sourceTree = "<group>"; };
 		9E824DC025673E2900AE3F77 /* MapFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilters.swift; sourceTree = "<group>"; };
@@ -353,7 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				9EFB676925742A17005941D1 /* Grid.swift */,
-				9E688927257536FA0065D165 /* PopUpHolder.swift */,
+				9E688927257536FA0065D165 /* PopUpContainer.swift */,
 				9EB47CE12566CEE80065C641 /* DaysContainer.swift */,
 				9EB47CDD2566C2A70065C641 /* MapContainer.swift */,
 			);
@@ -595,7 +595,7 @@
 			files = (
 				9E5A8EE1256ACA7A0037D742 /* StrokeText.swift in Sources */,
 				9E83FEB8255C44FC0008F8DC /* MyTrips.swift in Sources */,
-				9E688928257536FA0065D165 /* PopUpHolder.swift in Sources */,
+				9E688928257536FA0065D165 /* PopUpContainer.swift in Sources */,
 				9E5A8ED6256AB17E0037D742 /* EventIcon.swift in Sources */,
 				9E98CB362559EE4E00AF29EA /* UserDefault.swift in Sources */,
 				9E3343162573EEC400AE5568 /* NewTransfer.swift in Sources */,

@@ -14,10 +14,11 @@ class DateTextField: UITextField {
     @Binding var date: Date?
 
     // MARK: - Initializers
-    init(date: Binding<Date?>) {
+    init(date: Binding<Date?>, mode datePickerMode: UIDatePicker.Mode = .date) {
         self._date = date
         super.init(frame: .zero)
-
+        self.datePickerView.datePickerMode = datePickerMode
+        
         if let date = date.wrappedValue {
             self.datePickerView.date = date
         }
@@ -61,11 +62,16 @@ struct DateField: UIViewRepresentable {
     @Binding var date: Date?
 
     // MARK: - Initializers
-    init<S>(_ title: S, date: Binding<Date?>, formatter: DateFormatting = dateFormatter) where S: StringProtocol {
+    init<S>(
+        _ title: S,
+        date: Binding<Date?>,
+        formatter: DateFormatting = dateFormatter,
+        mode datePickerMode: UIDatePicker.Mode = .date
+    ) where S: StringProtocol {
         self.placeholder = String(title)
         self._date = date
 
-        self.textField = DateTextField(date: date)
+        self.textField = DateTextField(date: date, mode: datePickerMode)
         self.formatter = formatter
     }
 
