@@ -1,38 +1,41 @@
 //
-//  TripEvents.swift
+//  SegmentedContainer.swift
 //  TJA
 //
-//  Created by Miron Rogovets on 19.11.2020.
+//  Created by Miron Rogovets on 30.11.2020.
 //  Copyright © 2020 MironRogovets. All rights reserved.
 //
 
 import SwiftUI
 
-struct TripEvents: View {
+struct SegmentedContainer<ListContent: View, MapContent: View>: View {
     
     enum Tab: Int {
-        case events, map
+        case list, map
         
         var icon: String {
             switch self {
-            case .events: return "list.bullet"
+            case .list: return "list.bullet"
             case .map: return "mappin.circle"
             }
         }
     }
     
-    @State var selectedTab = Tab.events
-    @EnvironmentObject var eventService: EventService
+    @State var selectedTab = Tab.list
+    private let list: () -> ListContent
+    private let map: () -> MapContent
     
-    var tripname = ""
-    var location: Location?
+    init(@ViewBuilder list: @escaping () -> ListContent, @ViewBuilder map: @escaping () -> MapContent) {
+        self.list = list
+        self.map = map
+    }
     
     var body: some View {
         VStack {
             // Segment control
             Picker("", selection: $selectedTab) {
-                Image(systemName: Tab.events.icon)
-                    .tag(Tab.events)
+                Image(systemName: Tab.list.icon)
+                    .tag(Tab.list)
                     .frame(width: 24, height: 24, alignment: .center)
                 Image(systemName: Tab.map.icon)
                     .tag(Tab.map)
@@ -45,20 +48,13 @@ struct TripEvents: View {
             // Content
             contentSection
         }
-        .navigationBarTitle(Text(tripname.uppercased()), displayMode: .inline)
+//        .navigationBarTitle(Text(title.uppercased()), displayMode: .inline)
     }
     
     var contentSection: some View {
         switch self.selectedTab {
-        case .events: return DaysContainer().toAnyView()
-        case .map: return MapContainer(location: location).toAnyView()
+        case .list: return self.list().toAnyView()
+        case .map: return  self.map().toAnyView()
         }
-    }
-}
-
-struct TripEvents_Previews: PreviewProvider {
-    static var previews: some View {
-        TripEvents(location: Mockup.Locations.mockTripLocation)
-            .environmentObject(EventService())
     }
 }

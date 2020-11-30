@@ -43,7 +43,7 @@ struct MyTrips: View {
                             VStack(alignment: .center, spacing: 24) {
                                 ForEach(tripItems) { trip in
                                     NavigationLink(
-                                        destination: TripEvents(
+                                        destination: TripContainer(
                                             tripname: trip.name,
                                             location: trip.location
                                         ).environmentObject(EventService(start: trip.startDate))
