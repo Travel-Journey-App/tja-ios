@@ -19,6 +19,9 @@ struct SuggestionPlace: Hashable, Codable, Identifiable {
     let description: String
     let rating: Double
     let price: Price?
+    let location: Location
+    let openHours: String?
+    let imageUrl: URL?
     
     var ratingString: String {
         return "\(rating.round(to: 1))"

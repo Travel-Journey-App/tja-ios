@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum WishItem: Identifiable {
+enum WishItem: String, Identifiable {
     case breakfast
     case lunch
     case dinner

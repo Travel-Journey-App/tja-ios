@@ -34,7 +34,7 @@ struct SuggestionCell: View {
         .padding(.vertical, 6)
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .frame(height: 100)
-        .border(Color("MainRed"), width: 2)
+        .border(Color("MainRed"), width: 1)
     }
 }
 
@@ -48,13 +48,13 @@ struct SuggestionCell_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             SuggestionCell(
-                suggestion: .init(id: 0, name: "Cheap place", description: "Some description", rating: 4.764, price: .cheap))
+                suggestion: .init(id: 0, name: "Cheap place", description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home!", rating: 4.764, price: .cheap, location: Mockup.Locations.eventLocations["Museum of modern art"]!, openHours: nil, imageUrl: nil))
             SuggestionCell(
-                suggestion: .init(id: 1, name: "Expensive place", description: "Some description", rating: 4.55, price: .expensive))
+                suggestion: .init(id: 1, name: "Expensive place", description: "Very short description", rating: 4.55, price: .expensive, location: Mockup.Locations.eventLocations["Museum of modern art"]!, openHours: nil, imageUrl: nil))
             SuggestionCell(
-                suggestion: .init(id: 2, name: "Place with normal desc", description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.", rating: 3.222, price: nil))
+                suggestion: .init(id: 2, name: "Place with normal desc", description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.", rating: 3.222, price: nil, location: Mockup.Locations.eventLocations["Museum of modern art"]!, openHours: nil, imageUrl: nil))
             SuggestionCell(
-                suggestion: .init(id: 2, name: "Place with long desc", description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.", rating: 4.222, price: .medium))
+                suggestion: .init(id: 2, name: "Place with long desc", description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.", rating: 4.222, price: .medium, location: Mockup.Locations.eventLocations["Museum of modern art"]!, openHours: nil, imageUrl: nil))
         }
     }
 }
