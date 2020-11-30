@@ -21,8 +21,16 @@ struct WishList: View {
         NavigationView {
             ScrollView(.vertical) {
                 Grid(columns: 2, list: items, vSpacing: 25) { wish in
-                    ShadowImage(name: wish.image)
-                        .frame(width: 128, height: 128, alignment: .center)
+                    NavigationLink(
+                        destination: WishItemsContainer(
+                            wish: wish,
+                            items: Mockup.Wishes.suggestions,
+                            location: Mockup.Locations.mockTripLocation
+                        )) {
+                        ShadowImage(name: wish.image)
+                            .frame(width: 128, height: 128, alignment: .center)
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
                 .padding(25)
             }

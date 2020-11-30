@@ -149,4 +149,13 @@ enum Mockup {
             "Taxi transfer"        : Location(placeName: "Holiday Inn",          lat: 40.7961708, lon: -73.466321014647),
         ]
     }
+    
+    enum Wishes {
+        static let suggestions: [SuggestionPlace] = [
+            .init(id: 0, name: "Cheap place", description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home!", rating: 4.764, price: .cheap, location: Mockup.Locations.eventLocations["Museum of modern art"]!, openHours: "Open: 10:00 - 22:00", imageUrl: images[3]),
+            .init(id: 1, name: "Expensive place", description: "Very short description", rating: 4.55, price: .expensive, location: Mockup.Locations.eventLocations["Museum of modern art"]!, openHours: "Open: all day", imageUrl: images[2]),
+            .init(id: 2, name: "Place with normal desc", description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.", rating: 3.222, price: nil, location: Mockup.Locations.eventLocations["Museum of modern art"]!, openHours: "Open: Sun 10:30-12:00", imageUrl: images[1]),
+            .init(id: 2, name: "Place with long desc", description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.", rating: 4.222, price: .medium, location: Mockup.Locations.eventLocations["Museum of modern art"]!, openHours: nil, imageUrl: images[0])
+        ]
+    }
 }

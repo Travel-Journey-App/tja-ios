@@ -29,7 +29,7 @@ struct PopUpContainer<Content: View>: View {
     }
 }
 
-struct PopUpHolder_Previews: PreviewProvider {
+struct PopUpContainer_Previews: PreviewProvider {
     static var previews: some View {
         PopUpContainer(isShown: .constant(true)) {
 //            Text("A")

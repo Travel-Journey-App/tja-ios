@@ -48,7 +48,6 @@ struct SegmentedContainer<ListContent: View, MapContent: View>: View {
             // Content
             contentSection
         }
-//        .navigationBarTitle(Text(title.uppercased()), displayMode: .inline)
     }
     
     var contentSection: some View {
