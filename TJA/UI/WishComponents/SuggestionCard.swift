@@ -58,10 +58,10 @@ struct SuggestionCard: View {
                 
             }.padding(.top, 2)
             HStack(alignment: .center) {
-                Button(action: {}, label: { Text("Add") })
+                Button(action: { self.onAdd?() }, label: { Text("Add") })
                     .frame(maxWidth: .infinity)
                 Divider()
-                Button(action: {}, label: { Text("Cancel") })
+                Button(action: { self.onDismiss?() }, label: { Text("Cancel") })
                     .frame(maxWidth: .infinity)
             }
             .frame(height: 36)

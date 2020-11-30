@@ -13,7 +13,7 @@ struct BlurView: View {
         Rectangle()
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .foregroundColor(Color(UIColor.systemBackground))
-            .opacity(0.6)
+            .opacity(0.8)
             .edgesIgnoringSafeArea(.all)
     }
 }

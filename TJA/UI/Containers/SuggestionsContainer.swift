@@ -13,13 +13,22 @@ struct SuggestionsContainer: View {
     var items: [SuggestionPlace] = []
     let wish: WishItem
     
+    @State var selectedIndex: Int? = nil
+    
     var body: some View {
-        ZStack(alignment: .top) {
+        
+        let isSelected = Binding<Bool>(
+            get: { return selectedIndex != nil },
+            set: { if !$0 { self.selectedIndex = nil} }
+        )
+        
+        return ZStack(alignment: .top) {
             if items.count > 0 {
                 ScrollView {
                     VStack(spacing: 15) {
-                        ForEach(items) { item in
-                            SuggestionCell(suggestion: item)
+                        ForEach(0..<items.count) { id in
+                            SuggestionCell(suggestion: items[id])
+                                .onTapGesture { self.selectedIndex = id }
                         }
                     }
                     .padding(.vertical, 15)
@@ -30,6 +39,20 @@ struct SuggestionsContainer: View {
                     .font(.system(size: 20))
                     .foregroundColor(Color("MainRed"))
                     .multilineTextAlignment(.center)
+            }
+            if selectedIndex != nil {
+                PopUpContainer(isShown: isSelected) {
+                    SuggestionCard(
+                        suggestion: items[selectedIndex ?? 0],
+                        wishTitle: wish.rawValue,
+                        onDismiss: {
+                            self.selectedIndex = nil
+                        },
+                        onAdd: {
+                            self.selectedIndex = nil
+                        })
+                        .padding(.horizontal, 30)
+                }
             }
         }
     }
