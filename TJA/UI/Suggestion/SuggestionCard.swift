@@ -54,7 +54,7 @@ struct SuggestionCard: View {
                         .padding(5)
                 }
                 .frame(maxWidth: .infinity, maxHeight: 128, alignment: .center)
-                .border(Color(UIColor.secondaryLabel), width: 1)
+                .border(Color(UIColor.systemFill), width: 1)
                 
             }.padding(.top, 2)
             HStack(alignment: .center) {
@@ -67,8 +67,9 @@ struct SuggestionCard: View {
             .frame(height: 36)
         }
         .padding(.top, 17)
+        .padding(.bottom, 2)
         .padding(.horizontal, 25)
-        .border(Color(UIColor.systemFill), width: 1)
+        .border(Color(UIColor.opaqueSeparator), width: 1)
         .background(Color(UIColor.systemBackground))
     }
 }

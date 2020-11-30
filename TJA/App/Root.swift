@@ -43,6 +43,8 @@ struct Root: View {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(named: "MainRed")
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor(named: "MainRed")!], for: .normal)
+        
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = UIColor(named: "MainRed")
     }
 }
 

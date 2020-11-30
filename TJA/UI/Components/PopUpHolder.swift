@@ -37,7 +37,8 @@ struct PopUpHolder_Previews: PreviewProvider {
                 suggestion:
                                 .init(id: 2, name: "Place with long desc", description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.", rating: 4.222, price: .medium, location: Mockup.Locations.eventLocations["Museum of modern art"]!, openHours: nil, imageUrl: URL(string: "https://images.unsplash.com/photo-1605546741978-365c16813d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1575&q=80")!),
                                wishTitle: WishItem.breakfast.rawValue
-            ).padding(.horizontal, 30)
+            )
+            .padding(.horizontal, 30)
         }.background(Color.red)
     }
 }
