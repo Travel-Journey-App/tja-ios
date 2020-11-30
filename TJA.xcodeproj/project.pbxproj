@@ -40,6 +40,7 @@
 		9E5A8EE4256AD6690037D742 /* ShadowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8EE3256AD6680037D742 /* ShadowImage.swift */; };
 		9E6889252575277C0065D165 /* SuggestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6889242575277C0065D165 /* SuggestionCard.swift */; };
 		9E688928257536FA0065D165 /* PopUpHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E688927257536FA0065D165 /* PopUpHolder.swift */; };
+		9E68892C257576FB0065D165 /* MagicMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E68892B257576FA0065D165 /* MagicMode.swift */; };
 		9E76D1872572EA850063C4BE /* AddButtonsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E76D1862572EA850063C4BE /* AddButtonsStack.swift */; };
 		9E824DC125673E2900AE3F77 /* MapFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E824DC025673E2900AE3F77 /* MapFilters.swift */; };
 		9E83FEB8255C44FC0008F8DC /* MyTrips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E83FEB7255C44FC0008F8DC /* MyTrips.swift */; };
@@ -120,6 +121,7 @@
 		9E5A8EE3256AD6680037D742 /* ShadowImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowImage.swift; sourceTree = "<group>"; };
 		9E6889242575277C0065D165 /* SuggestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCard.swift; sourceTree = "<group>"; };
 		9E688927257536FA0065D165 /* PopUpHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpHolder.swift; sourceTree = "<group>"; };
+		9E68892B257576FA0065D165 /* MagicMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicMode.swift; sourceTree = "<group>"; };
 		9E76D1862572EA850063C4BE /* AddButtonsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonsStack.swift; sourceTree = "<group>"; };
 		9E824DC025673E2900AE3F77 /* MapFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilters.swift; sourceTree = "<group>"; };
 		9E83FEB7255C44FC0008F8DC /* MyTrips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTrips.swift; sourceTree = "<group>"; };
@@ -250,7 +252,9 @@
 		9E263661253DDD8400928B38 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9E3343082573EDD100AE5568 /* Event */,
+				9E68892A257576E60065D165 /* Magic */,
+				9E688937257588AD0065D165 /* Wish */,
+				9E688936257588910065D165 /* EventCreation */,
 				9E5AE2C025653CFD0033EF6F /* Trip */,
 				9E5AE2BF25653CE20033EF6F /* Home */,
 				9E5AE2BE25653CD70033EF6F /* Auth */,
@@ -266,27 +270,7 @@
 			path = Private;
 			sourceTree = "<group>";
 		};
-		9E3343082573EDD100AE5568 /* Event */ = {
-			isa = PBXGroup;
-			children = (
-				9E3343102573EE8900AE5568 /* NewEvents */,
-				9E3343092573EDFF00AE5568 /* WishList.swift */,
-				9E33430D2573EE6B00AE5568 /* EventCreation.swift */,
-			);
-			path = Event;
-			sourceTree = "<group>";
-		};
-		9E3343102573EE8900AE5568 /* NewEvents */ = {
-			isa = PBXGroup;
-			children = (
-				9E3343112573EEB800AE5568 /* NewAccommodation.swift */,
-				9E3343152573EEC400AE5568 /* NewTransfer.swift */,
-				9E3343182573EECE00AE5568 /* NewActivity.swift */,
-			);
-			path = NewEvents;
-			sourceTree = "<group>";
-		};
-		9E589E58253DF9AD003CC8EE /* Components */ = {
+		9E589E58253DF9AD003CC8EE /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
 				9E589E59253DFA28003CC8EE /* LogoTitle.swift */,
@@ -297,10 +281,8 @@
 				9E5A8EE3256AD6680037D742 /* ShadowImage.swift */,
 				9E76D1862572EA850063C4BE /* AddButtonsStack.swift */,
 				9ED7DC3A257320A80005E42F /* BlurView.swift */,
-				9EFB676925742A17005941D1 /* Grid.swift */,
-				9E688927257536FA0065D165 /* PopUpHolder.swift */,
 			);
-			path = Components;
+			path = UIComponents;
 			sourceTree = "<group>";
 		};
 		9E5AE2BE25653CD70033EF6F /* Auth */ = {
@@ -359,6 +341,52 @@
 			path = Trip;
 			sourceTree = "<group>";
 		};
+		9E68892A257576E60065D165 /* Magic */ = {
+			isa = PBXGroup;
+			children = (
+				9E68892B257576FA0065D165 /* MagicMode.swift */,
+			);
+			path = Magic;
+			sourceTree = "<group>";
+		};
+		9E688930257586AF0065D165 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				9EFB676925742A17005941D1 /* Grid.swift */,
+				9E688927257536FA0065D165 /* PopUpHolder.swift */,
+				9EB47CE12566CEE80065C641 /* DaysContainer.swift */,
+				9EB47CDD2566C2A70065C641 /* MapContainer.swift */,
+			);
+			path = Containers;
+			sourceTree = "<group>";
+		};
+		9E6889322575876E0065D165 /* EventComponents */ = {
+			isa = PBXGroup;
+			children = (
+				9E5A8ED5256AB17E0037D742 /* EventIcon.swift */,
+			);
+			path = EventComponents;
+			sourceTree = "<group>";
+		};
+		9E688936257588910065D165 /* EventCreation */ = {
+			isa = PBXGroup;
+			children = (
+				9E3343112573EEB800AE5568 /* NewAccommodation.swift */,
+				9E3343152573EEC400AE5568 /* NewTransfer.swift */,
+				9E3343182573EECE00AE5568 /* NewActivity.swift */,
+				9E33430D2573EE6B00AE5568 /* EventCreation.swift */,
+			);
+			path = EventCreation;
+			sourceTree = "<group>";
+		};
+		9E688937257588AD0065D165 /* Wish */ = {
+			isa = PBXGroup;
+			children = (
+				9E3343092573EDFF00AE5568 /* WishList.swift */,
+			);
+			path = Wish;
+			sourceTree = "<group>";
+		};
 		9E83FEBA255C4D2E0008F8DC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,10 +423,12 @@
 		9E98CB2B2559E05800AF29EA /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				9EFB6772257449A1005941D1 /* Suggestion */,
-				9EE66944256432300018B82A /* Trip */,
-				9EB47CD425669B7F0065C641 /* Map */,
-				9E589E58253DF9AD003CC8EE /* Components */,
+				9E688930257586AF0065D165 /* Containers */,
+				9EFB6772257449A1005941D1 /* WishComponents */,
+				9E6889322575876E0065D165 /* EventComponents */,
+				9EE66944256432300018B82A /* TripComponents */,
+				9EB47CD425669B7F0065C641 /* MapComponents */,
+				9E589E58253DF9AD003CC8EE /* UIComponents */,
 				9E98CB2E2559E50E00AF29EA /* Styles */,
 			);
 			path = UI;
@@ -432,14 +462,13 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
-		9EB47CD425669B7F0065C641 /* Map */ = {
+		9EB47CD425669B7F0065C641 /* MapComponents */ = {
 			isa = PBXGroup;
 			children = (
 				9EB47CD525669B970065C641 /* Map.swift */,
-				9EB47CDD2566C2A70065C641 /* MapContainer.swift */,
 				9E824DC025673E2900AE3F77 /* MapFilters.swift */,
 			);
-			path = Map;
+			path = MapComponents;
 			sourceTree = "<group>";
 		};
 		9ED5072D254B1ECD00401E2A /* Services */ = {
@@ -467,24 +496,22 @@
 			path = Misc;
 			sourceTree = "<group>";
 		};
-		9EE66944256432300018B82A /* Trip */ = {
+		9EE66944256432300018B82A /* TripComponents */ = {
 			isa = PBXGroup;
 			children = (
 				9EED544A25630B0C00098500 /* TripCell.swift */,
 				9EE66945256432790018B82A /* DayCell.swift */,
-				9EB47CE12566CEE80065C641 /* DaysContainer.swift */,
-				9E5A8ED5256AB17E0037D742 /* EventIcon.swift */,
 			);
-			path = Trip;
+			path = TripComponents;
 			sourceTree = "<group>";
 		};
-		9EFB6772257449A1005941D1 /* Suggestion */ = {
+		9EFB6772257449A1005941D1 /* WishComponents */ = {
 			isa = PBXGroup;
 			children = (
 				9EFB6773257449B7005941D1 /* SuggestionCell.swift */,
 				9E6889242575277C0065D165 /* SuggestionCard.swift */,
 			);
-			path = Suggestion;
+			path = WishComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -582,6 +609,7 @@
 				9E76D1872572EA850063C4BE /* AddButtonsStack.swift in Sources */,
 				9E3343192573EECE00AE5568 /* NewActivity.swift in Sources */,
 				9EED544B25630B0C00098500 /* TripCell.swift in Sources */,
+				9E68892C257576FB0065D165 /* MagicMode.swift in Sources */,
 				9EE6693F25640E260018B82A /* Constants.swift in Sources */,
 				9E263655253DACED00928B38 /* AppDelegate.swift in Sources */,
 				9EB47CDE2566C2A70065C641 /* MapContainer.swift in Sources */,

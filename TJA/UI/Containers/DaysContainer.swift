@@ -61,7 +61,7 @@ struct DaysContainer: View {
         }
         .sheet(item: $activeSheet) { item in
             switch item {
-            case .magic: Text("Magic")
+            case .magic: MagicMode().accentColor(Color("MainRed"))
             case .wish: WishList().accentColor(Color("MainRed"))
             case .manual: EventCreation().accentColor(Color("MainRed"))
             }
