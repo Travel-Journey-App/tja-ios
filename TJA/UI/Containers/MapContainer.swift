@@ -52,7 +52,7 @@ struct MapContainer: View {
     }
     
     private func applyFilters(_ day: Int?) {
-        self.eventService.filterBy(day: day)
+        self.events = self.eventService.filterBy(day: day)
     }
     
     private func loadEvents() {
