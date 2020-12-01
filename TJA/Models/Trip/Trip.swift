@@ -29,8 +29,11 @@ struct Trip: Hashable, Codable, Identifiable {
     }
     
     var daysInOrAgo: String {
-        remainingOrAgoFormatter.recentString(between: startDate, and: Date())
+        if hasStarted && !isFinished { return "Today" }
+        else {
+            return remainingOrAgoFormatter.recentString(between: startDate, and: Date())
             ?? dateFormatter.string(from: startDate)
+        }
     }
     
     var interval: String {
