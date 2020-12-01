@@ -12,6 +12,7 @@ struct MyTrips: View {
     
     @State var selectedTab = Tab.future
     @EnvironmentObject var tripService: TripService
+    @State var swipeableItems: [SwipeableItem<Trip>] = []
     
     enum Tab: Int {
         case future, past
@@ -48,7 +49,15 @@ struct MyTrips: View {
                                             location: trip.location
                                         ).environmentObject(EventService(start: trip.startDate))
                                     ) {
-                                        TripCell(trip: trip)
+                                        Swipeable(
+                                            $swipeableItems[getIndex(id: trip.id)],
+                                            onSwiped: {
+                                                print("DEBUG: -- onSwiped tirggered for -- \(trip.id)")
+                                                self.delete(by: trip.id)
+                                            }) { trip in
+                                            TripCell(trip: trip)
+                                        }
+                                        
                                     }.buttonStyle(PlainButtonStyle())
                                 }
                             }.padding(.vertical, 24)
@@ -79,12 +88,23 @@ struct MyTrips: View {
                 .padding(.bottom, 48)
             }
             .navigationBarTitle(Text("My trips".uppercased()))
-        }.onAppear(perform: self.tripService.loadTrips)
+        }.onAppear {
+            self.tripService.loadTrips(onLoaded: self.loadSwipeable(with:))
+        }
     }
     
     
-    private func delete(at offsets: IndexSet) {
-        self.tripService.delete(at: offsets)
+    private func loadSwipeable(with trips: [Trip]) {
+        self.swipeableItems = trips.compactMap {
+            return SwipeableItem<Trip>(item: $0, offset: 0, isSwiped: false)
+        }
+    }
+    
+    private func delete(by id: Int) {
+        print("DEBUG: -- Before removal Swipeable: \(swipeableItems.count)")
+        self.tripService.delete(by: id)
+        self.loadSwipeable(with: self.tripService.trips)
+        print("DEBUG: -- After removal Swipeable: \(swipeableItems.count)")
     }
     
     private var hasTrips: Bool {
@@ -99,6 +119,13 @@ struct MyTrips: View {
         case .future: return self.tripService.upcoming
         case .past: return self.tripService.finished
         }
+    }
+    
+    private func getIndex(id: Int) -> Int {
+        print("DEBUG: -- Getting index = \(id)")
+        return swipeableItems.firstIndex { (item) -> Bool in
+            return id == item.id
+        } ?? 0
     }
 }
 

@@ -15,9 +15,10 @@ class TripService: NSObject, ObservableObject {
     
     static let shared = TripService()
     
-    func loadTrips() {
+    func loadTrips(onLoaded: @escaping ([Trip]) -> ()) {
         var trips = Mockup.Trips.generateMockupTrips()
         self.trips = trips
+        onLoaded(self.trips)
     }
     
     func saveTrip(name: String, destination: String, startDate: Date, endDate: Date) {
@@ -33,9 +34,11 @@ class TripService: NSObject, ObservableObject {
         self.trips.append(trip)
     }
     
-    func delete(at offsets: IndexSet) {
-        print("DEBUG: -- Removing trips at \(offsets)")
-        self.trips.remove(atOffsets: offsets)
+    func delete(by id: Int) {
+        print("DEBUG: -- Removing trip by id = \(id)")
+        print("DEBUG: -- Before removal: \(trips.count)")
+        self.trips.removeAll(where: { $0.id == id })
+        print("DEBUG: -- After removal: \(trips.count)")
     }
     
     var hasUpcoming: Bool {
