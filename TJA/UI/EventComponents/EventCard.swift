@@ -47,20 +47,23 @@ struct EventCard: View {
                     }).accentColor(Color(UIColor.systemGray))
                 }
             }
-            Text("Event description goes here")
+            Text("Modern cafe with brilliant burgers and music\nDon't forget to visit our brand shop!")
                 .font(.system(size: 12))
                 .foregroundColor(Color(UIColor.brown))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
             TextField("Notes...", text: $notes)
-                .textFieldStyle(BorderedTextField())
+                .textFieldStyle(BorderedTextField(color: Color("LightRedBorder"), borderSize: 1))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .frame(height: 24)
-                .padding(.vertical, 5)
+                .padding(.vertical, 8)
         }
         .padding(.bottom, 13)
         .padding(.horizontal, 10)
-        .border(Color(UIColor.opaqueSeparator), width: 1)
         .background(Color(UIColor.systemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 7, style: .continuous)
+                .strokeBorder(Color(UIColor.opaqueSeparator), lineWidth: 1))
     }
 }
 

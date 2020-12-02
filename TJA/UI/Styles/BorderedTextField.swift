@@ -12,6 +12,7 @@ import SwiftUI
 struct BorderedTextField: TextFieldStyle {
     var color: Color = Color("MainRed")
     var fontSize: CGFloat = 15
+    var borderSize: CGFloat = 2
     
     public func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
@@ -21,7 +22,7 @@ struct BorderedTextField: TextFieldStyle {
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 32, maxHeight: 50)
             .background(
                 RoundedRectangle(cornerRadius: 2)
-                    .strokeBorder(color, lineWidth: 2)
+                    .strokeBorder(color, lineWidth: borderSize)
             )
     }
 }
