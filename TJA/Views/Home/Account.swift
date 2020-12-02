@@ -43,8 +43,6 @@ struct Account: View {
                             TextField("Your Name", text: $name)
                                 .font(.system(size: 18))
                                 .autocapitalization(.words)
-//                            TextField("01/01/2000", text: $birth)
-//                                .font(.system(size: 18))
                             dateField.frame(height: 23)
                             TextField("+00000000000", text: $phone)
                                 .font(.system(size: 18))
@@ -60,39 +58,10 @@ struct Account: View {
                     // Separator
                     Rectangle()
                         .fill(Color("MainRed"))
-                        .frame(height: 1)
+                        .frame(height: 2)
+                        .padding(.bottom, 40)
                     
-                    Text("Settings")
-                        .font(.system(size: 18))
-                        .fontWeight(.bold)
-                    
-                    Toggle(isOn: $calendarEnabled.didSet { state in
-                        print("DEBUG: -- Changing `Calendar Sync` to \(state)")
-                        UserDefaultsConfig.syncWithCalendar = state
-                    }){
-                        Text("Sync with calendar").font(.system(size: 18))
-                    }
-                    .padding(.top, 15)
-                    .padding(.bottom, 80)
-                    
-                    if !isEditing {
-                        // Calendar button
-                        Button(action: {
-                            print("DEBUG: -- Open calendar button tapped")
-                            guard let url = URL(string: "calshow://") else { return }
-                            if UIApplication.shared.canOpenURL(url) {
-                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                            }
-                        }){
-                            HStack(spacing: 20) {
-                                Image(systemName: "calendar")
-                                Text("Open calendar".uppercased())
-                            }
-                            .padding(.horizontal, 10)
-                            .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(FilledButtonStyle(filled: false))
-                        
+                    if !isEditing {                        
                         // Logout button
                         HStack {
                             Spacer()
@@ -142,6 +111,14 @@ struct Account: View {
         }
         .onAppear(perform: setFieldsData)
         .resignKeyboardOnDragGesture()
+//        .alert(isPresented: .constant(true)) {
+//            Alert(
+//                title: Text("Server is not available"),
+//                message: Text("Try again?"),
+//                primaryButton: .default(Text("Retry")),
+//                secondaryButton: .cancel()
+//            )
+//        }
     }
     
     private func saveData() {

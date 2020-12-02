@@ -20,9 +20,7 @@ struct DaysContainer: View {
     
     @EnvironmentObject var eventService: EventService
     @State var isBlurShown: Bool = false
-    @State var activeSheet: ActiveSheet?
-    @State var isCalendarAlertShown: Bool = false
-    
+    @State var activeSheet: ActiveSheet?    
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -49,7 +47,6 @@ struct DaysContainer: View {
                     Spacer()
                     AddButtonsStack(
                         isExpanded: $isBlurShown,
-                        calendarFlow: { self.isCalendarAlertShown = true },
                         magicFlow: { self.activeSheet = .magic },
                         ideasFlow: { self.activeSheet = .wish },
                         manualFlow: { self.activeSheet = .manual }
@@ -65,13 +62,6 @@ struct DaysContainer: View {
             case .wish: WishList().accentColor(Color("MainRed"))
             case .manual: EventCreation().accentColor(Color("MainRed"))
             }
-        }
-        .alert(isPresented: $isCalendarAlertShown) {
-            Alert(
-                title: Text("Sorry"),
-                message: Text("There are no events in your calendar for current trip dates"),
-                dismissButton: .default(Text("OK"))
-            )
         }
     }
 }

@@ -13,7 +13,6 @@ struct AddButtonsStack: View {
     @Binding var isExpanded: Bool
     @State var isHelpShown: Bool = false
     
-    var calendarFlow: (() -> ())?
     var magicFlow: (() -> ())?
     var ideasFlow: (() -> ())?
     var manualFlow: (() -> ())?
@@ -22,18 +21,6 @@ struct AddButtonsStack: View {
         VStack(alignment: .center, spacing: 10) {
             
             if isExpanded {
-                
-                if UserDefaultsConfig.syncWithCalendar {
-                    // Calendar
-                    Button(action: {
-                        print("DEBUG: -- Calendar flow tapped")
-                        self.calendarFlow?()
-                    }) {
-                        Image(systemName: "calendar")
-                            .frame(width: 24, height: 24, alignment: .center)
-                    }
-                    .buttonStyle(CircleButtonStyle(secondaryColor: Color(UIColor.systemYellow)))
-                }
                 
                 // Magic
                 Button(action: {

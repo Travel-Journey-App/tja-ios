@@ -18,7 +18,7 @@ struct WishItemsContainer: View {
         SegmentedContainer(
             list: { SuggestionsContainer(items: items, wish: wish) },
             map: { MapContainer(location: location) }
-        )
+        ).frame(maxHeight: .infinity, alignment: .top)
         .navigationBarTitle(Text("I wish...".uppercased()), displayMode: .inline)
     }
 }
