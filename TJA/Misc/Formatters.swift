@@ -58,5 +58,7 @@ final class TimeFormatter: TimeFormatting {
 
 
 let dateFormatter = ExactDateFormatter()
+let dateTimeFormatter = ExactDateFormatter(dateFormat: "dd.MM.yyyy HH:mm")
+let timeFormatter = ExactDateFormatter(dateFormat: "HH:mm")
 let slashedFormatter = ExactDateFormatter(dateFormat: "dd/MM/yyyy")
 let remainingOrAgoFormatter = TimeFormatter()

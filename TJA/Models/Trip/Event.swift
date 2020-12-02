@@ -27,6 +27,14 @@ struct Event: Hashable, Codable, Identifiable, Comparable {
         startTime
     }
     
+    var timeString: String {
+        if let end = endTime, end != startTime {
+            return "Open: \(timeFormatter.string(from: startTime)) - \(timeFormatter.string(from: end))"
+        } else {
+            return dateTimeFormatter.string(from: exactTime)
+        }
+    }
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }

@@ -14,6 +14,9 @@ struct EventCard: View {
     var dayNumber: Int
     @Binding var notes: String
     
+    
+    var onDelete: (() -> ())?
+    
     var body: some View {
         VStack(alignment: .center, spacing: 5) {
             Text("Day \(dayNumber)")
@@ -28,21 +31,20 @@ struct EventCard: View {
                     Text(event.name)
                         .lineLimit(1)
                         .font(.system(size: 15, weight: .bold))
-                    Text("Closed")
+                    Text(event.timeString)
                         .lineLimit(1)
                         .font(.system(size: 13))
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 HStack(spacing: 8) {
-                    Button(action: {}, label: {
-                        Image(systemName: "clock")
-                            .frame(width: 24, height: 24, alignment: .center)
-                    })
-                    Button(action: {}, label: {
+                    Image(systemName: "clock")
+                        .frame(width: 24, height: 24, alignment: .center)
+                        .foregroundColor(Color(UIColor.systemGray))
+                    Button(action: { self.onDelete?() }, label: {
                         Image(systemName: "trash")
                             .frame(width: 24, height: 24, alignment: .center)
-                    })
+                    }).accentColor(Color(UIColor.systemGray))
                 }
             }
             Text("Event description goes here")
