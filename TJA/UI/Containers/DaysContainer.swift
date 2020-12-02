@@ -28,7 +28,7 @@ struct DaysContainer: View {
             ScrollView {
                 VStack(spacing: 5) {
                     ForEach(0..<eventService.daysCount) { day in
-                        DayCell(dayNumber: day + 1)
+                        DayCell(dayNumber: day + 1, events: eventService.filterBy(day: day))
                     }
                 }
                 .padding(.vertical, 15)
