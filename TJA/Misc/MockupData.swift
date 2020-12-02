@@ -85,14 +85,14 @@ enum Mockup {
                     .activity(activity: .sightseeing)
                 ]
                 let names = ["NY Airport", "Hard Rock Cafe", "Ritz Hotel", "Central Park"]
-                let times: [Date] = [
-                    timeRef.addingTimeInterval(hour*12),
-                    timeRef.addingTimeInterval(hour*14),
-                    timeRef.addingTimeInterval(hour*15),
-                    timeRef.addingTimeInterval(hour*16 + hour / 2)
+                let times: [[Date?]] = [
+                    [timeRef.addingTimeInterval(hour*12), nil],
+                    [timeRef.addingTimeInterval(hour*11), timeRef.addingTimeInterval(hour*22)],
+                    [timeRef.addingTimeInterval(hour*15), nil],
+                    [timeRef.addingTimeInterval(hour*16 + hour / 2), nil]
                 ]
                 for i in 0..<types.count {
-                    events.append(Event(id: i, eventType: types[i], name: names[i], note: "", time: times[i],
+                    events.append(Event(id: i, eventType: types[i], name: names[i], note: "", startTime: times[i][0]!, endTime: times[i][1],
                                         location: Mockup.Locations.eventLocations[names[i]]))
                 }
             case 2:
@@ -101,12 +101,12 @@ enum Mockup {
                     .activity(activity: .bar)
                 ]
                 let names = ["Museum of modern art", "Local pub"]
-                let times: [Date] = [
-                    timeRef.addingTimeInterval(hour*12),
-                    timeRef.addingTimeInterval(hour*16)
+                let times: [[Date?]] = [
+                    [timeRef.addingTimeInterval(hour*12), timeRef.addingTimeInterval(hour*20)],
+                    [timeRef.addingTimeInterval(hour*16), timeRef.addingTimeInterval(hour*22)]
                 ]
                 for i in 0..<types.count {
-                    events.append(Event(id: i, eventType: types[i], name: names[i], note: "", time: times[i],
+                    events.append(Event(id: i, eventType: types[i], name: names[i], note: "", startTime: times[i][0]!, endTime: times[i][1],
                                         location: Mockup.Locations.eventLocations[names[i]]))
                 }
             case 4:
@@ -116,19 +116,19 @@ enum Mockup {
                     .transfer(transfer: .plane, direction: .departure)
                 ]
                 let names = ["Burger Heroes", "Taxi transfer", "NY Airport"]
-                let times: [Date] = [
-                    timeRef.addingTimeInterval(hour*10),
-                    timeRef.addingTimeInterval(hour*12 + hour/2),
-                    timeRef.addingTimeInterval(hour*15)
+                let times: [[Date?]] = [
+                    [timeRef.addingTimeInterval(hour*10), nil],
+                    [timeRef.addingTimeInterval(hour*12 + hour/2), nil],
+                    [timeRef.addingTimeInterval(hour*15), nil]
                 ]
                 for i in 0..<types.count {
-                    events.append(Event(id: i, eventType: types[i], name: names[i], note: "", time: times[i],
+                    events.append(Event(id: i, eventType: types[i], name: names[i], note: "", startTime: times[i][0]!, endTime: times[i][1],
                                         location: Mockup.Locations.eventLocations[names[i]]))
                 }
             default:
                 events.append(
                     Event(id: 0, eventType: .activity(activity: .fun),
-                        name: "Party", note: "Some notes", time: timeRef.addingTimeInterval(hour*9), location: nil))
+                        name: "Party", note: "Some notes", startTime: timeRef.addingTimeInterval(hour*9), endTime: nil, location: nil))
             }
             
             return events

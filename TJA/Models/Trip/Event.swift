@@ -11,25 +11,20 @@ import Foundation
 
 struct Event: Hashable, Codable, Identifiable, Comparable {
     
-    // TODO: Revert to scheduled and unscheduled when proper sort is discussed
-    
     let id: Int
     let eventType: EventType
     let name: String
     let note: String
-//    let startTime: Date
-//    let endTime: Date
-    let time: Date
+    let startTime: Date
+    let endTime: Date?
     let location: Location?
     
     var scheduled: Bool {
-//        return startTime == endTime
-        true
+        endTime == nil
     }
     
     var exactTime: Date {
-//        startTime
-        time
+        startTime
     }
     
     func hash(into hasher: inout Hasher) {
