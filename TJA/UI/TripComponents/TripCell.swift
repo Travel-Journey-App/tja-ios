@@ -48,7 +48,7 @@ struct TripCell: View {
             .frame(maxWidth: .infinity)
             .border(Color("MainRed"), width: 2)
             
-        }
+        }.background(Color(UIColor.systemBackground))
     }
 }
 

@@ -26,6 +26,8 @@
 		9E3343122573EEB800AE5568 /* NewAccommodation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3343112573EEB800AE5568 /* NewAccommodation.swift */; };
 		9E3343162573EEC400AE5568 /* NewTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3343152573EEC400AE5568 /* NewTransfer.swift */; };
 		9E3343192573EECE00AE5568 /* NewActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3343182573EECE00AE5568 /* NewActivity.swift */; };
+		9E47E073257977AF0022AC08 /* AnyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47E072257977AF0022AC08 /* AnyShape.swift */; };
+		9E47E076257980400022AC08 /* EdgeInsets+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47E075257980400022AC08 /* EdgeInsets+init.swift */; };
 		9E487F4A2569EF64007BC9C7 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E487F492569EF64007BC9C7 /* Event.swift */; };
 		9E487F4D2569F95D007BC9C7 /* KeyedEncodingContainer+values.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E487F4C2569F95D007BC9C7 /* KeyedEncodingContainer+values.swift */; };
 		9E487F502569FCD2007BC9C7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E487F4F2569FCD2007BC9C7 /* Location.swift */; };
@@ -118,6 +120,8 @@
 		9E3343112573EEB800AE5568 /* NewAccommodation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccommodation.swift; sourceTree = "<group>"; };
 		9E3343152573EEC400AE5568 /* NewTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransfer.swift; sourceTree = "<group>"; };
 		9E3343182573EECE00AE5568 /* NewActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewActivity.swift; sourceTree = "<group>"; };
+		9E47E072257977AF0022AC08 /* AnyShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyShape.swift; sourceTree = "<group>"; };
+		9E47E075257980400022AC08 /* EdgeInsets+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets+init.swift"; sourceTree = "<group>"; };
 		9E487F492569EF64007BC9C7 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		9E487F4C2569F95D007BC9C7 /* KeyedEncodingContainer+values.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyedEncodingContainer+values.swift"; sourceTree = "<group>"; };
 		9E487F4F2569FCD2007BC9C7 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -427,6 +431,7 @@
 				9E487F4C2569F95D007BC9C7 /* KeyedEncodingContainer+values.swift */,
 				9EFB676F2574483D005941D1 /* Double+rounded.swift */,
 				9E932FC025759A8D009FC2E8 /* String+capitalize.swift */,
+				9E47E075257980400022AC08 /* EdgeInsets+init.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -525,6 +530,7 @@
 				9EE6693E25640E250018B82A /* Constants.swift */,
 				9E17EF06256B1D85005F2BDE /* MockupData.swift */,
 				9EF3696525783F4000345B20 /* PreferenceKeys.swift */,
+				9E47E072257977AF0022AC08 /* AnyShape.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -644,6 +650,7 @@
 				9EB47CD625669B970065C641 /* Map.swift in Sources */,
 				9E33430E2573EE6B00AE5568 /* EventCreation.swift in Sources */,
 				9E76D1872572EA850063C4BE /* AddButtonsStack.swift in Sources */,
+				9E47E073257977AF0022AC08 /* AnyShape.swift in Sources */,
 				9E3343192573EECE00AE5568 /* NewActivity.swift in Sources */,
 				9EED544B25630B0C00098500 /* TripCell.swift in Sources */,
 				9E68892C257576FB0065D165 /* MagicMode.swift in Sources */,
@@ -672,6 +679,7 @@
 				9E26365D253DDBF500928B38 /* UserData.swift in Sources */,
 				9EB47CF6256722660065C641 /* SharpBorderButton.swift in Sources */,
 				9E487F4A2569EF64007BC9C7 /* Event.swift in Sources */,
+				9E47E076257980400022AC08 /* EdgeInsets+init.swift in Sources */,
 				9E3343122573EEB800AE5568 /* NewAccommodation.swift in Sources */,
 				9EED545C25632FFF00098500 /* TripService.swift in Sources */,
 				9EFB676D257446FE005941D1 /* SuggestionPlace.swift in Sources */,

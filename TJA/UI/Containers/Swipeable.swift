@@ -10,23 +10,38 @@ import SwiftUI
 
 struct Swipeable<Content: View, T: Identifiable>: View {
     
+    enum Style {
+        case rect, rounded(CGFloat)
+    }
+    
+    private let offsetLength: CGFloat
     private let content: (T) -> Content
+    private let style: Style
     @Binding var item: SwipeableItem<T>
+    var insets: EdgeInsets
     var onSwiped: (() -> ())?
     
     init(
         _ item: Binding<SwipeableItem<T>>,
+        offsetLength: CGFloat = 50,
         onSwiped: (() -> ())? = nil,
+        style: Style = .rect,
+        insets: EdgeInsets = .zero,
         @ViewBuilder content:@escaping (T) -> Content
     ) {
         self._item = item
         self.onSwiped = onSwiped
+        self.style = style
         self.content = content
+        self.insets = insets
+        self.offsetLength = offsetLength
     }
     
     var body: some View {
         ZStack {
             Color(UIColor.systemRed)
+                .clipShape(shape)
+                .padding(insets)
             
             // Button
             HStack {
@@ -36,16 +51,13 @@ struct Swipeable<Content: View, T: Identifiable>: View {
                 }) {
                     
                     Image(systemName: "trash")
-                        .font(.title)
                         .foregroundColor(.white)
-                        // default Frame....
-                        .frame(width: 50)
-                    //.frame(width: 24, height: 24, alignment: .center)
-                }
+                        .frame(width: 24, height: 24, alignment: .center)
+                }.frame(width: offsetLength, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             }
             
             self.content(self.item.item)
-                .background(Color(UIColor.systemBackground))
+//                .background(Color(UIColor.systemBackground))
                 .contentShape(Rectangle())
                 .offset(x: item.offset)
                 .gesture(
@@ -60,7 +72,7 @@ struct Swipeable<Content: View, T: Identifiable>: View {
         if value.translation.width < 0{
             
             if item.isSwiped{
-                item.offset = value.translation.width - 90
+                item.offset = value.translation.width - offsetLength
             }
             else{
                 item.offset = value.translation.width
@@ -81,10 +93,10 @@ struct Swipeable<Content: View, T: Identifiable>: View {
                     item.offset = -1000
                     self.onSwiped?()
                 }
-                else if -item.offset > 50{
+                else if -item.offset > 45 {
                     // updating is Swipng...
                     item.isSwiped = true
-                    item.offset = -90
+                    item.offset = -offsetLength
                 }
                 else{
                     item.isSwiped = false
@@ -95,6 +107,14 @@ struct Swipeable<Content: View, T: Identifiable>: View {
                 item.isSwiped = false
                 item.offset = 0
             }
+        }
+    }
+    
+    var shape: some Shape {
+        switch style {
+        case .rect: return AnyShape(Rectangle())
+        case .rounded(let radius):
+            return AnyShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
         }
     }
 }

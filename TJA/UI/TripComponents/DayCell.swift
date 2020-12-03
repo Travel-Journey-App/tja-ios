@@ -10,8 +10,15 @@ import SwiftUI
 
 struct DayCell: View {
     
-    var dayNumber: Int = 1
-    var events: [Event] = []
+    var dayNumber: Int
+    @State var swipeableItems: [SwipeableItem<Event>]
+    
+    init(_ events: [Event], dayNumber: Int = 1) {
+        self.dayNumber = dayNumber
+        self._swipeableItems = .init(initialValue: events.compactMap {
+            SwipeableItem<Event>(item: $0, offset: 0, isSwiped: false)
+        })
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -28,8 +35,18 @@ struct DayCell: View {
                     .padding(.horizontal)
                 
                 VStack(alignment: .leading, spacing: 12) {
-                    ForEach(events) { event in
-                        PipelineItem(event: event)
+                    ForEach(0..<swipeableItems.count) { index in
+                        Swipeable(
+                            $swipeableItems[index],
+                            onSwiped: {
+                                print("DEBUG: -- onSwiped tirggered for -- \(index)")
+                            },
+                            style: .rounded(7),
+                            insets: .leading(40)
+                        ) { event in
+                            PipelineItem(event: event)
+                        }
+                        .frame(height: 40)
                     }
                 }
             }
@@ -40,13 +57,13 @@ struct DayCell: View {
     
     var pipelineHeight: CGFloat {
         // events.count * 40 + 12 * (events.count - 1)
-        CGFloat(events.count > 1 ? 52 * events.count - 12 : 0)
+        CGFloat(swipeableItems.count > 1 ? 52 * swipeableItems.count - 12 : 0)
     }
 }
 
 struct DayCell_Previews: PreviewProvider {
     static var previews: some View {
         let events = Mockup.Events.generateEvents(dayNumber: 2)
-        DayCell(dayNumber: 1, events: events)
+        DayCell(events, dayNumber: 1)
     }
 }

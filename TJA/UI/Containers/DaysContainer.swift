@@ -20,15 +20,16 @@ struct DaysContainer: View {
     
     @EnvironmentObject var eventService: EventService
     @State var isBlurShown: Bool = false
-    @State var activeSheet: ActiveSheet?    
+    @State var activeSheet: ActiveSheet?
     
+
     var body: some View {
         ZStack(alignment: .top) {
             // Content
             ScrollView {
                 VStack(spacing: 5) {
                     ForEach(0..<eventService.daysCount) { day in
-                        DayCell(dayNumber: day + 1, events: eventService.filterBy(day: day))
+                        DayCell(eventService.filterBy(day: day), dayNumber: day + 1)
                     }
                 }
                 .padding(.vertical, 15)
