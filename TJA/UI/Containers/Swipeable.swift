@@ -86,15 +86,12 @@ struct Swipeable<Content: View, T: Identifiable>: View {
             
             if value.translation.width < 0{
                 
-                // Checking...
-                
                 if -value.translation.width > UIScreen.main.bounds.width / 2{
                     
                     item.offset = -1000
                     self.onSwiped?()
                 }
                 else if -item.offset > 45 {
-                    // updating is Swipng...
                     item.isSwiped = true
                     item.offset = -offsetLength
                 }

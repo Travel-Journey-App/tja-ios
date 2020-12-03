@@ -45,5 +45,5 @@ struct Trip: Hashable, Codable, Identifiable {
 struct TripDay: Hashable, Codable, Identifiable {
     let id: Int
     let number: Int
-    let events: [Event]
+    var events: [Event]
 }
