@@ -21,16 +21,25 @@ struct DaysContainer: View {
     @EnvironmentObject var eventService: EventService
     @State var isBlurShown: Bool = false
     @State var activeSheet: ActiveSheet?
-    
+    @State var isInDragNDropMode: Bool = true
 
     var body: some View {
-        ZStack(alignment: .top) {
+        let dropDelegate = ItemDropDelegate(active: $eventService.active.didSet(execute: {
+           id in print("Updated to \(id)")
+        }), activeSheet: $activeSheet)
+        return ZStack(alignment: .top) {
             // Content
             ScrollView {
                 VStack(spacing: 5) {
                     ForEach(0..<eventService.daysCount) { day in
-                        DayCell(eventService.filterBy(day: day), dayNumber: day)
-                    }
+                        DayCell(
+                            eventService.filterBy(day: day),
+                            dayNumber: day,
+                            active: isInDragNDropMode ?
+                                eventService.active == day ? true : false
+                                : true
+                        )
+                    }.onDrop(of: ["public.item-source"], delegate: dropDelegate)
                 }
                 .padding(.vertical, 15)
                 .padding(.horizontal, 10)
@@ -42,20 +51,30 @@ struct DaysContainer: View {
                 }
             }
             
-            VStack {
-                Spacer()
-                HStack {
+            if isInDragNDropMode {
+                
+                VStack {
                     Spacer()
-                    AddButtonsStack(
-                        isExpanded: $isBlurShown,
-                        magicFlow: { self.activeSheet = .magic },
-                        ideasFlow: { self.activeSheet = .wish },
-                        manualFlow: { self.activeSheet = .manual }
-                    )
+                    DraggableSplash()
+                        .onDrag({ NSItemProvider(object: "a" as NSString) })
                 }
+                
+            } else {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        AddButtonsStack(
+                            isExpanded: $isBlurShown,
+                            magicFlow: { self.activeSheet = .magic },
+                            ideasFlow: { self.activeSheet = .wish },
+                            manualFlow: { self.activeSheet = .manual }
+                        )
+                    }
+                }
+                .padding(.trailing, 16)
+                .padding(.bottom, 48)
             }
-            .padding(.trailing, 16)
-            .padding(.bottom, 48)
         }
         .sheet(item: $activeSheet) { item in
             switch item {

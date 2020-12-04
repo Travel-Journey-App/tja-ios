@@ -10,6 +10,7 @@ import Foundation
 
 class EventService: NSObject, ObservableObject {
     @Published var tripDays: [TripDay]
+    @Published var active: Int = -1
     
     init(days count: Int = 5, start date: Date = Date()) {
         self.tripDays = Mockup.Events.generateDays(numberOfDays: count, start: date)

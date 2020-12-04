@@ -14,15 +14,17 @@ struct DayCell: View {
     @State var disablePipeline: Bool
     @State var events: [Event]
     @State var swipeableItems: [SwipeableItem<Event>]
+    var active: Bool
 //    var onRemove: ((Int) -> ())?
     
-    init(_ events: [Event], dayNumber: Int = 1) {
+    init(_ events: [Event], dayNumber: Int = 1, active: Bool = true) {
         self.dayNumber = dayNumber
         self._disablePipeline = .init(initialValue: events.allSatisfy({ !$0.scheduled }))
         self._events = .init(initialValue: events)
         self._swipeableItems = .init(initialValue: events.compactMap {
             SwipeableItem<Event>(item: $0, offset: 0, isSwiped: false)
         })
+        self.active = active
     }
     
     var body: some View {
@@ -62,6 +64,7 @@ struct DayCell: View {
         }
         .padding(5)
         .background(RoundedRectangle(cornerRadius: 10).fill(Color("TripCellBackground")))
+        .overlay(active ? Color.clear : Color.white.opacity(0.7))
     }
     
     var pipelineHeight: CGFloat {
