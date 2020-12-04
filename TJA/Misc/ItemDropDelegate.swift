@@ -10,30 +10,27 @@ import SwiftUI
 
 struct ItemDropDelegate: DropDelegate {
     
+    var day: Int
     @Binding var active: Int
     @Binding var activeSheet: DaysContainer.ActiveSheet?
     
     func performDrop(info: DropInfo) -> Bool {
-        print("DEBUG: -- DropDelegate -- location: \(info.location)")
+        print("DEBUG: -- DropDelegate -- Dropped at day: \(day) & location: \(info.location)")
         activeSheet = .manual
         return true
     }
     
     func dropEntered(info: DropInfo) {
-        print("DEBUG: -- DropDelegate entered -- location: \(info.location)")
-        self.active = 1
+        print("DEBUG: -- DropDelegate entered -- day: \(day) -- location: \(info.location)")
+        self.active = day
     }
     
     func validateDrop(info: DropInfo) -> Bool {
         return info.hasItemsConforming(to: ["public.item-source"])
     }
     
-    func dropUpdated(info: DropInfo) -> DropProposal? {
-        return nil
-    }
-    
     func dropExited(info: DropInfo) {
         print("DEBUG: -- DropDelegate exited")
-        self.active = 0
+        self.active = -1
     }
 }

@@ -24,9 +24,9 @@ struct DaysContainer: View {
     @State var isInDragNDropMode: Bool = true
 
     var body: some View {
-        let dropDelegate = ItemDropDelegate(active: $eventService.active.didSet(execute: {
-           id in print("Updated to \(id)")
-        }), activeSheet: $activeSheet)
+//        let dropDelegate = ItemDropDelegate(active: $eventService.active.didSet(execute: {
+//           id in print("Updated to \(id)")
+//        }), activeSheet: $activeSheet)
         return ZStack(alignment: .top) {
             // Content
             ScrollView {
@@ -38,8 +38,14 @@ struct DaysContainer: View {
                             active: isInDragNDropMode ?
                                 eventService.active == day ? true : false
                                 : true
+                        ).onDrop(
+                            of: ["public.item-source"],
+                            delegate: ItemDropDelegate(
+                                day: day,
+                                active: $eventService.active,
+                                activeSheet: $activeSheet)
                         )
-                    }.onDrop(of: ["public.item-source"], delegate: dropDelegate)
+                    }
                 }
                 .padding(.vertical, 15)
                 .padding(.horizontal, 10)
