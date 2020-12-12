@@ -11,14 +11,27 @@ import Combine
 
 
 struct User: Codable {
-    let name: String
     let email: String
-    
+    var name: String? = nil
     var phone: String? = nil
     var birth: String? = nil
 }
 
-
-class UserData: ObservableObject {
-    @Published var currenUser: User?
+struct UserResponse: Codable {
+    let firstName: String?
+    let lastName: String?
+    let email: String
+    let secret: String
+    
+    var fullName: String? {
+        if let f = firstName, let l = lastName {
+            return "\(f) \(l)"
+        } else {
+            return nil
+        }
+    }
+    
+    var user: User {
+        User(email: email, name: fullName, phone: nil, birth: nil)
+    }
 }

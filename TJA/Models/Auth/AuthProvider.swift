@@ -13,3 +13,14 @@ enum AuthProvider {
     case google
     case emailAndPassword(email: String, password: String)
 }
+
+struct LoginRequest: Codable {
+    let email: String
+    let password: String
+}
+
+struct SignUpRequest: Codable {
+    let email: String
+    let password: String
+    let matchingPassword: String
+}

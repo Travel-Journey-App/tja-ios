@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Root: View {
     
-    @EnvironmentObject var authState: AuthState
+    @EnvironmentObject var viewModel: AuthViewModel
     
     init() {
         setupApperance()
@@ -18,12 +18,12 @@ struct Root: View {
     
     var body: some View {
         Group {
-            if let _ = authState.currentUser {
+            if let _ = viewModel.currentUser {
                 Home()
             } else {
                 SignIn()
             }
-        }.onAppear(perform: authState.restoreSession)
+        }.onAppear(perform: viewModel.restore)
     }
     
     private func setupApperance() {
@@ -50,6 +50,6 @@ struct Root: View {
 
 struct Root_Previews: PreviewProvider {
     static var previews: some View {
-        Root().environmentObject(AuthState.shared)
+        Root().environmentObject(AuthViewModel(apiService: APISession.shared))
     }
 }

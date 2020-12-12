@@ -18,20 +18,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
-        let authState = AuthState.shared
-        let tripService = TripService.shared
+        let apiSession = APISession.shared
+        let tripService = MockTripService.shared
         let locationService = LocationService()
+        let authViewModel = AuthViewModel(apiService: apiSession)
+        
         let root = Root()
-            .environmentObject(authState)
+            .environmentObject(authViewModel)
             .environmentObject(tripService)
             .environmentObject(locationService)
-            .accentColor(Color("MainRed"))
+            .accentColor(.mainRed)
         
         // Use a UIHostingController as window root view controller
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UIHostingController(rootView: root)
-            authState.configureGoogleSignIn(controller: window.rootViewController)
+            authViewModel.configureGoogleSignIn(controller: window.rootViewController)
             self.window = window
             window.makeKeyAndVisible()
         }

@@ -10,10 +10,9 @@ import SwiftUI
 
 struct Account: View {
     
-    @EnvironmentObject var authState: AuthState
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     @State var isEditing = false
-    @State var calendarEnabled = UserDefaultsConfig.syncWithCalendar
     
     @State var name: String = ""
     @State var birth: Date? = nil
@@ -40,7 +39,7 @@ struct Account: View {
                     // Account Data
                     VStack(alignment: .leading, spacing: 20) {
                         if isEditing {
-                            TextField("Your Name", text: $name)
+                            TextField("Your Name:", text: $name)
                                 .font(.system(size: 18))
                                 .autocapitalization(.words)
                             dateField.frame(height: 23)
@@ -48,16 +47,16 @@ struct Account: View {
                                 .font(.system(size: 18))
                                 .keyboardType(.phonePad)
                         } else {
-                            Text(authState.currentUser?.name ?? "Your Name").font(.system(size: 18))
+                            Text(authViewModel.currentUser?.name ?? "Your Name:").font(.system(size: 18))
                             Text(birthDate).font(.system(size: 18))
-                            Text(authState.currentUser?.phone ?? "Phone:").font(.system(size: 18))
+                            Text(authViewModel.currentUser?.phone ?? "Phone:").font(.system(size: 18))
                         }
-                        Text(authState.currentUser?.email ?? "Email:").font(.system(size: 18))
+                        Text(authViewModel.currentUser?.email ?? "Email:").font(.system(size: 18))
                     }.padding(.vertical, 10)
                     
                     // Separator
                     Rectangle()
-                        .fill(Color("MainRed"))
+                        .fill(Color.mainRed)
                         .frame(height: 2)
                         .padding(.bottom, 40)
                     
@@ -67,7 +66,7 @@ struct Account: View {
                             Spacer()
                             Button(action: {
                                 print("DEBUG: -- Logout button tapped")
-                                self.authState.logout()
+                                self.authViewModel.logout()
                             }) {
                                 Text("Logout")
                                     .font(.system(size: 18))
@@ -123,18 +122,18 @@ struct Account: View {
     
     private func saveData() {
         print("DEBUG: -- Saving data")
-        self.authState.updateUserProfile(name: self.name, phone: self.phone)
+//        self.authState.updateUserProfile(name: self.name, phone: self.phone)
     }
     
     private func setFieldsData() {
-        self.name = authState.currentUser?.name ?? ""
-        self.phone = authState.currentUser?.phone ?? ""
+        self.name = authViewModel.currentUser?.name ?? ""
+        self.phone = authViewModel.currentUser?.phone ?? ""
     }
 }
 
 
 struct Account_Previews: PreviewProvider {
     static var previews: some View {
-        Account().environmentObject(AuthState.shared)
+        Account().environmentObject(AuthViewModel(apiService: APISession.shared))
     }
 }

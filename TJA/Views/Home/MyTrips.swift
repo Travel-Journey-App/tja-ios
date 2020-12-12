@@ -11,7 +11,7 @@ import SwiftUI
 struct MyTrips: View {
     
     @State var selectedTab = Tab.future
-    @EnvironmentObject var tripService: TripService
+    @EnvironmentObject var tripService: MockTripService
     @State var swipeableItems: [SwipeableItem<Trip>] = []
     
     enum Tab: Int {
@@ -67,7 +67,7 @@ struct MyTrips: View {
                         Spacer()
                         Text("You don't have any \(selectedTab.title) trips")
                             .font(.system(size: 20))
-                            .foregroundColor(Color("MainRed"))
+                            .foregroundColor(.mainRed)
                         Spacer()
                     }
                 }
@@ -131,6 +131,6 @@ struct MyTrips: View {
 
 struct MyTrips_Previews: PreviewProvider {
     static var previews: some View {
-        MyTrips().environmentObject(TripService.shared)
+        MyTrips().environmentObject(MockTripService.shared)
     }
 }

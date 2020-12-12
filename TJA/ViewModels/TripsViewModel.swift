@@ -1,5 +1,5 @@
 //
-//  TripService.swift
+//  TripsViewModel.swift
 //  TJA
 //
 //  Created by Miron Rogovets on 12.12.2020.
@@ -7,4 +7,3 @@
 //
 
 import Foundation
-import Combine

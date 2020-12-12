@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Home: View {
     
-    @EnvironmentObject var authState: AuthState
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     @State var selectedTab = Tab.trips
     
@@ -40,6 +40,6 @@ struct Home: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home().environmentObject(AuthState.shared)
+        Home().environmentObject(AuthViewModel(apiService: APISession.shared))
     }
 }

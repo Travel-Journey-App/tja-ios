@@ -8,6 +8,7 @@
 
 import Foundation
 
-public struct APIConstants {
-    
+public enum APIConstants {
+    static let baseUrl = "http://tja-bh.herokuapp.com"
+    static let baseSearchUrl = ""
 }

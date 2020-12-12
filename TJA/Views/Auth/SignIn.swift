@@ -12,7 +12,7 @@ struct SignIn: View {
     
     @ObservedObject private var keyboard = KeyboardResponder()
     
-    @EnvironmentObject var authState: AuthState
+    @EnvironmentObject var viewModel: AuthViewModel
     
     @State var showingSignUp = false
     @State var email: String = ""
@@ -40,7 +40,7 @@ struct SignIn: View {
                     Text("Register".uppercased())
                         .font(.system(size: 35))
                         .fontWeight(.light)
-                        .foregroundColor(Color("MainRed"))
+                        .foregroundColor(.mainRed)
                         .tracking(4)
                         .frame(maxWidth: .infinity)
                         .padding(.bottom, 12)
@@ -92,7 +92,7 @@ struct SignIn: View {
                     } else {
                         Button(action: {
                             print("DEBUG: LogIn pressed")
-                            self.authState.login(with: .emailAndPassword(email: email, password: password))
+                            self.viewModel.login(with: .emailAndPassword(email: email, password: password))
                         }){
                             Text("Login".uppercased())
                         }
@@ -103,8 +103,7 @@ struct SignIn: View {
                         print("DEBUG: SignUp pressed")
                         if self.showingSignUp {
                             print("DEBUG: Signin User Up")
-                            //TODO: Call sign up later
-                            self.authState.login(with: .emailAndPassword(email: email, password: password))
+                            self.viewModel.signup(with: .emailAndPassword(email: email, password: password))
                         } else {
                             self.resetTextFields()
                             self.showingSignUp = true
@@ -119,14 +118,14 @@ struct SignIn: View {
                 
                 // Separator
                 Rectangle()
-                    .fill(Color("MainRed"))
+                    .fill(Color.mainRed)
                     .frame(height: 3)
                     .padding(.vertical, 10)
                 
                 // Google
                 Button(action: {
                     print("DEBUG: Google SignUp pressed")
-                    self.authState.login(with: .google)
+                    self.viewModel.login(with: .google)
                 }){
                     HStack(spacing: 20) {
                         Image("google")
@@ -161,6 +160,6 @@ struct SignIn: View {
 
 struct SignIn_Previews: PreviewProvider {
     static var previews: some View {
-        SignIn().environmentObject(AuthState.shared)
+        SignIn().environmentObject(AuthViewModel(apiService: APISession.shared))
     }
 }

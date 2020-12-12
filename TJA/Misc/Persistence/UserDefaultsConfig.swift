@@ -14,9 +14,6 @@ public struct UserDefaultsConfig {
     @UserDefault("google-provider", defaultValue: false)
     public static var googleProviderWasUsed: Bool
     
-    @UserDefault("sync-with-calendar", defaultValue: false)
-    public static var syncWithCalendar: Bool
-    
     @OptionalUserDefault("auth-token", defaultValue: nil)
     public static var authToken: String?
 }
