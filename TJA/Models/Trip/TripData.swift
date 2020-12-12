@@ -33,4 +33,5 @@ struct TripRequest: Codable {
     let destination: String
     let startDate: Date
     let endDate: Date
+    let days: [TripDay]
 }

@@ -38,7 +38,7 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
     
     func createTrip(name: String, destination: String, startDate: Date, endDate: Date) {
         let trip = TripRequest(
-            name: name, destination: destination, startDate: startDate, endDate: endDate
+            name: name, destination: destination, startDate: startDate, endDate: endDate, days: []
         )
         let token = self.addTrip(trip: trip).sinkToResult { result in
             switch result {
@@ -63,7 +63,19 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
     
     func delete(by id: Int) {
         print("DEBUG: -- Removing trip by id = \(id)")
-        // TODO: Add API call
+        let token = self.deleteTrip(id: id).sinkToResult { result in
+            switch result {
+            case let .failure(err):
+                print("DEBUG: -- DeleteTrip -- Error -- \(err.localizedDescription)")
+            case let .success(response):
+                if let err = response.getError() {
+                    print("DEBUG: -- DeleteTrip -- Response error -- \(err.localizedDescription)")
+                }
+                print("DEBUG: -- DeleteTrip -- Success")
+                
+            }
+        }
+        self.cancellationTokens.insert(token)
         self.trips.removeAll(where: { $0.id == id })
     }
     
