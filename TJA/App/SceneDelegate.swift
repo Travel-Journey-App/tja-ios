@@ -19,13 +19,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
         let apiSession = APISession.shared
-        let tripService = MockTripService.shared
         let locationService = LocationService()
         let authViewModel = AuthViewModel(apiService: apiSession)
+        let tripsViewModel = TripsViewModel(apiService: apiSession)
         
         let root = Root()
             .environmentObject(authViewModel)
-            .environmentObject(tripService)
+            .environmentObject(tripsViewModel)
             .environmentObject(locationService)
             .accentColor(.mainRed)
         

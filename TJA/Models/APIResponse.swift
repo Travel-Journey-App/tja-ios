@@ -27,3 +27,15 @@ struct APIResponse<T: Codable>: Codable {
         }
     }
 }
+
+struct APIMessageResponse: Codable {
+    let status: APIMessage
+    let error: String?
+    
+    func getError() -> APIError? {
+        switch status {
+        case .ok: return nil
+        case .error: return .api(error ?? "No message")
+        }
+    }
+}

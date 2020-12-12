@@ -18,3 +18,9 @@ struct SwipeableItem<T: Identifiable>: Identifiable {
         item.id as? Int ?? 0
     }
 }
+
+extension SwipeableItem {
+    init(_ item: T) {
+        self.init(item: item, offset: 0, isSwiped: false)
+    }
+}

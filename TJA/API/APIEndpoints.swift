@@ -17,6 +17,7 @@ enum AuthEndpoint {
 enum TripEndpoint {
     case tripList
     case newTrip(trip: TripRequest)
+    case updateTrip(trip: TripRequest)
     case trip(id: Int)
     case deleteTrip(id: Int)
     case magic
@@ -81,7 +82,7 @@ extension TripEndpoint: RequestBuilder {
     
     var path: String {
         switch self {
-        case .tripList, .newTrip: return "/api/trips"
+        case .tripList, .newTrip, .updateTrip: return "/api/trips"
         case let .trip(id), let .deleteTrip(id): return "/api/trips/\(id)"
         case .magic: return "/api/trips/magic"
         }
@@ -93,6 +94,8 @@ extension TripEndpoint: RequestBuilder {
             return "GET"
         case .newTrip:
             return "POST"
+        case .updateTrip:
+            return "PUT"
         case .deleteTrip:
             return "DELETE"
         }
@@ -100,7 +103,7 @@ extension TripEndpoint: RequestBuilder {
     
     var headers: [String : String]? {
         switch self {
-        case .newTrip: return appJsonHeaders
+        case .newTrip, .updateTrip: return appJsonHeaders
         default: return nil
         }
     }
@@ -111,7 +114,7 @@ extension TripEndpoint: RequestBuilder {
     
     func body() -> Data? {
         switch self {
-        case let .newTrip(trip):
+        case let .newTrip(trip), let .updateTrip(trip):
             return try? JSONEncoder().encode(trip)
         default:
             return nil

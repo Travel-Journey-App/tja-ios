@@ -16,7 +16,7 @@ struct CreateTrip: View {
     @State var endDate: Date? = nil
     
     @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var tripService: MockTripService
+    @EnvironmentObject var viewModel: TripsViewModel
     
     var body: some View {
         ScrollView(.vertical) {
@@ -89,7 +89,7 @@ struct CreateTrip: View {
     func saveTrip() {
         guard !name.isEmpty && !destination.isEmpty else { return }
         guard let start = startDate, let end = endDate else { return }
-        self.tripService.saveTrip(
+        self.viewModel.createTrip(
             name: name,
             destination: destination,
             startDate: start,

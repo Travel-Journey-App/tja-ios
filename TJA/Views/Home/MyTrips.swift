@@ -11,8 +11,7 @@ import SwiftUI
 struct MyTrips: View {
     
     @State var selectedTab = Tab.future
-    @EnvironmentObject var tripService: MockTripService
-    @State var swipeableItems: [SwipeableItem<Trip>] = []
+    @EnvironmentObject var viewModel: TripsViewModel
     
     enum Tab: Int {
         case future, past
@@ -45,12 +44,12 @@ struct MyTrips: View {
                                 ForEach(tripItems) { trip in
                                     NavigationLink(
                                         destination: TripContainer(
-                                            tripname: trip.name,
-                                            location: trip.location
-                                        ).environmentObject(EventService(start: trip.startDate))
+                                            tripname: trip.item.name,
+                                            location: trip.item.location
+                                        ).environmentObject(EventService(start: trip.item.startDate))
                                     ) {
                                         Swipeable(
-                                            $swipeableItems[getIndex(id: trip.id)],
+                                            self.$viewModel.trips[getIndex(id: trip.id)],
                                             onSwiped: {
                                                 print("DEBUG: -- onSwiped tirggered for -- \(trip.id)")
                                                 self.delete(by: trip.id)
@@ -88,42 +87,30 @@ struct MyTrips: View {
                 .padding(.bottom, 48)
             }
             .navigationBarTitle(Text("My trips".uppercased()))
-        }.onAppear {
-            self.tripService.loadTrips(onLoaded: self.loadSwipeable(with:))
-        }
-    }
-    
-    
-    private func loadSwipeable(with trips: [Trip]) {
-        self.swipeableItems = trips.compactMap {
-            return SwipeableItem<Trip>(item: $0, offset: 0, isSwiped: false)
-        }
+        }.onAppear(perform: self.viewModel.loadTrips)
     }
     
     private func delete(by id: Int) {
-        print("DEBUG: -- Before removal Swipeable: \(swipeableItems.count)")
-        self.tripService.delete(by: id)
-        self.loadSwipeable(with: self.tripService.trips)
-        print("DEBUG: -- After removal Swipeable: \(swipeableItems.count)")
+        self.viewModel.delete(by: id)
     }
     
     private var hasTrips: Bool {
         switch self.selectedTab {
-        case .future: return self.tripService.hasUpcoming
-        case .past: return self.tripService.hasFinished
+        case .future: return self.viewModel.hasUpcoming
+        case .past: return self.viewModel.hasFinished
         }
     }
     
-    private var tripItems: [Trip] {
+    private var tripItems: [SwipeableItem<Trip>] {
         switch self.selectedTab {
-        case .future: return self.tripService.upcoming
-        case .past: return self.tripService.finished
+        case .future: return self.viewModel.upcoming
+        case .past: return self.viewModel.finished
         }
     }
     
     private func getIndex(id: Int) -> Int {
         print("DEBUG: -- Getting index = \(id)")
-        return swipeableItems.firstIndex { (item) -> Bool in
+        return viewModel.trips.firstIndex { (item) -> Bool in
             return id == item.id
         } ?? 0
     }
@@ -131,6 +118,6 @@ struct MyTrips: View {
 
 struct MyTrips_Previews: PreviewProvider {
     static var previews: some View {
-        MyTrips().environmentObject(MockTripService.shared)
+        MyTrips().environmentObject(TripsViewModel(apiService: APISession.shared))
     }
 }
