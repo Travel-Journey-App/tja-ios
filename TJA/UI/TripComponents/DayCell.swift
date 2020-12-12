@@ -32,12 +32,12 @@ struct DayCell: View {
             Text("Day \(dayNumber + 1)")
                 .font(.system(size: 20))
                 .fontWeight(.medium)
-                .foregroundColor(Color("MainRed"))
+                .foregroundColor(.mainRed)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
             ZStack(alignment: .topLeading) {
                 if !disablePipeline {
                     Rectangle()
-                        .fill(Color("MainRed"))
+                        .fill(Color.mainRed)
                         .padding(.vertical, 10)
                         .frame(width: 2, height: pipelineHeight, alignment: .leading)
                         .padding(.horizontal)
@@ -63,7 +63,7 @@ struct DayCell: View {
             }
         }
         .padding(5)
-        .background(RoundedRectangle(cornerRadius: 10).fill(Color("TripCellBackground")))
+        .background(RoundedRectangle(cornerRadius: 10).fill(Color.tripBackground))
         .overlay(active ? Color.clear : Color.white.opacity(0.7))
     }
     

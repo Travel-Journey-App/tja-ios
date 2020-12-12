@@ -24,9 +24,7 @@ struct DaysContainer: View {
     @State var isInDragNDropMode: Bool = true
 
     var body: some View {
-//        let dropDelegate = ItemDropDelegate(active: $eventService.active.didSet(execute: {
-//           id in print("Updated to \(id)")
-//        }), activeSheet: $activeSheet)
+
         return ZStack(alignment: .top) {
             // Content
             ScrollView {
@@ -84,9 +82,9 @@ struct DaysContainer: View {
         }
         .sheet(item: $activeSheet) { item in
             switch item {
-            case .magic: MagicMode().accentColor(Color("MainRed"))
-            case .wish: WishList().accentColor(Color("MainRed"))
-            case .manual: EventCreation().accentColor(Color("MainRed"))
+            case .magic: MagicMode().accentColor(.mainRed)
+            case .wish: WishList().accentColor(.mainRed)
+            case .manual: EventCreation().accentColor(.mainRed)
             }
         }
     }

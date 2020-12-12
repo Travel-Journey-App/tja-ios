@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct CircleButtonStyle: ButtonStyle {
-    var color: Color = Color("MainRed")
+    var color: Color = .mainRed
     var secondaryColor: Color? = nil
     var size: CGFloat = 50
     

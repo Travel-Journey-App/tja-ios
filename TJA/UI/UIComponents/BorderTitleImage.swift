@@ -31,7 +31,7 @@ struct BorderTitleImage: View {
                     .padding(.horizontal, 5),
                 alignment: .bottomTrailing)
             .clipped()
-            .border(Color("MainRed"), width: 3.0)
+            .border(Color.mainRed, width: 3.0)
             .contentShape(Rectangle())
     }
     

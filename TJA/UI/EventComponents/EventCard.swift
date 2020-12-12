@@ -21,7 +21,7 @@ struct EventCard: View {
         VStack(alignment: .center, spacing: 5) {
             Text("Day \(dayNumber)")
                 .font(.system(size: 20, weight: .medium))
-                .foregroundColor(Color("MainRed"))
+                .foregroundColor(.mainRed)
                 .padding(5)
             HStack(spacing: 20){
                 // Icon
@@ -52,7 +52,7 @@ struct EventCard: View {
                 .foregroundColor(Color(UIColor.brown))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
             TextField("Notes...", text: $notes)
-                .textFieldStyle(BorderedTextField(color: Color("LightRedBorder"), borderSize: 1))
+                .textFieldStyle(BorderedTextField(color: .lightRedBorder, borderSize: 1))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .frame(height: 24)
                 .padding(.vertical, 8)

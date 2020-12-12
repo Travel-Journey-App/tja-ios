@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SharpBorderButtonStyle: ButtonStyle {
     var filled: Bool = false
-    var color: Color = Color("MainRed")
+    var color: Color = .mainRed
     
     public func makeBody(configuration: SharpBorderButtonStyle.Configuration) -> some View {
         

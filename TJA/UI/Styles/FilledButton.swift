@@ -11,7 +11,7 @@ import SwiftUI
 
 struct FilledButtonStyle: ButtonStyle {
     var filled: Bool = true
-    var color: Color = Color("MainRed")
+    var color: Color = .mainRed
     
     public func makeBody(configuration: FilledButtonStyle.Configuration) -> some View {
         

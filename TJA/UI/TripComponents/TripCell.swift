@@ -19,7 +19,7 @@ struct TripCell: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 100, height: 84)
-                .border(Color("MainRed"), width: 2)
+                .border(Color.mainRed, width: 2)
                 .clipped()
             
             HStack(alignment: .center, spacing: 10) {
@@ -46,7 +46,7 @@ struct TripCell: View {
             .padding(.leading, 7)
             .frame(height: 84)
             .frame(maxWidth: .infinity)
-            .border(Color("MainRed"), width: 2)
+            .border(Color.mainRed, width: 2)
             
         }.background(Color(UIColor.systemBackground))
     }

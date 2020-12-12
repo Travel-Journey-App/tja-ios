@@ -11,7 +11,7 @@ import SwiftUI
 struct DraggableSplash: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 7, style: .continuous)
-            .fill(Color("Splash"))
+            .fill(Color.splash)
             .overlay(
                 RoundedRectangle(cornerRadius: 7, style: .continuous)
                     .strokeBorder(Color(UIColor.opaqueSeparator), lineWidth: 1))

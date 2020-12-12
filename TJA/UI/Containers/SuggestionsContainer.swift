@@ -37,7 +37,7 @@ struct SuggestionsContainer: View {
             } else {
                 Text("There are no items from the \(wish.rawValue.capitalizedFirstLetter()) category that we can recommend\n☹️")
                     .font(.system(size: 20))
-                    .foregroundColor(Color("MainRed"))
+                    .foregroundColor(.mainRed)
                     .multilineTextAlignment(.center)
             }
             if selectedIndex != nil {

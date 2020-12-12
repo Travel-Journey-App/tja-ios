@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct BorderedTextField: TextFieldStyle {
-    var color: Color = Color("MainRed")
+    var color: Color = .mainRed
     var fontSize: CGFloat = 15
     var borderSize: CGFloat = 2
     

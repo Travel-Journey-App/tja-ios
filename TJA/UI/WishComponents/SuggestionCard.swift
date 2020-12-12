@@ -21,7 +21,7 @@ struct SuggestionCard: View {
         VStack(alignment: .center, spacing: 10) {
             Text(wishTitle.uppercased())
                 .font(.system(size: 35))
-                .foregroundColor(Color("MainRed"))
+                .foregroundColor(.mainRed)
                 .padding(5)
             KFImage(suggestion.imageUrl)
                 .resizable()

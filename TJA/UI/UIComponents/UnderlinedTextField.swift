@@ -23,7 +23,7 @@ struct UnderlinedTextField: View {
     }
     
     private var color: Color {
-        return text.isEmpty ? Color(UIColor.systemGray) : Color("MainRed")
+        return text.isEmpty ? Color(UIColor.systemGray) : .mainRed
     }
     
     private var textField: some View {

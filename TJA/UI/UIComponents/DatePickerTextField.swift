@@ -107,7 +107,7 @@ struct UnderlinedDateField: View {
     }
     
     private var color: Color {
-        return date != nil ? Color("MainRed") : Color(UIColor.systemGray)
+        return date != nil ? .mainRed : Color(UIColor.systemGray)
     }
     
     private var field: some View {

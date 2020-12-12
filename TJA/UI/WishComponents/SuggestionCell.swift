@@ -34,7 +34,7 @@ struct SuggestionCell: View {
         .padding(.vertical, 6)
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .frame(height: 100)
-        .border(Color("MainRed"), width: 1)
+        .border(Color.mainRed, width: 1)
     }
 }
 

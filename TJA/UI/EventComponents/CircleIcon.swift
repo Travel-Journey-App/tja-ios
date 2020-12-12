@@ -15,7 +15,7 @@ struct CircleIcon: View {
     
     var body: some View {
         Circle()
-            .strokeBorder(Color("MainRed"), lineWidth: 2)
+            .strokeBorder(Color.mainRed, lineWidth: 2)
             .background(
                 Circle()
                     .fill(Color(UIColor.systemBackground))

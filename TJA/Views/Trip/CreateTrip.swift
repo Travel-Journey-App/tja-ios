@@ -16,7 +16,7 @@ struct CreateTrip: View {
     @State var endDate: Date? = nil
     
     @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var tripService: TripService
+    @EnvironmentObject var tripService: MockTripService
     
     var body: some View {
         ScrollView(.vertical) {
@@ -68,7 +68,7 @@ struct CreateTrip: View {
                 .buttonStyle(
                     FilledButtonStyle(
                         filled: true,
-                        color: formFilled ? Color("MainRed") : Color(UIColor.systemGray)
+                        color: formFilled ? .mainRed : Color(UIColor.systemGray)
                     )
                 )
                 .disabled(!formFilled)
