@@ -17,6 +17,7 @@ protocol AuthService {
     
     func login(email: String, password: String) -> AuthResponse
     func signup(email: String, password: String) -> AuthResponse
+    func oauth(idToken: String) -> AuthResponse
     func refresh() -> AuthResponse
 }
 
@@ -31,6 +32,12 @@ extension AuthService {
     func signup(email: String, password: String) -> AuthResponse {
         return apiSession
             .request(with: AuthEndpoint.signup(email: email, password: password))
+            .eraseToAnyPublisher()
+    }
+    
+    func oauth(idToken: String) -> AuthResponse {
+        return apiSession
+            .request(with: AuthEndpoint.google(token: idToken))
             .eraseToAnyPublisher()
     }
     

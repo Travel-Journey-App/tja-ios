@@ -149,8 +149,21 @@ extension AuthViewModel: GIDSignInDelegate {
             print("DEBUG: -- Google Sign In -- idToken: \(token)")
             
             // TODO: api call
-            
-            UserDefaultsConfig.googleProviderWasUsed = true
+            self.cancellationToken = self.oauth(idToken: token)
+                .sinkToResult { result in
+                    switch result {
+                    case let .failure(err):
+                        print("DEBUG: -- Google OAuth -- Error -- \(err.localizedDescription)")
+                    case let .success(response):
+                        if let err = response.getError() {
+                            print("DEBUG: -- Google OAuth -- Response error -- \(err.localizedDescription)")
+                        }
+                        print("DEBUG: -- Google OAuth -- Success -- \(response.body)")
+                        UserDefaultsConfig.authToken = response.body?.secret
+                        UserDefaultsConfig.googleProviderWasUsed = true
+                        self.currentUser = response.body?.user
+                    }
+                }
         }
     }
 }

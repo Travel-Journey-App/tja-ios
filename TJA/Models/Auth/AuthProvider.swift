@@ -24,3 +24,7 @@ struct SignUpRequest: Codable {
     let password: String
     let matchingPassword: String
 }
+
+struct OAuthRequest: Codable {
+    let googleOAuthToken: String
+}

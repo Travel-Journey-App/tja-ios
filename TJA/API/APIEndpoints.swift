@@ -11,6 +11,7 @@ import Foundation
 enum AuthEndpoint {
     case login(email: String, password: String)
     case signup(email: String, password: String)
+    case google(token: String)
     case refresh
 }
 
@@ -38,12 +39,13 @@ extension AuthEndpoint: RequestBuilder {
         case .login: return "/auth/login"
         case .signup: return "/auth/registration"
         case .refresh: return "/api/user"
+        case .google: return "/auth/oauth"
         }
     }
     
     var method: String {
         switch self {
-        case .login, .signup:
+        case .login, .signup, .google:
             return "POST"
         case .refresh:
             return "GET"
@@ -52,7 +54,7 @@ extension AuthEndpoint: RequestBuilder {
     
     var headers: [String : String]? {
         switch self {
-        case .login, .signup: return appJsonHeaders
+        case .login, .signup, .google: return appJsonHeaders
         case .refresh: return nil
         }
     }
@@ -71,6 +73,9 @@ extension AuthEndpoint: RequestBuilder {
             return try? JSONEncoder().encode(request)
         case let .signup(email, password):
             let request = SignUpRequest(email: email, password: password, matchingPassword: password)
+            return try? JSONEncoder().encode(request)
+        case let .google(token):
+            let request = OAuthRequest(googleOAuthToken: token)
             return try? JSONEncoder().encode(request)
         default:
             return nil
