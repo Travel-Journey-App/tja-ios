@@ -18,6 +18,8 @@ struct UnderlinedTextField: View {
     
     var keyboard: UIKeyboardType = .default
     
+    var onEditingEnded: (() -> ())? = nil
+    
     private var hasIcon: Bool {
         return imageName != nil
     }
@@ -27,7 +29,9 @@ struct UnderlinedTextField: View {
     }
     
     private var textField: some View {
-        TextField(placeholder, text: $text)
+        TextField(placeholder, text: $text, onCommit:  {
+            self.onEditingEnded?()
+        })
             .font(.system(size: fontSize))
             .keyboardType(keyboard)
     }

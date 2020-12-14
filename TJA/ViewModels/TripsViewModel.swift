@@ -37,9 +37,14 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
         self.cancellationTokens.insert(token)
     }
     
-    func createTrip(name: String, destination: String, startDate: Date, endDate: Date) {
+    func createTrip(name: String, destination: Location, startDate: Date, endDate: Date) {
         let trip = TripRequest(
-            name: name, destination: destination, startDate: startDate, endDate: endDate
+            name: name,
+            destination: destination.placeName,
+            startDate: startDate,
+            endDate: endDate,
+            lat: destination.lat,
+            lon: destination.lon
         )
         let token = self.addTrip(trip: trip).sinkToResult { result in
             switch result {

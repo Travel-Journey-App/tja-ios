@@ -57,7 +57,7 @@ struct MyTrips: View {
                                             TripCell(trip: trip)
                                         }
                                         
-                                    }.buttonStyle(PlainButtonStyle())
+                                    }.buttonStyle(FlatLinkStyle())
                                 }
                             }.padding(.vertical, 24)
                         }
@@ -76,12 +76,7 @@ struct MyTrips: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        NavigationLink(
-                            destination: CreateTrip()
-                                .environmentObject(
-                                    DestinationSearchViewModel(apiService: APISession.shared)
-                                )
-                        ) {
+                        NavigationLink(destination: CreateTrip()) {
                             Image(systemName: "plus")
                                 .frame(width: 24, height: 24, alignment: .center)
                         }

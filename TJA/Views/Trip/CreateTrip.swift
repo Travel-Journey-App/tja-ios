@@ -11,21 +11,25 @@ import SwiftUI
 struct CreateTrip: View {
     
     @State var name: String = ""
-    @State var destination: String = ""
+    @State var destination: Location? = nil
     @State var startDate: Date? = nil
     @State var endDate: Date? = nil
     
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var viewModel: TripsViewModel
-    @EnvironmentObject var searchViewModel: DestinationSearchViewModel
+    @ObservedObject var searchViewModel = DestinationSearchViewModel(apiService: APISession.shared)
     
     var body: some View {
         ScrollView(.vertical) {
             VStack(spacing: 10) {
                 UnderlinedTextField(text: $name, placeholder: "Trip name")
                     .frame(height: 48)
-                UnderlinedTextField(text: $searchViewModel.searchText, placeholder: "Trip destination")
+                UnderlinedTextField(
+                    text: $searchViewModel.searchText,
+                    placeholder: "Trip destination",
+                    onEditingEnded: { self.searchViewModel.clearStored() })
                     .frame(height: 48)
+                    .overlay(dropDownList, alignment: .top)
                 UnderlinedDateField(date: $startDate, placeholder: "Trip date start", imageName: "calendar")
                     .frame(height: 48)
                 UnderlinedDateField(date: $endDate, placeholder: "Trip date finish", imageName: "calendar")
@@ -83,8 +87,37 @@ struct CreateTrip: View {
         .resignKeyboardOnDragGesture()
     }
     
+    var dropDownList: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(0..<searchViewModel.items.count, id: \.self) { i in
+                Text(searchViewModel.items[i].placeName)
+                    .font(.system(size: 16))
+                    .foregroundColor(Color(UIColor.label))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(height: 32)
+                    .onTapGesture {
+                        print("DEBUG -- \(i) tapped")
+                        let dest = searchViewModel.items[i]
+                        self.searchViewModel.searchText = dest.placeName
+                        self.destination = dest
+                        self.hideKeyboard()
+                        self.searchViewModel.clearStored(cancellAll: true)
+                        if self.name.isEmpty {
+                            self.name = dest.placeName
+                        }
+                    }
+            }.padding(.horizontal, 12)
+        }
+        .background(
+            Rectangle()
+                .fill(Color(UIColor.systemBackground))
+                .shadow(color: .black, radius: 4.0))
+        .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
+        .offset(y: 40)
+    }
+    
     var formFilled: Bool {
-        return (!(name.isEmpty || destination.isEmpty || startDate == nil || endDate == nil) && datesCorrect)
+        return (!(name.isEmpty || destination == nil || startDate == nil || endDate == nil) && datesCorrect)
     }
     
     var datesCorrect: Bool {
@@ -93,11 +126,11 @@ struct CreateTrip: View {
     }
     
     func saveTrip() {
-        guard !name.isEmpty && !destination.isEmpty else { return }
+        guard !name.isEmpty, let dest = destination else { return }
         guard let start = startDate, let end = endDate else { return }
         self.viewModel.createTrip(
             name: name,
-            destination: destination,
+            destination: dest,
             startDate: start,
             endDate: end
         )
@@ -107,6 +140,6 @@ struct CreateTrip: View {
 
 struct CreateTrip_Previews: PreviewProvider {
     static var previews: some View {
-        CreateTrip()
+        CreateTrip().environmentObject(DestinationSearchViewModel(apiService: APISession.shared))
     }
 }
