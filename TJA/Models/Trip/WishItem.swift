@@ -8,15 +8,15 @@
 
 import Foundation
 
-enum WishItem: String, Identifiable {
-    case breakfast
-    case lunch
-    case dinner
-    case bar
-    case gallery
-    case sightseeng
-    case museums
-    case fun
+enum WishItem: String, Codable, Identifiable {
+    case breakfast = "Breakfast"
+    case lunch = "Lunch"
+    case dinner = "Dinner"
+    case bar = "Bar"
+    case gallery = "Gallery"
+    case sightseeng = "Sightseeng"
+    case museums = "Museums"
+    case fun = "Fun"
     
     var image: String {
         switch self {

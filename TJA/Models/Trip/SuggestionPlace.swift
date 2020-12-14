@@ -14,14 +14,16 @@ struct SuggestionPlace: Hashable, Codable, Identifiable {
         case cheap, medium, expensive
     }
     
-    let id: Int
-    let name: String
+    let id: String
+    let category: WishItem
     let description: String
-    let rating: Double
+    let workingHours: String
     let price: Price?
-    let location: Location
-    let openHours: String?
-    let imageUrl: URL?
+    let location: PlaceLocation
+    let name: String
+    let photo: URL?
+    let rating: Double
+    let extraName: String
     
     var ratingString: String {
         return "\(rating.round(to: 1))"

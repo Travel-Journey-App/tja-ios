@@ -23,7 +23,7 @@ struct SuggestionCard: View {
                 .font(.system(size: 35))
                 .foregroundColor(.mainRed)
                 .padding(5)
-            KFImage(suggestion.imageUrl)
+            KFImage(suggestion.photo)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(height: 138)
@@ -36,10 +36,10 @@ struct SuggestionCard: View {
                     .lineLimit(2)
                 
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(suggestion.location.placeName)
+                    Text(suggestion.extraName)
                         .lineLimit(1)
                         .font(.system(size: 14))
-                    Text(suggestion.openHours ?? "Closed")
+                    Text(suggestion.workingHours)
                         .lineLimit(1)
                         .font(.system(size: 14))
                 }
@@ -77,7 +77,7 @@ struct SuggestionCard: View {
 struct SuggestionCard_Previews: PreviewProvider {
     static var previews: some View {
         SuggestionCard(suggestion:
-                        .init(id: 2, name: "Place with long desc", description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home! Offers a gluten free menu.", rating: 4.222, price: .medium, location: Mockup.Locations.eventLocations["Museum of modern art"]!, openHours: nil, imageUrl: URL(string: "https://images.unsplash.com/photo-1605546741978-365c16813d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1575&q=80")!),
+                        .init(id: "0", category: .bar, description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home!", workingHours: "Open: Sat 12:00 - 13:00", price: .cheap, location: .init(lat: 74, lon: 75), name: "Some name", photo: URL(string: "https://images.unsplash.com/photo-1605546741978-365c16813d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1575&q=80"), rating: 4.7, extraName: "Extra name"),
                        wishTitle: WishItem.breakfast.rawValue
         )
     }

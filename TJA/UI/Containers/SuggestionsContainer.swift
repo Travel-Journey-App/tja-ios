@@ -60,6 +60,6 @@ struct SuggestionsContainer: View {
 
 struct SuggestionsContainer_Previews: PreviewProvider {
     static var previews: some View {
-        SuggestionsContainer(items: Mockup.Wishes.suggestions, wish: .lunch)
+        SuggestionsContainer(items: [], wish: .lunch)
     }
 }

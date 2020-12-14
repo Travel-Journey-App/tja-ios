@@ -24,7 +24,7 @@ struct WishList: View {
                     NavigationLink(
                         destination: WishItemsContainer(
                             wish: wish,
-                            items: Mockup.Wishes.suggestions,
+                            items: [],
                             location: Mockup.Locations.mockTripLocation
                         )) {
                         ShadowImage(name: wish.image)

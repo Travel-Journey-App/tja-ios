@@ -14,6 +14,7 @@ protocol APIService {
 }
 
 protocol RequestBuilder {
+    var base: String { get }
     var path: String { get }
     var method: String { get }
     var headers: [String: String]? { get }
@@ -32,7 +33,7 @@ extension RequestBuilder {
     }
     
     var urlRequest: URLRequest {
-        guard let url = URL(string: "\(APIConstants.baseUrl)\(path)")
+        guard let url = URL(string: "\(base)\(path)")
         else { preconditionFailure("Invalid URL format") }
         var request = URLRequest(url: url)
         request.httpMethod = method

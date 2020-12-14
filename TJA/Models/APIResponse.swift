@@ -39,3 +39,7 @@ struct APIMessageResponse: Codable {
         }
     }
 }
+
+struct APISearchResponse<T: Codable>: Codable {
+    let items: [T]
+}

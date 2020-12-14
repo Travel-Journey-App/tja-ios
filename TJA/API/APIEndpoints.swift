@@ -32,7 +32,20 @@ enum WishEndpoint {
     
 }
 
+enum SearchEndpoint {
+    case city(query: String) // destination point
+    case suggestion(category: String, destination: String) // wish item
+    case eventPlace(query: String, category: String, destination: String) // activity event
+    case accommodation(query: String, destination: String) // accommodation place
+    case transferPoint(query: String, category: String, destination: String) // transfer place
+}
+
+
 extension AuthEndpoint: RequestBuilder {
+    
+    var base: String {
+        APIConstants.baseUrl
+    }
     
     var path: String {
         switch self {
@@ -85,6 +98,10 @@ extension AuthEndpoint: RequestBuilder {
 
 extension TripEndpoint: RequestBuilder {
     
+    var base: String {
+        APIConstants.baseUrl
+    }
+    
     var path: String {
         switch self {
         case .tripList, .newTrip, .updateTrip: return "/api/trips"
@@ -124,5 +141,43 @@ extension TripEndpoint: RequestBuilder {
         default:
             return nil
         }
+    }
+}
+
+extension SearchEndpoint: RequestBuilder {
+    
+    var base: String {
+        APIConstants.baseSearchUrl
+    }
+    
+    var path: String {
+        switch self {
+        case let .city(query):
+            return "/city?name=\(query)"
+        case let .suggestion(category, destination):
+            return "/place?category=\(category)&city=\(destination)"
+        case let .eventPlace(query, category, destination):
+            return ""
+        case let .accommodation(query, destination):
+            return ""
+        case let .transferPoint(query, category, destination):
+            return ""
+        }
+    }
+    
+    var method: String {
+        "GET"
+    }
+    
+    var headers: [String : String]? {
+        nil
+    }
+    
+    var authorizeRequest: Bool {
+        false
+    }
+    
+    func body() -> Data? {
+        nil
     }
 }

@@ -10,5 +10,5 @@ import Foundation
 
 public enum APIConstants {
     static let baseUrl = "http://tja-bh.herokuapp.com"
-    static let baseSearchUrl = ""
+    static let baseSearchUrl = "http://144.126.197.28:8080"
 }

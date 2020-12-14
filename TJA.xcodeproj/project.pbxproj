@@ -53,6 +53,12 @@
 		9E5BD4022582B7380059D169 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5BD4012582B7380059D169 /* API.swift */; };
 		9E5BD4062582D4360059D169 /* APISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5BD4052582D4360059D169 /* APISession.swift */; };
 		9E5BD4092582D9940059D169 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5BD4082582D9940059D169 /* APIEndpoints.swift */; };
+		9E641820258746D7009709D4 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E64181F258746D7009709D4 /* SearchService.swift */; };
+		9E6418232587554E009709D4 /* WishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6418222587554D009709D4 /* WishViewModel.swift */; };
+		9E641826258757F1009709D4 /* DestinationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E641825258757F1009709D4 /* DestinationSearchViewModel.swift */; };
+		9E641829258758C9009709D4 /* AccommodationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E641828258758C9009709D4 /* AccommodationSearchViewModel.swift */; };
+		9E64182C258758E6009709D4 /* TransferPointSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E64182B258758E6009709D4 /* TransferPointSearchViewModel.swift */; };
+		9E64182F258758F3009709D4 /* ActivitySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E64182E258758F3009709D4 /* ActivitySearchViewModel.swift */; };
 		9E6889252575277C0065D165 /* SuggestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6889242575277C0065D165 /* SuggestionCard.swift */; };
 		9E688928257536FA0065D165 /* PopUpContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E688927257536FA0065D165 /* PopUpContainer.swift */; };
 		9E68892C257576FB0065D165 /* MagicMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E68892B257576FA0065D165 /* MagicMode.swift */; };
@@ -159,6 +165,12 @@
 		9E5BD4012582B7380059D169 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		9E5BD4052582D4360059D169 /* APISession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISession.swift; sourceTree = "<group>"; };
 		9E5BD4082582D9940059D169 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		9E64181F258746D7009709D4 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
+		9E6418222587554D009709D4 /* WishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishViewModel.swift; sourceTree = "<group>"; };
+		9E641825258757F1009709D4 /* DestinationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationSearchViewModel.swift; sourceTree = "<group>"; };
+		9E641828258758C9009709D4 /* AccommodationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodationSearchViewModel.swift; sourceTree = "<group>"; };
+		9E64182B258758E6009709D4 /* TransferPointSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferPointSearchViewModel.swift; sourceTree = "<group>"; };
+		9E64182E258758F3009709D4 /* ActivitySearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySearchViewModel.swift; sourceTree = "<group>"; };
 		9E6889242575277C0065D165 /* SuggestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCard.swift; sourceTree = "<group>"; };
 		9E688927257536FA0065D165 /* PopUpContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpContainer.swift; sourceTree = "<group>"; };
 		9E68892B257576FA0065D165 /* MagicMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicMode.swift; sourceTree = "<group>"; };
@@ -343,6 +355,11 @@
 			children = (
 				9E58C733258409EF002688EE /* AuthViewModel.swift */,
 				9E58C74725844254002688EE /* TripsViewModel.swift */,
+				9E6418222587554D009709D4 /* WishViewModel.swift */,
+				9E641825258757F1009709D4 /* DestinationSearchViewModel.swift */,
+				9E641828258758C9009709D4 /* AccommodationSearchViewModel.swift */,
+				9E64182B258758E6009709D4 /* TransferPointSearchViewModel.swift */,
+				9E64182E258758F3009709D4 /* ActivitySearchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -558,6 +575,7 @@
 				9E17EF09256B2984005F2BDE /* EventService.swift */,
 				9E58C72F2584050E002688EE /* AuthService.swift */,
 				9E6A548C2584576A0041A340 /* TripService.swift */,
+				9E64181F258746D7009709D4 /* SearchService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -678,6 +696,7 @@
 			files = (
 				9E5A8EE1256ACA7A0037D742 /* StrokeText.swift in Sources */,
 				9E6A548D2584576A0041A340 /* TripService.swift in Sources */,
+				9E641826258757F1009709D4 /* DestinationSearchViewModel.swift in Sources */,
 				9E83FEB8255C44FC0008F8DC /* MyTrips.swift in Sources */,
 				9E932FB325758FAA009FC2E8 /* SegmentedContainer.swift in Sources */,
 				9E688928257536FA0065D165 /* PopUpContainer.swift in Sources */,
@@ -701,8 +720,10 @@
 				9E3343192573EECE00AE5568 /* NewActivity.swift in Sources */,
 				9EED544B25630B0C00098500 /* TripCell.swift in Sources */,
 				9E68892C257576FB0065D165 /* MagicMode.swift in Sources */,
+				9E64182F258758F3009709D4 /* ActivitySearchViewModel.swift in Sources */,
 				9EE6693F25640E260018B82A /* Constants.swift in Sources */,
 				9E263655253DACED00928B38 /* AppDelegate.swift in Sources */,
+				9E641820258746D7009709D4 /* SearchService.swift in Sources */,
 				9EB47CDE2566C2A70065C641 /* MapContainer.swift in Sources */,
 				9E58C73A258421F8002688EE /* Color.swift in Sources */,
 				9E5A8ED3256AA63B0037D742 /* EventIcons.swift in Sources */,
@@ -726,6 +747,7 @@
 				9EC920812561DFC4001A40CC /* Binding+didSet.swift in Sources */,
 				9EB47CEB2566D5F50065C641 /* View+toAny.swift in Sources */,
 				9E2D7786255176BF0040872F /* AuthProvider.swift in Sources */,
+				9E64182C258758E6009709D4 /* TransferPointSearchViewModel.swift in Sources */,
 				9EFB676A25742A17005941D1 /* Grid.swift in Sources */,
 				9EED544E2563116600098500 /* Trip.swift in Sources */,
 				9EC9207E2561B2E3001A40CC /* UnderlinedTextField.swift in Sources */,
@@ -733,8 +755,10 @@
 				9E26365D253DDBF500928B38 /* UserData.swift in Sources */,
 				9EB47CF6256722660065C641 /* SharpBorderButton.swift in Sources */,
 				9E9C8A2625816BA700AFA3AC /* Loadable.swift in Sources */,
+				9E6418232587554E009709D4 /* WishViewModel.swift in Sources */,
 				9E487F4A2569EF64007BC9C7 /* Event.swift in Sources */,
 				9E47E076257980400022AC08 /* EdgeInsets+init.swift in Sources */,
+				9E641829258758C9009709D4 /* AccommodationSearchViewModel.swift in Sources */,
 				9E3343122573EEB800AE5568 /* NewAccommodation.swift in Sources */,
 				9EED545C25632FFF00098500 /* MockTripService.swift in Sources */,
 				9EFB676D257446FE005941D1 /* SuggestionPlace.swift in Sources */,
