@@ -26,9 +26,9 @@ enum TripEndpoint {
 }
 
 enum ActivityEndpoint {
-    case newActivity(tripId: Int, dayId: Int)
-    case updateActivity(tripId: Int, dayId: Int)
-    case deleteActivity(tripId: Int, dayId: Int)
+    case newActivity(activity: NewActivityRequest, tripId: Int, dayId: Int)
+    case updateActivity(activity: ExistingActivityRequest, tripId: Int, dayId: Int)
+    case deleteActivity(activity: ExistingActivityRequest, tripId: Int, dayId: Int)
 }
 
 enum SearchEndpoint {
@@ -150,11 +150,11 @@ extension ActivityEndpoint: RequestBuilder {
     
     var path: String {
         switch self {
-        case let .newActivity(tripId, dayId):
+        case let .newActivity(_, tripId, dayId):
             return "/api/activities/\(tripId)/\(dayId)"
-        case let .updateActivity(tripId, dayId):
+        case let .updateActivity(_, tripId, dayId):
             return "/api/activities/\(tripId)/\(dayId)"
-        case let .deleteActivity(tripId, dayId):
+        case let .deleteActivity(_, tripId, dayId):
             return "/api/activities/\(tripId)/\(dayId)"
         }
     }
@@ -177,11 +177,28 @@ extension ActivityEndpoint: RequestBuilder {
     
     func body() -> Data? {
         switch self {
-//        case let .newActivity(activity), let .updateActivity(activity):
-//            return try? JSONEncoder().encode(activity)
-        default:
-            return nil
+        case let .newActivity(request, _, _):
+            if request.activityType == "transfer",
+               let req = request as? ActivityRequest.New.Transfer {
+                return try? JSONEncoder().encode(req)
+            } else if request.activityType == "accommodation",
+                      let req = request as? ActivityRequest.New.Accommodation {
+                return try? JSONEncoder().encode(req)
+            } else if let req = request as? ActivityRequest.New.Event {
+                return try? JSONEncoder().encode(req)
+            }
+        case let .updateActivity(request, _, _), let .deleteActivity(request, _, _):
+            if request.activityType == "transfer",
+               let req = request as? ActivityRequest.Existing.Transfer {
+                return try? JSONEncoder().encode(req)
+            } else if request.activityType == "accommodation",
+                      let req = request as? ActivityRequest.Existing.Accommodation {
+                return try? JSONEncoder().encode(req)
+            } else if let req = request as? ActivityRequest.Existing.Event {
+                return try? JSONEncoder().encode(req)
+            }
         }
+        return nil
     }
     
     

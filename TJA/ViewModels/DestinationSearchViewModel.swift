@@ -21,12 +21,6 @@ class DestinationSearchViewModel: NSObject, ObservableObject, SearchService {
         self.apiSession = apiService
         super.init()
         self.configureSearch()
-        items.append(contentsOf: [
-            Location(placeName: "A", lat: 1, lon: 1),
-            Location(placeName: "B", lat: 1, lon: 1),
-            Location(placeName: "C", lat: 1, lon: 1),
-            Location(placeName: "D", lat: 1, lon: 1),
-        ])
     }
     
     func clearStored(cancellAll: Bool = false) {

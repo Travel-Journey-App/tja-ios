@@ -15,7 +15,7 @@ struct Trip: Hashable, Codable, Identifiable {
     let startDate: Date
     let endDate: Date
     let location: Location?
-    let days: [TripDay]
+    var days: [TripDay]
     
     var isFinished: Bool {
         return Date().compare(to: endDate) == .orderedDescending
@@ -46,7 +46,7 @@ struct Trip: Hashable, Codable, Identifiable {
 struct TripDay: Hashable, Codable, Identifiable {
     let id: Int
     let orderInTrip: Int
-    var activities: [ActivityResponse]
+    var activities: [Activity]
     
     var number: Int {
         orderInTrip
@@ -71,14 +71,15 @@ struct TripDay: Hashable, Codable, Identifiable {
     init(id: Int, orderInTrip: Int, activities: [ActivityResponse]) {
         self.id = id
         self.orderInTrip = orderInTrip
-        self.activities = activities
+        self.activities = activities.compactMap { $0.activityItem }
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DecodingKeys.self)
         self.id = try container.decode(Int.self, forKey: .id)
         self.orderInTrip = try container.decode(Int.self, forKey: .orderInTrip)
-        self.activities = try container.decode([ActivityResponse]?.self, forKey: .activities) ?? []
+        let activities = try container.decode([ActivityResponse]?.self, forKey: .activities) ?? []
+        self.activities = activities.compactMap { $0.activityItem }
     }
     
     func encode(to encoder: Encoder) throws {

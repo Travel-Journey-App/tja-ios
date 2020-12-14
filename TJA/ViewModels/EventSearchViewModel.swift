@@ -1,5 +1,5 @@
 //
-//  ActivitySearchViewModel.swift
+//  EventSearchViewModel.swift
 //  TJA
 //
 //  Created by Miron Rogovets on 14.12.2020.
@@ -9,9 +9,10 @@
 import Foundation
 import Combine
 
-class ActivitySearchViewModel: NSObject, ObservableObject, SearchService {
+class EventSearchViewModel: NSObject, ObservableObject, SearchService {
     
     var apiSession: APIService
+    var cancellationTokens = Set<AnyCancellable>()
     
     init(apiService: APIService) {
         self.apiSession = apiService

@@ -12,6 +12,7 @@ import Combine
 class AccommodationSearchViewModel: NSObject, ObservableObject, SearchService {
     
     var apiSession: APIService
+    var cancellationTokens = Set<AnyCancellable>()
     
     init(apiService: APIService) {
         self.apiSession = apiService

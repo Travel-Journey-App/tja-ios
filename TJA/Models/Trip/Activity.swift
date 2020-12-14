@@ -16,6 +16,14 @@ struct Activity: Codable, Hashable, Identifiable, Comparable {
         case accommodation(Accommodation.Direction)
         case transfer(Transfer, Transfer.Direction)
         
+        var typeName: String {
+            switch self {
+            case .event: return "event"
+            case .accommodation: return "accommodation"
+            case .transfer: return "transfer"
+            }
+        }
+        
         func exactTimeString(time: Date) -> String {
             switch self {
             case let .accommodation(direction):
@@ -160,54 +168,5 @@ struct Activity: Codable, Hashable, Identifiable, Comparable {
             return l < r
         }
         return true
-    }
-}
-
-
-struct ActivityResponse: Decodable {
-    let id: Int
-    let name: String
-    let description: String?
-    let startTime: Date?
-    let endTime: Date?
-    let note: String
-    let transferType: String
-    let direction: String
-    let lat: Double
-    let lon: Double
-    let activityType: String
-    
-    enum BaseType: String, Decodable {
-        case transfer, accommodation, event
-    }
-    
-    enum CodingKeys: CodingKey {
-        case id, name, description, startTime, endTime, note, lat, lon
-        case activityType
-        case transferType, direction
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let type = try container.decode(String.self, forKey: .activityType)
-        if type == "transfer" {
-            self.transferType = try container.decode(String.self, forKey: .transferType)
-            self.direction = try container.decode(String.self, forKey: .direction)
-        } else if type == "accommodation" {
-            self.transferType = ""
-            self.direction = try container.decode(String.self, forKey: .direction)
-        } else {
-            self.transferType = ""
-            self.direction = ""
-        }
-        self.id = try container.decode(Int.self, forKey: .id)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.description = try container.decode(String?.self, forKey: .description)
-        self.startTime = try container.decode(Date?.self, forKey: .startTime)
-        self.endTime = try container.decode(Date?.self, forKey: .endTime)
-        self.note = try container.decode(String.self, forKey: .note)
-        self.lat = try container.decode(Double.self, forKey: .lat)
-        self.lon = try container.decode(Double.self, forKey: .lon)
-        self.activityType = type
     }
 }

@@ -16,28 +16,28 @@ protocol ActivityService {
     
     var apiSession: APIService { get }
     
-    func add(activity: Activity, to trip: Int, on day: Int) -> ItemResponse
-    func update(activity: Activity, in trip: Int, on day: Int) -> ItemResponse
-    func delete(by id: Int, from trip: Int, on day: Int) -> MessageResponse
+    func add(activity: NewActivityRequest, to trip: Int, on day: Int) -> ItemResponse
+    func update(activity: ExistingActivityRequest, in trip: Int, on day: Int) -> ItemResponse
+    func delete(activity: ExistingActivityRequest, from trip: Int, on day: Int) -> MessageResponse
 }
 
 extension ActivityService {
     
-    func add(activity: Activity, to trip: Int, on day: Int) -> ItemResponse {
+    func add(activity: NewActivityRequest, to trip: Int, on day: Int) -> ItemResponse {
         return apiSession
-            .request(with: ActivityEndpoint.newActivity(tripId: trip, dayId: day))
+            .request(with: ActivityEndpoint.newActivity(activity: activity, tripId: trip, dayId: day))
             .eraseToAnyPublisher()
     }
     
-    func update(activity: Activity, in trip: Int, on day: Int) -> ItemResponse {
+    func update(activity: ExistingActivityRequest, in trip: Int, on day: Int) -> ItemResponse {
         return apiSession
-            .request(with: ActivityEndpoint.updateActivity(tripId: trip, dayId: day))
+            .request(with: ActivityEndpoint.updateActivity(activity: activity, tripId: trip, dayId: day))
             .eraseToAnyPublisher()
     }
     
-    func delete(by id: Int, from trip: Int, on day: Int) -> MessageResponse {
+    func delete(activity: ExistingActivityRequest, from trip: Int, on day: Int) -> MessageResponse {
         return apiSession
-            .request(with: ActivityEndpoint.deleteActivity(tripId: trip, dayId: day))
+            .request(with: ActivityEndpoint.deleteActivity(activity: activity, tripId: trip, dayId: day))
             .eraseToAnyPublisher()
     }
 }
