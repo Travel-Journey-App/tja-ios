@@ -124,7 +124,7 @@ struct Swipeable_Previews: PreviewProvider {
             name: "New Year",
             startDate: Date().addingTimeInterval(60*60*24*2),
             endDate: Date().addingTimeInterval(60*60*24*6),
-            location: nil)
+            location: nil, days: [])
         var swipeable = SwipeableItem<Trip>(item: trip, offset: 0, isSwiped: false)
         var item = Binding<SwipeableItem<Trip>>(
             get: { return swipeable },

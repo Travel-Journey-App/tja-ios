@@ -41,23 +41,23 @@ struct EventIcon_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
             VStack {
-                EventType.activity(activity: .bar).eventIcon
-                EventType.activity(activity: .food).eventIcon
-                EventType.activity(activity: .museum).eventIcon
-                EventType.activity(activity: .fun).eventIcon
-                EventType.activity(activity: .sightseeing).eventIcon
-                EventType.activity(activity: .gallery).eventIcon
-                EventType.accomodation.eventIcon
+                Activity.ActivityType.event(.bar).eventIcon
+                Activity.ActivityType.event(.food).eventIcon
+                Activity.ActivityType.event(.museum).eventIcon
+                Activity.ActivityType.event(.fun).eventIcon
+                Activity.ActivityType.event(.sightseeing).eventIcon
+                Activity.ActivityType.event(.gallery).eventIcon
+                Activity.ActivityType.accommodation(.checkin).eventIcon
             }
             EventIcon(name: "calendar")
             VStack {
-                EventType.transfer(transfer: .plane, direction: .arrival).eventIcon
-                EventType.transfer(transfer: .plane, direction: .departure).eventIcon
-                EventType.transfer(transfer: .bus, direction: .arrival).eventIcon
-                EventType.transfer(transfer: .car, direction: .arrival).eventIcon
-                EventType.transfer(transfer: .ship, direction: .arrival).eventIcon
-                EventType.transfer(transfer: .train, direction: .arrival).eventIcon
-                EventType.transfer(transfer: .plane, direction: .arrival).categoryIcon
+                Activity.ActivityType.transfer(.plane, .arrival).eventIcon
+                Activity.ActivityType.transfer(.plane, .departure).eventIcon
+                Activity.ActivityType.transfer(.bus, .arrival).eventIcon
+                Activity.ActivityType.transfer(.car, .arrival).eventIcon
+                Activity.ActivityType.transfer(.ship, .arrival).eventIcon
+                Activity.ActivityType.transfer(.train, .arrival).eventIcon
+                Activity.ActivityType.transfer(.plane, .arrival).categoryIcon
             }
         }
         

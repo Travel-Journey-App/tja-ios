@@ -15,6 +15,7 @@ struct Trip: Hashable, Codable, Identifiable {
     let startDate: Date
     let endDate: Date
     let location: Location?
+    let days: [TripDay]
     
     var isFinished: Bool {
         return Date().compare(to: endDate) == .orderedDescending
@@ -44,6 +45,45 @@ struct Trip: Hashable, Codable, Identifiable {
 
 struct TripDay: Hashable, Codable, Identifiable {
     let id: Int
-    let number: Int
-    var events: [Event]
+    let orderInTrip: Int
+    var activities: [ActivityResponse]
+    
+    var number: Int {
+        orderInTrip
+    }
+    
+    enum DecodingKeys: CodingKey {
+        case id, orderInTrip, activities
+    }
+    
+    enum EncodingKeys: CodingKey {
+        case id, orderInTrip
+    }
+    
+    static func == (lhs: TripDay, rhs: TripDay) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    init(id: Int, orderInTrip: Int, activities: [ActivityResponse]) {
+        self.id = id
+        self.orderInTrip = orderInTrip
+        self.activities = activities
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: DecodingKeys.self)
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.orderInTrip = try container.decode(Int.self, forKey: .orderInTrip)
+        self.activities = try container.decode([ActivityResponse]?.self, forKey: .activities) ?? []
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: EncodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(orderInTrip, forKey: .orderInTrip)
+    }
 }

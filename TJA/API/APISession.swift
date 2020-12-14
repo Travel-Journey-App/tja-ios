@@ -23,11 +23,12 @@ struct APISession: APIService {
             .receive(on: DispatchQueue.main)
             .mapError { _ in .unknown }
             .flatMap { data, response -> AnyPublisher<T, APIError> in
+                print(String(data: data, encoding: .utf8))
                 if let response = response as? HTTPURLResponse {
                     if HTTPCodes.success.contains(response.statusCode) {
                     return Just(data)
                         .decode(type: T.self, decoder: decoder)
-                        .mapError {_ in .decodingError}
+                        .mapError {err in .decodingError(err.localizedDescription)}
                         .eraseToAnyPublisher()
                     } else {
                         return Fail(error: APIError.httpError(response.statusCode))

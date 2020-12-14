@@ -31,6 +31,7 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
                 }
                 print("DEBUG: -- TripList -- Success")
                 self.trips = response.body?.compactMap { SwipeableItem<Trip>($0.trip) } ?? []
+                print(self.trips)
             }
         }
         self.cancellationTokens.insert(token)
@@ -38,7 +39,7 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
     
     func createTrip(name: String, destination: String, startDate: Date, endDate: Date) {
         let trip = TripRequest(
-            name: name, destination: destination, startDate: startDate, endDate: endDate, days: []
+            name: name, destination: destination, startDate: startDate, endDate: endDate
         )
         let token = self.addTrip(trip: trip).sinkToResult { result in
             switch result {
@@ -51,6 +52,7 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
                 print("DEBUG: -- NewTrip -- Success")
                 if let item = response.body {
                     self.trips.append(SwipeableItem<Trip>(item.trip))
+                    print(item.trip)
                 }
             }
         }

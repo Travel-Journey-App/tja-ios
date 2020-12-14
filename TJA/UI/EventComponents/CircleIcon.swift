@@ -28,22 +28,22 @@ struct CircleIcon_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
             VStack {
-                CircleIcon(icon: EventType.activity(activity: .bar).eventIcon)
-                CircleIcon(icon: EventType.activity(activity: .food).eventIcon)
-                CircleIcon(icon: EventType.activity(activity: .museum).eventIcon)
-                CircleIcon(icon: EventType.activity(activity: .fun).eventIcon)
-                CircleIcon(icon: EventType.activity(activity: .sightseeing).eventIcon)
-                CircleIcon(icon: EventType.activity(activity: .gallery).eventIcon)
-                CircleIcon(icon: EventType.accomodation.eventIcon)
+                CircleIcon(icon: Activity.ActivityType.event(.bar).eventIcon)
+                CircleIcon(icon: Activity.ActivityType.event(.food).eventIcon)
+                CircleIcon(icon: Activity.ActivityType.event(.museum).eventIcon)
+                CircleIcon(icon: Activity.ActivityType.event(.fun).eventIcon)
+                CircleIcon(icon: Activity.ActivityType.event(.sightseeing).eventIcon)
+                CircleIcon(icon: Activity.ActivityType.event(.gallery).eventIcon)
+                CircleIcon(icon: Activity.ActivityType.accommodation(.checkin).eventIcon)
             }
             VStack {
-                CircleIcon(icon: EventType.transfer(transfer: .plane, direction: .arrival).eventIcon)
-                CircleIcon(icon: EventType.transfer(transfer: .plane, direction: .departure).eventIcon)
-                CircleIcon(icon: EventType.transfer(transfer: .bus, direction: .arrival).eventIcon)
-                CircleIcon(icon: EventType.transfer(transfer: .car, direction: .arrival).eventIcon)
-                CircleIcon(icon: EventType.transfer(transfer: .ship, direction: .arrival).eventIcon)
-                CircleIcon(icon: EventType.transfer(transfer: .train, direction: .arrival).eventIcon)
-                CircleIcon(icon: EventType.transfer(transfer: .plane, direction: .arrival).categoryIcon)
+                CircleIcon(icon: Activity.ActivityType.transfer(.plane, .arrival).eventIcon)
+                CircleIcon(icon: Activity.ActivityType.transfer(.plane, .departure).eventIcon)
+                CircleIcon(icon: Activity.ActivityType.transfer(.bus, .arrival).eventIcon)
+                CircleIcon(icon: Activity.ActivityType.transfer(.car, .arrival).eventIcon)
+                CircleIcon(icon: Activity.ActivityType.transfer(.ship, .arrival).eventIcon)
+                CircleIcon(icon: Activity.ActivityType.transfer(.train, .arrival).eventIcon)
+                CircleIcon(icon: Activity.ActivityType.transfer(.plane, .arrival).categoryIcon)
             }
         }
     }

@@ -53,7 +53,7 @@ enum Mockup {
                     Trip(id: i, image: images[i], name: names[i],
                          startDate: now.addingTimeInterval(dates[i].0),
                          endDate: now.addingTimeInterval(dates[i].1),
-                         location: Locations.mockTripLocation)
+                         location: Locations.mockTripLocation, days: [])
                 )
             }
             
@@ -67,72 +67,12 @@ enum Mockup {
             var days = [TripDay]()
             
             for i in 0..<numberOfDays {
-                days.append(TripDay(id: i, number: i, events: generateEvents(dayNumber: i, timeRef: date.startOf(.day))))
+                days.append(TripDay(id: i, orderInTrip: i, activities: []))/*generateEvents(dayNumber: i, timeRef: date.startOf(.day))*/
             }
             
             return days
         }
         
-        static func generateEvents(dayNumber: Int = 0, timeRef: Date = Date()) -> [Event] {
-            var events = [Event]()
-            
-            switch dayNumber {
-            case 0:
-                let types: [EventType] = [
-                    .transfer(transfer: .plane, direction: .arrival),
-                    .activity(activity: .food),
-                    .accomodation,
-                    .activity(activity: .sightseeing)
-                ]
-                let names = ["NY Airport", "Hard Rock Cafe", "Ritz Hotel", "Central Park"]
-                let times: [[Date?]] = [
-                    [timeRef.addingTimeInterval(hour*12), nil],
-                    [timeRef.addingTimeInterval(hour*11), timeRef.addingTimeInterval(hour*22)],
-                    [timeRef.addingTimeInterval(hour*15), nil],
-                    [timeRef.addingTimeInterval(hour*16 + hour / 2), nil]
-                ]
-                for i in 0..<types.count {
-                    events.append(Event(id: i, eventType: types[i], name: names[i], note: "", startTime: times[i][0]!, endTime: times[i][1],
-                                        location: Mockup.Locations.eventLocations[names[i]]))
-                }
-            case 2:
-                let types: [EventType] = [
-                    .activity(activity: .museum),
-                    .activity(activity: .bar)
-                ]
-                let names = ["Museum of modern art", "Local pub"]
-                let times: [[Date?]] = [
-                    [timeRef.addingTimeInterval(hour*12), timeRef.addingTimeInterval(hour*20)],
-                    [timeRef.addingTimeInterval(hour*16), timeRef.addingTimeInterval(hour*22)]
-                ]
-                for i in 0..<types.count {
-                    events.append(Event(id: i, eventType: types[i], name: names[i], note: "", startTime: times[i][0]!, endTime: times[i][1],
-                                        location: Mockup.Locations.eventLocations[names[i]]))
-                }
-            case 4:
-                let types: [EventType] = [
-                    .activity(activity: .food),
-                    .transfer(transfer: .car, direction: .departure),
-                    .transfer(transfer: .plane, direction: .departure)
-                ]
-                let names = ["Burger Heroes", "Taxi transfer", "NY Airport"]
-                let times: [[Date?]] = [
-                    [timeRef.addingTimeInterval(hour*10), nil],
-                    [timeRef.addingTimeInterval(hour*12 + hour/2), nil],
-                    [timeRef.addingTimeInterval(hour*15), nil]
-                ]
-                for i in 0..<types.count {
-                    events.append(Event(id: i, eventType: types[i], name: names[i], note: "", startTime: times[i][0]!, endTime: times[i][1],
-                                        location: Mockup.Locations.eventLocations[names[i]]))
-                }
-            default:
-                events.append(
-                    Event(id: 0, eventType: .activity(activity: .fun),
-                        name: "Party", note: "Some notes", startTime: timeRef.addingTimeInterval(hour*9), endTime: nil, location: nil))
-            }
-            
-            return events
-        }
     }
     
     enum Locations {

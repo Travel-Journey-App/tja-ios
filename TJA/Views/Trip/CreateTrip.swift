@@ -17,13 +17,14 @@ struct CreateTrip: View {
     
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var viewModel: TripsViewModel
+    @EnvironmentObject var searchViewModel: DestinationSearchViewModel
     
     var body: some View {
         ScrollView(.vertical) {
             VStack(spacing: 10) {
                 UnderlinedTextField(text: $name, placeholder: "Trip name")
                     .frame(height: 48)
-                UnderlinedTextField(text: $destination, placeholder: "Trip destination")
+                UnderlinedTextField(text: $searchViewModel.searchText, placeholder: "Trip destination")
                     .frame(height: 48)
                 UnderlinedDateField(date: $startDate, placeholder: "Trip date start", imageName: "calendar")
                     .frame(height: 48)
@@ -83,7 +84,12 @@ struct CreateTrip: View {
     }
     
     var formFilled: Bool {
-        return !(name.isEmpty || destination.isEmpty || startDate == nil || endDate == nil)
+        return (!(name.isEmpty || destination.isEmpty || startDate == nil || endDate == nil) && datesCorrect)
+    }
+    
+    var datesCorrect: Bool {
+        guard let start = startDate, let end = endDate else { return false }
+        return start.startOf(.day) >= Date().startOf(.day) && end.startOf(.day) > start.startOf(.day)
     }
     
     func saveTrip() {

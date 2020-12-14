@@ -62,7 +62,7 @@ struct TripCell_Previews: PreviewProvider {
                     name: "New Year",
                     startDate: Date().addingTimeInterval(60*60*24*2),
                     endDate: Date().addingTimeInterval(60*60*24*6),
-                    location: nil)
+                    location: nil, days: [])
             )
             TripCell(
                 trip: Trip(
@@ -71,7 +71,7 @@ struct TripCell_Previews: PreviewProvider {
                     name: "New Year",
                     startDate: Date().addingTimeInterval(-60*60*24*9),
                     endDate: Date().addingTimeInterval(-60*60*24*6),
-                    location: nil)
+                    location: nil, days: [])
             )
         }
         

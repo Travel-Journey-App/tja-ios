@@ -15,7 +15,7 @@ enum APIMessage: String, Codable {
 }
 
 
-struct APIResponse<T: Codable>: Codable {
+struct APIResponse<T: Decodable>: Decodable {
     let status: APIMessage
     let error: String?
     let body: T?
@@ -40,6 +40,6 @@ struct APIMessageResponse: Codable {
     }
 }
 
-struct APISearchResponse<T: Codable>: Codable {
+struct APISearchResponse<T: Decodable>: Decodable {
     let items: [T]
 }

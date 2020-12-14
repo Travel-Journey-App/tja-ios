@@ -12,17 +12,17 @@ struct DayCell: View {
     
     var dayNumber: Int
     @State var disablePipeline: Bool
-    @State var events: [Event]
-    @State var swipeableItems: [SwipeableItem<Event>]
+    @State var events: [Activity]
+    @State var swipeableItems: [SwipeableItem<Activity>]
     var active: Bool
 //    var onRemove: ((Int) -> ())?
     
-    init(_ events: [Event], dayNumber: Int = 1, active: Bool = true) {
+    init(_ events: [Activity], dayNumber: Int = 1, active: Bool = true) {
         self.dayNumber = dayNumber
         self._disablePipeline = .init(initialValue: events.allSatisfy({ !$0.scheduled }))
         self._events = .init(initialValue: events)
         self._swipeableItems = .init(initialValue: events.compactMap {
-            SwipeableItem<Event>(item: $0, offset: 0, isSwiped: false)
+            SwipeableItem<Activity>(item: $0, offset: 0, isSwiped: false)
         })
         self.active = active
     }
@@ -55,7 +55,7 @@ struct DayCell: View {
                             style: .rounded(7),
                             insets: .leading(40)
                         ) { event in
-                            PipelineItem(event: event)
+                            PipelineItem(activity: event)
                         }
                         .frame(height: 40)
                     }
@@ -72,9 +72,9 @@ struct DayCell: View {
         CGFloat(swipeableItems.count > 1 ? 52 * swipeableItems.count - 12 : 0)
     }
     
-    private func loadSwipeable(with events: [Event]) {
+    private func loadSwipeable(with events: [Activity]) {
         self.swipeableItems = events.compactMap {
-            SwipeableItem<Event>(item: $0, offset: 0, isSwiped: false)
+            SwipeableItem<Activity>(item: $0, offset: 0, isSwiped: false)
         }
     }
     
@@ -95,7 +95,6 @@ struct DayCell: View {
 
 struct DayCell_Previews: PreviewProvider {
     static var previews: some View {
-        let events = Mockup.Events.generateEvents(dayNumber: 2)
-        DayCell(events, dayNumber: 1)
+        DayCell([], dayNumber: 1)
     }
 }

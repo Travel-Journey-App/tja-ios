@@ -16,21 +16,23 @@ class EventService: NSObject, ObservableObject {
         self.tripDays = Mockup.Events.generateDays(numberOfDays: count, start: date)
     }
     
-    func filterBy(day number: Int?) -> [Event] {
-        if let n = number {
-            print("DEBUG: -- Applying filter for day = \(n)")
-            return tripDays.first(where: {$0.number == n})?.events ?? []
-        } else {
-            print("DEBUG: -- Reseting filter to all days")
-            return events
-        }
+    func filterBy(day number: Int?) -> [Activity] {
+        return []
+//        if let n = number {
+//            print("DEBUG: -- Applying filter for day = \(n)")
+//            return tripDays.first(where: {$0.number == n})?.activities ?? []
+//        } else {
+//            print("DEBUG: -- Reseting filter to all days")
+//            return events
+//        }
     }
-    
+
     var daysCount: Int {
         tripDays.count
     }
-    
-    var events: [Event] {
-        tripDays.flatMap(\.events)
+
+    var events: [Activity] {
+//        tripDays.flatMap(\.activities)
+        []
     }
 }

@@ -13,7 +13,7 @@ struct MapContainer: View {
     @EnvironmentObject var locationService: LocationService
     @EnvironmentObject var eventService: EventService
     
-    @State var events: [Event] = []
+    @State var events: [Activity] = []
     
     var location: Location? = nil
     

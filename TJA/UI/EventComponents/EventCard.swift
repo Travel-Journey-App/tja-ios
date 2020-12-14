@@ -10,7 +10,7 @@ import SwiftUI
 
 struct EventCard: View {
     
-    var event: Event
+    var activity: Activity
     var dayNumber: Int
     @Binding var notes: String
     
@@ -25,13 +25,13 @@ struct EventCard: View {
                 .padding(5)
             HStack(spacing: 20){
                 // Icon
-                event.eventType.eventIcon
+                activity.activityType.eventIcon
                 // Title + Time
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(event.name)
+                    Text(activity.name)
                         .lineLimit(1)
                         .font(.system(size: 15, weight: .bold))
-                    Text(event.timeString)
+                    Text(activity.timeString)
                         .lineLimit(1)
                         .font(.system(size: 13))
                 }
@@ -47,7 +47,7 @@ struct EventCard: View {
                     }).accentColor(Color(UIColor.systemGray))
                 }
             }
-            Text("Modern cafe with brilliant burgers and music\nDon't forget to visit our brand shop!")
+            Text(activity.description ?? "")
                 .font(.system(size: 12))
                 .foregroundColor(Color(UIColor.brown))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -69,7 +69,7 @@ struct EventCard: View {
 
 struct EventCard_Previews: PreviewProvider {
     static var previews: some View {
-        let events = Mockup.Events.generateEvents()
-        EventCard(event: events[1], dayNumber: 1, notes: .constant(""))
+        EventCard(activity:
+                    Activity(id: 0, name: "Name", description: nil, startTime: nil, endTime: nil, note: "", location: nil, activityType: .event(.bar)), dayNumber: 1, notes: .constant(""))
     }
 }

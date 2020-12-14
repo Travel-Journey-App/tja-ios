@@ -26,9 +26,9 @@ enum TripEndpoint {
 }
 
 enum ActivityEndpoint {
-    case newActivity
-    case updateActivity
-    case deleteActivity(id: Int)
+    case newActivity(tripId: Int, dayId: Int)
+    case updateActivity(tripId: Int, dayId: Int)
+    case deleteActivity(tripId: Int, dayId: Int)
 }
 
 enum SearchEndpoint {
@@ -150,8 +150,12 @@ extension ActivityEndpoint: RequestBuilder {
     
     var path: String {
         switch self {
-        case .newActivity, .updateActivity: return "/api/activity"
-        case let .deleteActivity(id): return "/api/activity/\(id)"
+        case let .newActivity(tripId, dayId):
+            return "/api/activities/\(tripId)/\(dayId)"
+        case let .updateActivity(tripId, dayId):
+            return "/api/activities/\(tripId)/\(dayId)"
+        case let .deleteActivity(tripId, dayId):
+            return "/api/activities/\(tripId)/\(dayId)"
         }
     }
     
@@ -164,10 +168,7 @@ extension ActivityEndpoint: RequestBuilder {
     }
     
     var headers: [String : String]? {
-        switch self {
-        case .newActivity, .updateActivity: return appJsonHeaders
-        default: return nil
-        }
+        appJsonHeaders
     }
     
     var authorizeRequest: Bool {

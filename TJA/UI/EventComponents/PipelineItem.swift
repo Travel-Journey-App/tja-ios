@@ -10,12 +10,12 @@ import SwiftUI
 
 struct PipelineItem: View {
     
-    var event: Event
+    var activity: Activity
     
     var body: some View {
-        if event.scheduled {
+        if activity.scheduled {
             HStack(spacing: 5) {
-                CircleIcon(icon: event.eventType.eventIcon)
+                CircleIcon(icon: activity.activityType.eventIcon)
                 detailStack
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .frame(height: 40)
@@ -28,7 +28,7 @@ struct PipelineItem: View {
             }
         } else {
             HStack(spacing: 5) {
-                event.eventType.eventIcon
+                activity.activityType.eventIcon
                     .padding(.horizontal, 5)
                 detailStack
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -44,11 +44,11 @@ struct PipelineItem: View {
     
     var detailStack: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(event.name)
+            Text(activity.name)
                 .lineLimit(1)
                 .font(.system(size: 15, weight: .bold))
                 .padding(.horizontal, 9)
-            Text(event.timeString)
+            Text(activity.timeString)
                 .lineLimit(1)
                 .font(.system(size: 13))
                 .padding(.horizontal, 9)
@@ -58,11 +58,8 @@ struct PipelineItem: View {
 
 struct PipelineItem_Previews: PreviewProvider {
     static var previews: some View {
-        let events = Mockup.Events.generateEvents()
         VStack(alignment: .center, spacing: 12) {
-            PipelineItem(event: events[0])
-            PipelineItem(event: events[1])
-            PipelineItem(event: events[2])
+            PipelineItem(activity: Activity(id: 0, name: "Name", description: nil, startTime: nil, endTime: nil, note: "", location: nil, activityType: .event(.bar)))
         }.background(Color.blue.opacity(0.5))
     }
 }

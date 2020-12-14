@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 
-extension EventType.Activity {
+extension Activity.Event {
     
     var icon: EventIcon {
         switch self {
@@ -24,7 +24,7 @@ extension EventType.Activity {
     }
 }
 
-extension EventType.Transfer {
+extension Activity.Transfer {
     
     var icon: EventIcon {
         switch self {
@@ -37,12 +37,12 @@ extension EventType.Transfer {
     }
 }
 
-extension EventType {
+extension Activity.ActivityType {
     
     var categoryIcon: EventIcon {
         switch self {
-        case .accomodation: return EventIcon(name: "bed.double.fill")
-        case .activity(let activity): return activity.icon
+        case .accommodation: return EventIcon(name: "bed.double.fill")
+        case .event(let event): return event.icon
         case .transfer(let transfer, _): return transfer.icon
         }
     }

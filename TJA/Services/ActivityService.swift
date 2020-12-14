@@ -11,16 +11,33 @@ import Combine
 
 protocol ActivityService {
     
-    typealias ActivityResponse = AnyPublisher<APIResponse<Event>, APIError>
+    typealias ItemResponse = AnyPublisher<APIResponse<ActivityResponse>, APIError>
     typealias MessageResponse = AnyPublisher<APIMessageResponse, APIError>
     
     var apiSession: APIService { get }
     
-    func add(activity: Event) -> ActivityResponse
-    func update(activity: Event) -> ActivityResponse
-    func delete(by id: Int) -> MessageResponse
+    func add(activity: Activity, to trip: Int, on day: Int) -> ItemResponse
+    func update(activity: Activity, in trip: Int, on day: Int) -> ItemResponse
+    func delete(by id: Int, from trip: Int, on day: Int) -> MessageResponse
 }
 
 extension ActivityService {
     
+    func add(activity: Activity, to trip: Int, on day: Int) -> ItemResponse {
+        return apiSession
+            .request(with: ActivityEndpoint.newActivity(tripId: trip, dayId: day))
+            .eraseToAnyPublisher()
+    }
+    
+    func update(activity: Activity, in trip: Int, on day: Int) -> ItemResponse {
+        return apiSession
+            .request(with: ActivityEndpoint.updateActivity(tripId: trip, dayId: day))
+            .eraseToAnyPublisher()
+    }
+    
+    func delete(by id: Int, from trip: Int, on day: Int) -> MessageResponse {
+        return apiSession
+            .request(with: ActivityEndpoint.deleteActivity(tripId: trip, dayId: day))
+            .eraseToAnyPublisher()
+    }
 }

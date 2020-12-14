@@ -31,7 +31,7 @@ enum WishItem: String, Codable, Identifiable {
         }
     }
     
-    var activity: EventType.Activity {
+    var activity: Activity.Event {
         switch self {
         case .breakfast, .lunch, .dinner: return .food
         case .bar: return .bar

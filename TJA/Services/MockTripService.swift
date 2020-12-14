@@ -29,7 +29,8 @@ class MockTripService: NSObject, ObservableObject {
             name: name,
             startDate: startDate,
             endDate: endDate,
-            location: Location(placeName: destination, lat: 40.71, lon: -74)
+            location: Location(placeName: destination, lat: 40.71, lon: -74),
+            days: []
         )
         self.trips.append(trip)
     }

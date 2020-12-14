@@ -56,7 +56,7 @@ extension RequestBuilder {
 }
 
 enum APIError: Error {
-    case decodingError
+    case decodingError(String)
     case httpError(HTTPCode)
     case api(String)
     case unknown
@@ -65,7 +65,7 @@ enum APIError: Error {
 extension APIError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .decodingError: return "Error decoding response"
+        case let .decodingError(subject): return "Error decoding response: \(subject)"
         case let .httpError(code): return "Unexpected HTTP code: \(code)"
         case let .api(message): return "Sever returned error: \(message)"
         case .unknown: return "Unknown API error"

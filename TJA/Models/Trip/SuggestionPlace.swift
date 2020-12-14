@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct SuggestionPlace: Hashable, Codable, Identifiable {
+struct SuggestionPlace: Hashable, Codable, Identifiable, Comparable {
     
     enum Price: String, Codable {
         case cheap, medium, expensive
     }
     
-    struct WorkingHours: Codable, Equatable, Hashable {
+    struct WorkingHours: Codable, Hashable {
         let open: TimeInterval
         let close: TimeInterval
     }
@@ -50,5 +50,9 @@ struct SuggestionPlace: Hashable, Codable, Identifiable {
         case .medium: return "$$"
         case .expensive: return "$$$"
         }
+    }
+    
+    static func < (lhs: SuggestionPlace, rhs: SuggestionPlace) -> Bool {
+        return lhs.rating < rhs.rating
     }
 }

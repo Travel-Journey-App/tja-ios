@@ -76,7 +76,12 @@ struct MyTrips: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        NavigationLink(destination: CreateTrip()) {
+                        NavigationLink(
+                            destination: CreateTrip()
+                                .environmentObject(
+                                    DestinationSearchViewModel(apiService: APISession.shared)
+                                )
+                        ) {
                             Image(systemName: "plus")
                                 .frame(width: 24, height: 24, alignment: .center)
                         }
