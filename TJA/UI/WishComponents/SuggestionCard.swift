@@ -39,7 +39,7 @@ struct SuggestionCard: View {
                     Text(suggestion.extraName)
                         .lineLimit(1)
                         .font(.system(size: 14))
-                    Text(suggestion.workingHours)
+                    Text(suggestion.workingHoursString)
                         .lineLimit(1)
                         .font(.system(size: 14))
                 }
@@ -77,7 +77,7 @@ struct SuggestionCard: View {
 struct SuggestionCard_Previews: PreviewProvider {
     static var previews: some View {
         SuggestionCard(suggestion:
-                        .init(id: "0", category: .bar, description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home!", workingHours: "Open: Sat 12:00 - 13:00", price: .cheap, location: .init(lat: 74, lon: 75), name: "Some name", photo: URL(string: "https://images.unsplash.com/photo-1605546741978-365c16813d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1575&q=80"), rating: 4.7, extraName: "Extra name"),
+                        .init(id: "0", category: .bar, description: "Greek pastries and desserts, freshly made! Also serving iced coffee variations like freddo espresso. A cosy and friendly environment that makes you feel home!", workingHours: .init(open: 10800, close: 72000), price: .cheap, location: .init(lat: 74, lon: 75), name: "Some name", photo: URL(string: "https://images.unsplash.com/photo-1605546741978-365c16813d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1575&q=80"), rating: 4.7, extraName: "Extra name"),
                        wishTitle: WishItem.breakfast.rawValue
         )
     }

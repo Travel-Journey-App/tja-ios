@@ -59,6 +59,7 @@
 		9E641829258758C9009709D4 /* AccommodationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E641828258758C9009709D4 /* AccommodationSearchViewModel.swift */; };
 		9E64182C258758E6009709D4 /* TransferPointSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E64182B258758E6009709D4 /* TransferPointSearchViewModel.swift */; };
 		9E64182F258758F3009709D4 /* ActivitySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E64182E258758F3009709D4 /* ActivitySearchViewModel.swift */; };
+		9E64183225876115009709D4 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E64183125876115009709D4 /* ActivityService.swift */; };
 		9E6889252575277C0065D165 /* SuggestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6889242575277C0065D165 /* SuggestionCard.swift */; };
 		9E688928257536FA0065D165 /* PopUpContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E688927257536FA0065D165 /* PopUpContainer.swift */; };
 		9E68892C257576FB0065D165 /* MagicMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E68892B257576FA0065D165 /* MagicMode.swift */; };
@@ -171,6 +172,7 @@
 		9E641828258758C9009709D4 /* AccommodationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodationSearchViewModel.swift; sourceTree = "<group>"; };
 		9E64182B258758E6009709D4 /* TransferPointSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferPointSearchViewModel.swift; sourceTree = "<group>"; };
 		9E64182E258758F3009709D4 /* ActivitySearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySearchViewModel.swift; sourceTree = "<group>"; };
+		9E64183125876115009709D4 /* ActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
 		9E6889242575277C0065D165 /* SuggestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCard.swift; sourceTree = "<group>"; };
 		9E688927257536FA0065D165 /* PopUpContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpContainer.swift; sourceTree = "<group>"; };
 		9E68892B257576FA0065D165 /* MagicMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicMode.swift; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 				9E58C72F2584050E002688EE /* AuthService.swift */,
 				9E6A548C2584576A0041A340 /* TripService.swift */,
 				9E64181F258746D7009709D4 /* SearchService.swift */,
+				9E64183125876115009709D4 /* ActivityService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 				9E33430A2573EDFF00AE5568 /* WishList.swift in Sources */,
 				9EB47CF32566E71C0065C641 /* LocationService.swift in Sources */,
 				9E58C74025842E9C002688EE /* Publisher+sink.swift in Sources */,
+				9E64183225876115009709D4 /* ActivityService.swift in Sources */,
 				9E47E0902579A0340022AC08 /* ItemDropDelegate.swift in Sources */,
 				9EE66942256418C50018B82A /* DatePickerTextField.swift in Sources */,
 				9EF369602578320100345B20 /* PipelineItem.swift in Sources */,

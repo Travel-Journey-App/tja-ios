@@ -42,3 +42,24 @@ extension Date {
         return startOfComponent
     }
 }
+
+extension Date {
+    func localizedTimeString() -> String {
+        return DateFormatter.localizedString(from: self, dateStyle: .none, timeStyle: .short)
+    }
+}
+
+extension TimeInterval {
+    
+    static var minute: TimeInterval {
+        60
+    }
+    
+    static var hour: TimeInterval {
+        minute * 60
+    }
+    
+    static var day: TimeInterval {
+        hour * 24
+    }
+}

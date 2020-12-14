@@ -14,10 +14,15 @@ struct SuggestionPlace: Hashable, Codable, Identifiable {
         case cheap, medium, expensive
     }
     
+    struct WorkingHours: Codable, Equatable, Hashable {
+        let open: TimeInterval
+        let close: TimeInterval
+    }
+    
     let id: String
     let category: WishItem
     let description: String
-    let workingHours: String
+    let workingHours: WorkingHours?
     let price: Price?
     let location: PlaceLocation
     let name: String
@@ -27,6 +32,15 @@ struct SuggestionPlace: Hashable, Codable, Identifiable {
     
     var ratingString: String {
         return "\(rating.round(to: 1))"
+    }
+    
+    var workingHoursString: String {
+        guard let hours = workingHours else { return "Open" }
+        let start = Date().startOf(.day).addingTimeInterval(hours.open)
+        let end: Date = hours.close <= hours.open
+            ? Date().startOf(.day).addingTimeInterval(hours.close + .day)
+            : Date().startOf(.day).addingTimeInterval(hours.close)
+        return "Open: \(start.localizedTimeString()) - \(end.localizedTimeString())"
     }
     
     var cost: String {

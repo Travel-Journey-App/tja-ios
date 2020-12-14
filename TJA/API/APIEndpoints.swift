@@ -13,6 +13,7 @@ enum AuthEndpoint {
     case signup(email: String, password: String)
     case google(token: String)
     case refresh
+    //update user data
 }
 
 enum TripEndpoint {
@@ -24,12 +25,10 @@ enum TripEndpoint {
     case magic
 }
 
-enum EventEndpoint {
-    
-}
-
-enum WishEndpoint {
-    
+enum ActivityEndpoint {
+    case newActivity
+    case updateActivity
+    case deleteActivity(id: Int)
 }
 
 enum SearchEndpoint {
@@ -142,6 +141,50 @@ extension TripEndpoint: RequestBuilder {
             return nil
         }
     }
+}
+
+extension ActivityEndpoint: RequestBuilder {
+    var base: String {
+        APIConstants.baseSearchUrl
+    }
+    
+    var path: String {
+        switch self {
+        case .newActivity, .updateActivity: return "/api/activity"
+        case let .deleteActivity(id): return "/api/activity/\(id)"
+        }
+    }
+    
+    var method: String {
+        switch self {
+        case .newActivity: return "POST"
+        case .updateActivity: return "PUT"
+        case .deleteActivity: return "DELETE"
+        }
+    }
+    
+    var headers: [String : String]? {
+        switch self {
+        case .newActivity, .updateActivity: return appJsonHeaders
+        default: return nil
+        }
+    }
+    
+    var authorizeRequest: Bool {
+        true
+    }
+    
+    func body() -> Data? {
+        switch self {
+//        case let .newActivity(activity), let .updateActivity(activity):
+//            return try? JSONEncoder().encode(activity)
+        default:
+            return nil
+        }
+    }
+    
+    
+    
 }
 
 extension SearchEndpoint: RequestBuilder {
