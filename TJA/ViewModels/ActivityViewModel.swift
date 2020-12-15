@@ -15,10 +15,23 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
     var cancellationTokens = Set<AnyCancellable>()
     
     @Published var trip: Trip
+    @Published var active: Int = -1
     
     init(trip: Trip, apiService: APIService) {
         self._trip = .init(initialValue: trip)
         self.apiSession = apiService
+    }
+    
+    var daysCount: Int {
+        trip.days.count
+    }
+    
+    func filter(by day: Int?) -> [Activity] {
+        if let day = day, let index = getIndex(for: day)  {
+            return trip.days[index].activities
+        } else {
+            return trip.days.flatMap(\.activities)
+        }
     }
     
     func create(in day: Int) {

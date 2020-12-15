@@ -11,7 +11,7 @@ import SwiftUI
 struct MapContainer: View {
     
     @EnvironmentObject var locationService: LocationService
-    @EnvironmentObject var eventService: EventService
+    @EnvironmentObject var activityViewModel: ActivityViewModel
     
     @State var events: [Activity] = []
     
@@ -25,7 +25,7 @@ struct MapContainer: View {
             
             VStack(alignment: .leading) {
                 // Filters
-                MapFilters(daysCount: eventService.daysCount, onFilterChanged: applyFilters)
+                MapFilters(daysCount: activityViewModel.daysCount, onFilterChanged: applyFilters)
                 Spacer()
                 
                 // Current location button
@@ -52,11 +52,11 @@ struct MapContainer: View {
     }
     
     private func applyFilters(_ day: Int?) {
-        self.events = self.eventService.filterBy(day: day)
+        self.events = self.activityViewModel.filter(by: day)
     }
     
     private func loadEvents() {
-        self.events = eventService.events
+        self.events = self.activityViewModel.filter(by: nil)
     }
 }
 

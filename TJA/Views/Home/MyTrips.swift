@@ -44,9 +44,13 @@ struct MyTrips: View {
                                 ForEach(tripItems) { trip in
                                     NavigationLink(
                                         destination: TripContainer(
-                                            tripname: trip.item.name,
-                                            location: trip.item.location
-                                        ).environmentObject(EventService(start: trip.item.startDate))
+                                            tripname: trip.item.name
+                                        ).environmentObject(
+                                            ActivityViewModel(
+                                                trip: trip.item,
+                                                apiService: APISession.shared
+                                            )
+                                        )
                                     ) {
                                         Swipeable(
                                             self.$viewModel.trips[getIndex(id: trip.id)],

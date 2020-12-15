@@ -18,7 +18,7 @@ struct DaysContainer: View {
         }
     }
     
-    @EnvironmentObject var eventService: EventService
+    @EnvironmentObject var viewModel: ActivityViewModel
     @State var isBlurShown: Bool = false
     @State var activeSheet: ActiveSheet?
     @State var isInDragNDropMode: Bool = true
@@ -29,18 +29,18 @@ struct DaysContainer: View {
             // Content
             ScrollView {
                 VStack(spacing: 5) {
-                    ForEach(0..<eventService.daysCount) { day in
+                    ForEach(0..<viewModel.daysCount, id: \.self) { i in
                         DayCell(
-                            eventService.filterBy(day: day),
-                            dayNumber: day,
+                            viewModel.trip.days[i].activities,
+                            dayNumber: viewModel.trip.days[i].orderInTrip,
                             active: isInDragNDropMode ?
-                                eventService.active == day ? true : false
+                                viewModel.active == i ? true : false
                                 : true
                         ).onDrop(
                             of: ["public.item-source"],
                             delegate: ItemDropDelegate(
-                                day: day,
-                                active: $eventService.active,
+                                day: i,
+                                active: $viewModel.active,
                                 activeSheet: $activeSheet)
                         )
                     }

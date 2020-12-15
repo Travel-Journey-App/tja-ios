@@ -10,22 +10,14 @@ import SwiftUI
 
 struct TripContainer: View {
     
-    @EnvironmentObject var eventService: EventService
+    @EnvironmentObject var viewModel: ActivityViewModel
     var tripname = ""
-    var location: Location?
     
     var body: some View {
         SegmentedContainer(
             list: { DaysContainer() },
-            map: { MapContainer(location: location) }
+            map: { MapContainer(location: viewModel.trip.location) }
         )
         .navigationBarTitle(Text(tripname.uppercased()), displayMode: .inline)
-    }
-}
-
-struct TripContainer_Previews: PreviewProvider {
-    static var previews: some View {
-        TripContainer(location: Mockup.Locations.mockTripLocation)
-            .environmentObject(EventService())
     }
 }

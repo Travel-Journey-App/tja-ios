@@ -29,7 +29,7 @@ struct DayCell: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Day \(dayNumber + 1)")
+            Text("Day \(dayNumber)")
                 .font(.system(size: 20))
                 .fontWeight(.medium)
                 .foregroundColor(.mainRed)

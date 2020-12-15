@@ -136,7 +136,7 @@ extension TripEndpoint: RequestBuilder {
     func body() -> Data? {
         switch self {
         case let .newTrip(trip), let .updateTrip(trip):
-            return try? JSONEncoder().encode(trip)
+            return try? JSONEncoder(.millisecondsSince1970).encode(trip)
         default:
             return nil
         }
@@ -180,22 +180,22 @@ extension ActivityEndpoint: RequestBuilder {
         case let .newActivity(request, _, _):
             if request.activityType == "transfer",
                let req = request as? ActivityRequest.New.Transfer {
-                return try? JSONEncoder().encode(req)
+                return try? JSONEncoder(.millisecondsSince1970).encode(req)
             } else if request.activityType == "accommodation",
                       let req = request as? ActivityRequest.New.Accommodation {
-                return try? JSONEncoder().encode(req)
+                return try? JSONEncoder(.millisecondsSince1970).encode(req)
             } else if let req = request as? ActivityRequest.New.Event {
-                return try? JSONEncoder().encode(req)
+                return try? JSONEncoder(.millisecondsSince1970).encode(req)
             }
         case let .updateActivity(request, _, _), let .deleteActivity(request, _, _):
             if request.activityType == "transfer",
                let req = request as? ActivityRequest.Existing.Transfer {
-                return try? JSONEncoder().encode(req)
+                return try? JSONEncoder(.millisecondsSince1970).encode(req)
             } else if request.activityType == "accommodation",
                       let req = request as? ActivityRequest.Existing.Accommodation {
-                return try? JSONEncoder().encode(req)
+                return try? JSONEncoder(.millisecondsSince1970).encode(req)
             } else if let req = request as? ActivityRequest.Existing.Event {
-                return try? JSONEncoder().encode(req)
+                return try? JSONEncoder(.millisecondsSince1970).encode(req)
             }
         }
         return nil

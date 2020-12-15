@@ -16,7 +16,7 @@ struct ItemDropDelegate: DropDelegate {
     
     func performDrop(info: DropInfo) -> Bool {
         print("DEBUG: -- DropDelegate -- Dropped at day: \(day) & location: \(info.location)")
-        activeSheet = .manual
+        activeSheet = .wish
         return true
     }
     
