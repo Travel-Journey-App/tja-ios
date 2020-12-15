@@ -55,8 +55,19 @@ struct NewTransfer: View {
                     TextField("Arrival point", text: $searchViewModel.arrSearchText)
                         .textFieldStyle(BorderedTextField())
                         .overlay(dropDownListArr, alignment: .top)
-                    TextField("Departure time", text: $time)
-                        .textFieldStyle(BorderedTextField())
+//                    TextField("Departure time", text: $time)
+//                        .textFieldStyle(BorderedTextField())
+                    DateField(
+                        "Time",
+                        date: $date,
+                        formatter: timeFormatter,
+                        mode: UIDatePicker.Mode.time)
+                        .padding(.horizontal, 12)
+                        .frame(height: 50)
+                        .background(
+                            RoundedRectangle(cornerRadius: 2)
+                                .strokeBorder(Color.mainRed, lineWidth: 2)
+                        )
                     
                     if searchViewModel.transfer != .bus && searchViewModel.transfer != .car {
                         TextField(numberPlaceholder, text: $flight)
@@ -74,6 +85,9 @@ struct NewTransfer: View {
             
             Button(action: {
                 print("DEBUG: -- Save button pressed")
+                if let d = departurePlace, let t  = date {
+                    self.addItem(d, time: t)
+                }
             }){
                 Text("Save".uppercased())
             }
@@ -156,6 +170,28 @@ struct NewTransfer: View {
                 .shadow(color: .black, radius: 4.0))
         .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
         .offset(y: 40)
+    }
+    
+    func addItem(_ location: Location, time: Date) {
+        print("Time: \(time)")
+        if let day = self.viewModel.activeDayNumber,
+           let index = self.viewModel.activeDayIndex {
+            let req = ActivityRequest
+                .New.Transfer(
+                    name: location.placeName,
+                    description: "",
+                    startTime: self.viewModel.startDate.addingTimeInterval(.day * Double((day - 1)) + time.timeIntervalSince(Date().startOf(.day))),
+                    endTime: self.viewModel.startDate.addingTimeInterval(.day * Double((day - 1)) + time.timeIntervalSince(Date().startOf(.day))),
+                    note: "",
+                    lat: location.lat,
+                    lon: location.lon,
+                    activityType: "transfer",
+                    direction: "departure",
+                    transferType: searchViewModel.transfer.rawValue)
+            self.viewModel.create(req, in: index) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
 }
 

@@ -25,6 +25,7 @@ struct DaysContainer: View {
         }
     }
     
+    @EnvironmentObject var locationService: LocationService
     @EnvironmentObject var viewModel: ActivityViewModel
     @EnvironmentObject var popupViewModel: PopupViewModel
     @State var isBlurShown: Bool = false
@@ -111,6 +112,7 @@ struct DaysContainer: View {
             case .wish: WishList()
                 .accentColor(.mainRed)
                 .environmentObject(viewModel)
+                .environmentObject(locationService)
             case .manual: EventCreation()
                 .accentColor(.mainRed)
                 .environmentObject(viewModel)

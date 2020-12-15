@@ -44,8 +44,19 @@ struct NewAccommodation: View {
                         .textFieldStyle(BorderedTextField())
                     TextField("Address", text: $address)
                         .textFieldStyle(BorderedTextField())
-                    TextField("Time", text: $time)
-                        .textFieldStyle(BorderedTextField())
+//                    TextField("Time", text: $time)
+//                        .textFieldStyle(BorderedTextField())
+                    DateField(
+                        "Time",
+                        date: $checkin,
+                        formatter: timeFormatter,
+                        mode: UIDatePicker.Mode.time)
+                        .padding(.horizontal, 12)
+                        .frame(height: 50)
+                        .background(
+                            RoundedRectangle(cornerRadius: 2)
+                                .strokeBorder(Color.mainRed, lineWidth: 2)
+                        )
                     TextField("Check-in", text: $direction)
                         .textFieldStyle(BorderedTextField())
                     
@@ -58,6 +69,9 @@ struct NewAccommodation: View {
             
             Button(action: {
                 print("DEBUG: -- Save button pressed")
+                if let loc = self.location, let d = self.checkin {
+                    self.addItem(loc, time: d)
+                }
             }){
                 Text("Save".uppercased())
             }
@@ -108,6 +122,27 @@ struct NewAccommodation: View {
                 .shadow(color: .black, radius: 4.0))
         .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
         .offset(y: 30)
+    }
+    
+    func addItem(_ location: AccommodationLocation, time: Date) {
+        print("Time: \(time)")
+        if let day = self.viewModel.activeDayNumber,
+           let index = self.viewModel.activeDayIndex {
+            let req = ActivityRequest
+                .New.Accommodation(
+                    name: location.name,
+                    description: location.description,
+                    startTime: self.viewModel.startDate.addingTimeInterval(.day * Double((day - 1)) + time.timeIntervalSince(Date().startOf(.day))),
+                    endTime: self.viewModel.startDate.addingTimeInterval(.day * Double((day - 1)) + time.timeIntervalSince(Date().startOf(.day))),
+                    note: "",
+                    lat: location.lat,
+                    lon: location.lon,
+                    activityType: "accommodation",
+                    direction: "check-in")
+            self.viewModel.create(req, in: index) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
 }
 
