@@ -106,6 +106,16 @@ struct Activity: Codable, Hashable, Identifiable, Comparable {
         enum Direction: String, Codable {
             case arrival, departure
         }
+        
+        var queryString: String {
+            switch self {
+            case .plane: return "airport"
+            case .train: return "railway"
+            case .ship: return "port"
+            case .bus: return "bus"
+            case .car: return "car"
+            }
+        }
     }
 
     let id: Int

@@ -37,3 +37,24 @@ struct CityResponse: Codable {
         Location(placeName: cityName.capitalizedFirstLetter(), lat: lat, lon: lon)
     }
 }
+
+struct TransferLocation: Codable {
+    let name: String
+    let lat: Double
+    let lon: Double
+    
+    var location: Location {
+        Location(placeName: name, lat: lat, lon: lon)
+    }
+}
+
+struct AccommodationLocation: Codable {
+    let name: String
+    let lat: Double
+    let lon: Double
+    let description: String
+    
+    var location: Location {
+        Location(placeName: name, lat: lat, lon: lon)
+    }
+}

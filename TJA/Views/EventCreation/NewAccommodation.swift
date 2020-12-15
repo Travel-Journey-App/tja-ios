@@ -16,7 +16,9 @@ struct NewAccommodation: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: ActivityViewModel
     
-    @State var query: String = ""
+    @State var checkin: Date? = nil
+    @State var location: AccommodationLocation? = nil
+    
     @State var name: String = ""
     @State var address: String = ""
     @State var time: String = ""
@@ -27,13 +29,16 @@ struct NewAccommodation: View {
             
             ScrollView(.vertical) {
                 VStack(alignment: .center, spacing: 10) {
-                    TextField("Search...", text: $query)
+                    TextField("Search...", text: $searchViewModel.searchText, onCommit:  {
+                        self.searchViewModel.clearStored()
+                    })
                         .textFieldStyle(
                             BorderedTextField(color: .lightRedBorder, borderSize: 1, cornerRadius: 10)
                         )
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                         .frame(height: 30)
                         .padding(.bottom, 6)
+                        .overlay(dropDownList, alignment: .top)
 
                     TextField("Name", text: $name)
                         .textFieldStyle(BorderedTextField())
@@ -73,7 +78,36 @@ struct NewAccommodation: View {
     }
     
     var formFilled: Bool {
-        true
+        checkin != nil && location != nil
+    }
+    
+    var dropDownList: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(0..<searchViewModel.items.count, id: \.self) { i in
+                Text(searchViewModel.items[i].name)
+                    .font(.system(size: 16))
+                    .foregroundColor(Color(UIColor.label))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(height: 32)
+                    .onTapGesture {
+                        print("DEBUG -- \(i) tapped")
+                        let dest = searchViewModel.items[i]
+                        self.searchViewModel.searchText = dest.name
+                        self.name = dest.name
+                        self.location = dest
+                        self.hideKeyboard()
+                        self.searchViewModel.clearStored(cancellAll: true)
+                        self.address = "Tokyo"
+                        self.direction = "check-in"
+                    }
+            }.padding(.horizontal, 12)
+        }
+        .background(
+            Rectangle()
+                .fill(Color(UIColor.systemBackground))
+                .shadow(color: .black, radius: 4.0))
+        .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
+        .offset(y: 30)
     }
 }
 

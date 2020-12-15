@@ -16,13 +16,16 @@ struct NewTransfer: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: ActivityViewModel
     
+    @State var departurePlace: Location? = nil
+    @State var arrivalPlace: Location? = nil
+    @State var date: Date? = nil
+    
     @State var departure: String = ""
     @State var arrival: String = ""
     @State var time: String = ""
     @State var flight: String = ""
     @State var seat: String = ""
     
-    @State var transfer: Activity.Transfer = .plane
     
     let filters: [Activity.Transfer] = [.plane, .train, .ship, .bus, .car]
     
@@ -33,10 +36,10 @@ struct NewTransfer: View {
                     CircleIcon(
                         icon: filters[i].icon,
                         size: 35,
-                        backgroundColor: filters[i] == transfer
+                        backgroundColor: filters[i] == searchViewModel.transfer
                             ? Color.mainRed : Color(UIColor.systemBackground))
                         .onTapGesture {
-                            self.transfer = filters[i]
+                            self.searchViewModel.transfer = filters[i]
                         }
                 }
             }
@@ -46,14 +49,16 @@ struct NewTransfer: View {
             ScrollView(.vertical) {
                 VStack(alignment: .center, spacing: 10) {
                     
-                    TextField("Departure point", text: $departure)
+                    TextField("Departure point", text: $searchViewModel.depSearchText)
                         .textFieldStyle(BorderedTextField())
-                    TextField("Arrival point", text: $arrival)
+                        .overlay(dropDownListDep, alignment: .top)
+                    TextField("Arrival point", text: $searchViewModel.arrSearchText)
                         .textFieldStyle(BorderedTextField())
+                        .overlay(dropDownListArr, alignment: .top)
                     TextField("Departure time", text: $time)
                         .textFieldStyle(BorderedTextField())
                     
-                    if transfer != .bus && transfer != .car {
+                    if searchViewModel.transfer != .bus && searchViewModel.transfer != .car {
                         TextField(numberPlaceholder, text: $flight)
                             .textFieldStyle(BorderedTextField())
                         TextField("Seat", text: $seat)
@@ -89,7 +94,7 @@ struct NewTransfer: View {
     }
     
     var numberPlaceholder: String {
-        switch transfer {
+        switch searchViewModel.transfer {
         case .plane: return "Flight number"
         case .train: return "Train number"
         case .ship: return "Ship number"
@@ -98,7 +103,59 @@ struct NewTransfer: View {
     }
     
     var formFilled: Bool {
-        true
+        departurePlace != nil && arrivalPlace != nil && date != nil
+    }
+    
+    var dropDownListDep: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(0..<searchViewModel.depItems.count, id: \.self) { i in
+                Text(searchViewModel.depItems[i].placeName)
+                    .font(.system(size: 16))
+                    .foregroundColor(Color(UIColor.label))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(height: 32)
+                    .onTapGesture {
+                        print("DEBUG -- \(i) tapped")
+                        let dest = searchViewModel.depItems[i]
+                        self.searchViewModel.depSearchText = dest.placeName
+                        self.departurePlace = dest
+                        self.hideKeyboard()
+                        self.searchViewModel.clearStoredDept(cancellAll: true)
+                    }
+            }.padding(.horizontal, 12)
+        }
+        .background(
+            Rectangle()
+                .fill(Color(UIColor.systemBackground))
+                .shadow(color: .black, radius: 4.0))
+        .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
+        .offset(y: 40)
+    }
+    
+    var dropDownListArr: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(0..<searchViewModel.arrItems.count, id: \.self) { i in
+                Text(searchViewModel.arrItems[i].placeName)
+                    .font(.system(size: 16))
+                    .foregroundColor(Color(UIColor.label))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(height: 32)
+                    .onTapGesture {
+                        print("DEBUG -- \(i) tapped")
+                        let dest = searchViewModel.arrItems[i]
+                        self.searchViewModel.arrSearchText = dest.placeName
+                        self.arrivalPlace = dest
+                        self.hideKeyboard()
+                        self.searchViewModel.clearStoredArr(cancellAll: true)
+                    }
+            }.padding(.horizontal, 12)
+        }
+        .background(
+            Rectangle()
+                .fill(Color(UIColor.systemBackground))
+                .shadow(color: .black, radius: 4.0))
+        .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
+        .offset(y: 40)
     }
 }
 

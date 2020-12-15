@@ -218,11 +218,11 @@ extension SearchEndpoint: RequestBuilder {
         case let .suggestion(category, destination):
             return "/place?category=\(category)&city=\(destination.lowercased())"
         case let .eventPlace(query, category, destination):
-            return ""
+            return "/place?category=\(category)&city=\(destination)&name=\(query.encodeUrl())"
         case let .accommodation(query, destination):
-            return ""
+            return "/accommodation?city=\(destination)&name=\(query.encodeUrl())"
         case let .transferPoint(query, category, destination):
-            return ""
+            return "/destination?class=\(category)&city=\(destination)&name=\(query.encodeUrl())"
         }
     }
     

@@ -17,8 +17,8 @@ protocol SearchService {
     
     func search(destination query: String) -> SearchResponse<CityResponse>
     func search(wish category: WishItem, for destination: String) -> SearchResponse<SuggestionPlace>
-    func search(accommodation query: String, for destination: String)
-    func search(transferPoint query: String, in category: String, for destination: String)
+    func search(accommodation query: String, for destination: String) -> SearchResponse<AccommodationLocation>
+    func search(transferPoint query: String, in category: String, for destination: String) -> SearchResponse<TransferLocation>
     func search(eventPlace query: String, in category: String, for destination: String)
 }
 
@@ -41,15 +41,26 @@ extension SearchService {
             .eraseToAnyPublisher()
     }
     
-    func search(accommodation query: String, for destination: String) {
-        
+    func search(accommodation query: String, for destination: String) -> SearchResponse<AccommodationLocation> {
+        return apiSession
+            .request(with: SearchEndpoint.accommodation(query: query, destination: destination))
+            .eraseToAnyPublisher()
     }
     
-    func search(transferPoint query: String, in category: String, for destination: String) {
-        
+    func search(transferPoint query: String, in category: String, for destination: String) -> SearchResponse<TransferLocation> {
+        return apiSession
+            .request(with: SearchEndpoint.transferPoint(query: query, category: category, destination: destination))
+            .eraseToAnyPublisher()
     }
     
     func search(eventPlace query: String, in category: String, for destination: String) {
-        
+//        var decoder = JSONDecoder()
+//        decoder.keyDecodingStrategy = .convertFromSnakeCase
+//        return apiSession
+//            .request(
+//                with: SearchEndpoint.suggestion(category: category.rawValue, destination: destination),
+//                with: decoder
+//            )
+//            .eraseToAnyPublisher()
     }
 }
