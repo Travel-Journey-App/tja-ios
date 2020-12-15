@@ -125,7 +125,7 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
     
     private func replace(_ activity: Activity, by id: Int, in day: Int) {
         if let dayIndex = getIndex(for: day),
-           let activityIndex = getActivityIndex(for: id, with: day) {
+           let activityIndex = getActivityIndex(for: id, with: dayIndex) {
             self.trip.days[dayIndex].activities[activityIndex] = .init(item: activity, offset: 0, isSwiped: false)
             self.trip.days[dayIndex].activities.sort(by: { $0.item < $1.item })
         }
@@ -140,6 +140,10 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
     
     private func getIndex(for id: Int) -> Int? {
         return self.trip.days.firstIndex(where: { $0.id == id })
+    }
+    
+    private func getIndex(by number: Int) -> Int? {
+        return self.trip.days.firstIndex(where: { $0.orderInTrip == number })
     }
     
     private func getActivityIndex(for id: Int, with dayIndex: Int) -> Int? {

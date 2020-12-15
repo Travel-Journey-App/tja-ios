@@ -15,18 +15,21 @@ struct DayCell: View {
     @Binding var swipeableItems: [SwipeableItem<Activity>]
     var active: Bool
     var onRemove: ((Activity) -> ())?
+    var onTap: ((Activity, Int) -> ())?
     
     init(
         _ events: Binding<[SwipeableItem<Activity>]>,
         dayNumber: Int = 1,
         active: Bool = true,
-        onRemove: ((Activity) -> ())? = nil) {
+        onRemove: ((Activity) -> ())? = nil,
+        onTap: ((Activity, Int) -> ())? = nil) {
         
         self.dayNumber = dayNumber
         self._disablePipeline = .init(initialValue: events.wrappedValue.allSatisfy({ !$0.item.scheduled }))
         self._swipeableItems = events
         self.active = active
         self.onRemove = onRemove
+        self.onTap = onTap
     }
     
     var body: some View {
@@ -58,6 +61,7 @@ struct DayCell: View {
                             insets: .leading(40)
                         ) { event in
                             PipelineItem(activity: event)
+                                .onTapGesture { self.onTap?(event, dayNumber) }
                         }
                         .frame(height: 40)
                     }

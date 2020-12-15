@@ -13,16 +13,19 @@ struct PopUpContainer<Content: View>: View {
     @Binding var isBlurShown: Bool
     
     private let content: () -> Content
+    private let onDismiss: (() -> ())?
     
-    init(isShown: Binding<Bool>, @ViewBuilder content:@escaping () -> Content) {
+    init(isShown: Binding<Bool>, onDismiss: (() -> ())? = nil, @ViewBuilder content:@escaping () -> Content) {
         self._isBlurShown = isShown
         self.content = content
+        self.onDismiss = onDismiss
     }
     
     var body: some View {
         ZStack(alignment: .center) {
             BlurView().onTapGesture {
                 self.isBlurShown = false
+                self.onDismiss?()
             }
             self.content()
         }

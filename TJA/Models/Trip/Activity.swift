@@ -113,7 +113,7 @@ struct Activity: Codable, Hashable, Identifiable, Comparable {
     let description: String?
     let startTime: Date?
     let endTime: Date?
-    let note: String
+    var note: String
     let location: Location?
     let activityType: ActivityType
 

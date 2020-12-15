@@ -45,12 +45,14 @@ struct MyTrips: View {
                                     NavigationLink(
                                         destination: TripContainer(
                                             tripname: trip.item.name
-                                        ).environmentObject(
+                                        )
+                                        .environmentObject(
                                             ActivityViewModel(
                                                 trip: trip.item,
                                                 apiService: APISession.shared
                                             )
                                         )
+                                        .environmentObject(PopupViewModel())
                                     ) {
                                         Swipeable(
                                             self.$viewModel.trips[getIndex(id: trip.id)],

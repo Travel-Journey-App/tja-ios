@@ -12,10 +12,23 @@ struct EventCard: View {
     
     var activity: Activity
     var dayNumber: Int
-    @Binding var notes: String
+    var onDelete: ((Activity) -> ())?
+    var onCommit: ((String) -> ())?
     
+    @State var notes: String
     
-    var onDelete: (() -> ())?
+    init(
+        _ activity: Activity,
+        dayNumber: Int,
+        onDelete: ((Activity) -> ())? = nil,
+        onCommit: ((String) -> ())? = nil) {
+//        self._activity = .init(initialValue: activity)
+        self.activity = activity
+        self._notes = .init(initialValue: activity.note)
+        self.dayNumber = dayNumber
+        self.onDelete = onDelete
+        self.onCommit = onCommit
+    }
     
     var body: some View {
         VStack(alignment: .center, spacing: 5) {
@@ -41,7 +54,7 @@ struct EventCard: View {
                     Image(systemName: "clock")
                         .frame(width: 24, height: 24, alignment: .center)
                         .foregroundColor(Color(UIColor.systemGray))
-                    Button(action: { self.onDelete?() }, label: {
+                    Button(action: { self.onDelete?(self.activity) }, label: {
                         Image(systemName: "trash")
                             .frame(width: 24, height: 24, alignment: .center)
                     }).accentColor(Color(UIColor.systemGray))
@@ -51,7 +64,9 @@ struct EventCard: View {
                 .font(.system(size: 12))
                 .foregroundColor(Color(UIColor.brown))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-            TextField("Notes...", text: $notes)
+            TextField("Notes...", text: $notes, onCommit:  {
+                self.onCommit?(self.notes)
+            })
                 .textFieldStyle(BorderedTextField(color: .lightRedBorder, borderSize: 1))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .frame(height: 24)
@@ -63,13 +78,12 @@ struct EventCard: View {
         .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 7, style: .continuous)
-                .strokeBorder(Color(UIColor.opaqueSeparator), lineWidth: 1))
+                .strokeBorder(Color(UIColor.opaqueSeparator), lineWidth: 2))
     }
 }
 
 struct EventCard_Previews: PreviewProvider {
     static var previews: some View {
-        EventCard(activity:
-                    Activity(id: 0, name: "Name", description: nil, startTime: nil, endTime: nil, note: "", location: nil, activityType: .event(.bar)), dayNumber: 1, notes: .constant(""))
+        EventCard(Activity(id: 0, name: "Name", description: "Some description", startTime: nil, endTime: nil, note: "", location: nil, activityType: .event(.bar)), dayNumber: 1)
     }
 }

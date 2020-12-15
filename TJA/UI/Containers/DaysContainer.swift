@@ -26,6 +26,7 @@ struct DaysContainer: View {
     }
     
     @EnvironmentObject var viewModel: ActivityViewModel
+    @EnvironmentObject var popupViewModel: PopupViewModel
     @State var isBlurShown: Bool = false
     @State var activeSheet: ActiveSheet?
     @State var dragNdropTarget: DragNDropTarget? = nil
@@ -45,6 +46,12 @@ struct DaysContainer: View {
                                 : true,
                             onRemove: { (activity) in
                                 self.viewModel.delete(activity, in: viewModel.trip.days[i].id)
+                            },
+                            onTap: { (activity, day) in
+                                self.popupViewModel.activity = activity
+                                self.popupViewModel.dayIndex =
+                                    self.viewModel.trip.days[i].id
+                                self.popupViewModel.dayNumber = day
                             }
                         ).onDrop(
                             of: ["public.item-source"],

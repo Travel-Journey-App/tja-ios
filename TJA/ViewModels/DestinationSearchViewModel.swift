@@ -33,7 +33,7 @@ class DestinationSearchViewModel: NSObject, ObservableObject, SearchService {
     
     private func configureSearch() {
         $searchText
-            .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
+            .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .map{ (string) -> String? in
                 if string.count < 2 {

@@ -18,4 +18,6 @@ enum Constants {
     }
     
     static let defaultLocation = Location(placeName: "Tokyo", lat: 35.011665, lon: 135.768326)
+    static let mockActivity = Activity(id: -1, name: "Ooops...", description: "Something went wrong",
+                                       startTime: nil, endTime: nil, note: "", location: nil, activityType: .event(.fun))
 }

@@ -24,4 +24,8 @@ extension Color {
     public static var tripBackground: Color {
         Color("TripCellBackground")
     }
+    
+    public static var darkRed: Color {
+        Color("DarkRed")
+    }
 }
