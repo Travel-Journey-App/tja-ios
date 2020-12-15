@@ -41,8 +41,8 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
         let trip = TripRequest(
             name: name,
             destination: destination.placeName,
-            startDate: startDate,
-            endDate: endDate,
+            startDate: startDate.startOf(.day),
+            endDate: endDate.startOf(.day),
             lat: destination.lat,
             lon: destination.lon
         )

@@ -10,21 +10,25 @@ import SwiftUI
 
 struct WishItemsContainer: View {
     
-    let wish: WishItem
-    var items: [SuggestionPlace] = []
-    var location: Location?
+    
+    @EnvironmentObject var viewModel: WishViewModel
+    
+    var onAdd: ((SuggestionPlace) -> ())?
     
     var body: some View {
         SegmentedContainer(
-            list: { SuggestionsContainer(items: items, wish: wish) },
-            map: { MapContainer(location: location) }
+            list: { SuggestionsContainer(onAdd: onAdd).environmentObject(viewModel) },
+            map: { MapContainer(location: viewModel.location) }
         ).frame(maxHeight: .infinity, alignment: .top)
         .navigationBarTitle(Text("I wish...".uppercased()), displayMode: .inline)
+        .onAppear {
+            self.viewModel.fetchItems()
+        }
     }
 }
 
 struct WishItemsContainer_Previews: PreviewProvider {
     static var previews: some View {
-        WishItemsContainer(wish: .bar, items: [])
+        WishItemsContainer()
     }
 }

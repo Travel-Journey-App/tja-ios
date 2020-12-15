@@ -26,6 +26,18 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
         trip.days.count
     }
     
+    var activeDayNumber: Int? {
+        active > -1 ? trip.days[active].orderInTrip : nil
+    }
+    
+    var activeDayIndex: Int? {
+        active > -1 ? trip.days[active].id : nil
+    }
+    
+    var startDate: Date {
+        trip.startDate
+    }
+    
     func filter(by day: Int?) -> [Activity] {
         if let day = day, let index = getIndex(for: day)  {
             return trip.days[index].activities
@@ -34,9 +46,14 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
         }
     }
     
-    func create(in day: Int) {
-        let request = ActivityRequest.New.createRequest(for: .event(.bar), name: "test")
-        self.add(activity: request, to: trip.id, on: day).sinkToResult { result in
+    func sort() {
+        for i in 0..<trip.days.count {
+            self.trip.days[i].activities.sort()
+        }
+    }
+    
+    func create(_ activity: NewActivityRequest, in day: Int, onSuccess: (() -> ())? = nil) {
+        self.add(activity: activity, to: trip.id, on: day).sinkToResult { result in
             switch result {
             case let .failure(err):
                 print("DEBUG: -- NewActivity -- Error -- \(err.localizedDescription)")
@@ -48,6 +65,7 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
                 if let item = response.body {
                     // append to day
                     self.append(item.activityItem, to: day)
+                    onSuccess?()
                 }
             }
         }.store(in: &cancellationTokens)

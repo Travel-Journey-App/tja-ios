@@ -12,20 +12,20 @@ import Combine
 class WishViewModel: NSObject, ObservableObject, SearchService {
     
     let wish: WishItem
-    let destination: String
+    let location: Location
     var apiSession: APIService
     var cancellationToken: AnyCancellable?
     
     @Published var items = [SuggestionPlace]()
     
-    init(wish: WishItem, destination: String, apiService: APIService) {
+    init(wish: WishItem, location: Location, apiService: APIService) {
         self.wish = wish
-        self.destination = destination
+        self.location = location
         self.apiSession = apiService
     }
     
     func fetchItems() {
-        self.cancellationToken = self.search(wish: wish, for: destination)
+        self.cancellationToken = self.search(wish: wish, for: location.placeName)
             .sinkToResult { result in
                 switch result {
                 case let .failure(err):

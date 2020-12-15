@@ -11,6 +11,7 @@ import SwiftUI
 struct EventCreation: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var viewModel: ActivityViewModel
     
     var body: some View {
         NavigationView {
@@ -36,7 +37,7 @@ struct EventCreation: View {
                     label: { Text("Cancel") }
                 )
             )
-        }
+        }.onDisappear { self.viewModel.active = -1 }
     }
 }
 

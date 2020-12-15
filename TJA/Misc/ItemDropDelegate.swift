@@ -13,10 +13,17 @@ struct ItemDropDelegate: DropDelegate {
     var day: Int
     @Binding var active: Int
     @Binding var activeSheet: DaysContainer.ActiveSheet?
+    @Binding var target: DaysContainer.DragNDropTarget?
     
     func performDrop(info: DropInfo) -> Bool {
         print("DEBUG: -- DropDelegate -- Dropped at day: \(day) & location: \(info.location)")
-        activeSheet = .wish
+        self.active = day
+        switch target {
+        case .wish: self.activeSheet = .wish
+        case .manual: self.activeSheet = .manual
+        case .none: break
+        }
+        self.target = nil
         return true
     }
     

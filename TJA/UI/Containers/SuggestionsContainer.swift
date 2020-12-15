@@ -10,10 +10,11 @@ import SwiftUI
 
 struct SuggestionsContainer: View {
     
-    var items: [SuggestionPlace] = []
-    let wish: WishItem
+    @EnvironmentObject var viewModel: WishViewModel
     
     @State var selectedIndex: Int? = nil
+    
+    var onAdd: ((SuggestionPlace) -> ())?
     
     var body: some View {
         
@@ -23,19 +24,19 @@ struct SuggestionsContainer: View {
         )
         
         return ZStack(alignment: .top) {
-            if items.count > 0 {
+            if viewModel.items.count > 0 {
                 ScrollView {
                     VStack(spacing: 15) {
-                        ForEach(0..<items.count) { id in
-                            SuggestionCell(suggestion: items[id])
-                                .onTapGesture { self.selectedIndex = id }
+                        ForEach(0..<viewModel.items.count, id: \.self) { i in
+                            SuggestionCell(suggestion: viewModel.items[i])
+                                .onTapGesture { self.selectedIndex = i }
                         }
                     }
                     .padding(.vertical, 15)
                     .padding(.horizontal, 10)
                 }
             } else {
-                Text("There are no items from the \(wish.rawValue.capitalizedFirstLetter()) category that we can recommend\n☹️")
+                Text("There are no items from the \(viewModel.wish.rawValue.capitalizedFirstLetter()) category that we can recommend\n☹️")
                     .font(.system(size: 20))
                     .foregroundColor(.mainRed)
                     .multilineTextAlignment(.center)
@@ -43,12 +44,15 @@ struct SuggestionsContainer: View {
             if selectedIndex != nil {
                 PopUpContainer(isShown: isSelected) {
                     SuggestionCard(
-                        suggestion: items[selectedIndex ?? 0],
-                        wishTitle: wish.rawValue,
+                        suggestion: viewModel.items[selectedIndex ?? 0],
+                        wishTitle: viewModel.wish.rawValue,
                         onDismiss: {
                             self.selectedIndex = nil
                         },
                         onAdd: {
+                            if let index = selectedIndex {
+                                self.onAdd?(viewModel.items[index])
+                            }
                             self.selectedIndex = nil
                         })
                         .padding(.horizontal, 30)
@@ -60,6 +64,6 @@ struct SuggestionsContainer: View {
 
 struct SuggestionsContainer_Previews: PreviewProvider {
     static var previews: some View {
-        SuggestionsContainer(items: [], wish: .lunch)
+        SuggestionsContainer()
     }
 }

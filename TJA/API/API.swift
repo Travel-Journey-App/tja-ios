@@ -11,6 +11,7 @@ import Combine
 
 protocol APIService {
     func request<T: Decodable>(with builder: RequestBuilder) -> AnyPublisher<T, APIError>
+    func request<T: Decodable>(with builder: RequestBuilder, with decoder: JSONDecoder) -> AnyPublisher<T, APIError>
 }
 
 protocol RequestBuilder {
@@ -35,6 +36,7 @@ extension RequestBuilder {
     var urlRequest: URLRequest {
         guard let url = URL(string: "\(base)\(path)")
         else { preconditionFailure("Invalid URL format") }
+        print("DEBUG: -- URL = \(url)")
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.httpBody = body()

@@ -145,7 +145,7 @@ extension TripEndpoint: RequestBuilder {
 
 extension ActivityEndpoint: RequestBuilder {
     var base: String {
-        APIConstants.baseSearchUrl
+        APIConstants.baseUrl
     }
     
     var path: String {
@@ -214,9 +214,9 @@ extension SearchEndpoint: RequestBuilder {
     var path: String {
         switch self {
         case let .city(query):
-            return "/city?name=\(query)"
+            return "/city?name=\(query.encodeUrl())"
         case let .suggestion(category, destination):
-            return "/place?category=\(category)&city=\(destination)"
+            return "/place?category=\(category)&city=\(destination.lowercased())"
         case let .eventPlace(query, category, destination):
             return ""
         case let .accommodation(query, destination):

@@ -18,10 +18,17 @@ struct DaysContainer: View {
         }
     }
     
+    enum DragNDropTarget: Identifiable {
+        case wish, manual
+        var id: Int {
+            hashValue
+        }
+    }
+    
     @EnvironmentObject var viewModel: ActivityViewModel
     @State var isBlurShown: Bool = false
     @State var activeSheet: ActiveSheet?
-    @State var isInDragNDropMode: Bool = true
+    @State var dragNdropTarget: DragNDropTarget? = nil
 
     var body: some View {
 
@@ -33,7 +40,7 @@ struct DaysContainer: View {
                         DayCell(
                             viewModel.trip.days[i].activities,
                             dayNumber: viewModel.trip.days[i].orderInTrip,
-                            active: isInDragNDropMode ?
+                            active: dragNdropTarget != nil ?
                                 viewModel.active == i ? true : false
                                 : true
                         ).onDrop(
@@ -41,7 +48,8 @@ struct DaysContainer: View {
                             delegate: ItemDropDelegate(
                                 day: i,
                                 active: $viewModel.active,
-                                activeSheet: $activeSheet)
+                                activeSheet: $activeSheet,
+                                target: $dragNdropTarget)
                         )
                     }
                 }
@@ -55,12 +63,12 @@ struct DaysContainer: View {
                 }
             }
             
-            if isInDragNDropMode {
+            if dragNdropTarget != nil {
                 
                 VStack {
                     Spacer()
                     DraggableSplash()
-                        .onDrag({ NSItemProvider(object: "a" as NSString) })
+                        .onDrag({ NSItemProvider(object: "" as NSString) })
                 }
                 
             } else {
@@ -71,8 +79,14 @@ struct DaysContainer: View {
                         AddButtonsStack(
                             isExpanded: $isBlurShown,
                             magicFlow: { self.activeSheet = .magic },
-                            ideasFlow: { self.activeSheet = .wish },
-                            manualFlow: { self.activeSheet = .manual }
+                            ideasFlow: {
+                                self.isBlurShown = false
+                                self.dragNdropTarget = .wish
+                            },
+                            manualFlow: {
+                                self.isBlurShown = false
+                                self.dragNdropTarget = .manual
+                            }
                         )
                     }
                 }
@@ -83,8 +97,12 @@ struct DaysContainer: View {
         .sheet(item: $activeSheet) { item in
             switch item {
             case .magic: MagicMode().accentColor(.mainRed)
-            case .wish: WishList().accentColor(.mainRed)
-            case .manual: EventCreation().accentColor(.mainRed)
+            case .wish: WishList()
+                .accentColor(.mainRed)
+                .environmentObject(viewModel)
+            case .manual: EventCreation()
+                .accentColor(.mainRed)
+                .environmentObject(viewModel)
             }
         }
     }

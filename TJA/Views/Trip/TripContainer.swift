@@ -19,5 +19,6 @@ struct TripContainer: View {
             map: { MapContainer(location: viewModel.trip.location) }
         )
         .navigationBarTitle(Text(tripname.uppercased()), displayMode: .inline)
+        .onAppear { self.viewModel.sort() }
     }
 }

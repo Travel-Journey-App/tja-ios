@@ -15,3 +15,9 @@ extension JSONEncoder {
         self.dateEncodingStrategy = strategy
     }
 }
+
+extension String {
+    func encodeUrl() -> String {
+        return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? self
+    }
+}

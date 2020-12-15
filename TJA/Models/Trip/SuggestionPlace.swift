@@ -56,3 +56,32 @@ struct SuggestionPlace: Hashable, Codable, Identifiable, Comparable {
         return lhs.rating < rhs.rating
     }
 }
+
+
+extension SuggestionPlace {
+    
+    func activityRequest(for startDate: Date, day number: Int) -> ActivityRequest.New.Event {
+        
+        let start: Date?
+        let end: Date?
+        
+        if let hours = workingHours {
+            start = startDate.addingTimeInterval(.day * Double((number - 1)) + hours.open)
+            end = startDate.addingTimeInterval(.day * Double((number - 1)) + hours.close)
+        } else {
+            start = nil
+            end = nil
+        }
+        
+        return .init(
+            name: name,
+            description: description,
+            startTime: start,
+            endTime: end,
+            note: "",
+            lat: location.lat,
+            lon: location.lon,
+            activityType: "event",
+            eventType: category.activity.rawValue)
+    }
+}

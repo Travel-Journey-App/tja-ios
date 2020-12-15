@@ -17,8 +17,10 @@ struct APISession: APIService {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .millisecondsSince1970
-//        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
+        return request(with: builder, with: decoder)
+    }
+    
+    func request<T>(with builder: RequestBuilder, with decoder: JSONDecoder) -> AnyPublisher<T, APIError> where T : Decodable {
         return URLSession.shared
             .dataTaskPublisher(for: builder.urlRequest)
             .receive(on: DispatchQueue.main)

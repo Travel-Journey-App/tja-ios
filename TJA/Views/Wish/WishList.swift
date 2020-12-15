@@ -11,6 +11,7 @@ import SwiftUI
 struct WishList: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var viewModel: ActivityViewModel
     
     private let items: [WishItem] = [
         .breakfast, .lunch, .dinner, .bar,
@@ -22,11 +23,14 @@ struct WishList: View {
             ScrollView(.vertical) {
                 Grid(columns: 2, list: items, vSpacing: 25) { wish in
                     NavigationLink(
-                        destination: WishItemsContainer(
-                            wish: wish,
-                            items: [],
-                            location: Mockup.Locations.mockTripLocation
-                        )) {
+                        destination: WishItemsContainer(onAdd: addItem(_:))
+                            .environmentObject(
+                                WishViewModel(
+                                    wish: wish,
+                                    location: viewModel.trip.location ?? Constants.defaultLocation,
+                                    apiService: APISession.shared
+                                ))
+                    ) {
                         ShadowImage(name: wish.image)
                             .frame(width: 128, height: 128, alignment: .center)
                     }
@@ -41,6 +45,17 @@ struct WishList: View {
                     label: { Text("Cancel") }
                 )
             )
+        }.onDisappear { self.viewModel.active = -1 }
+    }
+    
+    func addItem(_ suggestion: SuggestionPlace) {
+        if let day = self.viewModel.activeDayNumber,
+           let index = self.viewModel.activeDayIndex {
+            
+            let request = suggestion.activityRequest(for: self.viewModel.startDate, day: day)
+            self.viewModel.create(request, in: index) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
         }
     }
 }

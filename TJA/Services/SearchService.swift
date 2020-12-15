@@ -31,8 +31,13 @@ extension SearchService {
     }
     
     func search(wish category: WishItem, for destination: String) -> SearchResponse<SuggestionPlace> {
+        var decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         return apiSession
-            .request(with: SearchEndpoint.suggestion(category: category.rawValue, destination: destination))
+            .request(
+                with: SearchEndpoint.suggestion(category: category.rawValue, destination: destination),
+                with: decoder
+            )
             .eraseToAnyPublisher()
     }
     
