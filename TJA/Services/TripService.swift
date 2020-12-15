@@ -54,4 +54,10 @@ extension TripService {
             .request(with: TripEndpoint.deleteTrip(id: id))
             .eraseToAnyPublisher()
     }
+	
+	func magic(trip: TripRequest) -> TripItemResponse {
+        return apiSession
+            .request(with: TripEndpoint.magic(trip: trip))
+            .eraseToAnyPublisher()
+    }
 }
