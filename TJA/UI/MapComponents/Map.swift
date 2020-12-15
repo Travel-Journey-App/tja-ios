@@ -50,14 +50,13 @@ struct Map: UIViewRepresentable {
         
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             print("DEBUG: -- Map -- Selected annotation")
-//            guard let coordinates = view.annotation?.coordinate else { return }
-//            let span = mapView.region.span
-//            let region = MKCoordinateRegion(center: coordinates, span: span)
-//            mapView.setRegion(region, animated: true)
-        }
-        
-        func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
-            print("DEBUG: -- Map -- Added annotations")
+            guard let v = view.annotation as? Place else { return }
+//            if self.controller.selectedPlace?.activity.id != v.activity.id {
+//                DispatchQueue.main.async {
+//                    self.controller.selectedPlace = v
+//                }
+//                
+//            }
         }
         
         func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
