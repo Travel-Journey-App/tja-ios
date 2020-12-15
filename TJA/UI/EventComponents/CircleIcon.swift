@@ -13,12 +13,14 @@ struct CircleIcon: View {
     var icon: EventIcon
     var size: CGFloat = 35
     
+    var backgroundColor = Color(UIColor.systemBackground)
+    
     var body: some View {
         Circle()
             .strokeBorder(Color.mainRed, lineWidth: 2)
             .background(
                 Circle()
-                    .fill(Color(UIColor.systemBackground))
+                    .fill(backgroundColor)
                     .overlay(icon, alignment: .center)
             ).frame(width: size, height: size, alignment: .center)
     }

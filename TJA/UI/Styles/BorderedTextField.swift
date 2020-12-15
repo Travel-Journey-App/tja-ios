@@ -13,6 +13,7 @@ struct BorderedTextField: TextFieldStyle {
     var color: Color = .mainRed
     var fontSize: CGFloat = 15
     var borderSize: CGFloat = 2
+    var cornerRadius: CGFloat = 2
     
     public func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
@@ -21,7 +22,7 @@ struct BorderedTextField: TextFieldStyle {
             .padding(15)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 32, maxHeight: 50)
             .background(
-                RoundedRectangle(cornerRadius: 2)
+                RoundedRectangle(cornerRadius: cornerRadius)
                     .strokeBorder(color, lineWidth: borderSize)
             )
     }

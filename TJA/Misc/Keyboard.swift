@@ -32,7 +32,7 @@ final class KeyboardResponder: ObservableObject {
         if let keyboardSize = (
             notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
         )?.cgRectValue {
-            withAnimation(.easeInOut(duration: 0.5)) {
+            withAnimation(.easeInOut(duration: 0.3)) {
                 self.currentHeight = keyboardSize.height
             }
             
