@@ -11,6 +11,8 @@ import MapKit
 
 struct Map: UIViewRepresentable {
     
+    @Binding var places: [Activity]
+    @Binding var selectedPlace: Place?
     @EnvironmentObject var locationService: LocationService
     var tripLocation: CLLocationCoordinate2D?
     
@@ -26,6 +28,8 @@ struct Map: UIViewRepresentable {
         if let region = makeInitialRegion() {
             map.setRegion(region, animated: true)
         }
+        map.register(PlaceAnnotation.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        map.register(ClusterAnnotation.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
         return map
     }
     
@@ -33,6 +37,7 @@ struct Map: UIViewRepresentable {
         if uiView.userTrackingMode != locationService.userTrackingMode {
             uiView.setUserTrackingMode(locationService.userTrackingMode, animated: true)
         }
+        updateAnnotations(from: uiView)
     }
     
     // MARK: - Map Coordinator -
@@ -45,6 +50,10 @@ struct Map: UIViewRepresentable {
         
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             print("DEBUG: -- Map -- Selected annotation")
+//            guard let coordinates = view.annotation?.coordinate else { return }
+//            let span = mapView.region.span
+//            let region = MKCoordinateRegion(center: coordinates, span: span)
+//            mapView.setRegion(region, animated: true)
         }
         
         func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
@@ -57,6 +66,11 @@ struct Map: UIViewRepresentable {
 //                self.controller.$userTrackingMode.wrappedValue = mode
                 self.controller.locationService.userTrackingMode = mode
             }
+        }
+        
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            guard let annotation = annotation as? Place else { return nil }
+            return PlaceAnnotation(annotation: annotation, reuseIdentifier: PlaceAnnotation.reuseId)
         }
     }
     
@@ -71,13 +85,22 @@ struct Map: UIViewRepresentable {
             return nil
         }
     }
+    
+    private func updateAnnotations(from mapView: MKMapView) {
+        mapView.removeAnnotations(mapView.annotations)
+        let newAnnotations = places.compactMap{ Place($0) }
+        mapView.addAnnotations(newAnnotations)
+        if let selectedAnnotation = newAnnotations.filter({ $0.activity.id == selectedPlace?.activity.id }).first {
+            mapView.selectAnnotation(selectedAnnotation, animated: true)
+        }
+    }
 }
 
 struct Map_Previews: PreviewProvider {
     static var previews: some View {
         Map(
 //            userTrackingMode: .constant(.follow),
-            tripLocation: CLLocationCoordinate2D(latitude: 40.71, longitude: -74)
+            places: .constant([]), selectedPlace: .constant(nil), tripLocation: CLLocationCoordinate2D(latitude: 40.71, longitude: -74)
         ).environmentObject(LocationService())
     }
 }

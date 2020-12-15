@@ -35,6 +35,13 @@ struct EventIcon: View {
             .toAnyView()
         }
     }
+    
+    var uiimage: UIImage? {
+        switch source {
+        case .system: return UIImage(systemName: name)
+        case .custom: return UIImage(named: name)
+        }
+    }
 }
 
 struct EventIcon_Previews: PreviewProvider {
