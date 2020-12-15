@@ -38,11 +38,14 @@ struct DaysContainer: View {
                 VStack(spacing: 5) {
                     ForEach(0..<viewModel.daysCount, id: \.self) { i in
                         DayCell(
-                            viewModel.trip.days[i].activities,
+                            $viewModel.trip.days[i].activities,
                             dayNumber: viewModel.trip.days[i].orderInTrip,
                             active: dragNdropTarget != nil ?
                                 viewModel.active == i ? true : false
-                                : true
+                                : true,
+                            onRemove: { (activity) in
+                                self.viewModel.delete(activity, in: viewModel.trip.days[i].id)
+                            }
                         ).onDrop(
                             of: ["public.item-source"],
                             delegate: ItemDropDelegate(
@@ -94,6 +97,7 @@ struct DaysContainer: View {
                 .padding(.bottom, 48)
             }
         }
+        .onAppear { self.viewModel.resetSwipes() }
         .sheet(item: $activeSheet) { item in
             switch item {
             case .magic: MagicMode().accentColor(.mainRed)

@@ -38,7 +38,16 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
         trip.startDate
     }
     
-    func filter(by day: Int?) -> [Activity] {
+    func resetSwipes() {
+        for i in 0..<trip.days.count {
+            for j in 0..<trip.days[i].activities.count {
+                trip.days[i].activities[j].isSwiped = false
+                trip.days[i].activities[j].offset = 0
+            }
+        }
+    }
+    
+    func filter(by day: Int?) -> [SwipeableItem<Activity>] {
         if let day = day, let index = getIndex(for: day)  {
             return trip.days[index].activities
         } else {
@@ -48,7 +57,7 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
     
     func sort() {
         for i in 0..<trip.days.count {
-            self.trip.days[i].activities.sort(by: { $0 < $1 })
+            self.trip.days[i].activities.sort(by: { $0.item < $1.item })
         }
     }
     
@@ -117,15 +126,15 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
     private func replace(_ activity: Activity, by id: Int, in day: Int) {
         if let dayIndex = getIndex(for: day),
            let activityIndex = getActivityIndex(for: id, with: day) {
-            self.trip.days[dayIndex].activities[activityIndex] = activity
-            self.trip.days[dayIndex].activities.sort(by: { $0 < $1 })
+            self.trip.days[dayIndex].activities[activityIndex] = .init(item: activity, offset: 0, isSwiped: false)
+            self.trip.days[dayIndex].activities.sort(by: { $0.item < $1.item })
         }
     }
     
     private func append(_ activity: Activity, to day: Int) {
         if let dayIndex = getIndex(for: day) {
-            self.trip.days[dayIndex].activities.append(activity)
-            self.trip.days[dayIndex].activities.sort(by: { $0 < $1 })
+            self.trip.days[dayIndex].activities.append(.init(item: activity, offset: 0, isSwiped: false))
+            self.trip.days[dayIndex].activities.sort(by: { $0.item < $1.item })
         }
     }
     

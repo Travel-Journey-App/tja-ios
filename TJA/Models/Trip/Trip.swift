@@ -46,7 +46,7 @@ struct Trip: Hashable, Codable, Identifiable {
 struct TripDay: Hashable, Codable, Identifiable {
     let id: Int
     let orderInTrip: Int
-    var activities: [Activity]
+    var activities: [SwipeableItem<Activity>]
     
     var number: Int {
         orderInTrip
@@ -71,7 +71,7 @@ struct TripDay: Hashable, Codable, Identifiable {
     init(id: Int, orderInTrip: Int, activities: [ActivityResponse]) {
         self.id = id
         self.orderInTrip = orderInTrip
-        self.activities = activities.compactMap { $0.activityItem }
+        self.activities = activities.compactMap { .init(item: $0.activityItem, offset: 0, isSwiped: false) }
     }
     
     init(from decoder: Decoder) throws {
@@ -79,7 +79,7 @@ struct TripDay: Hashable, Codable, Identifiable {
         self.id = try container.decode(Int.self, forKey: .id)
         self.orderInTrip = try container.decode(Int.self, forKey: .orderInTrip)
         let activities = try container.decode([ActivityResponse]?.self, forKey: .activities) ?? []
-        self.activities = activities.compactMap { $0.activityItem }
+        self.activities = activities.compactMap { .init(item: $0.activityItem, offset: 0, isSwiped: false) }
     }
     
     func encode(to encoder: Encoder) throws {

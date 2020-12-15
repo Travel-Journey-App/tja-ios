@@ -52,11 +52,11 @@ struct MapContainer: View {
     }
     
     private func applyFilters(_ day: Int?) {
-        self.events = self.activityViewModel.filter(by: day)
+        self.events = self.activityViewModel.filter(by: day).compactMap { $0.item }
     }
     
     private func loadEvents() {
-        self.events = self.activityViewModel.filter(by: nil)
+        self.events = self.activityViewModel.filter(by: nil).compactMap { $0.item }
     }
 }
 
