@@ -21,7 +21,6 @@ struct MapContainer: View {
     @EnvironmentObject var locationService: LocationService
     @EnvironmentObject var activityViewModel: ActivityViewModel
     
-    @State var events: [Activity] = []
     @State var selected: Place? = nil
     
     var location: Location? = nil
@@ -29,7 +28,7 @@ struct MapContainer: View {
     var body: some View {
         ZStack(alignment: .top) {
             Map(
-                places: $events,
+                places: $activityViewModel.filtered,
                 selectedPlace: $selected.didSet { place in
                     if let place = place {
                         print("DEBUG: -- Selected place: \(place.activity)")
@@ -67,12 +66,11 @@ struct MapContainer: View {
     }
     
     private func applyFilters(_ day: Int?) {
-        self.events = self.activityViewModel.filter(by: day).compactMap { $0.item }
-        print("DEBUG: -- Events after filtering -- \(events)")
+        self.activityViewModel.filter(by: day)
     }
     
     private func loadEvents() {
-        self.events = self.activityViewModel.filter(by: nil).compactMap { $0.item }
+         self.activityViewModel.filter(by: nil)
     }
 }
 

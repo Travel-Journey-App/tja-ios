@@ -16,6 +16,7 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
     
     @Published var trip: Trip
     @Published var active: Int = -1
+    @Published var filtered: [Activity] = []
     
     init(trip: Trip, apiService: APIService) {
         self._trip = .init(initialValue: trip)
@@ -47,11 +48,11 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
         }
     }
     
-    func filter(by day: Int?) -> [SwipeableItem<Activity>] {
-        if let day = day, let index = getIndex(for: day)  {
-            return trip.days[index].activities
+    func filter(by day: Int?) {
+        if let day = day, day < trip.days.count /*, let index = getIndex(for: day)*/  {
+            filtered = trip.days[day].activities.compactMap { $0.item }
         } else {
-            return trip.days.flatMap(\.activities)
+            filtered = trip.days.flatMap(\.activities).compactMap { $0.item }
         }
     }
     
