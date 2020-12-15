@@ -151,8 +151,8 @@ struct Activity: Codable, Hashable, Identifiable, Comparable {
 
     static func < (lhs: Activity, rhs: Activity) -> Bool {
         
-        if rhs.withoutTime { return false }
-        if lhs.withoutTime { return true }
+        if rhs.withoutTime { return true }
+        if lhs.withoutTime { return false }
         
         if lhs.scheduled && rhs.scheduled, let l = lhs.exactTime, let r = rhs.exactTime {
             return l < r

@@ -48,7 +48,7 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
     
     func sort() {
         for i in 0..<trip.days.count {
-            self.trip.days[i].activities.sort()
+            self.trip.days[i].activities.sort(by: { $0 < $1 })
         }
     }
     
@@ -118,14 +118,14 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
         if let dayIndex = getIndex(for: day),
            let activityIndex = getActivityIndex(for: id, with: day) {
             self.trip.days[dayIndex].activities[activityIndex] = activity
-            self.trip.days[dayIndex].activities.sort()
+            self.trip.days[dayIndex].activities.sort(by: { $0 < $1 })
         }
     }
     
     private func append(_ activity: Activity, to day: Int) {
         if let dayIndex = getIndex(for: day) {
             self.trip.days[dayIndex].activities.append(activity)
-            self.trip.days[dayIndex].activities.sort()
+            self.trip.days[dayIndex].activities.sort(by: { $0 < $1 })
         }
     }
     
