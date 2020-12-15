@@ -22,7 +22,7 @@ enum TripEndpoint {
     case updateTrip(trip: TripRequest)
     case trip(id: Int)
     case deleteTrip(id: Int)
-    case magic
+    case magic(trip: TripRequest)
 }
 
 enum ActivityEndpoint {
@@ -113,7 +113,7 @@ extension TripEndpoint: RequestBuilder {
         switch self {
         case .tripList, .trip, .magic:
             return "GET"
-        case .newTrip:
+        case .newTrip, .magic:
             return "POST"
         case .updateTrip:
             return "PUT"

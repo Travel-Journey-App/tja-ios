@@ -11,6 +11,7 @@ import SwiftUI
 struct MagicMode: View {
     
     @Environment(\.presentationMode) var presentationMode
+	@EnvironmentObject var viewModel: ActivityViewModel
     
     var body: some View {
         NavigationView {
@@ -22,7 +23,10 @@ struct MagicMode: View {
                         label: { Text("Cancel") }
                     ),
                     trailing: Button(
-                        action: { self.presentationMode.wrappedValue.dismiss() },
+                        action: {
+							self.viewModel.getMagicTrip(trip: viewModel.trip)
+							self.presentationMode.wrappedValue.dismiss()
+						},
                         label: { Text("Save") }
                     )
                 )

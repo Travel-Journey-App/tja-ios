@@ -39,4 +39,5 @@ struct TripRequest: Codable {
     let endDate: Date
     let lat: Double
     let lon: Double
+    let days: [TripDay]
 }

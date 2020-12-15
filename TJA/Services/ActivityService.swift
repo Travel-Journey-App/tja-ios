@@ -19,6 +19,7 @@ protocol ActivityService {
     func add(activity: NewActivityRequest, to trip: Int, on day: Int) -> ItemResponse
     func update(activity: ExistingActivityRequest, in trip: Int, on day: Int) -> ItemResponse
     func delete(activity: ExistingActivityRequest, from trip: Int, on day: Int) -> MessageResponse
+    func magic(trip: TripRequest) -> TripItemResponse
 }
 
 extension ActivityService {
@@ -38,6 +39,12 @@ extension ActivityService {
     func delete(activity: ExistingActivityRequest, from trip: Int, on day: Int) -> MessageResponse {
         return apiSession
             .request(with: ActivityEndpoint.deleteActivity(activity: activity, tripId: trip, dayId: day))
+            .eraseToAnyPublisher()
+    }
+
+	func magic(trip: TripRequest) -> TripItemResponse {
+        return apiSession
+            .request(with: TripEndpoint.magic(trip: trip))
             .eraseToAnyPublisher()
     }
 }

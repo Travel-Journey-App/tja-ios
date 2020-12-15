@@ -151,4 +151,32 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
     private func getActivityIndex(for id: Int, with dayIndex: Int) -> Int? {
         return self.trip.days[dayIndex].activities.firstIndex(where: {$0.id == id})
     }
+
+    func getMagicTrip(currentTrip: Trip) {
+            let trip = TripRequest(
+                name: currentTrip.name,
+                destination: currentTrip.destination
+                startDate: currentTrip.startDate
+                endDate: currentTrip.endDate
+                lat: currentTrip.lat,
+                lon: currentTrip.lon,
+                days: currentTrip.days
+            )
+            let token = self.magic(trip: trip).sinkToResult { result in
+                switch result {
+                case let .failure(err):
+                    print("DEBUG: -- MagicTrip -- Error -- \(err.localizedDescription)")
+                case let .success(response):
+                    if let err = response.getError() {
+                        print("DEBUG: -- MagicTrip -- Response error -- \(err.localizedDescription)")
+                    }
+                    print("DEBUG: -- MagicTrip -- Success")
+                    if let item = response.body {
+                        self.trip = SwipeableItem<Trip>(item.trip)
+                        print(item.trip)
+                    }
+                }
+            }
+            self.cancellationTokens.insert(token)
+        }
 }
