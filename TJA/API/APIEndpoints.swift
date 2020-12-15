@@ -22,7 +22,7 @@ enum TripEndpoint {
     case updateTrip(trip: TripRequest)
     case trip(id: Int)
     case deleteTrip(id: Int)
-    case magic
+    case magic(trip: TripRequest)
 }
 
 enum ActivityEndpoint {

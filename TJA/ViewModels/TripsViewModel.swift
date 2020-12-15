@@ -63,6 +63,25 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
         }
         self.cancellationTokens.insert(token)
     }
+	
+	func getMagicTrip(trip: Trip) {
+        let token = self.magic(trip: trip).sinkToResult { result in
+            switch result {
+            case let .failure(err):
+                print("DEBUG: -- NewTrip -- Error -- \(err.localizedDescription)")
+            case let .success(response):
+                if let err = response.getError() {
+                    print("DEBUG: -- NewTrip -- Response error -- \(err.localizedDescription)")
+                }
+                print("DEBUG: -- NewTrip -- Success")
+                if let item = response.body {
+                    self.trips.append(SwipeableItem<Trip>(item.trip))
+                    print(item.trip)
+                }
+            }
+        }
+        self.cancellationTokens.insert(token)
+    }
     
     func get(by id: Int) {
         print("DEBUG: -- Fetching trip by id = \(id)")
