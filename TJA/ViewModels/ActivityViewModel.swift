@@ -113,6 +113,7 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
                     print("DEBUG: -- NewActivity -- Response error -- \(err.localizedDescription)")
                 }
                 print("DEBUG: -- NewActivity -- Success")
+//                self.remove(by: request.id, in: day)
             }
         }.store(in: &cancellationTokens)
     }

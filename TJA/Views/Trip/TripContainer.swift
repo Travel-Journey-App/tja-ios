@@ -44,6 +44,7 @@ struct TripContainer: View {
                         })
                         .padding(.horizontal, 30)
                         .frame(maxHeight: 210)
+                        .offset(y: -keyboard.currentHeight / 4)
                 }
                 .frame(alignment: .center)
                 .resignKeyboardOnDragGesture()
