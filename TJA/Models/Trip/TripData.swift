@@ -16,6 +16,8 @@ struct TripResponse: Codable {
     let endDate: Date
     let cover: String?
     let days: [TripDay]
+    let lat: Double
+    let lon: Double
     
     var trip: Trip {
         Trip(
@@ -24,7 +26,7 @@ struct TripResponse: Codable {
             name: name,
             startDate: startDate,
             endDate: endDate,
-            location: nil,
+            location: Location(placeName: destination, lat: lat, lon: lon),
             days: days
         )
     }
