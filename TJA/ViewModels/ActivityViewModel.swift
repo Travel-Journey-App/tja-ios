@@ -62,6 +62,15 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
         }
     }
     
+    func findActivityDay(by id: Int) -> (Int, Int)? {
+        for day in trip.days {
+            if day.activities.contains { $0.id == id } {
+                return (day.orderInTrip, day.id)
+            }
+        }
+        return nil
+    }
+    
     func create(_ activity: NewActivityRequest, in day: Int, onSuccess: (() -> ())? = nil) {
         self.add(activity: activity, to: trip.id, on: day).sinkToResult { result in
             switch result {
@@ -122,6 +131,7 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
     private func remove(by id: Int, in day: Int) {
         if let dayIndex = getIndex(for: day) {
             self.trip.days[dayIndex].activities.removeAll(where: { $0.id == id })
+            self.filtered.removeAll(where: { $0.id == id })
         }
     }
     

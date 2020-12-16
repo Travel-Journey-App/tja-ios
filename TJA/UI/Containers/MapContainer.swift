@@ -20,8 +20,7 @@ struct MapContainer: View {
     
     @EnvironmentObject var locationService: LocationService
     @EnvironmentObject var activityViewModel: ActivityViewModel
-    
-    @State var selected: Place? = nil
+    @EnvironmentObject var popupViewModel: PopupViewModel
     
     var location: Location? = nil
     
@@ -29,12 +28,15 @@ struct MapContainer: View {
         ZStack(alignment: .top) {
             Map(
                 places: $activityViewModel.filtered,
-                selectedPlace: $selected.didSet { place in
-                    if let place = place {
-                        print("DEBUG: -- Selected place: \(place.activity)")
+                tripLocation: location?.coordinate,
+                didSelect: { activity in
+                    if let (day, index) = self.activityViewModel.findActivityDay(by: activity.id) {
+                        print("DEBUG: -- Selected place: \(activity)")
+                        self.popupViewModel.activity = activity
+                        self.popupViewModel.dayNumber = day
+                        self.popupViewModel.dayIndex = index
                     }
-                },
-                tripLocation: location?.coordinate
+                }
             ).edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading) {

@@ -13,12 +13,20 @@ struct FilledButtonStyle: ButtonStyle {
     var filled: Bool = true
     var color: Color = .mainRed
     
+    var fontSize: CGFloat {
+        UIScreen.main.bounds.size.width >= 375 ? 16 : 14
+    }
+    
+    var paddingSize: CGFloat {
+        UIScreen.main.bounds.size.width >= 375 ? 16 : 10
+    }
+    
     public func makeBody(configuration: FilledButtonStyle.Configuration) -> some View {
         
         configuration.label
-            .font(.system(size: 16))
+            .font(.system(size: fontSize))
             .foregroundColor(filled ? .white : color)
-            .padding(18)
+            .padding(paddingSize)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 32, maxHeight: 50)
             .background(
                 RoundedRectangle(cornerRadius: 6)

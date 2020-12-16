@@ -32,7 +32,7 @@ class WishViewModel: NSObject, ObservableObject, SearchService {
                     print("DEBUG: -- WishItems -- Error -- \(err.localizedDescription)")
                 case let .success(response):
                     print("DEBUG: -- WishItems -- Success")
-                    self.items = response.items.sorted()
+                    self.items = response.items.sorted(by: { $0 > $1 })
                 }
             }
     }
