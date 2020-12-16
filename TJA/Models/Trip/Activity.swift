@@ -94,6 +94,10 @@ struct Activity: Codable, Hashable, Identifiable, Comparable {
         case museum
         case sightseeing
         case fun
+        
+        var queryString: String {
+            rawValue.capitalizedFirstLetter()
+        }
     }
 
     enum Transfer: String, Codable {

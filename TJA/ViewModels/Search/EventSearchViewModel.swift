@@ -66,7 +66,7 @@ class EventSearchViewModel: NSObject, ObservableObject, SearchService {
     }
     
     private func search(textQuery: String) {
-        self.search(eventPlace: textQuery, in: event.rawValue, for: location).sinkToResult { result in
+        self.search(eventPlace: textQuery, in: event.queryString, for: location).sinkToResult { result in
             switch result {
             case let .failure(err):
                 print("DEBUG: -- EventSearch -- Error -- \(err.localizedDescription)")
