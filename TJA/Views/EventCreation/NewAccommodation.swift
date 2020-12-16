@@ -33,8 +33,7 @@ struct NewAccommodation: View {
                     VStack(alignment: .center, spacing: 10) {
                         TextField("Search...",
                             text: $searchViewModel.searchText,
-                            onEditingChanged: { self.searchViewModel.enableSearch($0) },
-                            onCommit:  { self.searchViewModel.clearStored() }
+                            onEditingChanged: { self.searchViewModel.enableSearch($0) }
                         )
                         .textFieldStyle(
                             BorderedTextField(color: .lightRedBorder, borderSize: 1, cornerRadius: 10)

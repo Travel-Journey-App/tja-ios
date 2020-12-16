@@ -60,8 +60,7 @@ struct NewTransfer: View {
                             onEditingChanged: { val in
                                 if val { self.searchViewModel.configure(target: .departure)}
                                 self.searchViewModel.enableSearch(val)
-                            },
-                            onCommit:  { self.searchViewModel.clearStored() }
+                            }
                         )
                         .textFieldStyle(BorderedTextField())
                         TextField(

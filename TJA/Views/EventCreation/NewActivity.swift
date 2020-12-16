@@ -37,8 +37,10 @@ struct NewActivity: View {
                         .onTapGesture {
                             if self.searchViewModel.event != filters[i] {
                                 self.resetFields()
+                                self.searchViewModel.clearStored(cancellAll: true)
                             }
                             self.searchViewModel.event = filters[i]
+                            self.hideKeyboard()
                         }
                 }
             }
@@ -52,8 +54,7 @@ struct NewActivity: View {
                         TextField(
                             "Search...",
                             text: $searchViewModel.searchText,
-                            onEditingChanged: { self.searchViewModel.enableSearch($0) },
-                            onCommit:  { self.searchViewModel.clearStored() }
+                            onEditingChanged: { self.searchViewModel.enableSearch($0) }
                         )
                         .textFieldStyle(
                             BorderedTextField(color: .lightRedBorder, borderSize: 1, cornerRadius: 10)
@@ -138,12 +139,12 @@ struct NewActivity: View {
                 }
             }.padding(.horizontal, 12)
         }
+        .padding(.vertical, 6)
         .background(
             Rectangle()
                 .fill(Color(UIColor.systemBackground))
                 .shadow(color: .black, radius: 4.0))
         .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
-        .padding(.vertical, 6)
     }
     
     private func save(_ place: SuggestionPlace, time: Date? = nil) {

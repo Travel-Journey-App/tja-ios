@@ -55,7 +55,6 @@ class AccommodationSearchViewModel: NSObject, ObservableObject, SearchService {
                 }
         } else {
             self.inputFieldToken = nil
-            clearStored(cancellAll: true)
         }
     }
     
