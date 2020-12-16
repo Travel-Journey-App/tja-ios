@@ -19,7 +19,7 @@ protocol RequestBuilder {
     var path: String { get }
     var method: String { get }
     var headers: [String: String]? { get }
-    var urlRequest: URLRequest { get }
+    var urlRequest: URLRequest? { get }
     var authorizeRequest: Bool { get }
     func body() -> Data?
 }
@@ -33,9 +33,9 @@ extension RequestBuilder {
         ]
     }
     
-    var urlRequest: URLRequest {
+    var urlRequest: URLRequest? {
         guard let url = URL(string: "\(base)\(path)")
-        else { preconditionFailure("Invalid URL format") }
+        else { return nil }
         print("DEBUG: -- URL = \(url)")
         var request = URLRequest(url: url)
         request.httpMethod = method
@@ -48,8 +48,9 @@ extension RequestBuilder {
         return authRequestModifier(request)
     }
     
-    func authRequestModifier(_ request: URLRequest) -> URLRequest {
-        var request = request
+    func authRequestModifier(_ request: URLRequest?) -> URLRequest? {
+        guard let r = request else { return request }
+        var request = r
         if self.authorizeRequest, let token = UserDefaultsConfig.authToken {
             request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }

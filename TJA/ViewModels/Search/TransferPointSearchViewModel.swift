@@ -12,11 +12,12 @@ import Combine
 class TransferPointSearchViewModel: NSObject, ObservableObject, SearchService {
     
     var apiSession: APIService
-    var cancellationTokensD = Set<AnyCancellable>()
-    var cancellationTokensA = Set<AnyCancellable>()
+    var inputDestinationFieldToken: AnyCancellable?
+    var inputArrivalFieldToken: AnyCancellable?
+    var cancellationTokens = Set<AnyCancellable>()
     
-    @Published private(set) var depItems = [Location]()
-    @Published private(set) var arrItems = [Location]()
+    @Published private(set) var departureItems = [Location]()
+    @Published private(set) var arrivalItems = [Location]()
     @Published var depSearchText: String = ""
     @Published var arrSearchText: String = ""
     @Published var transfer: Activity.Transfer = .plane
@@ -33,29 +34,21 @@ class TransferPointSearchViewModel: NSObject, ObservableObject, SearchService {
         self.location = location
     }
     
-    func clearStoredDept(cancellAll: Bool = false) {
+    func clearStored(cancellAll: Bool = false) {
         if cancellAll {
-            self.cancellationTokensD.removeAll()
+            self.cancellationTokens.removeAll()
         }
-        self.depItems.removeAll(keepingCapacity: true)
-        
-    }
-    
-    func clearStoredArr(cancellAll: Bool = false) {
-        if cancellAll {
-            self.cancellationTokensA.removeAll()
-        }
-        self.arrItems.removeAll(keepingCapacity: true)
-        
+        self.departureItems.removeAll(keepingCapacity: true)
+        self.arrivalItems.removeAll(keepingCapacity: true)
     }
     
     private func configureSearch() {
-        $depSearchText
+        self.inputDestinationFieldToken = $depSearchText
             .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .map{ (string) -> String? in
                 if string.count < 2 {
-                    self.depItems = []
+                    self.departureItems = []
                     return nil
                 }
                 
@@ -65,15 +58,15 @@ class TransferPointSearchViewModel: NSObject, ObservableObject, SearchService {
             .sink { (_) in
                 //
             } receiveValue: { [self] (query) in
-                self.depSearch(textQuery: query)
-            }.store(in: &cancellationTokensD)
+                self.search(textQuery: query, arrivalData: false)
+            }
         
-        $arrSearchText
+        self.inputArrivalFieldToken = $arrSearchText
             .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .map{ (string) -> String? in
                 if string.count < 2 {
-                    self.arrItems = []
+                    self.arrivalItems = []
                     return nil
                 }
                 
@@ -83,31 +76,24 @@ class TransferPointSearchViewModel: NSObject, ObservableObject, SearchService {
             .sink { (_) in
                 //
             } receiveValue: { [self] (query) in
-                self.arrSearch(textQuery: query)
-            }.store(in: &cancellationTokensA)
+                self.search(textQuery: query, arrivalData: true)
+            }
     }
     
-    private func arrSearch(textQuery: String) {
+    private func search(textQuery: String, arrivalData: Bool) {
         self.search(transferPoint: textQuery, in: self.transfer.queryString, for: location).sinkToResult { result in
             switch result {
             case let .failure(err):
-                print("DEBUG: -- DeptCitySearch -- Error -- \(err.localizedDescription)")
+                print("DEBUG: -- Search -- Error -- \(err.localizedDescription)")
             case let .success(response):
-                print("DEBUG: -- DeptCitySearch -- Success")
-                self.arrItems = response.items.compactMap { $0.location }
+                print("DEBUG: -- Search -- Success")
+                if arrivalData {
+                    self.arrivalItems = response.items.compactMap { $0.location }
+                } else {
+                    self.departureItems = response.items.compactMap { $0.location }
+                }
+                
             }
-        }.store(in: &cancellationTokensD)
-    }
-    
-    private func depSearch(textQuery: String) {
-        self.search(transferPoint: textQuery, in: self.transfer.queryString, for: location).sinkToResult { result in
-            switch result {
-            case let .failure(err):
-                print("DEBUG: -- ArrCitySearch -- Error -- \(err.localizedDescription)")
-            case let .success(response):
-                print("DEBUG: -- ArrCitySearch -- Success")
-                self.depItems = response.items.compactMap { $0.location }
-            }
-        }.store(in: &cancellationTokensA)
+        }.store(in: &cancellationTokens)
     }
 }

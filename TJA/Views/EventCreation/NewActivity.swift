@@ -19,7 +19,7 @@ struct NewActivity: View {
     @State var query: String = ""
     @State var name: String = ""
     @State var address: String = ""
-    @State var time: String = ""
+    @State var time: Date? = nil
     
     @State var event: Activity.Event = .food
     
@@ -57,8 +57,17 @@ struct NewActivity: View {
                         .textFieldStyle(BorderedTextField())
                     TextField("Address", text: $address)
                         .textFieldStyle(BorderedTextField())
-                    TextField("Time", text: $time)
-                        .textFieldStyle(BorderedTextField())
+                    DateField(
+                        "Time",
+                        date: $time,
+                        formatter: fixedTimeFormatter,
+                        mode: UIDatePicker.Mode.time)
+                        .padding(.horizontal, 12)
+                        .frame(height: 50)
+                        .background(
+                            RoundedRectangle(cornerRadius: 2)
+                                .strokeBorder(Color.mainRed, lineWidth: 2)
+                        )
                     
                 }
                 .frame(maxHeight: .infinity)

@@ -12,6 +12,7 @@ import Combine
 class AccommodationSearchViewModel: NSObject, ObservableObject, SearchService {
     
     var apiSession: APIService
+    var inputFieldToken: AnyCancellable?
     var cancellationTokens = Set<AnyCancellable>()
     
     @Published private(set) var items = [AccommodationLocation]()
@@ -19,7 +20,7 @@ class AccommodationSearchViewModel: NSObject, ObservableObject, SearchService {
     
     private(set) var location: String = "tokyo"
     
-    init(apiService: APIService) {
+    init(apiService: APIService = APISession.shared) {
         self.apiSession = apiService
         super.init()
         self.configureSearch()
@@ -34,11 +35,10 @@ class AccommodationSearchViewModel: NSObject, ObservableObject, SearchService {
             self.cancellationTokens.removeAll()
         }
         self.items.removeAll(keepingCapacity: true)
-        
     }
     
     private func configureSearch() {
-        $searchText
+        self.inputFieldToken = $searchText
             .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .map{ (string) -> String? in
@@ -54,7 +54,7 @@ class AccommodationSearchViewModel: NSObject, ObservableObject, SearchService {
                 //
             } receiveValue: { [self] (query) in
                 self.search(textQuery: query)
-            }.store(in: &cancellationTokens)
+            }
     }
     
     private func search(textQuery: String) {

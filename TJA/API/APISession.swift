@@ -21,8 +21,11 @@ struct APISession: APIService {
     }
     
     func request<T>(with builder: RequestBuilder, with decoder: JSONDecoder) -> AnyPublisher<T, APIError> where T : Decodable {
+        guard let request = builder.urlRequest else {
+            return Fail(error: APIError.unknown).eraseToAnyPublisher()
+        }
         return URLSession.shared
-            .dataTaskPublisher(for: builder.urlRequest)
+            .dataTaskPublisher(for: request)
             .receive(on: DispatchQueue.main)
             .mapError { _ in .unknown }
             .flatMap { data, response -> AnyPublisher<T, APIError> in

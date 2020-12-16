@@ -50,12 +50,25 @@ struct NewTransfer: View {
                     
                     TextField("Departure point", text: $searchViewModel.depSearchText)
                         .textFieldStyle(BorderedTextField())
-                        .overlay(dropDownListDep, alignment: .top)
+                        .overlay(createDropDownList(
+                                    searchViewModel.departureItems,
+                                    tapCallback: { loc in
+                                self.searchViewModel.depSearchText = loc.placeName
+                                self.departurePlace = loc
+                                self.hideKeyboard()
+                                self.searchViewModel.clearStored(cancellAll: true)
+                            }), alignment: .top)
                     TextField("Arrival point", text: $searchViewModel.arrSearchText)
                         .textFieldStyle(BorderedTextField())
-                        .overlay(dropDownListArr, alignment: .top)
-//                    TextField("Departure time", text: $time)
-//                        .textFieldStyle(BorderedTextField())
+                        .overlay(createDropDownList(
+                                    searchViewModel.arrivalItems,
+                                    tapCallback: { loc in
+                            self.searchViewModel.arrSearchText = loc.placeName
+                            self.arrivalPlace = loc
+                            self.hideKeyboard()
+                            self.searchViewModel.clearStored(cancellAll: true)
+                        }), alignment: .top)
+                    
                     DateField(
                         "Time",
                         date: $date,
@@ -119,47 +132,20 @@ struct NewTransfer: View {
         departurePlace != nil && arrivalPlace != nil && date != nil
     }
     
-    var dropDownListDep: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            ForEach(0..<searchViewModel.depItems.count, id: \.self) { i in
-                Text(searchViewModel.depItems[i].placeName)
+    private func createDropDownList(
+        _ items: [Location],
+        tapCallback: @escaping ((Location) -> ())
+    ) -> some View {
+        return VStack(alignment: .leading, spacing: 0) {
+            ForEach(0..<items.count, id: \.self) { i in
+                Text(items[i].placeName)
                     .font(.system(size: 16))
                     .foregroundColor(Color(UIColor.label))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(height: 32)
                     .onTapGesture {
                         print("DEBUG -- \(i) tapped")
-                        let dest = searchViewModel.depItems[i]
-                        self.searchViewModel.depSearchText = dest.placeName
-                        self.departurePlace = dest
-                        self.hideKeyboard()
-                        self.searchViewModel.clearStoredDept(cancellAll: true)
-                    }
-            }.padding(.horizontal, 12)
-        }
-        .background(
-            Rectangle()
-                .fill(Color(UIColor.systemBackground))
-                .shadow(color: .black, radius: 4.0))
-        .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
-        .offset(y: 40)
-    }
-    
-    var dropDownListArr: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            ForEach(0..<searchViewModel.arrItems.count, id: \.self) { i in
-                Text(searchViewModel.arrItems[i].placeName)
-                    .font(.system(size: 16))
-                    .foregroundColor(Color(UIColor.label))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .frame(height: 32)
-                    .onTapGesture {
-                        print("DEBUG -- \(i) tapped")
-                        let dest = searchViewModel.arrItems[i]
-                        self.searchViewModel.arrSearchText = dest.placeName
-                        self.arrivalPlace = dest
-                        self.hideKeyboard()
-                        self.searchViewModel.clearStoredArr(cancellAll: true)
+                        tapCallback(items[i])
                     }
             }.padding(.horizontal, 12)
         }

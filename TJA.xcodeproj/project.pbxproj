@@ -371,13 +371,10 @@
 		9E58C73225840528002688EE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				9EDEA117258A445F00D62B77 /* Search */,
 				9E58C733258409EF002688EE /* AuthViewModel.swift */,
 				9E58C74725844254002688EE /* TripsViewModel.swift */,
 				9E6418222587554D009709D4 /* WishViewModel.swift */,
-				9E641825258757F1009709D4 /* DestinationSearchViewModel.swift */,
-				9E641828258758C9009709D4 /* AccommodationSearchViewModel.swift */,
-				9E64182B258758E6009709D4 /* TransferPointSearchViewModel.swift */,
-				9E64182E258758F3009709D4 /* EventSearchViewModel.swift */,
 				9EAD851B258820C10041737F /* ActivityViewModel.swift */,
 				9EA9CB4F258892B10066EA10 /* PopupViewModel.swift */,
 			);
@@ -622,6 +619,17 @@
 				9E58C739258421F8002688EE /* Color.swift */,
 			);
 			path = Misc;
+			sourceTree = "<group>";
+		};
+		9EDEA117258A445F00D62B77 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				9E641825258757F1009709D4 /* DestinationSearchViewModel.swift */,
+				9E641828258758C9009709D4 /* AccommodationSearchViewModel.swift */,
+				9E64182E258758F3009709D4 /* EventSearchViewModel.swift */,
+				9E64182B258758E6009709D4 /* TransferPointSearchViewModel.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		9EE66944256432300018B82A /* TripComponents */ = {
