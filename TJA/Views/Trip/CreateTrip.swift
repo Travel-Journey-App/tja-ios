@@ -14,6 +14,8 @@ struct CreateTrip: View {
     @State var destination: Location? = nil
     @State var startDate: Date? = nil
     @State var endDate: Date? = nil
+    @State var startDateError: Bool = false
+    @State var endDateError: Bool = false
     
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var viewModel: TripsViewModel
@@ -31,13 +33,28 @@ struct CreateTrip: View {
                     onCommit: { self.searchViewModel.clearStored() })
                     .frame(height: 48)
                     .overlay(dropDownList, alignment: .top)
-                UnderlinedDateField(date: $startDate, placeholder: "Trip date start", imageName: "calendar")
+                UnderlinedDateField(
+                    date: $startDate.didSet(execute: { self.startDateError = !self.checkStartDate($0)}),
+                    placeholder: "Trip date start", imageName: "calendar",
+                    activeColor: startDateError ? Color(UIColor.systemRed) : .mainRed)
                     .frame(height: 48)
-                UnderlinedDateField(date: $endDate, placeholder: "Trip date finish", imageName: "calendar")
+                UnderlinedDateField(
+                    date: $endDate.didSet(execute: { self.endDateError = !self.checkEndDate($0)}),
+                    placeholder: "Trip date finish", imageName: "calendar",
+                    activeColor: endDateError ? Color(UIColor.systemRed) : .mainRed)
                     .frame(height: 48)
                 
+                if startDateError || endDateError {
+                    Text("Select the correct \(startDateError ? "start" : endDateError ? "end" : "") date")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(UIColor.systemRed))
+                        .frame(alignment: .leading)
+                        .padding(.top, -4)
+                } else {
+                    Spacer().frame(height: 10)
+                }
+                
                 // Email button
-                // Calendar button
                 Button(action: {
                     print("DEBUG: -- Open email client button tapped")
                     guard let url = URL(string: "message://") else { return }
@@ -54,7 +71,6 @@ struct CreateTrip: View {
                 }
                 .buttonStyle(FilledButtonStyle(filled: false))
                 .frame(height: 50)
-                .padding(.top, 20)
                 
                 // Info label
                 Text(Constants.Text.supportInfoText)
@@ -119,7 +135,7 @@ struct CreateTrip: View {
     }
     
     var formFilled: Bool {
-        return (!(name.isEmpty || destination == nil || startDate == nil || endDate == nil) && datesCorrect)
+        return (!(name.isEmpty || destination == nil) && datesCorrect)
     }
     
     var datesCorrect: Bool {
@@ -137,6 +153,16 @@ struct CreateTrip: View {
             endDate: end
         )
         self.presentation.wrappedValue.dismiss()
+    }
+    
+    private func checkStartDate(_ date: Date?) -> Bool {
+        guard let date = date else { return false }
+        return date.startOf(.day) >= Date().startOf(.day)
+    }
+    
+    private func checkEndDate(_ date: Date?) -> Bool {
+        guard let start = startDate, let end = date else { return false }
+        return end.startOf(.day) > start.startOf(.day)
     }
     
     private func configureViewModel() {

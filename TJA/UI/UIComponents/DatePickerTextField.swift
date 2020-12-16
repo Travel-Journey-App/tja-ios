@@ -101,13 +101,14 @@ struct UnderlinedDateField: View {
     
     var imageName: String? = nil
     var fontSize: CGFloat = 16
+    var activeColor: Color = .mainRed
     
     private var hasIcon: Bool {
         return imageName != nil
     }
     
     private var color: Color {
-        return date != nil ? .mainRed : Color(UIColor.systemGray)
+        return date != nil ? activeColor : Color(UIColor.systemGray)
     }
     
     private var field: some View {
