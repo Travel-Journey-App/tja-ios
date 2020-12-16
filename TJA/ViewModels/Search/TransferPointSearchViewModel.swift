@@ -55,43 +55,51 @@ class TransferPointSearchViewModel: NSObject, ObservableObject, SearchService {
     func enableSearch(_ enable: Bool) {
         switch self.target {
         case .departure:
-            self.inputFieldToken = enable ? $depSearchText
-                .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
-                .removeDuplicates()
-                .map{ (string) -> String? in
-                    if string.count < 2 {
-                        self.departureItems = []
-                        return nil
+            if enable {
+                self.inputFieldToken = $depSearchText
+                    .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
+                    .removeDuplicates()
+                    .map{ (string) -> String? in
+                        if string.count < 2 {
+                            self.departureItems = []
+                            return nil
+                        }
+                        
+                        return string
                     }
-                    
-                    return string
-                }
-                .compactMap{ $0 }
-                .sink { (_) in
-                    //
-                } receiveValue: { [self] (query) in
-                    self.search(textQuery: query, arrivalData: false)
-                }
-                : nil //disable search if requested
+                    .compactMap{ $0 }
+                    .sink { (_) in
+                        //
+                    } receiveValue: { [self] (query) in
+                        self.search(textQuery: query, arrivalData: false)
+                    }
+            } else {
+                self.inputFieldToken = nil
+                self.clearStored(cancellAll: true)
+            }
         case .arrival:
-            self.inputFieldToken = enable ? $arrSearchText
-                .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
-                .removeDuplicates()
-                .map{ (string) -> String? in
-                    if string.count < 2 {
-                        self.arrivalItems = []
-                        return nil
+            if enable {
+                self.inputFieldToken = $arrSearchText
+                    .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
+                    .removeDuplicates()
+                    .map{ (string) -> String? in
+                        if string.count < 2 {
+                            self.arrivalItems = []
+                            return nil
+                        }
+                        
+                        return string
                     }
-                    
-                    return string
-                }
-                .compactMap{ $0 }
-                .sink { (_) in
-                    //
-                } receiveValue: { [self] (query) in
-                    self.search(textQuery: query, arrivalData: true)
-                }
-                : nil //disable search if requested
+                    .compactMap{ $0 }
+                    .sink { (_) in
+                        //
+                    } receiveValue: { [self] (query) in
+                        self.search(textQuery: query, arrivalData: true)
+                    }
+            } else {
+                self.inputFieldToken = nil
+                self.clearStored(cancellAll: true)
+            }
         }
     }
     

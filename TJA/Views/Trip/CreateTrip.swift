@@ -23,82 +23,89 @@ struct CreateTrip: View {
     
     var body: some View {
         ScrollView(.vertical) {
-            VStack(spacing: 10) {
-                UnderlinedTextField(text: $name, placeholder: "Trip name")
-                    .frame(height: 48)
-                UnderlinedTextField(
-                    text: $searchViewModel.searchText,
-                    placeholder: "Trip destination",
-                    onEditingChanged: { self.searchViewModel.enableSearch($0) },
-                    onCommit: { self.searchViewModel.clearStored() })
-                    .frame(height: 48)
-                    .overlay(dropDownList, alignment: .top)
-                UnderlinedDateField(
-                    date: $startDate.didSet(execute: { self.startDateError = !self.checkStartDate($0)}),
-                    placeholder: "Trip date start", imageName: "calendar",
-                    activeColor: startDateError ? Color(UIColor.systemRed) : .mainRed)
-                    .frame(height: 48)
-                UnderlinedDateField(
-                    date: $endDate.didSet(execute: { self.endDateError = !self.checkEndDate($0)}),
-                    placeholder: "Trip date finish", imageName: "calendar",
-                    activeColor: endDateError ? Color(UIColor.systemRed) : .mainRed)
-                    .frame(height: 48)
-                
-                if startDateError || endDateError {
-                    Text("Select the correct \(startDateError ? "start" : endDateError ? "end" : "") date")
-                        .font(.system(size: 12))
-                        .foregroundColor(Color(UIColor.systemRed))
-                        .frame(alignment: .leading)
-                        .padding(.top, -4)
-                } else {
-                    Spacer().frame(height: 10)
-                }
-                
-                // Email button
-                Button(action: {
-                    print("DEBUG: -- Open email client button tapped")
-                    guard let url = URL(string: "message://") else { return }
-                    if UIApplication.shared.canOpenURL(url) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            ZStack(alignment: .top) {
+                VStack(spacing: 10) {
+                    UnderlinedTextField(text: $name, placeholder: "Trip name")
+                        .frame(height: 48)
+                    UnderlinedTextField(
+                        text: $searchViewModel.searchText,
+                        placeholder: "Trip destination",
+                        onEditingChanged: { self.searchViewModel.enableSearch($0) },
+                        onCommit: { self.searchViewModel.clearStored() })
+                        .frame(height: 48)
+                    UnderlinedDateField(
+                        date: $startDate.didSet(execute: { self.startDateError = !self.checkStartDate($0)}),
+                        placeholder: "Trip date start", imageName: "calendar",
+                        activeColor: startDateError ? Color(UIColor.systemRed) : .mainRed)
+                        .frame(height: 48)
+                    UnderlinedDateField(
+                        date: $endDate.didSet(execute: { self.endDateError = !self.checkEndDate($0)}),
+                        placeholder: "Trip date finish", imageName: "calendar",
+                        activeColor: endDateError ? Color(UIColor.systemRed) : .mainRed)
+                        .frame(height: 48)
+                    
+                    if startDateError || endDateError {
+                        Text("Select the correct \(startDateError ? "start" : endDateError ? "end" : "") date")
+                            .font(.system(size: 12))
+                            .foregroundColor(Color(UIColor.systemRed))
+                            .frame(alignment: .leading)
+                            .padding(.top, -4)
+                    } else {
+                        Spacer().frame(height: 10)
                     }
-                }){
-                    HStack(spacing: 20) {
-                        Text("Open email client".uppercased())
-                        Image(systemName: "envelope")
+                    
+                    // Email button
+                    Button(action: {
+                        print("DEBUG: -- Open email client button tapped")
+                        guard let url = URL(string: "message://") else { return }
+                        if UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        }
+                    }){
+                        HStack(spacing: 20) {
+                            Text("Open email client".uppercased())
+                            Image(systemName: "envelope")
+                        }
+                        .padding(.horizontal, 10)
+                        .frame(maxWidth: .infinity)
                     }
-                    .padding(.horizontal, 10)
-                    .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(FilledButtonStyle(filled: false))
-                .frame(height: 50)
-                
-                // Info label
-                Text(Constants.Text.supportInfoText)
-                    .font(.system(size: 15))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Color(UIColor.systemGray))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 2)
-                
-                // Save button
-                Button(action: {
-                    print("DEBUG: -- Save button pressed")
-                    self.saveTrip()
-                }){
-                    Text("Save".uppercased())
-                }
-                .buttonStyle(
-                    FilledButtonStyle(
-                        filled: true,
-                        color: formFilled ? .mainRed : Color(UIColor.systemGray)
+                    .buttonStyle(FilledButtonStyle(filled: false))
+                    .frame(height: 50)
+                    
+                    // Info label
+                    Text(Constants.Text.supportInfoText)
+                        .font(.system(size: 15))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Color(UIColor.systemGray))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 2)
+                    
+                    // Save button
+                    Button(action: {
+                        print("DEBUG: -- Save button pressed")
+                        self.saveTrip()
+                    }){
+                        Text("Save".uppercased())
+                    }
+                    .buttonStyle(
+                        FilledButtonStyle(
+                            filled: true,
+                            color: formFilled ? .mainRed : Color(UIColor.systemGray)
+                        )
                     )
-                )
-                .disabled(!formFilled)
-                .padding(.bottom, 10)
+                    .disabled(!formFilled)
+                    .padding(.bottom, 10)
+                    
+                }
+                .padding(.vertical, 30)
+                .padding(.horizontal, 16)
                 
+                if !searchViewModel.searchText.isEmpty {
+                    dropDownList
+                        .padding(.top, 48 + 10 + 40 + 30)
+                        .padding(.horizontal, 16)
+                }
             }
-            .padding(.vertical, 30)
-            .padding(.horizontal, 16)
         }
         .navigationBarTitle(Text("Add new trip".uppercased()), displayMode: .inline)
         .resignKeyboardOnDragGesture()
@@ -131,7 +138,6 @@ struct CreateTrip: View {
                 .fill(Color(UIColor.systemBackground))
                 .shadow(color: .black, radius: 4.0))
         .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
-        .offset(y: 40)
     }
     
     var formFilled: Bool {

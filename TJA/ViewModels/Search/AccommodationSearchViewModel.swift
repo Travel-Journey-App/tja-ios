@@ -35,24 +35,28 @@ class AccommodationSearchViewModel: NSObject, ObservableObject, SearchService {
     }
     
     func enableSearch(_ enable: Bool) {
-        self.inputFieldToken = enable ? $searchText
-            .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
-            .removeDuplicates()
-            .map{ (string) -> String? in
-                if string.count < 2 {
-                    self.items = []
-                    return nil
+        if enable {
+            self.inputFieldToken = $searchText
+                .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
+                .removeDuplicates()
+                .map{ (string) -> String? in
+                    if string.count < 2 {
+                        self.items = []
+                        return nil
+                    }
+                    
+                    return string
                 }
-                
-                return string
-            }
-            .compactMap{ $0 }
-            .sink { (_) in
-                //
-            } receiveValue: { [self] (query) in
-                self.search(textQuery: query)
-            }
-            : nil //disable search if requested
+                .compactMap{ $0 }
+                .sink { (_) in
+                    //
+                } receiveValue: { [self] (query) in
+                    self.search(textQuery: query)
+                }
+        } else {
+            self.inputFieldToken = nil
+            clearStored(cancellAll: true)
+        }
     }
     
     func clearStored(cancellAll: Bool = false) {
