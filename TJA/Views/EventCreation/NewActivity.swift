@@ -16,12 +16,11 @@ struct NewActivity: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: ActivityViewModel
     
-    @State var query: String = ""
+    @State var selectedLocation: SuggestionPlace? = nil
+    
     @State var name: String = ""
     @State var address: String = ""
     @State var time: Date? = nil
-    
-    @State var event: Activity.Event = .food
     
     let filters: [Activity.Event] = [.museum, .gallery, .sightseeing, .food, .bar, .fun]
     
@@ -33,10 +32,10 @@ struct NewActivity: View {
                     CircleIcon(
                         icon: filters[i].icon,
                         size: 35,
-                        backgroundColor: filters[i] == event
+                        backgroundColor: filters[i] == self.searchViewModel.event
                             ? Color.mainRed : Color(UIColor.systemBackground))
                         .onTapGesture {
-                            self.event = filters[i]
+                            self.searchViewModel.event = filters[i]
                         }
                 }
             }
@@ -45,13 +44,19 @@ struct NewActivity: View {
             
             ScrollView(.vertical) {
                 VStack(alignment: .center, spacing: 10) {
-                    TextField("Search...", text: $query)
-                        .textFieldStyle(
-                            BorderedTextField(color: .lightRedBorder, borderSize: 1, cornerRadius: 10)
-                        )
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                        .frame(height: 30)
-                        .padding(.bottom, 6)
+                    TextField(
+                        "Search...",
+                        text: $searchViewModel.searchText,
+                        onEditingChanged: { self.searchViewModel.enableSearch($0) },
+                        onCommit:  { self.searchViewModel.clearStored() }
+                    )
+                    .textFieldStyle(
+                        BorderedTextField(color: .lightRedBorder, borderSize: 1, cornerRadius: 10)
+                    )
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    .frame(height: 30)
+                    .padding(.bottom, 6)
+                    .overlay(dropDownList, alignment: .top)
 
                     TextField("Name", text: $name)
                         .textFieldStyle(BorderedTextField())
@@ -77,6 +82,9 @@ struct NewActivity: View {
             
             Button(action: {
                 print("DEBUG: -- Save button pressed")
+                if let location = selectedLocation {
+                    self.save(location, time: self.time)
+                }
             }){
                 Text("Save".uppercased())
             }
@@ -94,10 +102,75 @@ struct NewActivity: View {
         .padding(.horizontal, 15)
         .padding(.vertical, 15)
         .navigationBarTitle(Text("Add Event".uppercased()), displayMode: .inline)
+        .onAppear(perform: configureViewModel)
     }
     
     var formFilled: Bool {
-        true
+        selectedLocation != nil
+    }
+    
+    var dropDownList: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(0..<searchViewModel.items.count, id: \.self) { i in
+                Text(searchViewModel.items[i].name)
+                    .font(.system(size: 16))
+                    .foregroundColor(Color(UIColor.label))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(height: 32)
+                    .onTapGesture {
+                        print("DEBUG -- \(i) tapped")
+                        let place = searchViewModel.items[i]
+                        self.searchViewModel.searchText = place.name
+                        self.name = place.name
+                        self.address = self.searchViewModel.location.capitalizedFirstLetter()
+                        self.selectedLocation = place
+                        self.hideKeyboard()
+                        self.searchViewModel.clearStored(cancellAll: true)
+                    }
+            }.padding(.horizontal, 12)
+        }
+        .background(
+            Rectangle()
+                .fill(Color(UIColor.systemBackground))
+                .shadow(color: .black, radius: 4.0))
+        .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
+        .offset(y: 30)
+    }
+    
+    private func save(_ place: SuggestionPlace, time: Date? = nil) {
+        if let day = self.viewModel.activeDayNumber,
+           let index = self.viewModel.activeDayIndex {
+            
+            let request: NewActivityRequest
+            
+            if let exactTime = time {
+                let timeValue = exactTime.timeIntervalSince(Date().startOf(.day))
+                let interval = TimeInterval(.day * Double(day - 1) + timeValue)
+                request = place.activityRequest(
+                    with: self.viewModel.startDate.addingTimeInterval(interval)
+                )
+            } else {
+                request = place.activityRequest(for: self.viewModel.startDate, day: day)
+            }
+            self.viewModel.create(request, in: index) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
+    }
+    
+    private func configureViewModel() {
+        if let locationName = self.viewModel.trip.location?.placeName {
+            self.searchViewModel.configure(location: locationName.lowercased())
+        }
+        self.searchViewModel.resetData()
+        self.$searchViewModel.event.didSet { _ in resetFields() }
+    }
+    
+    private func resetFields() {
+        self.selectedLocation = nil
+        self.time = nil
+        self.name = ""
+        self.address = ""
     }
 }
 

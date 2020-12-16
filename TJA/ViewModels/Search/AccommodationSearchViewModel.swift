@@ -23,22 +23,19 @@ class AccommodationSearchViewModel: NSObject, ObservableObject, SearchService {
     init(apiService: APIService = APISession.shared) {
         self.apiSession = apiService
         super.init()
-        self.configureSearch()
     }
     
     func configure(location: String) {
         self.location = location
     }
     
-    func clearStored(cancellAll: Bool = false) {
-        if cancellAll {
-            self.cancellationTokens.removeAll()
-        }
-        self.items.removeAll(keepingCapacity: true)
+    func resetData() {
+        clearStored()
+        searchText = ""
     }
     
-    private func configureSearch() {
-        self.inputFieldToken = $searchText
+    func enableSearch(_ enable: Bool) {
+        self.inputFieldToken = enable ? $searchText
             .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .map{ (string) -> String? in
@@ -55,6 +52,15 @@ class AccommodationSearchViewModel: NSObject, ObservableObject, SearchService {
             } receiveValue: { [self] (query) in
                 self.search(textQuery: query)
             }
+            : nil //disable search if requested
+    }
+    
+    func clearStored(cancellAll: Bool = false) {
+        if cancellAll {
+            self.inputFieldToken?.cancel()
+            self.cancellationTokens.removeAll()
+        }
+        self.items.removeAll(keepingCapacity: true)
     }
     
     private func search(textQuery: String) {

@@ -84,4 +84,17 @@ extension SuggestionPlace {
             activityType: "event",
             eventType: category.activity.rawValue)
     }
+    
+    func activityRequest(with fixedTime: Date) -> ActivityRequest.New.Event {
+        return .init(
+            name: name,
+            description: description,
+            startTime: fixedTime,
+            endTime: fixedTime,
+            note: "",
+            lat: location.lat,
+            lon: location.lon,
+            activityType: "event",
+            eventType: category.activity.rawValue)
+    }
 }

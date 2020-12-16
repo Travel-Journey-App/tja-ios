@@ -12,15 +12,20 @@ import Combine
 class DestinationSearchViewModel: NSObject, ObservableObject, SearchService {
     
     var apiSession: APIService
+    var inputFieldToken: AnyCancellable?
     var cancellationTokens = Set<AnyCancellable>()
     
     @Published private(set) var items = [Location]()
     @Published var searchText: String = ""
     
-    init(apiService: APIService) {
+    init(apiService: APIService = APISession.shared) {
         self.apiSession = apiService
         super.init()
-        self.configureSearch()
+    }
+    
+    func resetData() {
+        clearStored()
+        searchText = ""
     }
     
     func clearStored(cancellAll: Bool = false) {
@@ -31,8 +36,8 @@ class DestinationSearchViewModel: NSObject, ObservableObject, SearchService {
         
     }
     
-    private func configureSearch() {
-        $searchText
+    func enableSearch(_ enable: Bool) {
+        self.inputFieldToken = enable ? $searchText
             .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .map{ (string) -> String? in
@@ -48,7 +53,8 @@ class DestinationSearchViewModel: NSObject, ObservableObject, SearchService {
                 //
             } receiveValue: { [self] (query) in
                 self.search(textQuery: query)
-            }.store(in: &cancellationTokens)
+            }
+            : nil //disable search if requested
     }
     
     private func search(textQuery: String) {

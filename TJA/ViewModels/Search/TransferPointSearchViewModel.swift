@@ -12,8 +12,7 @@ import Combine
 class TransferPointSearchViewModel: NSObject, ObservableObject, SearchService {
     
     var apiSession: APIService
-    var inputDestinationFieldToken: AnyCancellable?
-    var inputArrivalFieldToken: AnyCancellable?
+    var inputFieldToken: AnyCancellable?
     var cancellationTokens = Set<AnyCancellable>()
     
     @Published private(set) var departureItems = [Location]()
@@ -22,16 +21,27 @@ class TransferPointSearchViewModel: NSObject, ObservableObject, SearchService {
     @Published var arrSearchText: String = ""
     @Published var transfer: Activity.Transfer = .plane
     
+    private(set) var target: Activity.Transfer.Direction = .departure
     private(set) var location: String = "tokyo"
     
     init(apiService: APIService = APISession.shared) {
         self.apiSession = apiService
         super.init()
-        self.configureSearch()
     }
     
     func configure(location: String) {
         self.location = location
+    }
+    
+    func configure(target: Activity.Transfer.Direction) {
+        self.target = target
+    }
+    
+    func resetData() {
+        clearStored()
+        depSearchText = ""
+        arrSearchText = ""
+        transfer = .plane
     }
     
     func clearStored(cancellAll: Bool = false) {
@@ -42,42 +52,47 @@ class TransferPointSearchViewModel: NSObject, ObservableObject, SearchService {
         self.arrivalItems.removeAll(keepingCapacity: true)
     }
     
-    private func configureSearch() {
-        self.inputDestinationFieldToken = $depSearchText
-            .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
-            .removeDuplicates()
-            .map{ (string) -> String? in
-                if string.count < 2 {
-                    self.departureItems = []
-                    return nil
+    func enableSearch(_ enable: Bool) {
+        switch self.target {
+        case .departure:
+            self.inputFieldToken = enable ? $depSearchText
+                .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
+                .removeDuplicates()
+                .map{ (string) -> String? in
+                    if string.count < 2 {
+                        self.departureItems = []
+                        return nil
+                    }
+                    
+                    return string
                 }
-                
-                return string
-            }
-            .compactMap{ $0 }
-            .sink { (_) in
-                //
-            } receiveValue: { [self] (query) in
-                self.search(textQuery: query, arrivalData: false)
-            }
-        
-        self.inputArrivalFieldToken = $arrSearchText
-            .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
-            .removeDuplicates()
-            .map{ (string) -> String? in
-                if string.count < 2 {
-                    self.arrivalItems = []
-                    return nil
+                .compactMap{ $0 }
+                .sink { (_) in
+                    //
+                } receiveValue: { [self] (query) in
+                    self.search(textQuery: query, arrivalData: false)
                 }
-                
-                return string
-            }
-            .compactMap{ $0 }
-            .sink { (_) in
-                //
-            } receiveValue: { [self] (query) in
-                self.search(textQuery: query, arrivalData: true)
-            }
+                : nil //disable search if requested
+        case .arrival:
+            self.inputFieldToken = enable ? $arrSearchText
+                .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
+                .removeDuplicates()
+                .map{ (string) -> String? in
+                    if string.count < 2 {
+                        self.arrivalItems = []
+                        return nil
+                    }
+                    
+                    return string
+                }
+                .compactMap{ $0 }
+                .sink { (_) in
+                    //
+                } receiveValue: { [self] (query) in
+                    self.search(textQuery: query, arrivalData: true)
+                }
+                : nil //disable search if requested
+        }
     }
     
     private func search(textQuery: String, arrivalData: Bool) {

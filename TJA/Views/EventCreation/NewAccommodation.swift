@@ -29,17 +29,19 @@ struct NewAccommodation: View {
             
             ScrollView(.vertical) {
                 VStack(alignment: .center, spacing: 10) {
-                    TextField("Search...", text: $searchViewModel.searchText, onCommit:  {
-                        self.searchViewModel.clearStored()
-                    })
-                        .textFieldStyle(
-                            BorderedTextField(color: .lightRedBorder, borderSize: 1, cornerRadius: 10)
-                        )
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                        .frame(height: 30)
-                        .padding(.bottom, 6)
-                        .overlay(dropDownList, alignment: .top)
-
+                    TextField("Search...",
+                        text: $searchViewModel.searchText,
+                        onEditingChanged: { self.searchViewModel.enableSearch($0) },
+                        onCommit:  { self.searchViewModel.clearStored() }
+                    )
+                    .textFieldStyle(
+                        BorderedTextField(color: .lightRedBorder, borderSize: 1, cornerRadius: 10)
+                    )
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    .frame(height: 30)
+                    .padding(.bottom, 6)
+                    .overlay(dropDownList, alignment: .top)
+                    
                     TextField("Name", text: $name)
                         .textFieldStyle(BorderedTextField())
                     TextField("Address", text: $address)
@@ -50,12 +52,13 @@ struct NewAccommodation: View {
                         formatter: fixedTimeFormatter,
                         mode: UIDatePicker.Mode.time
                     )
-                        .padding(.horizontal, 12)
-                        .frame(height: 50)
-                        .background(
-                            RoundedRectangle(cornerRadius: 2)
-                                .strokeBorder(Color.mainRed, lineWidth: 2)
-                        )
+                    .padding(.horizontal, 12)
+                    .frame(height: 50)
+                    .background(
+                        RoundedRectangle(cornerRadius: 2)
+                            .strokeBorder(Color.mainRed, lineWidth: 2)
+                    )
+                    
                     TextField("Check-in", text: $direction)
                         .textFieldStyle(BorderedTextField())
                     
@@ -69,7 +72,7 @@ struct NewAccommodation: View {
             Button(action: {
                 print("DEBUG: -- Save button pressed")
                 if let loc = self.location, let d = self.checkin {
-                    self.addItem(loc, time: d)
+                    self.save(loc, time: d)
                 }
             }){
                 Text("Save".uppercased())
@@ -88,6 +91,7 @@ struct NewAccommodation: View {
         .padding(.horizontal, 15)
         .padding(.vertical, 15)
         .navigationBarTitle(Text("Add Accommodation".uppercased()), displayMode: .inline)
+        .onAppear(perform: configureViewModel)
     }
     
     var formFilled: Bool {
@@ -110,7 +114,7 @@ struct NewAccommodation: View {
                         self.location = dest
                         self.hideKeyboard()
                         self.searchViewModel.clearStored(cancellAll: true)
-                        self.address = "Tokyo"
+                        self.address = self.searchViewModel.location.capitalizedFirstLetter()
                         self.direction = "check-in"
                     }
             }.padding(.horizontal, 12)
@@ -123,7 +127,7 @@ struct NewAccommodation: View {
         .offset(y: 30)
     }
     
-    func addItem(_ location: AccommodationLocation, time: Date) {
+    func save(_ location: AccommodationLocation, time: Date) {
         print("Time: \(time)")
         if let day = self.viewModel.activeDayNumber,
            let index = self.viewModel.activeDayIndex {
@@ -139,6 +143,13 @@ struct NewAccommodation: View {
                 self.presentationMode.wrappedValue.dismiss()
             }
         }
+    }
+    
+    private func configureViewModel() {
+        if let locationName = self.viewModel.trip.location?.placeName {
+            self.searchViewModel.configure(location: locationName.lowercased())
+        }
+        self.searchViewModel.resetData()
     }
 }
 

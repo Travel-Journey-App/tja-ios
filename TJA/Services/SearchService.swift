@@ -19,7 +19,7 @@ protocol SearchService {
     func search(wish category: WishItem, for destination: String) -> SearchResponse<SuggestionPlace>
     func search(accommodation query: String, for destination: String) -> SearchResponse<AccommodationLocation>
     func search(transferPoint query: String, in category: String, for destination: String) -> SearchResponse<TransferLocation>
-    func search(eventPlace query: String, in category: String, for destination: String)
+    func search(eventPlace query: String, in category: String, for destination: String) -> SearchResponse<SuggestionPlace>
 }
 
 extension SearchService {
@@ -53,14 +53,14 @@ extension SearchService {
             .eraseToAnyPublisher()
     }
     
-    func search(eventPlace query: String, in category: String, for destination: String) {
-//        var decoder = JSONDecoder()
-//        decoder.keyDecodingStrategy = .convertFromSnakeCase
-//        return apiSession
-//            .request(
-//                with: SearchEndpoint.suggestion(category: category.rawValue, destination: destination),
-//                with: decoder
-//            )
-//            .eraseToAnyPublisher()
+    func search(eventPlace query: String, in category: String, for destination: String) -> SearchResponse<SuggestionPlace> {
+        var decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return apiSession
+            .request(
+                with: SearchEndpoint.eventPlace(query: query, category: category, destination: destination),
+                with: decoder
+            )
+            .eraseToAnyPublisher()
     }
 }

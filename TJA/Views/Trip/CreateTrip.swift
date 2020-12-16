@@ -17,7 +17,7 @@ struct CreateTrip: View {
     
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var viewModel: TripsViewModel
-    @ObservedObject var searchViewModel = DestinationSearchViewModel(apiService: APISession.shared)
+    @ObservedObject var searchViewModel = DestinationSearchViewModel()
     
     var body: some View {
         ScrollView(.vertical) {
@@ -27,7 +27,8 @@ struct CreateTrip: View {
                 UnderlinedTextField(
                     text: $searchViewModel.searchText,
                     placeholder: "Trip destination",
-                    onEditingEnded: { self.searchViewModel.clearStored() })
+                    onEditingChanged: { self.searchViewModel.enableSearch($0) },
+                    onCommit: { self.searchViewModel.clearStored() })
                     .frame(height: 48)
                     .overlay(dropDownList, alignment: .top)
                 UnderlinedDateField(date: $startDate, placeholder: "Trip date start", imageName: "calendar")
@@ -85,6 +86,7 @@ struct CreateTrip: View {
         }
         .navigationBarTitle(Text("Add new trip".uppercased()), displayMode: .inline)
         .resignKeyboardOnDragGesture()
+        .onAppear(perform: configureViewModel)
     }
     
     var dropDownList: some View {
@@ -135,6 +137,10 @@ struct CreateTrip: View {
             endDate: end
         )
         self.presentation.wrappedValue.dismiss()
+    }
+    
+    private func configureViewModel() {
+        self.searchViewModel.resetData()
     }
 }
 

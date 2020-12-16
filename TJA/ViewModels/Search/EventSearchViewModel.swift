@@ -15,7 +15,7 @@ class EventSearchViewModel: NSObject, ObservableObject, SearchService {
     var inputFieldToken: AnyCancellable?
     var cancellationTokens = Set<AnyCancellable>()
     
-    @Published private(set) var items = [AccommodationLocation]()
+    @Published private(set) var items = [SuggestionPlace]()
     @Published var searchText: String = ""
     @Published var event: Activity.Event = .museum
     
@@ -23,21 +23,29 @@ class EventSearchViewModel: NSObject, ObservableObject, SearchService {
     
     init(apiService: APIService = APISession.shared) {
         self.apiSession = apiService
+        super.init()
+    }
+    
+    func resetData() {
+        clearStored()
+        searchText = ""
+        event = .museum
     }
     
     func clearStored(cancellAll: Bool = false) {
         if cancellAll {
+            self.inputFieldToken?.cancel()
             self.cancellationTokens.removeAll()
         }
-//        self.items.removeAll(keepingCapacity: true)
+        self.items.removeAll(keepingCapacity: true)
     }
     
     func configure(location: String) {
         self.location = location
     }
     
-    private func configureSearch() {
-        self.inputFieldToken = $searchText
+    func enableSearch(_ enable: Bool) {
+        self.inputFieldToken = enable ? $searchText
             .debounce(for: .milliseconds(350), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .map{ (string) -> String? in
@@ -54,18 +62,18 @@ class EventSearchViewModel: NSObject, ObservableObject, SearchService {
             } receiveValue: { [self] (query) in
                 self.search(textQuery: query)
             }
+            : nil //disable search if requested
     }
     
     private func search(textQuery: String) {
-        self.search(eventPlace: textQuery, in: event.rawValue, for: location)
-//            .sinkToResult { result in
-//            switch result {
-//            case let .failure(err):
-//                print("DEBUG: -- EventSearch -- Error -- \(err.localizedDescription)")
-//            case let .success(response):
-//                print("DEBUG: -- EventSearch -- Success")
-//                self.items = response.items //.compactMap { $0.location }
-//            }
-//        }.store(in: &cancellationTokens)
+        self.search(eventPlace: textQuery, in: event.rawValue, for: location).sinkToResult { result in
+            switch result {
+            case let .failure(err):
+                print("DEBUG: -- EventSearch -- Error -- \(err.localizedDescription)")
+            case let .success(response):
+                print("DEBUG: -- EventSearch -- Success")
+                self.items = response.items //.compactMap { $0.location }
+            }
+        }.store(in: &cancellationTokens)
     }
 }

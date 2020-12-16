@@ -48,26 +48,42 @@ struct NewTransfer: View {
             ScrollView(.vertical) {
                 VStack(alignment: .center, spacing: 10) {
                     
-                    TextField("Departure point", text: $searchViewModel.depSearchText)
-                        .textFieldStyle(BorderedTextField())
-                        .overlay(createDropDownList(
-                                    searchViewModel.departureItems,
-                                    tapCallback: { loc in
-                                self.searchViewModel.depSearchText = loc.placeName
-                                self.departurePlace = loc
-                                self.hideKeyboard()
-                                self.searchViewModel.clearStored(cancellAll: true)
-                            }), alignment: .top)
-                    TextField("Arrival point", text: $searchViewModel.arrSearchText)
-                        .textFieldStyle(BorderedTextField())
-                        .overlay(createDropDownList(
-                                    searchViewModel.arrivalItems,
-                                    tapCallback: { loc in
-                            self.searchViewModel.arrSearchText = loc.placeName
-                            self.arrivalPlace = loc
-                            self.hideKeyboard()
-                            self.searchViewModel.clearStored(cancellAll: true)
-                        }), alignment: .top)
+                    TextField(
+                        "Departure point",
+                        text: $searchViewModel.depSearchText,
+                        onEditingChanged: { val in
+                            if val { self.searchViewModel.configure(target: .departure)}
+                            self.searchViewModel.enableSearch(val)
+                        },
+                        onCommit:  { self.searchViewModel.clearStored() }
+                    )
+                    .textFieldStyle(BorderedTextField())
+                    .overlay(createDropDownList(
+                                searchViewModel.departureItems,
+                                tapCallback: { loc in
+                                    self.searchViewModel.depSearchText = loc.placeName
+                                    self.departurePlace = loc
+                                    self.hideKeyboard()
+                                    self.searchViewModel.clearStored(cancellAll: true)
+                                }), alignment: .top)
+                    TextField(
+                        "Arrival point",
+                        text: $searchViewModel.arrSearchText,
+                        onEditingChanged: { val in
+                            if val { self.searchViewModel.configure(target: .arrival)}
+                            self.searchViewModel.enableSearch(val)
+                        },
+                        onCommit:  { self.searchViewModel.clearStored() }
+                    )
+                    .textFieldStyle(BorderedTextField())
+                    .overlay(createDropDownList(
+                                searchViewModel.arrivalItems,
+                                tapCallback: { loc in
+                                    self.searchViewModel.arrSearchText = loc.placeName
+                                    self.arrivalPlace = loc
+                                    self.hideKeyboard()
+                                    self.searchViewModel.clearStored(cancellAll: true)
+                                }), alignment: .top)
                     
                     DateField(
                         "Time",
@@ -97,8 +113,8 @@ struct NewTransfer: View {
             
             Button(action: {
                 print("DEBUG: -- Save button pressed")
-                if let d = departurePlace, let t  = date {
-                    self.addItem(d, time: t)
+                if let departure = departurePlace, let time  = date {
+                    self.save(departure, time: time)
                 }
             }){
                 Text("Save".uppercased())
@@ -117,6 +133,7 @@ struct NewTransfer: View {
         .padding(.horizontal, 15)
         .padding(.vertical, 15)
         .navigationBarTitle(Text("Add Transfer".uppercased()), displayMode: .inline)
+        .onAppear(perform: configureViewModel)
     }
     
     var numberPlaceholder: String {
@@ -157,14 +174,14 @@ struct NewTransfer: View {
         .offset(y: 40)
     }
     
-    private func addItem(_ location: Location, time: Date) {
+    private func save(_ location: Location, time: Date) {
         if let day = self.viewModel.activeDayNumber,
            let index = self.viewModel.activeDayIndex {
             let flightDescription = !flight.isEmpty ? "\(numberPlaceholder): \(flight)" : ""
             let seatDescription = !seat.isEmpty ? "Seat: \(seat)" : ""
             
             let description = !flightDescription.isEmpty && !seatDescription.isEmpty ?
-            "\(flightDescription)\n\(seatDescription)" : flightDescription + seatDescription
+                "\(flightDescription)\n\(seatDescription)" : flightDescription + seatDescription
             
             let timeValue = time.timeIntervalSince(Date().startOf(.day))
             
@@ -181,10 +198,20 @@ struct NewTransfer: View {
         }
     }
     
+    private func configureViewModel() {
+        if let locationName = self.viewModel.trip.location?.placeName {
+            self.searchViewModel.configure(location: locationName.lowercased())
+        }
+        self.searchViewModel.resetData()
+        self.$searchViewModel.transfer.didSet { _ in resetFields() }
+    }
+    
     private func resetFields() {
         self.seat = ""
         self.flight = ""
         self.date = nil
+        self.departurePlace = nil
+        self.arrivalPlace = nil
     }
 }
 
