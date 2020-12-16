@@ -31,7 +31,6 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
                 }
                 print("DEBUG: -- TripList -- Success")
                 self.trips = response.body?.compactMap { SwipeableItem<Trip>($0.trip) } ?? []
-                print(self.trips)
             }
         }
         self.cancellationTokens.insert(token)
@@ -57,7 +56,6 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
                 print("DEBUG: -- NewTrip -- Success")
                 if let item = response.body {
                     self.trips.append(SwipeableItem<Trip>(item.trip))
-                    print(item.trip)
                 }
             }
         }

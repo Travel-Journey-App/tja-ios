@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9E17EF07256B1D85005F2BDE /* MockupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E17EF06256B1D85005F2BDE /* MockupData.swift */; };
-		9E17EF0A256B2984005F2BDE /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E17EF09256B2984005F2BDE /* EventService.swift */; };
 		9E263642253DA29000928B38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E263641253DA29000928B38 /* Assets.xcassets */; };
 		9E263645253DA29000928B38 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E263644253DA29000928B38 /* Preview Assets.xcassets */; };
 		9E263650253DA62800928B38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E26364F253DA62800928B38 /* LaunchScreen.storyboard */; };
@@ -128,7 +127,6 @@
 
 /* Begin PBXFileReference section */
 		9E17EF06256B1D85005F2BDE /* MockupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupData.swift; sourceTree = "<group>"; };
-		9E17EF09256B2984005F2BDE /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		9E26363A253DA28900928B38 /* TJA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TJA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E263641253DA29000928B38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E263644253DA29000928B38 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -598,7 +596,6 @@
 			children = (
 				9ED5072E254B1EEB00401E2A /* NetworkMonitor.swift */,
 				9EB47CF22566E71C0065C641 /* LocationService.swift */,
-				9E17EF09256B2984005F2BDE /* EventService.swift */,
 				9E58C72F2584050E002688EE /* AuthService.swift */,
 				9E6A548C2584576A0041A340 /* TripService.swift */,
 				9E64181F258746D7009709D4 /* SearchService.swift */,
@@ -773,7 +770,6 @@
 				9E58C73A258421F8002688EE /* Color.swift in Sources */,
 				9E5A8ED3256AA63B0037D742 /* EventIcons.swift in Sources */,
 				9E58C72A2583F1DE002688EE /* APIResponse.swift in Sources */,
-				9E17EF0A256B2984005F2BDE /* EventService.swift in Sources */,
 				9E58C74825844254002688EE /* TripsViewModel.swift in Sources */,
 				9E263667253DDDD700928B38 /* SignIn.swift in Sources */,
 				9E263659253DB15200928B38 /* SceneDelegate.swift in Sources */,

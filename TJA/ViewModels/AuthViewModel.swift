@@ -175,7 +175,9 @@ extension AuthViewModel: GIDSignInDelegate {
         }
         // If the previous `error` is null, then the sign-in was succesful
         if let token = user.authentication.idToken {
+            #if DEBUG
             print("DEBUG: -- Google Sign In -- idToken: \(token)")
+            #endif
             
             // TODO: api call
             self.cancellationToken = self.oauth(idToken: token)
@@ -187,7 +189,9 @@ extension AuthViewModel: GIDSignInDelegate {
                         if let err = response.getError() {
                             print("DEBUG: -- Google OAuth -- Response error -- \(err.localizedDescription)")
                         }
+                        #if DEBUG
                         print("DEBUG: -- Google OAuth -- Success -- \(response.body)")
+                        #endif
                         UserDefaultsConfig.authToken = response.body?.secret
                         UserDefaultsConfig.googleProviderWasUsed = true
                         self.currentUser = response.body?.user

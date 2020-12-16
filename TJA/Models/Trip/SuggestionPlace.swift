@@ -57,6 +57,9 @@ struct SuggestionPlace: Hashable, Codable, Identifiable, Comparable, PlaceItem {
     }
     
     static func < (lhs: SuggestionPlace, rhs: SuggestionPlace) -> Bool {
+        if lhs.rating == rhs.rating {
+            return lhs.name < rhs.name
+        }
         return lhs.rating < rhs.rating
     }
     

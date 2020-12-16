@@ -29,7 +29,9 @@ struct APISession: APIService {
             .receive(on: DispatchQueue.main)
             .mapError { _ in .unknown }
             .flatMap { data, response -> AnyPublisher<T, APIError> in
+                #if DEBUG
                 print(String(data: data, encoding: .utf8))
+                #endif
                 if let response = response as? HTTPURLResponse {
                     if HTTPCodes.success.contains(response.statusCode) {
                     return Just(data)
