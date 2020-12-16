@@ -29,17 +29,7 @@ struct WishItemsContainer: View {
             
             if popupViewModel.hasValue {
                 PopUpContainer(isShown: isShown) {
-                    SuggestionCard(
-                        suggestion: popupViewModel.selected ?? viewModel.items[0],
-                        wishTitle: viewModel.wish.rawValue,
-                        onDismiss: { self.popupViewModel.reset() },
-                        onAdd: {
-                            if let place = popupViewModel.selected {
-                                self.onAdd?(place)
-                            }
-                            self.popupViewModel.reset()
-                        })
-                        .padding(.horizontal, 30)
+                    popupView
                 }
             }
         }
@@ -47,6 +37,25 @@ struct WishItemsContainer: View {
         .onAppear {
             self.viewModel.fetchItems()
             self.popupViewModel.reset()
+        }
+    }
+    
+    var popupView: some View {
+        if let items = viewModel.items.value {
+            return SuggestionCard(
+                suggestion: popupViewModel.selected ?? items[0],
+                wishTitle: viewModel.wish.rawValue,
+                onDismiss: { self.popupViewModel.reset() },
+                onAdd: {
+                    if let place = popupViewModel.selected {
+                        self.onAdd?(place)
+                    }
+                    self.popupViewModel.reset()
+                })
+                .padding(.horizontal, 30)
+                .toAnyView()
+        } else {
+            return EmptyView().toAnyView()
         }
     }
 }

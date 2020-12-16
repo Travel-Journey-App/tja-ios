@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import SwiftUI
 
 
-//typealias LoadableItem<Value> = Binding<Loadable<Value>>
+typealias LoadableItem<Value> = Binding<Loadable<Value>>
 
 enum Loadable<Value> {
     

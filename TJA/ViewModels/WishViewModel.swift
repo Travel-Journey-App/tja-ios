@@ -16,7 +16,7 @@ class WishViewModel: NSObject, ObservableObject, SearchService {
     var apiSession: APIService
     var cancellationToken: AnyCancellable?
     
-    @Published var items = [SuggestionPlace]()
+    @Published var items: Loadable<[SuggestionPlace]> = .idle
     @Published var locations = [Place<SuggestionPlace>]()
     
     init(wish: WishItem, location: Location, apiService: APIService) {
@@ -26,19 +26,24 @@ class WishViewModel: NSObject, ObservableObject, SearchService {
     }
     
     func fetchItems() {
+        self.items = .loading
         self.cancellationToken = self.search(wish: wish, for: location.placeName)
             .sinkToResult { result in
                 switch result {
                 case let .failure(err):
                     print("DEBUG: -- WishItems -- Error -- \(err.localizedDescription)")
+                    self.items = .failed(err)
                 case let .success(response):
                     print("DEBUG: -- WishItems -- Success")
-                    self.items = response.items.sorted(by: { $0 > $1 })
+                    self.items = .loaded(response.items.sorted(by: { $0 > $1 }))
+                    self.updateLocations()
                 }
             }
     }
     
     func updateLocations() {
-        locations = items.compactMap { Place<SuggestionPlace>($0) }
+        if let places = items.value {
+            locations = places.compactMap { Place<SuggestionPlace>($0) }
+        }
     }
 }
