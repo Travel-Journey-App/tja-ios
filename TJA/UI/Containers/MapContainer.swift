@@ -23,6 +23,7 @@ struct MapContainer: View {
     @EnvironmentObject var popupViewModel: PopupViewModel
     
     var location: Location? = nil
+    var dataSource: DataSource = .activity
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -41,7 +42,9 @@ struct MapContainer: View {
             
             VStack(alignment: .leading) {
                 // Filters
-                MapFilters(daysCount: activityViewModel.daysCount, onFilterChanged: applyFilters)
+                if dataSource == .activity {
+                    MapFilters(daysCount: activityViewModel.daysCount, onFilterChanged: applyFilters)
+                }
                 Spacer()
                 
                 // Current location button

@@ -29,3 +29,16 @@ class PopupViewModel: NSObject, ObservableObject {
         return self.activity
     }
 }
+
+class PopupSuggestionViewModel: NSObject, ObservableObject {
+    
+    @Published var selectedIndex: Int? = nil
+    
+    var hasValue: Bool {
+        selectedIndex != nil
+    }
+    
+    func reset() {
+        selectedIndex = nil
+    }
+}

@@ -30,6 +30,7 @@ struct WishList: View {
                                     location: viewModel.trip.location ?? Constants.defaultLocation,
                                     apiService: APISession.shared
                                 ))
+                            .environmentObject(PopupSuggestionViewModel())
                     ) {
                         ShadowImage(name: wish.image)
                             .frame(width: 128, height: 128, alignment: .center)

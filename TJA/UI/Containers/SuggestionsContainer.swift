@@ -11,25 +11,17 @@ import SwiftUI
 struct SuggestionsContainer: View {
     
     @EnvironmentObject var viewModel: WishViewModel
-    
-    @State var selectedIndex: Int? = nil
-    
-    var onAdd: ((SuggestionPlace) -> ())?
+    @EnvironmentObject var popupViewModel: PopupSuggestionViewModel
     
     var body: some View {
         
-        let isSelected = Binding<Bool>(
-            get: { return selectedIndex != nil },
-            set: { if !$0 { self.selectedIndex = nil} }
-        )
-        
-        return ZStack(alignment: .top) {
+        ZStack(alignment: .top) {
             if viewModel.items.count > 0 {
                 ScrollView {
                     VStack(spacing: 15) {
                         ForEach(0..<viewModel.items.count, id: \.self) { i in
                             SuggestionCell(suggestion: viewModel.items[i])
-                                .onTapGesture { self.selectedIndex = i }
+                                .onTapGesture { self.popupViewModel.selectedIndex = i }
                         }
                     }
                     .padding(.vertical, 15)
@@ -40,23 +32,6 @@ struct SuggestionsContainer: View {
                     .font(.system(size: 20))
                     .foregroundColor(.mainRed)
                     .multilineTextAlignment(.center)
-            }
-            if selectedIndex != nil {
-                PopUpContainer(isShown: isSelected) {
-                    SuggestionCard(
-                        suggestion: viewModel.items[selectedIndex ?? 0],
-                        wishTitle: viewModel.wish.rawValue,
-                        onDismiss: {
-                            self.selectedIndex = nil
-                        },
-                        onAdd: {
-                            if let index = selectedIndex {
-                                self.onAdd?(viewModel.items[index])
-                            }
-                            self.selectedIndex = nil
-                        })
-                        .padding(.horizontal, 30)
-                }
             }
         }
     }
