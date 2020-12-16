@@ -32,13 +32,13 @@ class PopupViewModel: NSObject, ObservableObject {
 
 class PopupSuggestionViewModel: NSObject, ObservableObject {
     
-    @Published var selectedIndex: Int? = nil
+    @Published var selected: SuggestionPlace? = nil
     
     var hasValue: Bool {
-        selectedIndex != nil
+        selected != nil
     }
     
     func reset() {
-        selectedIndex = nil
+        selected = nil
     }
 }

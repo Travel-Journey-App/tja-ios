@@ -8,15 +8,14 @@
 
 import MapKit
 
-class PlaceAnnotation: MKMarkerAnnotationView {
-    static let reuseId = "placeAnnotation"
+class PlaceAnnotation<T: PlaceItem & Comparable>: MKMarkerAnnotationView {
     
     override var annotation: MKAnnotation? {
         willSet {
-            guard let annotation = annotation as? Place else { return }
+            guard let annotation = annotation as? Place<T> else { return }
             displayPriority = .defaultHigh
             markerTintColor = UIColor(named: "MainRed")
-            glyphImage = annotation.activity.activityType.eventIcon.uiimage
+            glyphImage = annotation.item.icon
             animatesWhenAdded = true
         }
     }

@@ -23,19 +23,19 @@ struct WishItemsContainer: View {
         )
         return ZStack {
             SegmentedContainer(
-                list: { SuggestionsContainer().environmentObject(viewModel) },
-                map: { MapContainer(location: viewModel.location) }
+                list: { SuggestionsContainer() },
+                map: { SuggestionMapContainer(location: viewModel.location) }
             ).frame(maxHeight: .infinity, alignment: .top)
             
             if popupViewModel.hasValue {
                 PopUpContainer(isShown: isShown) {
                     SuggestionCard(
-                        suggestion: viewModel.items[popupViewModel.selectedIndex ?? 0],
+                        suggestion: popupViewModel.selected ?? viewModel.items[0],
                         wishTitle: viewModel.wish.rawValue,
                         onDismiss: { self.popupViewModel.reset() },
                         onAdd: {
-                            if let index = popupViewModel.selectedIndex {
-                                self.onAdd?(viewModel.items[index])
+                            if let place = popupViewModel.selected {
+                                self.onAdd?(place)
                             }
                             self.popupViewModel.reset()
                         })

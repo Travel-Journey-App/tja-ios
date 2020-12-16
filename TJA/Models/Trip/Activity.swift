@@ -6,10 +6,10 @@
 //  Copyright © 2020 MironRogovets. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
-struct Activity: Codable, Hashable, Identifiable, Comparable {
+struct Activity: Codable, Hashable, Identifiable, Comparable, PlaceItem {
 
     enum ActivityType: Codable {
         case event(Event)
@@ -182,5 +182,14 @@ struct Activity: Codable, Hashable, Identifiable, Comparable {
             return l < r
         }
         return true
+    }
+    
+    // PlaceItem
+    var locationDetails: Location {
+        location ?? Constants.defaultLocation
+    }
+    
+    var icon: UIImage? {
+        activityType.eventIcon.uiimage
     }
 }

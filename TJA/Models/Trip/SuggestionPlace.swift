@@ -6,9 +6,9 @@
 //  Copyright © 2020 MironRogovets. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-struct SuggestionPlace: Hashable, Codable, Identifiable, Comparable {
+struct SuggestionPlace: Hashable, Codable, Identifiable, Comparable, PlaceItem {
     
     enum Price: String, Codable {
         case cheap, medium, expensive
@@ -52,8 +52,21 @@ struct SuggestionPlace: Hashable, Codable, Identifiable, Comparable {
         }
     }
     
+    static func == (lhs: SuggestionPlace, rhs: SuggestionPlace) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     static func < (lhs: SuggestionPlace, rhs: SuggestionPlace) -> Bool {
         return lhs.rating < rhs.rating
+    }
+    
+    // PlaceItem
+    var locationDetails: Location {
+        Location(placeName: name, lat: location.lat, lon: location.lon)
+    }
+    
+    var icon: UIImage? {
+        category.activity.icon.uiimage
     }
 }
 

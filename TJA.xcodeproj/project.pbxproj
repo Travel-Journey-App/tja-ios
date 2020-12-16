@@ -70,6 +70,7 @@
 		9E68892C257576FB0065D165 /* MagicMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E68892B257576FA0065D165 /* MagicMode.swift */; };
 		9E6A548D2584576A0041A340 /* TripService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6A548C2584576A0041A340 /* TripService.swift */; };
 		9E76D1872572EA850063C4BE /* AddButtonsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E76D1862572EA850063C4BE /* AddButtonsStack.swift */; };
+		9E80F3FF258A8E7200E299F6 /* SuggestionMapContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E80F3FE258A8E7200E299F6 /* SuggestionMapContainer.swift */; };
 		9E824DC125673E2900AE3F77 /* MapFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E824DC025673E2900AE3F77 /* MapFilters.swift */; };
 		9E83FEB8255C44FC0008F8DC /* MyTrips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E83FEB7255C44FC0008F8DC /* MyTrips.swift */; };
 		9E932FB325758FAA009FC2E8 /* SegmentedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E932FB225758FAA009FC2E8 /* SegmentedContainer.swift */; };
@@ -191,6 +192,7 @@
 		9E68892B257576FA0065D165 /* MagicMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicMode.swift; sourceTree = "<group>"; };
 		9E6A548C2584576A0041A340 /* TripService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripService.swift; sourceTree = "<group>"; };
 		9E76D1862572EA850063C4BE /* AddButtonsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonsStack.swift; sourceTree = "<group>"; };
+		9E80F3FE258A8E7200E299F6 /* SuggestionMapContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionMapContainer.swift; sourceTree = "<group>"; };
 		9E824DC025673E2900AE3F77 /* MapFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilters.swift; sourceTree = "<group>"; };
 		9E83FEB7255C44FC0008F8DC /* MyTrips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTrips.swift; sourceTree = "<group>"; };
 		9E932FB225758FAA009FC2E8 /* SegmentedContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedContainer.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 				9E932FB225758FAA009FC2E8 /* SegmentedContainer.swift */,
 				9E932FBD2575971A009FC2E8 /* SuggestionsContainer.swift */,
 				9E5BCCFB25765E50004EB8C1 /* Swipeable.swift */,
+				9E80F3FE258A8E7200E299F6 /* SuggestionMapContainer.swift */,
 			);
 			path = Containers;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				9E98CB362559EE4E00AF29EA /* UserDefault.swift in Sources */,
 				9E3343162573EEC400AE5568 /* NewTransfer.swift in Sources */,
 				9E5BD4062582D4360059D169 /* APISession.swift in Sources */,
+				9E80F3FF258A8E7200E299F6 /* SuggestionMapContainer.swift in Sources */,
 				9EA9CB50258892B10066EA10 /* PopupViewModel.swift in Sources */,
 				9E17EF07256B1D85005F2BDE /* MockupData.swift in Sources */,
 				9E2D779225518C3C0040872F /* ApiKeys.swift in Sources */,

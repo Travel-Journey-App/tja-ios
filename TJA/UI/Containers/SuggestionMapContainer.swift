@@ -1,39 +1,30 @@
 //
-//  MapContainer.swift
+//  SuggestionMapContainer.swift
 //  TJA
 //
-//  Created by Miron Rogovets on 19.11.2020.
+//  Created by Miron Rogovets on 16.12.2020.
 //  Copyright © 2020 MironRogovets. All rights reserved.
 //
 
 import SwiftUI
 
-struct MapContainer: View {
+struct SuggestionMapContainer: View {
     
     @EnvironmentObject var locationService: LocationService
-    @EnvironmentObject var activityViewModel: ActivityViewModel
-    @EnvironmentObject var popupViewModel: PopupViewModel
+    @EnvironmentObject var viewModel: WishViewModel
+    @EnvironmentObject var popupViewModel: PopupSuggestionViewModel
     
     var location: Location? = nil
     
     var body: some View {
         ZStack(alignment: .top) {
-            Map<Activity>(
-                places: $activityViewModel.filtered,
+            Map<SuggestionPlace>(
+                places: $viewModel.locations,
                 tripLocation: location?.coordinate,
-                didSelect: { activity in
-                    if let (day, index) = self.activityViewModel.findActivityDay(by: activity.id) {
-                        print("DEBUG: -- Selected place: \(activity)")
-                        self.popupViewModel.activity = activity
-                        self.popupViewModel.dayNumber = day
-                        self.popupViewModel.dayIndex = index
-                    }
-                }
+                didSelect: { self.popupViewModel.selected = $0 }
             ).edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading) {
-                // Filters
-                MapFilters(daysCount: activityViewModel.daysCount, onFilterChanged: applyFilters)
                 Spacer()
                 
                 // Current location button
@@ -56,20 +47,13 @@ struct MapContainer: View {
         .onAppear(perform: self.locationService.checkPermissions)
         .alert(isPresented: $locationService.servicesDisabled) {
             Alert(title: Text("Please Enable Location Access In Settings"))
-        }.onAppear(perform: loadEvents)
-    }
-    
-    private func applyFilters(_ day: Int?) {
-        self.activityViewModel.filter(by: day)
-    }
-    
-    private func loadEvents() {
-         self.activityViewModel.filter(by: nil)
+        }
+        .onAppear(perform: self.viewModel.updateLocations)
     }
 }
 
-struct MapContainer_Previews: PreviewProvider {
+struct SuggestionMapContainer_Previews: PreviewProvider {
     static var previews: some View {
-        MapContainer()
+        SuggestionMapContainer()
     }
 }

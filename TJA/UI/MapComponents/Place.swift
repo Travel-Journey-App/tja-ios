@@ -8,25 +8,29 @@
 
 import MapKit
 
-class Place: NSObject, Decodable, MKAnnotation, Comparable {
+protocol PlaceItem {
+    var locationDetails: Location { get }
+    var icon: UIImage? { get }
+}
+
+class Place<T: PlaceItem & Comparable>: NSObject, MKAnnotation, Comparable {
     
     static func < (lhs: Place, rhs: Place) -> Bool {
-        return lhs.activity < rhs.activity
+        return lhs.item < rhs.item
     }
     
     
-    let activity: Activity
+    let item: T
     
     var title: String? {
-        activity.name
+        item.locationDetails.placeName
     }
     
-    init?(_ activity: Activity) {
-        guard let _ = activity.location else { return nil }
-        self.activity = activity
+    init(_ item: T) {
+        self.item = item
     }
     
     var coordinate: CLLocationCoordinate2D {
-        activity.location?.coordinate ?? Constants.defaultLocation.coordinate
+        item.locationDetails.coordinate
     }
 }

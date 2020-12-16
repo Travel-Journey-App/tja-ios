@@ -17,6 +17,7 @@ class WishViewModel: NSObject, ObservableObject, SearchService {
     var cancellationToken: AnyCancellable?
     
     @Published var items = [SuggestionPlace]()
+    @Published var locations = [Place<SuggestionPlace>]()
     
     init(wish: WishItem, location: Location, apiService: APIService) {
         self.wish = wish
@@ -35,5 +36,9 @@ class WishViewModel: NSObject, ObservableObject, SearchService {
                     self.items = response.items.sorted(by: { $0 > $1 })
                 }
             }
+    }
+    
+    func updateLocations() {
+        locations = items.compactMap { Place<SuggestionPlace>($0) }
     }
 }

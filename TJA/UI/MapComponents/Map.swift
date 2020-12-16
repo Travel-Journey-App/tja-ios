@@ -9,13 +9,13 @@
 import SwiftUI
 import MapKit
 
-struct Map: UIViewRepresentable {
+struct Map<T: PlaceItem & Comparable>: UIViewRepresentable {
     
-    @Binding var places: [Activity]
+    @Binding var places: [Place<T>]
     @EnvironmentObject var locationService: LocationService
     var tripLocation: CLLocationCoordinate2D?
     
-    var didSelect: ((Activity) -> ())? = nil
+    var didSelect: ((T) -> ())? = nil
     
     func makeCoordinator() -> Map.Coordinator {
         return Coordinator(self)
@@ -29,7 +29,7 @@ struct Map: UIViewRepresentable {
         if let region = makeInitialRegion() {
             map.setRegion(region, animated: true)
         }
-        map.register(PlaceAnnotation.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        map.register(PlaceAnnotation<T>.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         map.register(ClusterAnnotation.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
         
         return map
@@ -39,11 +39,11 @@ struct Map: UIViewRepresentable {
         if uiView.userTrackingMode != locationService.userTrackingMode {
             uiView.setUserTrackingMode(locationService.userTrackingMode, animated: true)
         }
-        let old = uiView.annotations.compactMap{ $0 as? Place }.compactMap { $0.activity }
+        let old = uiView.annotations.compactMap{ $0 as? Place<T> }
         if !old.containsSameElements(as: places) {
+            print("DEBUG: -- Map Annotation update required")
             uiView.removeAnnotations(uiView.annotations)
-            let newAnnotations = places.compactMap{ Place($0) }
-            uiView.addAnnotations(newAnnotations)
+            uiView.addAnnotations(places)
         }
     }
     
@@ -57,8 +57,8 @@ struct Map: UIViewRepresentable {
         
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             print("DEBUG: -- Map -- Selected annotation")
-            guard let place = view.annotation as? Place else { return }
-            self.controller.didSelect?(place.activity)
+            guard let place = view.annotation as? Place<T> else { return }
+            self.controller.didSelect?(place.item)
         }
         
         func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
@@ -70,8 +70,8 @@ struct Map: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-            guard let annotation = annotation as? Place else { return nil }
-            return PlaceAnnotation(annotation: annotation, reuseIdentifier: PlaceAnnotation.reuseId)
+            guard let annotation = annotation as? Place<T> else { return nil }
+            return PlaceAnnotation<T>(annotation: annotation, reuseIdentifier: Constants.placeAnnotationReuseId)
         }
     }
     
@@ -90,7 +90,7 @@ struct Map: UIViewRepresentable {
 
 struct Map_Previews: PreviewProvider {
     static var previews: some View {
-        Map(
+        Map<Activity>(
 //            userTrackingMode: .constant(.follow),
             places: .constant([]), tripLocation: CLLocationCoordinate2D(latitude: 40.71, longitude: -74)
         ).environmentObject(LocationService())

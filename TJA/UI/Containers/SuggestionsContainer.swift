@@ -21,7 +21,7 @@ struct SuggestionsContainer: View {
                     VStack(spacing: 15) {
                         ForEach(0..<viewModel.items.count, id: \.self) { i in
                             SuggestionCell(suggestion: viewModel.items[i])
-                                .onTapGesture { self.popupViewModel.selectedIndex = i }
+                                .onTapGesture { self.popupViewModel.selected = viewModel.items[i] }
                         }
                     }
                     .padding(.vertical, 15)

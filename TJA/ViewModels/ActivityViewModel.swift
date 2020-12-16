@@ -16,7 +16,7 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
     
     @Published var trip: Trip
     @Published var active: Int = -1
-    @Published var filtered: [Activity] = []
+    @Published var filtered: [Place<Activity>] = []
     
     init(trip: Trip, apiService: APIService) {
         self._trip = .init(initialValue: trip)
@@ -50,9 +50,13 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
     
     func filter(by day: Int?) {
         if let day = day, day < trip.days.count /*, let index = getIndex(for: day)*/  {
-            filtered = trip.days[day].activities.compactMap { $0.item }
+            filtered = trip.days[day].activities
+                .compactMap { $0.item }
+                .compactMap { Place<Activity>($0) }
         } else {
-            filtered = trip.days.flatMap(\.activities).compactMap { $0.item }
+            filtered = trip.days.flatMap(\.activities)
+                .compactMap { $0.item }
+                .compactMap { Place<Activity>($0) }
         }
     }
     
@@ -131,7 +135,7 @@ class ActivityViewModel: NSObject, ObservableObject, ActivityService {
     private func remove(by id: Int, in day: Int) {
         if let dayIndex = getIndex(for: day) {
             self.trip.days[dayIndex].activities.removeAll(where: { $0.id == id })
-            self.filtered.removeAll(where: { $0.id == id })
+            self.filtered.removeAll(where: { $0.item.id == id })
         }
     }
     
