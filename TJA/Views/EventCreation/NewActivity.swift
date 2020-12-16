@@ -78,6 +78,7 @@ struct NewActivity: View {
                                 RoundedRectangle(cornerRadius: 2)
                                     .strokeBorder(Color.mainRed, lineWidth: 2)
                             )
+                        Spacer()
                         
                     }
                     .frame(maxHeight: .infinity)
