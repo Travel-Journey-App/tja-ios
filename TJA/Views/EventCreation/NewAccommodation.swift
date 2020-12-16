@@ -106,11 +106,7 @@ struct NewAccommodation: View {
     var dropDownList: some View {
         VStack(alignment: .leading, spacing: 0) {
             ForEach(0..<searchViewModel.items.count, id: \.self) { i in
-                Text(searchViewModel.items[i].name)
-                    .font(.system(size: 16))
-                    .foregroundColor(Color(UIColor.label))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .frame(height: 32)
+                SimpleSearchItem(title: searchViewModel.items[i].name)
                     .onTapGesture {
                         print("DEBUG -- \(i) tapped")
                         let dest = searchViewModel.items[i]
@@ -122,7 +118,7 @@ struct NewAccommodation: View {
                         self.address = self.searchViewModel.location.capitalizedFirstLetter()
                         self.direction = "check-in"
                     }
-            }.padding(.horizontal, 12)
+            }
         }
         .background(
             Rectangle()

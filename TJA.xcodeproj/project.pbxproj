@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E07A2B3258AB02300E2D215 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E07A2B2258AB02300E2D215 /* SearchItem.swift */; };
 		9E17EF07256B1D85005F2BDE /* MockupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E17EF06256B1D85005F2BDE /* MockupData.swift */; };
 		9E263642253DA29000928B38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E263641253DA29000928B38 /* Assets.xcassets */; };
 		9E263645253DA29000928B38 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E263644253DA29000928B38 /* Preview Assets.xcassets */; };
@@ -126,6 +127,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E07A2B2258AB02300E2D215 /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 		9E17EF06256B1D85005F2BDE /* MockupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockupData.swift; sourceTree = "<group>"; };
 		9E26363A253DA28900928B38 /* TJA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TJA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E263641253DA29000928B38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				9E5BCD012576AA4B004EB8C1 /* EventCard.swift */,
 				9EF3695F2578320000345B20 /* PipelineItem.swift */,
 				9EF36962257836A100345B20 /* CircleIcon.swift */,
+				9E07A2B2258AB02300E2D215 /* SearchItem.swift */,
 			);
 			path = EventComponents;
 			sourceTree = "<group>";
@@ -783,6 +786,7 @@
 				9EB47CF32566E71C0065C641 /* LocationService.swift in Sources */,
 				9E58C74025842E9C002688EE /* Publisher+sink.swift in Sources */,
 				9E64183225876115009709D4 /* ActivityService.swift in Sources */,
+				9E07A2B3258AB02300E2D215 /* SearchItem.swift in Sources */,
 				9E47E0902579A0340022AC08 /* ItemDropDelegate.swift in Sources */,
 				9EE66942256418C50018B82A /* DatePickerTextField.swift in Sources */,
 				9EF369602578320100345B20 /* PipelineItem.swift in Sources */,

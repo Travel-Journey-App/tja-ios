@@ -170,16 +170,12 @@ struct NewTransfer: View {
     ) -> some View {
         return VStack(alignment: .leading, spacing: 0) {
             ForEach(0..<items.count, id: \.self) { i in
-                Text(items[i].placeName)
-                    .font(.system(size: 16))
-                    .foregroundColor(Color(UIColor.label))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .frame(height: 32)
+                SimpleSearchItem(title: items[i].placeName)
                     .onTapGesture {
                         print("DEBUG -- \(i) tapped")
                         tapCallback(items[i])
                     }
-            }.padding(.horizontal, 12)
+            }
         }
         .background(
             Rectangle()

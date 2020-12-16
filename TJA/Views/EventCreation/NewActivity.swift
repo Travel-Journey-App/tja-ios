@@ -120,23 +120,22 @@ struct NewActivity: View {
     }
     
     var dropDownList: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 6) {
             ForEach(0..<searchViewModel.items.count, id: \.self) { i in
-                Text(searchViewModel.items[i].name)
-                    .font(.system(size: 16))
-                    .foregroundColor(Color(UIColor.label))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .frame(height: 32)
-                    .onTapGesture {
-                        print("DEBUG -- \(i) tapped")
-                        let place = searchViewModel.items[i]
-                        self.searchViewModel.searchText = place.name
-                        self.name = place.name
-                        self.address = self.searchViewModel.location.capitalizedFirstLetter()
-                        self.selectedLocation = place
-                        self.hideKeyboard()
-                        self.searchViewModel.clearStored(cancellAll: true)
-                    }
+                SearchItem(
+                    title: searchViewModel.items[i].name,
+                    description: searchViewModel.items[i].description
+                )
+                .onTapGesture {
+                    print("DEBUG -- \(i) tapped")
+                    let place = searchViewModel.items[i]
+                    self.searchViewModel.searchText = place.name
+                    self.name = place.name
+                    self.address = self.searchViewModel.location.capitalizedFirstLetter()
+                    self.selectedLocation = place
+                    self.hideKeyboard()
+                    self.searchViewModel.clearStored(cancellAll: true)
+                }
             }.padding(.horizontal, 12)
         }
         .background(
@@ -144,6 +143,7 @@ struct NewActivity: View {
                 .fill(Color(UIColor.systemBackground))
                 .shadow(color: .black, radius: 4.0))
         .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
+        .padding(.vertical, 6)
     }
     
     private func save(_ place: SuggestionPlace, time: Date? = nil) {
