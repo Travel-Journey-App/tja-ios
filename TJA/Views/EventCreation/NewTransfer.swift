@@ -11,18 +11,17 @@ import SwiftUI
 struct NewTransfer: View {
     
     @ObservedObject private var keyboard = KeyboardResponder()
-    @ObservedObject var searchViewModel = TransferPointSearchViewModel(apiService: APISession.shared)
+    @ObservedObject var searchViewModel = TransferPointSearchViewModel()
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: ActivityViewModel
     
+    // Assigned automatically with selection
     @State var departurePlace: Location? = nil
     @State var arrivalPlace: Location? = nil
-    @State var date: Date? = nil
     
-    @State var departure: String = ""
-    @State var arrival: String = ""
-    @State var time: String = ""
+    // Assigned manually
+    @State var date: Date? = nil
     @State var flight: String = ""
     @State var seat: String = ""
     
@@ -60,7 +59,7 @@ struct NewTransfer: View {
                     DateField(
                         "Time",
                         date: $date,
-                        formatter: timeFormatter,
+                        formatter: fixedTimeFormatter,
                         mode: UIDatePicker.Mode.time)
                         .padding(.horizontal, 12)
                         .frame(height: 50)
@@ -172,26 +171,34 @@ struct NewTransfer: View {
         .offset(y: 40)
     }
     
-    func addItem(_ location: Location, time: Date) {
-        print("Time: \(time)")
+    private func addItem(_ location: Location, time: Date) {
         if let day = self.viewModel.activeDayNumber,
            let index = self.viewModel.activeDayIndex {
-            let req = ActivityRequest
-                .New.Transfer(
-                    name: location.placeName,
-                    description: "",
-                    startTime: self.viewModel.startDate.addingTimeInterval(.day * Double((day - 1)) + time.timeIntervalSince(Date().startOf(.day))),
-                    endTime: self.viewModel.startDate.addingTimeInterval(.day * Double((day - 1)) + time.timeIntervalSince(Date().startOf(.day))),
-                    note: "",
-                    lat: location.lat,
-                    lon: location.lon,
-                    activityType: "transfer",
-                    direction: "departure",
-                    transferType: searchViewModel.transfer.rawValue)
-            self.viewModel.create(req, in: index) {
+            let flightDescription = !flight.isEmpty ? "\(numberPlaceholder): \(flight)" : ""
+            let seatDescription = !seat.isEmpty ? "Seat: \(seat)" : ""
+            
+            let description = !flightDescription.isEmpty && !seatDescription.isEmpty ?
+            "\(flightDescription)\n\(seatDescription)" : flightDescription + seatDescription
+            
+            let timeValue = time.timeIntervalSince(Date().startOf(.day))
+            
+            let request = ActivityRequest.New.createRequest(
+                for: self.searchViewModel.transfer,
+                with: location,
+                for: TimeInterval(.day * Double(day - 1) + timeValue),
+                with: self.viewModel.startDate,
+                with: .arrival,
+                with: description)
+            self.viewModel.create(request, in: index) {
                 self.presentationMode.wrappedValue.dismiss()
             }
         }
+    }
+    
+    private func resetFields() {
+        self.seat = ""
+        self.flight = ""
+        self.date = nil
     }
 }
 

@@ -38,6 +38,14 @@ final class ExactDateFormatter: DateFormatting {
     }
 }
 
+final class ExactTimeFormatter: DateFormatting {
+    let dateFormat: String = "HH:mm"
+    
+    func string(from date: Date) -> String {
+        return date.localizedTimeString()
+    }
+}
+
 final class TimeFormatter: TimeFormatting {
 
     func recentString(between date: Date, and now: Date) -> String? {
@@ -60,5 +68,6 @@ final class TimeFormatter: TimeFormatting {
 let dateFormatter = ExactDateFormatter()
 let dateTimeFormatter = ExactDateFormatter(dateFormat: "dd.MM.yyyy HH:mm")
 let timeFormatter = ExactDateFormatter(dateFormat: "HH:mm")
+let fixedTimeFormatter = ExactTimeFormatter()
 let slashedFormatter = ExactDateFormatter(dateFormat: "dd/MM/yyyy")
 let remainingOrAgoFormatter = TimeFormatter()

@@ -23,7 +23,7 @@ class TransferPointSearchViewModel: NSObject, ObservableObject, SearchService {
     
     private(set) var location: String = "tokyo"
     
-    init(apiService: APIService) {
+    init(apiService: APIService = APISession.shared) {
         self.apiSession = apiService
         super.init()
         self.configureSearch()

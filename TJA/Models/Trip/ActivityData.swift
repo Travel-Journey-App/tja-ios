@@ -307,3 +307,49 @@ extension ActivityRequest.Existing {
         }
     }
 }
+
+
+extension ActivityRequest.New {
+    
+    static func createRequest(
+        for transfer: Activity.Transfer,
+        with location: Location,
+        for time: TimeInterval,
+        with startingDate: Date,
+        with direction: Activity.Transfer.Direction = .arrival,
+        with description: String = ""
+    ) -> NewActivityRequest {
+        
+        return Transfer(
+            name: location.placeName,
+            description: description,
+            startTime: startingDate.addingTimeInterval(time),
+            endTime: startingDate.addingTimeInterval(time),
+            note: "",
+            lat: location.lat,
+            lon: location.lon,
+            activityType: "transfer",
+            direction: direction.rawValue,
+            transferType: transfer.rawValue)
+    }
+    
+    static func createRequest(
+        for accommodation: AccommodationLocation,
+        for time: TimeInterval,
+        with startingDate: Date,
+        with direction: Activity.Accommodation.Direction = .checkin
+    ) -> NewActivityRequest {
+        
+        return Accommodation(
+            name: accommodation.name,
+            description: accommodation.description,
+            startTime: startingDate.addingTimeInterval(time),
+            endTime: startingDate.addingTimeInterval(time),
+            note: "",
+            lat: accommodation.lat,
+            lon: accommodation.lon,
+            activityType: "accommodation",
+            direction: direction.rawValue
+        )
+    }
+}

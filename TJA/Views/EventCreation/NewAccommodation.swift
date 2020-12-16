@@ -44,13 +44,12 @@ struct NewAccommodation: View {
                         .textFieldStyle(BorderedTextField())
                     TextField("Address", text: $address)
                         .textFieldStyle(BorderedTextField())
-//                    TextField("Time", text: $time)
-//                        .textFieldStyle(BorderedTextField())
                     DateField(
                         "Time",
                         date: $checkin,
-                        formatter: timeFormatter,
-                        mode: UIDatePicker.Mode.time)
+                        formatter: fixedTimeFormatter,
+                        mode: UIDatePicker.Mode.time
+                    )
                         .padding(.horizontal, 12)
                         .frame(height: 50)
                         .background(
@@ -128,18 +127,15 @@ struct NewAccommodation: View {
         print("Time: \(time)")
         if let day = self.viewModel.activeDayNumber,
            let index = self.viewModel.activeDayIndex {
-            let req = ActivityRequest
-                .New.Accommodation(
-                    name: location.name,
-                    description: location.description,
-                    startTime: self.viewModel.startDate.addingTimeInterval(.day * Double((day - 1)) + time.timeIntervalSince(Date().startOf(.day))),
-                    endTime: self.viewModel.startDate.addingTimeInterval(.day * Double((day - 1)) + time.timeIntervalSince(Date().startOf(.day))),
-                    note: "",
-                    lat: location.lat,
-                    lon: location.lon,
-                    activityType: "accommodation",
-                    direction: "check-in")
-            self.viewModel.create(req, in: index) {
+            
+            let timeValue = time.timeIntervalSince(Date().startOf(.day))
+            let request = ActivityRequest.New.createRequest(
+                for: location,
+                for: TimeInterval(.day * Double(day - 1) + timeValue),
+                with: self.viewModel.startDate,
+                with: .checkin)
+            
+            self.viewModel.create(request, in: index) {
                 self.presentationMode.wrappedValue.dismiss()
             }
         }
