@@ -19,6 +19,7 @@ protocol AuthService {
     func signup(email: String, password: String) -> AuthResponse
     func oauth(idToken: String) -> AuthResponse
     func refresh() -> AuthResponse
+    func update(name: String?, phone: String?, birthDate: Date?) -> AuthResponse
 }
 
 extension AuthService {
@@ -44,6 +45,12 @@ extension AuthService {
     func refresh() -> AuthResponse {
         return apiSession
             .request(with: AuthEndpoint.refresh)
+            .eraseToAnyPublisher()
+    }
+    
+    func update(name: String?, phone: String?, birthDate: Date?) -> AuthResponse {
+        return apiSession
+            .request(with: AuthEndpoint.update(name: name, phone: phone, birthDate: birthDate))
             .eraseToAnyPublisher()
     }
 }

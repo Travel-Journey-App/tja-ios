@@ -13,7 +13,7 @@ enum AuthEndpoint {
     case signup(email: String, password: String)
     case google(token: String)
     case refresh
-    //update user data
+    case update(name: String?, phone: String?, birthDate: Date?)
 }
 
 enum TripEndpoint {
@@ -50,7 +50,7 @@ extension AuthEndpoint: RequestBuilder {
         switch self {
         case .login: return "/auth/login"
         case .signup: return "/auth/registration"
-        case .refresh: return "/api/user"
+        case .refresh, .update: return "/api/user"
         case .google: return "/auth/oauth"
         }
     }
@@ -61,19 +61,21 @@ extension AuthEndpoint: RequestBuilder {
             return "POST"
         case .refresh:
             return "GET"
+        case .update:
+            return "PUT"
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .login, .signup, .google: return appJsonHeaders
+        case .login, .signup, .google, .update: return appJsonHeaders
         case .refresh: return nil
         }
     }
     
     var authorizeRequest: Bool {
         switch self {
-        case .refresh: return true
+        case .refresh, .update: return true
         default: return false
         }
     }
@@ -88,6 +90,9 @@ extension AuthEndpoint: RequestBuilder {
             return try? JSONEncoder().encode(request)
         case let .google(token):
             let request = OAuthRequest(googleOAuthToken: token)
+            return try? JSONEncoder().encode(request)
+        case let .update(name, phone, birthDate):
+            let request = UserUpdateRequest(name: name, phone: phone, birthDate: birthDate)
             return try? JSONEncoder().encode(request)
         default:
             return nil

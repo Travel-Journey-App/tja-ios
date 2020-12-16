@@ -122,12 +122,15 @@ struct Account: View {
     
     private func saveData() {
         print("DEBUG: -- Saving data")
-//        self.authState.updateUserProfile(name: self.name, phone: self.phone)
+        self.authViewModel.updateUser(name: self.name, phone: self.phone, birthDate: self.birth) {
+            self.setFieldsData()
+        }
     }
     
     private func setFieldsData() {
         self.name = authViewModel.currentUser?.name ?? ""
         self.phone = authViewModel.currentUser?.phone ?? ""
+        self.birth = authViewModel.currentUser?.birth
     }
 }
 

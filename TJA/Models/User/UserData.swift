@@ -14,7 +14,7 @@ struct User: Codable {
     let email: String
     var name: String? = nil
     var phone: String? = nil
-    var birth: String? = nil
+    var birth: Date? = nil
 }
 
 struct UserResponse: Codable {
@@ -34,4 +34,10 @@ struct UserResponse: Codable {
     var user: User {
         User(email: email, name: fullName, phone: nil, birth: nil)
     }
+}
+
+struct UserUpdateRequest: Codable {
+    let name: String?
+    let phone: String?
+    let birthDate: Date?
 }

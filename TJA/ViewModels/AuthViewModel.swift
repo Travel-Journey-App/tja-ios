@@ -48,6 +48,35 @@ class AuthViewModel: NSObject, ObservableObject, AuthService {
         UserDefaultsConfig.authToken = nil
     }
     
+    func updateUser(name: String?, phone: String?, birthDate: Date?, onComplete: (() -> ())? = nil) {
+        
+        let onError: (() -> ()) = {
+            if let email = self.currentUser?.email {
+                self.currentUser = User(email: email, name: name, phone: phone, birth: birthDate)
+            }
+        }
+        
+        self.cancellationToken = update(name: name, phone: phone, birthDate: birthDate)
+            .sinkToResult { result in
+                switch result {
+                case let .failure(err):
+                    print("DEBUG: -- UpdateUser -- Error -- \(err.localizedDescription)")
+                    onError()
+                    onComplete?()
+                case let .success(response):
+                    if let err = response.getError() {
+                        print("DEBUG: -- UpdateUser -- Response error -- \(err.localizedDescription)")
+                        onError()
+                        onComplete?()
+                    }
+                    print("DEBUG: -- UpdateUser -- Success -- \(response.body)")
+                    UserDefaultsConfig.authToken = response.body?.secret
+                    self.currentUser = response.body?.user
+                    onComplete?()
+                }
+            }
+    }
+    
     func restore() {
         
         let onError: (() -> ()) = {
