@@ -38,6 +38,9 @@ struct NewTransfer: View {
                         backgroundColor: filters[i] == searchViewModel.transfer
                             ? Color.mainRed : Color(UIColor.systemBackground))
                         .onTapGesture {
+                            if self.searchViewModel.transfer != filters[i] {
+                                self.resetFields()
+                            }
                             self.searchViewModel.transfer = filters[i]
                         }
                 }
@@ -203,7 +206,6 @@ struct NewTransfer: View {
             self.searchViewModel.configure(location: locationName.lowercased())
         }
         self.searchViewModel.resetData()
-        self.$searchViewModel.transfer.didSet { _ in resetFields() }
     }
     
     private func resetFields() {

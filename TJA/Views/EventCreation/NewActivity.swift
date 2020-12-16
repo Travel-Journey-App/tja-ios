@@ -35,6 +35,9 @@ struct NewActivity: View {
                         backgroundColor: filters[i] == self.searchViewModel.event
                             ? Color.mainRed : Color(UIColor.systemBackground))
                         .onTapGesture {
+                            if self.searchViewModel.event != filters[i] {
+                                self.resetFields()
+                            }
                             self.searchViewModel.event = filters[i]
                         }
                 }
@@ -163,7 +166,6 @@ struct NewActivity: View {
             self.searchViewModel.configure(location: locationName.lowercased())
         }
         self.searchViewModel.resetData()
-        self.$searchViewModel.event.didSet { _ in resetFields() }
     }
     
     private func resetFields() {
