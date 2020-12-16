@@ -42,6 +42,7 @@ struct NewTransfer: View {
                                 self.resetFields()
                             }
                             self.searchViewModel.transfer = filters[i]
+                            self.hideKeyboard()
                         }
                 }
             }
@@ -49,68 +50,79 @@ struct NewTransfer: View {
             
             
             ScrollView(.vertical) {
-                VStack(alignment: .center, spacing: 10) {
-                    
-                    TextField(
-                        "Departure point",
-                        text: $searchViewModel.depSearchText,
-                        onEditingChanged: { val in
-                            if val { self.searchViewModel.configure(target: .departure)}
-                            self.searchViewModel.enableSearch(val)
-                        },
-                        onCommit:  { self.searchViewModel.clearStored() }
-                    )
-                    .textFieldStyle(BorderedTextField())
-                    .overlay(createDropDownList(
-                                searchViewModel.departureItems,
-                                tapCallback: { loc in
-                                    self.searchViewModel.depSearchText = loc.placeName
-                                    self.departurePlace = loc
-                                    self.hideKeyboard()
-                                    self.searchViewModel.clearStored(cancellAll: true)
-                                }), alignment: .top)
-                    TextField(
-                        "Arrival point",
-                        text: $searchViewModel.arrSearchText,
-                        onEditingChanged: { val in
-                            if val { self.searchViewModel.configure(target: .arrival)}
-                            self.searchViewModel.enableSearch(val)
-                        },
-                        onCommit:  { self.searchViewModel.clearStored() }
-                    )
-                    .textFieldStyle(BorderedTextField())
-                    .overlay(createDropDownList(
-                                searchViewModel.arrivalItems,
-                                tapCallback: { loc in
-                                    self.searchViewModel.arrSearchText = loc.placeName
-                                    self.arrivalPlace = loc
-                                    self.hideKeyboard()
-                                    self.searchViewModel.clearStored(cancellAll: true)
-                                }), alignment: .top)
-                    
-                    DateField(
-                        "Time",
-                        date: $date,
-                        formatter: fixedTimeFormatter,
-                        mode: UIDatePicker.Mode.time)
-                        .padding(.horizontal, 12)
-                        .frame(height: 50)
-                        .background(
-                            RoundedRectangle(cornerRadius: 2)
-                                .strokeBorder(Color.mainRed, lineWidth: 2)
+                
+                ZStack(alignment: .top) {
+                    VStack(alignment: .center, spacing: 10) {
+                        
+                        TextField(
+                            "Departure point",
+                            text: $searchViewModel.depSearchText,
+                            onEditingChanged: { val in
+                                if val { self.searchViewModel.configure(target: .departure)}
+                                self.searchViewModel.enableSearch(val)
+                            },
+                            onCommit:  { self.searchViewModel.clearStored() }
                         )
+                        .textFieldStyle(BorderedTextField())
+                        TextField(
+                            "Arrival point",
+                            text: $searchViewModel.arrSearchText,
+                            onEditingChanged: { val in
+                                if val { self.searchViewModel.configure(target: .arrival)}
+                                self.searchViewModel.enableSearch(val)
+                            },
+                            onCommit:  { self.searchViewModel.clearStored() }
+                        )
+                        .textFieldStyle(BorderedTextField())
+                        
+                        DateField(
+                            "Time",
+                            date: $date,
+                            formatter: fixedTimeFormatter,
+                            mode: UIDatePicker.Mode.time)
+                            .padding(.horizontal, 12)
+                            .frame(height: 50)
+                            .background(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .strokeBorder(Color.mainRed, lineWidth: 2)
+                            )
+                        
+                        if searchViewModel.transfer != .bus && searchViewModel.transfer != .car {
+                            TextField(numberPlaceholder, text: $flight)
+                                .textFieldStyle(BorderedTextField())
+                            TextField("Seat", text: $seat)
+                                .textFieldStyle(BorderedTextField())
+                        } else {
+                            Spacer()
+                        }
+                    }
+                    .frame(maxHeight: .infinity)
+                    .padding(.vertical, 10)
                     
-                    if searchViewModel.transfer != .bus && searchViewModel.transfer != .car {
-                        TextField(numberPlaceholder, text: $flight)
-                            .textFieldStyle(BorderedTextField())
-                        TextField("Seat", text: $seat)
-                            .textFieldStyle(BorderedTextField())
-                    } else {
-                        Spacer()
+                    if !searchViewModel.depSearchText.isEmpty {
+                        createDropDownList(
+                            searchViewModel.departureItems,
+                            tapCallback: { loc in
+                                self.searchViewModel.depSearchText = loc.placeName
+                                self.departurePlace = loc
+                                self.hideKeyboard()
+                                self.searchViewModel.clearStored(cancellAll: true)
+                            })
+                            .padding(.top, 10 + 50)
+                    }
+                    
+                    if !searchViewModel.arrSearchText.isEmpty {
+                        createDropDownList(
+                            searchViewModel.arrivalItems,
+                            tapCallback: { loc in
+                                self.searchViewModel.arrSearchText = loc.placeName
+                                self.arrivalPlace = loc
+                                self.hideKeyboard()
+                                self.searchViewModel.clearStored(cancellAll: true)
+                            })
+                            .padding(.top, 10 + 50 + 10 + 50)
                     }
                 }
-                .frame(maxHeight: .infinity)
-                .padding(.vertical, 10)
             }
             
             
@@ -174,7 +186,6 @@ struct NewTransfer: View {
                 .fill(Color(UIColor.systemBackground))
                 .shadow(color: .black, radius: 4.0))
         .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
-        .offset(y: 40)
     }
     
     private func save(_ location: Location, time: Date) {

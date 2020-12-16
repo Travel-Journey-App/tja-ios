@@ -46,40 +46,47 @@ struct NewActivity: View {
             
             
             ScrollView(.vertical) {
-                VStack(alignment: .center, spacing: 10) {
-                    TextField(
-                        "Search...",
-                        text: $searchViewModel.searchText,
-                        onEditingChanged: { self.searchViewModel.enableSearch($0) },
-                        onCommit:  { self.searchViewModel.clearStored() }
-                    )
-                    .textFieldStyle(
-                        BorderedTextField(color: .lightRedBorder, borderSize: 1, cornerRadius: 10)
-                    )
-                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                    .frame(height: 30)
-                    .padding(.bottom, 6)
-                    .overlay(dropDownList, alignment: .top)
-
-                    TextField("Name", text: $name)
-                        .textFieldStyle(BorderedTextField())
-                    TextField("Address", text: $address)
-                        .textFieldStyle(BorderedTextField())
-                    DateField(
-                        "Time",
-                        date: $time,
-                        formatter: fixedTimeFormatter,
-                        mode: UIDatePicker.Mode.time)
-                        .padding(.horizontal, 12)
-                        .frame(height: 50)
-                        .background(
-                            RoundedRectangle(cornerRadius: 2)
-                                .strokeBorder(Color.mainRed, lineWidth: 2)
+                
+                ZStack(alignment: .top) {
+                    VStack(alignment: .center, spacing: 10) {
+                        TextField(
+                            "Search...",
+                            text: $searchViewModel.searchText,
+                            onEditingChanged: { self.searchViewModel.enableSearch($0) },
+                            onCommit:  { self.searchViewModel.clearStored() }
                         )
+                        .textFieldStyle(
+                            BorderedTextField(color: .lightRedBorder, borderSize: 1, cornerRadius: 10)
+                        )
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        .frame(height: 30)
+                        .padding(.bottom, 6)
+
+                        TextField("Name", text: $name)
+                            .textFieldStyle(BorderedTextField())
+                        TextField("Address", text: $address)
+                            .textFieldStyle(BorderedTextField())
+                        DateField(
+                            "Time",
+                            date: $time,
+                            formatter: fixedTimeFormatter,
+                            mode: UIDatePicker.Mode.time)
+                            .padding(.horizontal, 12)
+                            .frame(height: 50)
+                            .background(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .strokeBorder(Color.mainRed, lineWidth: 2)
+                            )
+                        
+                    }
+                    .frame(maxHeight: .infinity)
+                    .padding(.vertical, 10)
                     
+                    if !searchViewModel.searchText.isEmpty {
+                        dropDownList
+                            .padding(.top, 10 + 30)
+                    }
                 }
-                .frame(maxHeight: .infinity)
-                .padding(.vertical, 10)
             }
             
             
@@ -137,7 +144,6 @@ struct NewActivity: View {
                 .fill(Color(UIColor.systemBackground))
                 .shadow(color: .black, radius: 4.0))
         .overlay(Rectangle().stroke(Color(UIColor.opaqueSeparator), lineWidth: 1))
-        .offset(y: 30)
     }
     
     private func save(_ place: SuggestionPlace, time: Date? = nil) {
