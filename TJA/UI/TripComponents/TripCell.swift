@@ -12,6 +12,11 @@ import KingfisherSwiftUI
 struct TripCell: View {
     
     var trip: Trip
+    @State var isEditing = false
+    @State var name = ""
+    
+    var onNameChanged: ((String) -> ())?
+    private let generator = UIImpactFeedbackGenerator(style: .medium)
     
     var body: some View {
         HStack(spacing: 6) {
@@ -24,9 +29,34 @@ struct TripCell: View {
             
             HStack(alignment: .center, spacing: 10) {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(trip.name)
-                        .font(.system(size: 18))
-                        .bold()
+                    if isEditing {
+                        FocusableTextField(
+                            text: $name,
+                            placeholder: "Trip name",
+                            isFirstResponder: true,
+                            onEditingChanged: { val in
+                                print("DEBUG: -- onEditingChanged")
+                                if !val { self.isEditing = false }
+                            },
+                            onCommit: {
+                                print("DEBUG: -- onCommit")
+                                if !name.isEmpty && name != trip.name {
+                                    self.onNameChanged?(name)
+                                }
+                                self.isEditing = false
+                            })
+                            .frame(height: 21.5)
+                    } else {
+                        Text(trip.name)
+                            .font(.system(size: 18))
+                            .bold()
+                            .onLongPressGesture {
+                                self.isEditing = true
+                                self.name = trip.name
+                                self.generator.impactOccurred()
+                            }
+                    }
+                   
                     Text(trip.interval).font(.system(size: 13))
                     if !trip.isFinished {
                         HStack(spacing: 5) {

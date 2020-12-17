@@ -60,7 +60,9 @@ struct MyTrips: View {
                                                 print("DEBUG: -- onSwiped tirggered for -- \(trip.id)")
                                                 self.delete(by: trip.id)
                                             }) { trip in
-                                            TripCell(trip: trip)
+                                            TripCell(trip: trip) { name in
+                                                self.viewModel.update(trip: trip, with: name)
+                                            }
                                         }
                                         
                                     }.buttonStyle(FlatLinkStyle())
@@ -91,7 +93,9 @@ struct MyTrips: View {
                 .padding(.bottom, 48)
             }
             .navigationBarTitle(Text("My trips".uppercased()))
-        }.onAppear(perform: self.viewModel.loadTrips)
+        }
+        .onAppear(perform: self.viewModel.loadTrips)
+        .resignKeyboardOnDragGesture()
     }
     
     var placeholder: some View {

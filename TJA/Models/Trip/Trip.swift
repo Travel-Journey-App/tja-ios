@@ -40,6 +40,17 @@ struct Trip: Hashable, Codable, Identifiable {
     var interval: String {
         return "\(dateFormatter.string(from: startDate)) - \(dateFormatter.string(from: endDate))"
     }
+    
+    func updated(with name: String) -> Trip {
+        return Trip(
+            id: self.id,
+            image: self.image,
+            name: name,
+            startDate: self.startDate,
+            endDate: self.endDate,
+            location: self.location,
+            days: self.days)
+    }
 }
 
 

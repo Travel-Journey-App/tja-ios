@@ -19,7 +19,7 @@ protocol TripService {
     func getTrips() -> TripListResponse
     func getTrip(id: Int) -> TripItemResponse
     func addTrip(trip: TripRequest) -> TripItemResponse
-    func updateTrip(trip: TripRequest) -> TripItemResponse
+    func updateTrip(trip: TripUpdateRequest) -> TripItemResponse
     func deleteTrip(id: Int) -> MessageResponse
 }
 
@@ -43,7 +43,7 @@ extension TripService {
             .eraseToAnyPublisher()
     }
     
-    func updateTrip(trip: TripRequest) -> TripItemResponse {
+    func updateTrip(trip: TripUpdateRequest) -> TripItemResponse {
         return apiSession
             .request(with: TripEndpoint.updateTrip(trip: trip))
             .eraseToAnyPublisher()

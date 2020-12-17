@@ -71,6 +71,25 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
         print("DEBUG: -- Fetching trip by id = \(id)")
     }
     
+    func update(trip: Trip, with name: String) {
+        guard let request = TripUpdateRequest.create(from: trip.updated(with: name)) else { return }
+        self.updateTrip(trip: request).sinkToResult { result in
+            switch result {
+            case let .failure(err):
+                print("DEBUG: -- UpdateTrip -- Error -- \(err.localizedDescription)")
+            case let .success(response):
+                if let err = response.getError() {
+                    print("DEBUG: -- UpdateTrip -- Response error -- \(err.localizedDescription)")
+                }
+                print("DEBUG: -- UpdateTrip -- Success")
+                if let body = response.body, let index = self.trips.firstIndex(where: { $0.id == body.id}) {
+                    self.trips[index] = SwipeableItem<Trip>(body.trip)
+                }
+                
+            }
+        }.store(in: &cancellationTokens)
+    }
+    
     func delete(by id: Int) {
         print("DEBUG: -- Removing trip by id = \(id)")
         let token = self.deleteTrip(id: id).sinkToResult { result in

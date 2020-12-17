@@ -19,7 +19,7 @@ enum AuthEndpoint {
 enum TripEndpoint {
     case tripList
     case newTrip(trip: TripRequest)
-    case updateTrip(trip: TripRequest)
+    case updateTrip(trip: TripUpdateRequest)
     case trip(id: Int)
     case deleteTrip(id: Int)
     case magic
@@ -140,7 +140,9 @@ extension TripEndpoint: RequestBuilder {
     
     func body() -> Data? {
         switch self {
-        case let .newTrip(trip), let .updateTrip(trip):
+        case let .newTrip(trip):
+            return try? JSONEncoder(.millisecondsSince1970).encode(trip)
+        case let .updateTrip(trip):
             return try? JSONEncoder(.millisecondsSince1970).encode(trip)
         default:
             return nil

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ActivityResponse: Decodable {
+struct ActivityResponse: Codable {
     let id: Int
     let name: String
     let description: String?
@@ -22,7 +22,7 @@ struct ActivityResponse: Decodable {
     let lon: Double
     let activityType: String
     
-    enum BaseType: String, Decodable {
+    enum BaseType: String, Codable {
         case transfer, accommodation, event
     }
     
@@ -81,7 +81,7 @@ struct ActivityResponse: Decodable {
 }
 
 
-protocol NewActivityRequest {
+protocol NewActivityRequest: Codable {
     var name: String { get }
     var description: String? { get }
     var startTime: Date? { get }
@@ -92,7 +92,7 @@ protocol NewActivityRequest {
     var activityType: String { get }
 }
 
-protocol ExistingActivityRequest {
+protocol ExistingActivityRequest: Codable {
     var id: Int { get }
     var name: String { get }
     var description: String? { get }
