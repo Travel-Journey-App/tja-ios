@@ -70,6 +70,9 @@ struct MyTrips: View {
                             }.padding(.vertical, 24)
                         }
                         .padding(.horizontal, 10)
+                        .onTapGesture {
+                            self.hideKeyboard()
+                        }
                     } else {
                         Spacer()
                         placeholder
@@ -95,7 +98,6 @@ struct MyTrips: View {
             .navigationBarTitle(Text("My trips".uppercased()))
         }
         .onAppear(perform: self.viewModel.loadTrips)
-        .resignKeyboardOnDragGesture()
     }
     
     var placeholder: some View {
