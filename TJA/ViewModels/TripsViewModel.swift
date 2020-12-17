@@ -14,6 +14,7 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
     var apiSession: APIService
     var cancellationTokens = Set<AnyCancellable>()
     
+    @Published var loadingState: Loadable<Bool> = .idle
     @Published var trips = [SwipeableItem<Trip>]()
     
     init(apiService: APIService) {
@@ -21,16 +22,20 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
     }
     
     func loadTrips() {
+        if self.loadingState.isIdle { self.loadingState = .loading }
         let token = self.getTrips().sinkToResult { result in
             switch result {
             case let .failure(err):
                 print("DEBUG: -- TripList -- Error -- \(err.localizedDescription)")
+                self.loadingState = .failed(err)
             case let .success(response):
                 if let err = response.getError() {
                     print("DEBUG: -- TripList -- Response error -- \(err.localizedDescription)")
+                    self.loadingState = .failed(err)
                 }
                 print("DEBUG: -- TripList -- Success")
                 self.trips = response.body?.compactMap { SwipeableItem<Trip>($0.trip) } ?? []
+                self.loadingState = .loaded(true)
             }
         }
         self.cancellationTokens.insert(token)
@@ -85,11 +90,11 @@ class TripsViewModel: NSObject, ObservableObject, TripService {
     }
     
     var hasUpcoming: Bool {
-        return upcoming.count > 0
+        return upcoming.count > 0 && !loadingState.isLoading
     }
     
     var hasFinished: Bool {
-        return finished.count > 0
+        return finished.count > 0 && !loadingState.isLoading
     }
     
     var upcoming: [SwipeableItem<Trip>] {

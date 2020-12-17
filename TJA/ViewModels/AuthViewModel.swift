@@ -16,6 +16,7 @@ class AuthViewModel: NSObject, ObservableObject, AuthService {
     var cancellationToken: AnyCancellable?
     
     @Published var currentUser: User?
+    @Published var state: Loadable<Bool> = .idle
     
     init(apiService: APIService) {
         self.apiSession = apiService
@@ -79,10 +80,13 @@ class AuthViewModel: NSObject, ObservableObject, AuthService {
     
     func restore() {
         
+        if state.isIdle { self.state = .loading }
+        
         let onError: (() -> ()) = {
             UserDefaultsConfig.authToken = nil
             UserDefaultsConfig.googleProviderWasUsed = false
             self.currentUser = nil
+            self.state = .loaded(false)
         }
         
         
@@ -106,6 +110,7 @@ class AuthViewModel: NSObject, ObservableObject, AuthService {
                             UserDefaultsConfig.authToken = response.body?.secret
                             UserDefaultsConfig.googleProviderWasUsed = false
                             self.currentUser = response.body?.user
+                            self.state = .loaded(true)
                         }
                     }
                 
@@ -131,14 +136,17 @@ class AuthViewModel: NSObject, ObservableObject, AuthService {
                 switch result {
                 case let .failure(err):
                     print("DEBUG: -- SignIn -- Error -- \(err.localizedDescription)")
+                    self.state = .loaded(false)
                 case let .success(response):
                     if let err = response.getError() {
                         print("DEBUG: -- SignIn -- Response error -- \(err.localizedDescription)")
+                        self.state = .loaded(false)
                     }
                     print("DEBUG: -- SignIn -- Success -- \(response.body)")
                     UserDefaultsConfig.authToken = response.body?.secret
                     UserDefaultsConfig.googleProviderWasUsed = false
                     self.currentUser = response.body?.user
+                    self.state = .loaded(true)
                 }
             }
     }
@@ -149,14 +157,17 @@ class AuthViewModel: NSObject, ObservableObject, AuthService {
                 switch result {
                 case let .failure(err):
                     print("DEBUG: -- SignIn -- Error -- \(err.localizedDescription)")
+                    self.state = .loaded(false)
                 case let .success(response):
                     if let err = response.getError() {
                         print("DEBUG: -- SignIn -- Response error -- \(err.localizedDescription)")
+                        self.state = .loaded(false)
                     }
                     print("DEBUG: -- SignIn -- Success -- \(response.body)")
                     UserDefaultsConfig.authToken = response.body?.secret
                     UserDefaultsConfig.googleProviderWasUsed = false
                     self.currentUser = response.body?.user
+                    self.state = .loaded(true)
                 }
             }
     }
@@ -171,6 +182,7 @@ extension AuthViewModel: GIDSignInDelegate {
             } else {
                 print("DEBUG: -- Google Sign In -- \(error.localizedDescription)")
             }
+            self.state = .loaded(false)
             return
         }
         // If the previous `error` is null, then the sign-in was succesful
@@ -185,9 +197,11 @@ extension AuthViewModel: GIDSignInDelegate {
                     switch result {
                     case let .failure(err):
                         print("DEBUG: -- Google OAuth -- Error -- \(err.localizedDescription)")
+                        self.state = .loaded(false)
                     case let .success(response):
                         if let err = response.getError() {
                             print("DEBUG: -- Google OAuth -- Response error -- \(err.localizedDescription)")
+                            self.state = .loaded(false)
                         }
                         #if DEBUG
                         print("DEBUG: -- Google OAuth -- Success -- \(response.body)")
@@ -195,6 +209,7 @@ extension AuthViewModel: GIDSignInDelegate {
                         UserDefaultsConfig.authToken = response.body?.secret
                         UserDefaultsConfig.googleProviderWasUsed = true
                         self.currentUser = response.body?.user
+                        self.state = .loaded(true)
                     }
                 }
         }

@@ -21,9 +21,15 @@ struct Root: View {
             if let _ = viewModel.currentUser {
                 Home()
             } else {
-                SignIn()
+                SignIn().overlay(loadingOverlay)
             }
         }.onAppear(perform: viewModel.restore)
+    }
+    
+    var loadingOverlay: some View {
+        viewModel.state.isLoading ?
+            LoadingView().toAnyView() :
+            EmptyView().toAnyView()
     }
     
     private func setupApperance() {

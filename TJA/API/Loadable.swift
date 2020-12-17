@@ -31,6 +31,20 @@ enum Loadable<Value> {
         default: return nil
         }
     }
+    
+    var isLoading: Bool {
+        switch self {
+        case .loading: return true
+        default: return false
+        }
+    }
+    
+    var isIdle: Bool {
+        switch self {
+        case .idle: return true
+        default: return false
+        }
+    }
 }
 
 extension Loadable {

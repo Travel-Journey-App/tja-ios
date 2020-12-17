@@ -70,9 +70,7 @@ struct MyTrips: View {
                         .padding(.horizontal, 10)
                     } else {
                         Spacer()
-                        Text("You don't have any \(selectedTab.title) trips")
-                            .font(.system(size: 20))
-                            .foregroundColor(.mainRed)
+                        placeholder
                         Spacer()
                     }
                 }
@@ -94,6 +92,17 @@ struct MyTrips: View {
             }
             .navigationBarTitle(Text("My trips".uppercased()))
         }.onAppear(perform: self.viewModel.loadTrips)
+    }
+    
+    var placeholder: some View {
+        if viewModel.loadingState.isLoading {
+            return ActivityIndicatorView().toAnyView()
+        } else {
+            return Text("You don't have any \(selectedTab.title) trips")
+                .font(.system(size: 20))
+                .foregroundColor(.mainRed)
+                .toAnyView()
+        }
     }
     
     private func delete(by id: Int) {
