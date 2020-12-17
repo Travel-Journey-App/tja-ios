@@ -11,6 +11,7 @@
 		9E07A2B6258AC02B00E2D215 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E07A2B5258AC02B00E2D215 /* ActivityIndicator.swift */; };
 		9E07A2BC258AF46700E2D215 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E07A2BB258AF46600E2D215 /* LoadingView.swift */; };
 		9E07A2BF258AFBFC00E2D215 /* FocusableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E07A2BE258AFBFB00E2D215 /* FocusableTextField.swift */; };
+		9E07A2C3258B198B00E2D215 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E07A2C2258B198A00E2D215 /* PickerTextField.swift */; };
 		9E263642253DA29000928B38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E263641253DA29000928B38 /* Assets.xcassets */; };
 		9E263645253DA29000928B38 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E263644253DA29000928B38 /* Preview Assets.xcassets */; };
 		9E263650253DA62800928B38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E26364F253DA62800928B38 /* LaunchScreen.storyboard */; };
@@ -133,6 +134,7 @@
 		9E07A2B5258AC02B00E2D215 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		9E07A2BB258AF46600E2D215 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		9E07A2BE258AFBFB00E2D215 /* FocusableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableTextField.swift; sourceTree = "<group>"; };
+		9E07A2C2258B198A00E2D215 /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		9E26363A253DA28900928B38 /* TJA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TJA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E263641253DA29000928B38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E263644253DA29000928B38 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				9ED7DC3A257320A80005E42F /* BlurView.swift */,
 				9E07A2B5258AC02B00E2D215 /* ActivityIndicator.swift */,
 				9E07A2BE258AFBFB00E2D215 /* FocusableTextField.swift */,
+				9E07A2C2258B198A00E2D215 /* PickerTextField.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -845,6 +848,7 @@
 				9E58C734258409EF002688EE /* AuthViewModel.swift in Sources */,
 				9E58C7302584050E002688EE /* AuthService.swift in Sources */,
 				9E932FBE2575971A009FC2E8 /* SuggestionsContainer.swift in Sources */,
+				9E07A2C3258B198B00E2D215 /* PickerTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

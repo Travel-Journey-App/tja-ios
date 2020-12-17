@@ -22,7 +22,7 @@ struct NewAccommodation: View {
     @State var name: String = ""
     @State var address: String = ""
     @State var time: String = ""
-    @State var direction: String = ""
+    @State var direction: String? = nil
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
@@ -58,9 +58,18 @@ struct NewAccommodation: View {
                             RoundedRectangle(cornerRadius: 2)
                                 .strokeBorder(Color.mainRed, lineWidth: 2)
                         )
+                        PickerField(
+                            "Check-in",
+                            selectedString: $direction,
+                            data: [Activity.Accommodation.Direction.checkin.strValue,
+                                   Activity.Accommodation.Direction.checkout.strValue])
+                            .padding(.horizontal, 12)
+                            .frame(height: 50)
+                            .background(
+                                RoundedRectangle(cornerRadius: 2)
+                                    .strokeBorder(Color.mainRed, lineWidth: 2)
+                            )
                         
-                        TextField("Check-in", text: $direction)
-                            .textFieldStyle(BorderedTextField())
                         
                     }
                     .frame(maxHeight: .infinity)
@@ -115,7 +124,7 @@ struct NewAccommodation: View {
                         self.hideKeyboard()
                         self.searchViewModel.clearStored(cancellAll: true)
                         self.address = self.searchViewModel.location.capitalizedFirstLetter()
-                        self.direction = "check-in"
+                        self.direction = Activity.Accommodation.Direction.checkin.strValue
                     }
             }
         }
