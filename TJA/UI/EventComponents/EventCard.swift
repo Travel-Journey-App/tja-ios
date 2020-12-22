@@ -16,6 +16,7 @@ struct EventCard: View {
     var onCommit: ((String) -> ())?
     
     @State var notes: String
+    @State private var alertPresented = false
     
     init(
         _ activity: Activity,
@@ -54,7 +55,7 @@ struct EventCard: View {
                     Image(systemName: "clock")
                         .frame(width: 24, height: 24, alignment: .center)
                         .foregroundColor(Color(UIColor.systemGray))
-                    Button(action: { self.onDelete?(self.activity) }, label: {
+                    Button(action: { self.alertPresented = true }, label: {
                         Image(systemName: "trash")
                             .frame(width: 24, height: 24, alignment: .center)
                     }).accentColor(Color(UIColor.systemGray))
@@ -79,6 +80,16 @@ struct EventCard: View {
         .overlay(
             RoundedRectangle(cornerRadius: 7, style: .continuous)
                 .strokeBorder(Color(UIColor.opaqueSeparator), lineWidth: 2))
+        .alert(isPresented: $alertPresented) {
+            Alert(
+                title: Text("Do you want to delete item?"),
+                message: Text("\(activity.name)"),
+                primaryButton: .destructive(Text("Yes")) {
+                    print("Delete")
+                    self.alertPresented = false
+                    self.onDelete?(self.activity)
+                }, secondaryButton: .cancel(Text("No")))
+        }
     }
 }
 

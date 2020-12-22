@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(iOS 13.4, *)
 struct ItemDropDelegate: DropDelegate {
     
     var day: Int

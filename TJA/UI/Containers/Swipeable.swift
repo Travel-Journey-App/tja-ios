@@ -20,17 +20,21 @@ struct Swipeable<Content: View, T: Identifiable>: View {
     @Binding var item: SwipeableItem<T>
     var insets: EdgeInsets
     var onSwiped: (() -> ())?
+    var onDeleteTapped: ((SwipeableItem<T>) -> ())?
+
     
     init(
         _ item: Binding<SwipeableItem<T>>,
         offsetLength: CGFloat = 50,
         onSwiped: (() -> ())? = nil,
+        onDeleteTapped: ((SwipeableItem<T>) -> ())? = nil,
         style: Style = .rect,
         insets: EdgeInsets = .zero,
         @ViewBuilder content:@escaping (T) -> Content
     ) {
         self._item = item
         self.onSwiped = onSwiped
+        self.onDeleteTapped = onDeleteTapped
         self.style = style
         self.content = content
         self.insets = insets
@@ -47,7 +51,8 @@ struct Swipeable<Content: View, T: Identifiable>: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    withAnimation(.easeIn){ self.onSwiped?() }
+//                    withAnimation(.easeIn){ self.onSwiped?() }
+                    self.onDeleteTapped?(item)
                 }) {
                     
                     Image(systemName: "trash")

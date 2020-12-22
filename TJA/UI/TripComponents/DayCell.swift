@@ -12,6 +12,7 @@ struct DayCell: View {
     
     var dayNumber: Int
     @State var disablePipeline: Bool
+    @State var selectedItem: SwipeableItem<Activity>? = nil
     @Binding var swipeableItems: [SwipeableItem<Activity>]
     var active: Bool
     var onRemove: ((Activity) -> ())?
@@ -57,6 +58,9 @@ struct DayCell: View {
                                 print("DEBUG: -- onSwiped tirggered for -- \(swipeableItems[i])")
                                 self.onRemove?(swipeableItems[i].item)
                             },
+                            onDeleteTapped: { item in
+                                self.selectedItem = item
+                            },
                             style: .rounded(7),
                             insets: .leading(40)
                         ) { event in
@@ -71,6 +75,16 @@ struct DayCell: View {
         .padding(5)
         .background(RoundedRectangle(cornerRadius: 10).fill(Color.tripBackground))
         .overlay(active ? Color.clear : Color.white.opacity(0.7))
+        .alert(item: $selectedItem) { item in
+            Alert(
+                title: Text("Do you want to delete item?"),
+                message: Text("\(item.item.name)"),
+                primaryButton: .destructive(Text("Yes")) {
+                    print("Delete")
+                    self.selectedItem = nil
+                    self.onRemove?(item.item)
+                }, secondaryButton: .cancel(Text("No")))
+        }
     }
     
     var pipelineHeight: CGFloat {

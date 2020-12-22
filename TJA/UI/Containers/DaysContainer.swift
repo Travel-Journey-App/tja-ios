@@ -36,37 +36,7 @@ struct DaysContainer: View {
 
         return ZStack(alignment: .top) {
             // Content
-            ScrollView {
-                VStack(spacing: 5) {
-                    ForEach(0..<viewModel.daysCount, id: \.self) { i in
-                        DayCell(
-                            $viewModel.trip.days[i].activities,
-                            dayNumber: viewModel.trip.days[i].orderInTrip,
-                            active: dragNdropTarget != nil ?
-                                viewModel.active == i ? true : false
-                                : true,
-                            onRemove: { (activity) in
-                                self.viewModel.delete(activity, in: viewModel.trip.days[i].id)
-                            },
-                            onTap: { (activity, day) in
-                                self.popupViewModel.activity = activity
-                                self.popupViewModel.dayIndex =
-                                    self.viewModel.trip.days[i].id
-                                self.popupViewModel.dayNumber = day
-                            }
-                        ).onDrop(
-                            of: ["public.item-source"],
-                            delegate: ItemDropDelegate(
-                                day: i,
-                                active: $viewModel.active,
-                                activeSheet: $activeSheet,
-                                target: $dragNdropTarget)
-                        )
-                    }
-                }
-                .padding(.vertical, 15)
-                .padding(.horizontal, 10)
-            }
+            content
             
             if isBlurShown {
                 BlurView().onTapGesture {
@@ -78,8 +48,7 @@ struct DaysContainer: View {
                 
                 VStack {
                     Spacer()
-                    DraggableSplash()
-                        .onDrag({ NSItemProvider(object: "" as NSString) })
+                    DraggableSplashContainer()
                 }
                 
             } else {
@@ -117,6 +86,79 @@ struct DaysContainer: View {
                 .accentColor(.mainRed)
                 .environmentObject(viewModel)
             }
+        }
+    }
+    
+    var content: some View {
+        if #available(iOS 13.4, *) {
+            return // Content
+                ScrollView {
+                    VStack(spacing: 5) {
+                        ForEach(0..<viewModel.daysCount, id: \.self) { i in
+                            DayCell(
+                                $viewModel.trip.days[i].activities,
+                                dayNumber: viewModel.trip.days[i].orderInTrip,
+                                active: dragNdropTarget != nil ?
+                                    viewModel.active == i ? true : false
+                                    : true,
+                                onRemove: { (activity) in
+                                    self.viewModel.delete(activity, in: viewModel.trip.days[i].id)
+                                },
+                                onTap: { (activity, day) in
+                                    self.popupViewModel.activity = activity
+                                    self.popupViewModel.dayIndex =
+                                        self.viewModel.trip.days[i].id
+                                    self.popupViewModel.dayNumber = day
+                                }
+                            ).onDrop(
+                                of: ["public.item-source"],
+                                delegate: ItemDropDelegate(
+                                    day: i,
+                                    active: $viewModel.active,
+                                    activeSheet: $activeSheet,
+                                    target: $dragNdropTarget)
+                            )
+                        }
+                    }
+                    .padding(.vertical, 15)
+                    .padding(.horizontal, 10)
+                }.toAnyView()
+            
+        } else {
+            return // Content
+                ScrollView {
+                    VStack(spacing: 5) {
+                        ForEach(0..<viewModel.daysCount, id: \.self) { i in
+                            DayCell(
+                                $viewModel.trip.days[i].activities,
+                                dayNumber: viewModel.trip.days[i].orderInTrip,
+                                active: dragNdropTarget != nil ?
+                                    viewModel.active == i ? true : false
+                                    : true,
+                                onRemove: { (activity) in
+                                    self.viewModel.delete(activity, in: viewModel.trip.days[i].id)
+                                },
+                                onTap: { (activity, day) in
+                                    self.popupViewModel.activity = activity
+                                    self.popupViewModel.dayIndex =
+                                        self.viewModel.trip.days[i].id
+                                    self.popupViewModel.dayNumber = day
+                                }
+                            )
+                            .onTapGesture {
+                                self.viewModel.active = i
+                                switch dragNdropTarget {
+                                case .wish: self.activeSheet = .wish
+                                case .manual: self.activeSheet = .manual
+                                case .none: break
+                                }
+                                self.dragNdropTarget = nil
+                            }
+                        }
+                    }
+                    .padding(.vertical, 15)
+                    .padding(.horizontal, 10)
+                }.toAnyView()
         }
     }
 }

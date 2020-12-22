@@ -11,6 +11,7 @@ import SwiftUI
 struct MyTrips: View {
     
     @State var selectedTab = Tab.future
+    @State var selectedItem: SwipeableItem<Trip>? = nil
     @EnvironmentObject var viewModel: TripsViewModel
     
     enum Tab: Int {
@@ -59,6 +60,9 @@ struct MyTrips: View {
                                             onSwiped: {
                                                 print("DEBUG: -- onSwiped tirggered for -- \(trip.id)")
                                                 self.delete(by: trip.id)
+                                            },
+                                            onDeleteTapped: { item in
+                                                self.selectedItem = item
                                             }) { trip in
                                             TripCell(trip: trip) { name in
                                                 self.viewModel.update(trip: trip, with: name)
@@ -98,6 +102,16 @@ struct MyTrips: View {
             .navigationBarTitle(Text("My trips".uppercased()))
         }
         .onAppear(perform: self.viewModel.loadTrips)
+        .alert(item: $selectedItem) { item in
+            Alert(
+                title: Text("Do you want to delete item?"),
+                message: Text("\(item.item.name)"),
+                primaryButton: .destructive(Text("Yes")) {
+                    print("Delete")
+                    self.selectedItem = nil
+                    self.delete(by: item.item.id)
+                }, secondaryButton: .cancel(Text("No")))
+        }
     }
     
     var placeholder: some View {
